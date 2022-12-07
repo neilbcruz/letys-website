@@ -1,0 +1,55 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    padding: 1rem;
+    background-color: $prim-color-1;
+
+    @include tablet {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    &__top {
+        // text-align: center;
+
+        & img {
+            width: 3rem;
+        }
+    }
+
+    &__nav {
+
+        @include tablet {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+       
+
+        & a {
+            &:link,
+            &:visited {
+                text-decoration: none;
+                color: $prim-color-2;
+            }
+
+            &:hover {
+                color: $sec-color-1;
+            }
+        }
+    }
+}
+
+.active {
+    color: $sec-color-1 !important;
+}

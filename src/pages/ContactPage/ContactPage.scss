@@ -1,0 +1,22 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contact {
+    padding: 1rem;
+    text-align: center;
+
+    @include tablet {
+        padding: 1rem 2rem;
+    }
+
+    @include desktop {
+        padding: 1rem 10rem;
+    }
+}
