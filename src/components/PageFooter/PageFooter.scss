@@ -1,0 +1,44 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.footer {
+    padding: 1rem;
+    background-color: $prim-color-1;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__text {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        & img {
+            width: 2.5rem;
+        }
+    }
+
+    &__contact {
+        & img {
+            width: 2rem;
+            margin: 0rem;
+            cursor: pointer;
+        }
+
+        &-share img {
+            width: 1.75rem;
+            position: relative;
+            bottom: 4px;
+        }
+    }
+}

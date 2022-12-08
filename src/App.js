@@ -2,12 +2,15 @@ import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet'
 
-import HomePage from './pages/HomePage/HomePage';
 import PageHeader from './components/PageHeader/PageHeader';
+
+import HomePage from './pages/HomePage/HomePage';
 import ProductsPage from './pages/ProductsPage/ProductsPages';
 import StoresPage from './pages/StoresPage/StoresPage';
 import FaqPage from './pages/FaqPage/FaqPage';
 import ContactPage from './pages/ContactPage/ContactPage';
+
+import PageFooter from './components/PageFooter/PageFooter';
 
 function App() {
   return (
@@ -29,6 +32,7 @@ function App() {
             <Route path='/faq' element={<FaqPage />} />
             <Route path='/contact' element={<ContactPage />} />
           </Routes>
+          <PageFooter />
         </Router>
       </div>
     </>
