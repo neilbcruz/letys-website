@@ -9,13 +9,40 @@
 }
 
 .footer {
-    padding: 1rem;
-    background-color: $prim-color-1;
+    &__social {
+        padding: 1rem;
+
+        &-contact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            @include tablet {
+                display: none;
+            }
+
+            & img {
+                width: 3rem;
+                margin: 0rem 2rem;
+                cursor: pointer;
+            }
+        }
+    }
 
     &__container {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background-color: $prim-color-1;
+        padding: 0.5rem 1rem;
+
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
     }
 
     &__text {
@@ -29,16 +56,20 @@
     }
 
     &__contact {
+        display: none;
+
         & img {
-            width: 2rem;
-            margin: 0rem;
+            width: 3rem;
+            margin-left: 2rem;
             cursor: pointer;
+
+            @include desktop {
+                margin-left: 4rem;
+            }
         }
 
-        &-share img {
-            width: 1.75rem;
-            position: relative;
-            bottom: 4px;
+        @include tablet {
+            display: flex;
         }
     }
 }

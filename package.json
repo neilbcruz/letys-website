@@ -12,6 +12,7 @@
     "react-dom": "^18.2.0",
     "react-facebook": "^9.0.12",
     "react-helmet": "^6.1.0",
+    "react-native-linking": "^0.0.0",
     "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
     "react-share": "^4.4.1",
