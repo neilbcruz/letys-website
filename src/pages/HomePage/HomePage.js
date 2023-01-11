@@ -1,18 +1,15 @@
 import './HomePage.scss';
 
+import PageHero from '../../components/PageHero/PageHero';
+import PageBody from '../../components/PageBody/PageBody';
+
 export default function HomePage() {
     return (
         <>
             <div className='home'>
-                <h1>Lety's Buko Pie</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dictum libero quam, netus conubia nec semper nascetur nisi curae habitasse. Luctus venenatis tempor hendrerit ridiculus fusce ornare porttitor pulvinar aliquam justo, litora integer cras aenean senectus cursus platea habitant ligula sociosqu, conubia cum arcu quam at elementum molestie montes taciti. Vestibulum libero viverra et condimentum cum convallis leo interdum, iaculis torquent platea conubia duis class volutpat posuere, a dis nascetur mauris magna fringilla urna.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dictum libero quam, netus conubia nec semper nascetur nisi curae habitasse. Luctus venenatis tempor hendrerit ridiculus fusce ornare porttitor pulvinar aliquam justo, litora integer cras aenean senectus cursus platea habitant ligula sociosqu, conubia cum arcu quam at elementum molestie montes taciti. Vestibulum libero viverra et condimentum cum convallis leo interdum, iaculis torquent platea conubia duis class volutpat posuere, a dis nascetur mauris magna fringilla urna.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dictum libero quam, netus conubia nec semper nascetur nisi curae habitasse. Luctus venenatis tempor hendrerit ridiculus fusce ornare porttitor pulvinar aliquam justo, litora integer cras aenean senectus cursus platea habitant ligula sociosqu, conubia cum arcu quam at elementum molestie montes taciti. Vestibulum libero viverra et condimentum cum convallis leo interdum, iaculis torquent platea conubia duis class volutpat posuere, a dis nascetur mauris magna fringilla urna.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dictum libero quam, netus conubia nec semper nascetur nisi curae habitasse. Luctus venenatis tempor hendrerit ridiculus fusce ornare porttitor pulvinar aliquam justo, litora integer cras aenean senectus cursus platea habitant ligula sociosqu, conubia cum arcu quam at elementum molestie montes taciti. Vestibulum libero viverra et condimentum cum convallis leo interdum, iaculis torquent platea conubia duis class volutpat posuere, a dis nascetur mauris magna fringilla urna.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dictum libero quam, netus conubia nec semper nascetur nisi curae habitasse. Luctus venenatis tempor hendrerit ridiculus fusce ornare porttitor pulvinar aliquam justo, litora integer cras aenean senectus cursus platea habitant ligula sociosqu, conubia cum arcu quam at elementum molestie montes taciti. Vestibulum libero viverra et condimentum cum convallis leo interdum, iaculis torquent platea conubia duis class volutpat posuere, a dis nascetur mauris magna fringilla urna.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dictum libero quam, netus conubia nec semper nascetur nisi curae habitasse. Luctus venenatis tempor hendrerit ridiculus fusce ornare porttitor pulvinar aliquam justo, litora integer cras aenean senectus cursus platea habitant ligula sociosqu, conubia cum arcu quam at elementum molestie montes taciti. Vestibulum libero viverra et condimentum cum convallis leo interdum, iaculis torquent platea conubia duis class volutpat posuere, a dis nascetur mauris magna fringilla urna.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dictum libero quam, netus conubia nec semper nascetur nisi curae habitasse. Luctus venenatis tempor hendrerit ridiculus fusce ornare porttitor pulvinar aliquam justo, litora integer cras aenean senectus cursus platea habitant ligula sociosqu, conubia cum arcu quam at elementum molestie montes taciti. Vestibulum libero viverra et condimentum cum convallis leo interdum, iaculis torquent platea conubia duis class volutpat posuere, a dis nascetur mauris magna fringilla urna.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dictum libero quam, netus conubia nec semper nascetur nisi curae habitasse. Luctus venenatis tempor hendrerit ridiculus fusce ornare porttitor pulvinar aliquam justo, litora integer cras aenean senectus cursus platea habitant ligula sociosqu, conubia cum arcu quam at elementum molestie montes taciti. Vestibulum libero viverra et condimentum cum convallis leo interdum, iaculis torquent platea conubia duis class volutpat posuere, a dis nascetur mauris magna fringilla urna.</p>
+                {/* <h1>Lety's Buko Pie</h1> */}
+                <PageHero />
+                <PageBody />
             </div>
         </>
     )
