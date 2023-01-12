@@ -6,7 +6,7 @@ import PageHeader from './components/PageHeader/PageHeader';
 
 import HomePage from './pages/HomePage/HomePage';
 import ProductsPage from './pages/ProductsPage/ProductsPages';
-import StoresPage from './pages/StoresPage/StoresPage';
+import LocationsPage from './pages/LocationsPage/LocationsPage';
 import FaqPage from './pages/FaqPage/FaqPage';
 import ContactPage from './pages/ContactPage/ContactPage';
 
@@ -28,7 +28,7 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/products' element={<ProductsPage />} />
-            <Route path='/stores' element={<StoresPage />} />
+            <Route path='/locations' element={<LocationsPage />} />
             <Route path='/faq' element={<FaqPage />} />
             <Route path='/contact' element={<ContactPage />} />
           </Routes>

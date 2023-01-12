@@ -9,21 +9,114 @@
 }
 
 .body {
-    padding: 1rem;
-    text-align: center;
 
-    &__image-one {
-        float: right;
-        width: 15rem;
+    &__buko {
+        padding: 1rem 1rem 0rem;
+
+        & h1 {
+            color: $prim-color-2;
+            padding: 0.5rem 0rem;
+            border-top: 1px solid $prim-color-2;
+        }
+
+        &-info {
+            text-align: left;
+
+            & img {
+                width: 100%;
+                height: auto;
+                padding-top: 0.5rem;
+            }
+        }
     }
 
-    &__image-two {
-        float: left;
-        width: 15rem;
+    &__lety {
+        padding: 1rem 1rem 0rem;
+
+        & h1 {
+            color: $prim-color-2;
+            padding: 0.5rem 0rem;
+            border-top: 1px solid $prim-color-2;
+        }
+
+        &-info {
+            text-align: left;
+
+            & img {
+                width: 100%;
+                height: auto;
+                padding-top: 0.5rem;
+            }
+        }
     }
 
-    &__image-three {
-        float: right;
-        width: 15rem;
+    &__products {
+        padding: 1rem 1rem 0rem;
+
+        & h1 {
+            color: $prim-color-2;
+            padding: 0.5rem 0rem;
+            border-top: 1px solid $prim-color-2;
+        }
+
+        &-info {
+            text-align: center;
+
+            & img {
+                width: 60%;
+                height: auto;
+                padding-bottom: 0.5rem;
+            }
+        }
+
+        &-item {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.5rem 0rem;
+
+            & button {
+                padding: 4px;
+                background: $prim-color-1;
+                border: 1px solid $prim-color-3;
+                box-shadow: 5px 5px 5px rgba(202, 206, 214, 0.3);
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__location {
+        padding: 1rem 1rem 0rem;
+
+        & h1 {
+            color: $prim-color-2;
+            padding: 0.5rem 0rem;
+            border-top: 1px solid $prim-color-2;
+        }
+
+        &-info {
+            text-align: center;
+
+            & h3 {
+                // padding: 0.5rem 0rem;
+            }
+
+            & img {
+                display: none;
+                width: 100%;
+                height: auto;
+                padding-top: 0.5rem;
+            }
+
+            & button {
+                margin: 0.5rem 0rem;
+                padding: 4px;
+                background: $prim-color-1;
+                border: 1px solid $prim-color-3;
+                box-shadow: 5px 5px 5px rgba(202, 206, 214, 0.3);
+                cursor: pointer;
+            }
+        }
     }
 }

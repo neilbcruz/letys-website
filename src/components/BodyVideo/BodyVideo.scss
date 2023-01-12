@@ -1,0 +1,39 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.video {
+    background-color: black;
+    
+    @include tablet {
+        padding: 0rem 2rem;
+    }
+
+    @include desktop {
+        padding: 0rem 10rem;
+    }
+
+    &__youtube {
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        position: relative;
+        height: 0;
+    
+        & iframe {
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+    }
+
+}
