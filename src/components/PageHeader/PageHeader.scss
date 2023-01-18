@@ -20,14 +20,22 @@
     }
 
     &__top {
-        // text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-        & img {
+        &-logo {
             width: 3rem;
+        }
+
+        &-hamburger {
+            width: 2.4rem;
+            cursor: pointer;
         }
     }
 
     &__nav {
+        display: none;
 
         @include tablet {
             display: flex;

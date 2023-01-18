@@ -1,0 +1,74 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.modal {
+    position: absolute;
+    top: -0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 2000;
+    margin: 40px auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    &__icon {
+
+        & img {
+            cursor: pointer;
+            width: 3rem;
+            position: absolute;
+            top: -32px;
+            right: 2px;
+            margin: 0.5rem;
+        }
+    }
+
+    &__nav {
+
+        & h1 {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        & a {
+
+            &:link,
+            &:visited {
+                text-decoration: none;
+                color: $prim-color-2;
+            }
+
+            &:hover {
+                color: $sec-color-2;
+            }
+        }
+    }
+}
+
+.active {
+    color: $sec-color-2 !important;
+}

@@ -1,33 +1,59 @@
 import './PageHeader.scss';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+// import Modal from 'react-modal';
+
+import ModalMenu from '../ModalMenu/ModalMenu';
+import Hamburger from '../Hamburger/Hamburger';
 
 import LetysLogo from '../../assets/images/letys-logo.jpg';
+import HamburgerIcon from '../../assets/icons/hamb.svg';
 
 export default function PageHeader() {
+    const [open, setOpen] = useState(false);
+
+    function openModal() {
+        setOpen(true);
+    }
+
+    function closeModal() {
+        setOpen(false);
+    }
+
     return (
         <>
-        <header className='header'>
-            <div className='header__top'>
-                <img src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
-            </div>
-            <div className='header__nav'>
-                <NavLink to='/'>
-                    <h3>Home</h3>
-                </NavLink>
-                <NavLink to='/products'>
-                    <h3>Products</h3>
-                </NavLink>
-                <NavLink to='/stores'>
-                    <h3>Stores</h3>
-                </NavLink>
-                <NavLink to='/faq'>
-                    <h3>FAQ</h3>
-                </NavLink>
-                <NavLink to='/contact'>
-                    <h3>Contact</h3>
-                </NavLink>
-            </div>
-        </header>
+            <header className='header'>
+                <div className='header__top'>
+                    <img className='header__top-logo' src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
+                    <Hamburger 
+                    openModal={openModal}
+                    setOpen={setOpen}
+                    open={open}
+                     />
+                    {/* <img className='header__top-hamburger' src={Hamburger} onClick={openModal} /> */}
+                </div>
+                <div className='header__nav'>
+                    <NavLink to='/'>
+                        <h3 onClick={closeModal}>Home</h3>
+                    </NavLink>
+                    <NavLink to='/products'>
+                        <h3 onClick={closeModal}>Products</h3>
+                    </NavLink>
+                    <NavLink to='/stores'>
+                        <h3 onClick={closeModal}>Stores</h3>
+                    </NavLink>
+                    <NavLink to='/faq'>
+                        <h3 onClick={closeModal}>FAQ</h3>
+                    </NavLink>
+                    <NavLink to='/contact'>
+                        <h3 onClick={closeModal}>Contact</h3>
+                    </NavLink>
+                    <ModalMenu
+                        closeModal={closeModal}
+                        open={open}
+                        />
+                </div>
+            </header>
         </>
     )
 }
