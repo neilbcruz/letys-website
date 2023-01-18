@@ -4,19 +4,19 @@ import Modal from 'react-modal';
 
 import Close from '../../assets/icons/close.svg';
 
-export default function ModalMenu({ closeModal, open }) {
+export default function ModalMenu({ closeModal, isOpen }) {
 
     return (
         <>
             <Modal
-                isOpen={open}
+                isOpen={isOpen}
                 onRequestClose={closeModal}
                 className='modal'
                 overlayClassName='modal__overlay'
             >
-                {/* <div className='modal__icon'>
+                <div className='modal__icon'>
                     <img onClick={closeModal} src={Close} alt='X mark to close modal' />
-                </div> */}
+                </div>
                 <div className='modal__nav'>
                 <NavLink to='/'>
                     <h1 onClick={closeModal}>Home</h1>

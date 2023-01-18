@@ -38,11 +38,12 @@
     &__icon {
 
         & img {
+            opacity: 0;
             cursor: pointer;
-            width: 3rem;
+            width: 2rem;
             position: absolute;
-            top: -32px;
-            right: 2px;
+            top: -24px;
+            right: 16px;
             margin: 0.5rem;
         }
     }

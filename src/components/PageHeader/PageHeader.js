@@ -2,15 +2,16 @@ import './PageHeader.scss';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 // import Modal from 'react-modal';
+import ReactBurger from 'hamburger-react';
 
 import ModalMenu from '../ModalMenu/ModalMenu';
-import Hamburger from '../Hamburger/Hamburger';
+// import Hamburger from '../Hamburger/Hamburger';
 
 import LetysLogo from '../../assets/images/letys-logo.jpg';
-import HamburgerIcon from '../../assets/icons/hamb.svg';
+// import HamburgerIcon from '../../assets/icons/hamb.svg';
 
 export default function PageHeader() {
-    const [open, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(false);
 
     function openModal() {
         setOpen(true);
@@ -20,16 +21,39 @@ export default function PageHeader() {
         setOpen(false);
     }
 
+    // function onToggle(toggled) {
+    //     if (toggled) {
+    //         // open a menu
+    //         open
+    //      } else {
+    //         // close a menu
+    //         closeModal
+    //      }
+    // }
+
     return (
         <>
             <header className='header'>
                 <div className='header__top'>
                     <img className='header__top-logo' src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
-                    <Hamburger 
+                    <ReactBurger
+                        color='#014723'
+                        easing="ease-in"
+                        toggled={isOpen}
+                        toggle={setOpen}
+                        onToggle={toggled => {
+                            if (toggled) {
+                                // open a menu
+                            } if (!toggled) {
+                                // close a menu
+                            }
+                        }}
+                    />
+                    {/* <Hamburger 
                     openModal={openModal}
                     setOpen={setOpen}
                     open={open}
-                     />
+                     /> */}
                     {/* <img className='header__top-hamburger' src={Hamburger} onClick={openModal} /> */}
                 </div>
                 <div className='header__nav'>
@@ -50,8 +74,8 @@ export default function PageHeader() {
                     </NavLink>
                     <ModalMenu
                         closeModal={closeModal}
-                        open={open}
-                        />
+                        isOpen={isOpen}
+                    />
                 </div>
             </header>
         </>
