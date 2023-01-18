@@ -13,7 +13,7 @@
 .hero{
     padding: 1rem;
     text-align: left;
-    background-image: url(../../assets/images/bukopie-hero.jpg);
+    background-image: url(../../assets/images/letys_buko_pie-2.jpg);
     background-color: $prim-color-3;
     background-size: cover;
     background-position: 50% 100%;
@@ -28,10 +28,11 @@
     }
 
     & h1 {
-        color: $prim-color-2;
+        color: $sec-color-1;
         font-family: 'Dancing Script', cursive;
         font-size: 3rem;
         position:relative;
         top: 3rem;
+        font-weight: 400;
     }
 }

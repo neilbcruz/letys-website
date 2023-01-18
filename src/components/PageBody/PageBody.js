@@ -5,7 +5,9 @@ import { NavLink } from "react-router-dom";
 import BodyVideo from '../BodyVideo/BodyVideo';
 import BukoTree from '../../assets/images/buko-tree.jpg';
 import Lety from '../../assets/images/lety-1.jpg';
-import BukoPie from '../../assets/images/buko-pie.png';
+import BukoPie from '../../assets/images/buko_pie-12.jpg';
+import Cassava from '../../assets/images/cassava-10.jpg';
+import Pasalubong from '../../assets/images/pasalubong-2.png';
 import MainStore from '../../assets/images/location-main.png';
 
 export default function PageBody() {
@@ -41,15 +43,15 @@ export default function PageBody() {
                             </NavLink>
                         </div>
                         <div className='body__products-item'>
-                            <h2>Banana Bread</h2>
-                            <img src={BukoPie} alt='Buko pie slice on a white plate with flower design' />
+                            <h2>Cassava Cake</h2>
+                            <img src={Cassava} alt='Buko pie slice on a white plate with flower design' />
                             <NavLink to='/products'>
                                 <button>VIEW BAKED GOODS</button>
                             </NavLink>
                         </div>
                         <div className='body__products-item'>
                             <h2>Broas</h2>
-                            <img src={BukoPie} alt='Buko pie slice on a white plate with flower design' />
+                            <img src={Pasalubong} alt='Buko pie slice on a white plate with flower design' />
                             <NavLink to='/products'>
                                 <button>VIEW PASALUBONG</button>
                             </NavLink>
