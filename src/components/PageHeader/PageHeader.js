@@ -13,23 +13,13 @@ import LetysLogo from '../../assets/images/letys-logo.jpg';
 export default function PageHeader() {
     const [isOpen, setOpen] = useState(false);
 
-    function openModal() {
-        setOpen(true);
-    }
+    // function openModal() {
+    //     setOpen(true);
+    // }
 
     function closeModal() {
         setOpen(false);
     }
-
-    // function onToggle(toggled) {
-    //     if (toggled) {
-    //         // open a menu
-    //         open
-    //      } else {
-    //         // close a menu
-    //         closeModal
-    //      }
-    // }
 
     return (
         <>
