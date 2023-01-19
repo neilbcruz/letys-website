@@ -1,5 +1,7 @@
 import './PageFooter.scss';
 
+import { NavLink } from 'react-router-dom';
+
 import LetysLogo from '../../assets/images/letys-logo.jpg';
 import Facebook from '../../assets/icons/facebook.png';
 import Google from '../../assets/icons/googlemail.png';
@@ -25,7 +27,9 @@ export default function PageFooter() {
                 </div>
                 <div className='footer__container'>
                     <div className='footer__text'>
-                        <img src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
+                        <NavLink to='/'>
+                            <img src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
+                        </NavLink>
                         <h3>© 2022 Lety's Buko Pie</h3>
                     </div>
                     <div className='footer__contact'>

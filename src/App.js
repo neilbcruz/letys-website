@@ -5,7 +5,13 @@ import { Helmet } from 'react-helmet'
 import PageHeader from './components/PageHeader/PageHeader';
 
 import HomePage from './pages/HomePage/HomePage';
+
 import ProductsPage from './pages/ProductsPage/ProductsPages';
+
+import ProductSpecialty from './components/ProductSpecialty/ProductSpecialty';
+import ProductGoods from './components/ProductGoods/ProductGoods';
+import ProductPasa from './components/ProductPasa/ProductPasa';
+
 import LocationsPage from './pages/LocationsPage/LocationsPage';
 import FaqPage from './pages/FaqPage/FaqPage';
 import ContactPage from './pages/ContactPage/ContactPage';
@@ -27,7 +33,11 @@ function App() {
           <PageHeader />
           <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/products' element={<ProductsPage />} />
+            <Route path='/products' element={<ProductsPage />}>
+              <Route path='specialty' element={<ProductSpecialty />} />
+              <Route path='bakedgoods' element={<ProductGoods />} />
+              <Route path='pasalubong' element={<ProductPasa />} />
+            </Route>
             <Route path='/locations' element={<LocationsPage />} />
             <Route path='/faq' element={<FaqPage />} />
             <Route path='/contact' element={<ContactPage />} />

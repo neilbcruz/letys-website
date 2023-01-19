@@ -1,7 +1,6 @@
 import './PageHeader.scss';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import Modal from 'react-modal';
 import ReactBurger from 'hamburger-react';
 
 import ModalMenu from '../ModalMenu/ModalMenu';
@@ -35,7 +34,9 @@ export default function PageHeader() {
         <>
             <header className='header'>
                 <div className='header__top'>
-                    <img className='header__top-logo' src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
+                    <NavLink to='/'>
+                        <img className='header__top-logo' src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
+                    </NavLink>
                     <ReactBurger
                         color='#014723'
                         easing="ease-in"
