@@ -1,11 +1,11 @@
 import './LocationsPage.scss';
 
+import GoogleMaps from '../../components/GoogleMaps/GoogleMaps';
+
 import MainStore from '../../assets/images/location-main.jpg';
 import Agapita from '../../assets/images/location-agapita.jpg';
 import Shell from '../../assets/images/location-shell.jpg';
 import Pansol from '../../assets/images/location-pansol.jpg';
-
-const API_KEY = 'AIzaSyCfeaOaN3OF4kmuGfRbH6yfmtLbnNE9_Sg';
 
 export default function LocationsPage() {
     return (
@@ -54,6 +54,7 @@ export default function LocationsPage() {
                     <h3>Store Hours:</h3>
                     <h3>Open daily from 7am to 5pm</h3>
                 </div>
+                <GoogleMaps />
             </div>
         </>
     )
