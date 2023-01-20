@@ -8,8 +8,8 @@ import FrozenPie from '../../assets/images/frozen_pie-1.jpg';
 export default function ProductSpecialty() {
     return (
         <>
-            <div className='specialty'>
-                <div className='specialty__title' id='specialty'>
+            <div className='specialty' id='specialty'>
+                <div className='specialty__title'>
                     <h1>Specialties</h1>
                     <p>Lety's Buko Pie Specialty Pies</p>
                 </div>

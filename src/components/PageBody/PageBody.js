@@ -46,16 +46,16 @@ export default function PageBody() {
                         <div className='body__products-item'>
                             <h2>Cassava Cake</h2>
                             <img src={Cassava} alt='Cassava cake on a board with a rectangular slice cut' />
-                            <NavLink to='/products/bakedgoods'>
+                            <HashLink to='/products/bakedgoods#goods'>
                                 <button>VIEW BAKED GOODS</button>
-                            </NavLink>
+                            </HashLink>
                         </div>
                         <div className='body__products-item'>
                             <h2>Broas</h2>
                             <img src={Pasalubong} alt='Various take away products from the pasalubong section' />
-                            <NavLink to='/products/pasalubong'>
+                            <HashLink to='/products/pasalubong#pasalubong'>
                                 <button>VIEW PASALUBONG</button>
-                            </NavLink>
+                            </HashLink>
                         </div>
                     </div>
                 </div>
