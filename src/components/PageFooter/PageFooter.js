@@ -19,9 +19,6 @@ export default function PageFooter() {
                     <div className='footer__social-contact'>
                         <img onClick={() => window.location = 'mailto:neilbcruz@gmail.com'} src={Google} alt='Google Mail icon that is shaped as letter M and envelope' />
                         <img onClick={() => newTab('https://www.facebook.com/profile.php?id=100063583611018')} src={Facebook} alt='Facebook icon is a blue circle with a letter f lowercase inside it' />
-                        {/* <a href='tel:+16478642354'>
-                        <img src={Phone} alt='Light blue circle with a phone shape inside it' />
-                        </a> */}
                         <img onClick={() => window.location = 'tel:+16478642354'} src={Phone} alt='Light blue circle with a phone shape inside it' />
                     </div>
                 </div>
@@ -30,7 +27,7 @@ export default function PageFooter() {
                         <NavLink to='/'>
                             <img src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
                         </NavLink>
-                        <h3>© 2022 Lety's Buko Pie</h3>
+                        <h3>© 2023 Lety's Buko Pie</h3>
                     </div>
                     <div className='footer__contact'>
                         <img src={Google} alt='Google Mail icon that is shaped as letter M and envelope' />

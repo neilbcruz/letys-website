@@ -1,6 +1,7 @@
 import './PageBody.scss';
 
 import { NavLink } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link'
 
 import BodyVideo from '../BodyVideo/BodyVideo';
 import BukoTree from '../../assets/images/buko-tree.jpg';
@@ -37,22 +38,22 @@ export default function PageBody() {
                         <p>Enjoy some of our products!<br></br>Specialty Pies, Baked Goods, and Pasalubong!</p>
                         <div className='body__products-item'>
                             <h2>Buko Pie</h2>
-                            <img src={BukoPie} alt='Buko pie slice on a white plate with flower design' />
-                            <NavLink to='/products'>
+                            <img src={BukoPie} alt='Buko pie in a box slightly open and a triangle slice on a small plate' />
+                            <HashLink to='/products/specialty#specialty'>
                                 <button>VIEW SPECIALTY</button>
-                            </NavLink>
+                            </HashLink>
                         </div>
                         <div className='body__products-item'>
                             <h2>Cassava Cake</h2>
-                            <img src={Cassava} alt='Buko pie slice on a white plate with flower design' />
-                            <NavLink to='/products'>
+                            <img src={Cassava} alt='Cassava cake on a board with a rectangular slice cut' />
+                            <NavLink to='/products/bakedgoods'>
                                 <button>VIEW BAKED GOODS</button>
                             </NavLink>
                         </div>
                         <div className='body__products-item'>
                             <h2>Broas</h2>
-                            <img src={Pasalubong} alt='Buko pie slice on a white plate with flower design' />
-                            <NavLink to='/products'>
+                            <img src={Pasalubong} alt='Various take away products from the pasalubong section' />
+                            <NavLink to='/products/pasalubong'>
                                 <button>VIEW PASALUBONG</button>
                             </NavLink>
                         </div>
