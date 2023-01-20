@@ -9,7 +9,7 @@ import Lety from '../../assets/images/lety-1.jpg';
 import BukoPie from '../../assets/images/buko_pie-12.jpg';
 import Cassava from '../../assets/images/cassava-10.jpg';
 import Pasalubong from '../../assets/images/pasalubong-2.png';
-import MainStore from '../../assets/images/location-main.png';
+import MainStore from '../../assets/images/location-main.jpg';
 
 export default function PageBody() {
     return (

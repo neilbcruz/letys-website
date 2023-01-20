@@ -24,8 +24,8 @@ export default function ModalMenu({ closeModal, isOpen }) {
                 <NavLink to='/products'>
                     <h1 onClick={closeModal}>Products</h1>
                 </NavLink>
-                <NavLink to='/stores'>
-                    <h1 onClick={closeModal}>Stores</h1>
+                <NavLink to='/locations'>
+                    <h1 onClick={closeModal}>Locations</h1>
                 </NavLink>
                 <NavLink to='/faq'>
                     <h1 onClick={closeModal}>FAQ</h1>

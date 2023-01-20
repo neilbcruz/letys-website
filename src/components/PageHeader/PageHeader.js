@@ -45,8 +45,8 @@ export default function PageHeader() {
                     <NavLink to='/products'>
                         <h3 onClick={closeModal}>Products</h3>
                     </NavLink>
-                    <NavLink to='/stores'>
-                        <h3 onClick={closeModal}>Stores</h3>
+                    <NavLink to='/locations'>
+                        <h3 onClick={closeModal}>Locations</h3>
                     </NavLink>
                     <NavLink to='/faq'>
                         <h3 onClick={closeModal}>FAQ</h3>
