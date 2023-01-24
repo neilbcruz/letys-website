@@ -28,10 +28,11 @@
             width: 3rem;
         }
 
-        // &-hamburger {
-        //     width: 2.4rem;
-        //     cursor: pointer;
-        // }
+        &-burger {
+            @include tablet {
+                display: none;
+            }
+        }
     }
 
     &__nav {
@@ -55,10 +56,6 @@
                 color: $sec-color-1;
             }
         }
-    }
-
-    &__burger {
-        padding: 1rem;
     }
 }
 

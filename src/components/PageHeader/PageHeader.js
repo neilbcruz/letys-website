@@ -1,21 +1,14 @@
 import './PageHeader.scss';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import Modal from 'react-modal';
 import ReactBurger from 'hamburger-react';
 
 import ModalMenu from '../ModalMenu/ModalMenu';
-// import Hamburger from '../Hamburger/Hamburger';
 
 import LetysLogo from '../../assets/images/letys-logo.jpg';
-// import HamburgerIcon from '../../assets/icons/hamb.svg';
 
 export default function PageHeader() {
     const [isOpen, setOpen] = useState(false);
-
-    // function openModal() {
-    //     setOpen(true);
-    // }
 
     function closeModal() {
         setOpen(false);
@@ -25,7 +18,10 @@ export default function PageHeader() {
         <>
             <header className='header'>
                 <div className='header__top'>
-                    <img className='header__top-logo' src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
+                    <NavLink to='/'>
+                        <img className='header__top-logo' src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
+                    </NavLink>
+                    <div className='header__top-burger'>
                     <ReactBurger
                         color='#014723'
                         easing="ease-in"
@@ -39,12 +35,7 @@ export default function PageHeader() {
                             }
                         }}
                     />
-                    {/* <Hamburger 
-                    openModal={openModal}
-                    setOpen={setOpen}
-                    open={open}
-                     /> */}
-                    {/* <img className='header__top-hamburger' src={Hamburger} onClick={openModal} /> */}
+                    </div>
                 </div>
                 <div className='header__nav'>
                     <NavLink to='/'>
@@ -53,8 +44,8 @@ export default function PageHeader() {
                     <NavLink to='/products'>
                         <h3 onClick={closeModal}>Products</h3>
                     </NavLink>
-                    <NavLink to='/stores'>
-                        <h3 onClick={closeModal}>Stores</h3>
+                    <NavLink to='/locations'>
+                        <h3 onClick={closeModal}>Locations</h3>
                     </NavLink>
                     <NavLink to='/faq'>
                         <h3 onClick={closeModal}>FAQ</h3>

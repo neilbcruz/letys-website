@@ -1,0 +1,24 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.goods {
+    // padding: 1rem;
+
+    &__product {
+        padding-top: 1rem;
+
+        & img {
+            width: 100%;
+            height: auto;
+            padding-bottom: 0.5rem;
+            object-fit: cover;
+        }
+    }
+}
