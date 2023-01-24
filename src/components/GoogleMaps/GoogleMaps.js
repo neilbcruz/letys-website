@@ -12,7 +12,7 @@ const center = {
     lng: 121.23094523836086
 };
 
-const APIKEY = process.env.API_KEY;
+// const APIKEY = process.env.API_KEY;
 
 export default function GoogleMaps() {
 
