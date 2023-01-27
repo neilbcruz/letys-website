@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 const containerStyle = {
-    width: '200%',
+    width: '100%',
     height: '50vh'
 };
 
@@ -59,7 +59,7 @@ export default function GoogleMaps() {
                     onLoad={handleOnLoad}
                     onClick={() => setActiveMarker(null)}
                     mapContainerStyle={containerStyle}
-                    zoom={50}
+                    // zoom={50}
                 >
                     {markers.map(({ id, name, position }) => (
                         <Marker
