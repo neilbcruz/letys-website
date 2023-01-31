@@ -1,6 +1,6 @@
 import './PageBody.scss';
 
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link'
 
 import BodyVideo from '../BodyVideo/BodyVideo';

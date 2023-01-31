@@ -30,9 +30,9 @@ export default function PageFooter() {
                         <h3>© 2023 Lety's Buko Pie</h3>
                     </div>
                     <div className='footer__contact'>
-                        <img src={Google} alt='Google Mail icon that is shaped as letter M and envelope' />
+                        {/* <img src={Google} alt='Google Mail icon that is shaped as letter M and envelope' /> */}
                         <img src={Facebook} alt='Facebook icon is a blue circle with a letter f lowercase inside it' />
-                        <img src={Phone} alt='Light blue circle with a phone shape inside it' />
+                        {/* <img src={Phone} alt='Light blue circle with a phone shape inside it' /> */}
                     </div>
                 </div>
             </div>

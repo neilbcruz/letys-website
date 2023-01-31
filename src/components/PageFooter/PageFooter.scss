@@ -15,7 +15,7 @@
         padding: 1rem;
 
         &-contact {
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
 
@@ -58,20 +58,20 @@
     }
 
     &__contact {
-        display: none;
+        // display: flex;
 
         & img {
-            width: 3rem;
+            width: 2rem;
             margin-left: 2rem;
             cursor: pointer;
 
-            @include desktop {
-                margin-left: 4rem;
+            @include tablet {
+                width: 3rem;
             }
         }
 
-        @include tablet {
-            display: flex;
-        }
+        // @include tablet {
+        //     display: flex;
+        // }
     }
 }

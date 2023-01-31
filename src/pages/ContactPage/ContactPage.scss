@@ -9,14 +9,67 @@
 }
 
 .contact {
-    padding: 1rem;
     text-align: center;
 
-    @include tablet {
-        padding: 1rem 2rem;
+    &__title {
+        padding: 1rem;
+        background-color: $prim-color-3;
+        // border-top: 1px solid $prim-color-2;
+
+        & h1 {
+            color: $prim-color-2;
+        }
+
+
     }
 
-    @include desktop {
-        padding: 1rem 10rem;
+    &__form {
+        padding: 1rem 1rem 0rem;
+        text-align: left;
+
+        &-group {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 0.75rem;
+
+            & h2 {
+                color: $prim-color-2;
+            }
+
+            & input, textarea {
+                border-radius: 5px;
+                background: $prim-color-3;
+                border: 0 solid;
+                border-bottom: 1px solid rgba($prim-color-2, 0.5);
+                box-shadow: 5px 5px 5px rgba($sec-color-2, 0.5);
+                // font-size: 0.9rem;
+                display: block;
+                padding: .5rem;
+
+                &:focus {
+                    background: $prim-color-3;
+                    transition: 250ms background ease-in;
+                }
+
+                &:-webkit-autofill, 
+                :-webkit-autofill:hover, 
+                :-webkit-autofill:focus, 
+                :-webkit-autofill:active {
+                    -webkit-box-shadow: 0 0 0 30px $prim-color-3 inset !important;
+                }
+            }
+        }
+
+        & button {
+            margin: 0.5rem 0rem;
+            padding: 0.5rem;
+            color: $support-color-1;
+            font-size: 1.25rem;
+            background: $prim-color-2;
+            border: 1px solid $sec-color-2;
+            box-shadow: 5px 5px 5px rgba($sec-color-1, 0.5);
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
     }
 }
