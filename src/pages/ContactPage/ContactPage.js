@@ -10,13 +10,13 @@ export default function ContactPage() {
     e.preventDefault();
 
     emailjs.sendForm(
-      // process.env.REACT_APP_SERVICE_ID, 
-      'service_gwxauj3',
-      // process.env.REACT_APP_TEMPLATE_ID, 
-      'template_lqaclxg',
+      process.env.REACT_APP_SERVICE_ID, 
+      // 'service_gwxauj3',
+      process.env.REACT_APP_TEMPLATE_ID, 
+      // 'template_lqaclxg',
       form.current,
-      // process.env.REACT_APP_USER_ID)
-      '5r561NxOPSpI-g8_D')
+      process.env.REACT_APP_USER_ID)
+      // '5r561NxOPSpI-g8_D')
       .then((result) => {
         console.log(result.text);
         alert('SUCCESS!')
@@ -37,47 +37,52 @@ export default function ContactPage() {
         </div>
         <div className='contact__form'>
           <form ref={form} onSubmit={sendEmail}>
-            <div className="form-group">
-              <label for="name">Name</label>
+            <div className='contact__form-group'>
+              <label for='name'><h2>Name</h2></label>
               <input
-                type="name"
-                name="name"
-                class="form-control"
-                id="name"
-                placeholder="enter your name"
+                type='name'
+                name='name'
+                class='contact__form-input'
+                id='name'
+                placeholder='enter your name'
+                required
               />
             </div>
-            <div className="form-group">
-              <label for="email">Email</label>
+            <div className='contact__form-group'>
+              <label for='email'><h2>Email</h2></label>
               <input
-                type="email"
-                name="email"
-                className="form-control"
-                id="email"
-                placeholder="enter your email"
+                type='email'
+                name='email'
+                className='contact__form-input'
+                id='email'
+                placeholder='enter your email'
+                required
               />
             </div>
-            <div className="form-group">
-              <label for="subject">Subject</label>
+            <div className='contact__form-group'>
+              <label for='subject'><h2>Subject</h2></label>
               <input
-                type="text"
-                name="subject"
-                className="form-control"
-                id="subject"
-                placeholder="enter email subject"
+                type='text'
+                name='subject'
+                className='contact__form-input'
+                id='subject'
+                placeholder='enter email subject'
+                required
               />
             </div>
-            <div className="form-group">
-              <label for="message">Message</label>
+            <div className='contact__form-group'>
+              <label for='message'><h2>Message</h2></label>
               <textarea
-                name="message"
-                className="form-control"
-                id="message"
-                rows="5"
+                name='message'
+                className='contact__form-input'
+                id='message'
+                rows='5'
+                placeholder='enter your message'
+                required
               ></textarea>
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <button type='submit'>
               Submit
             </button>
           </form>
