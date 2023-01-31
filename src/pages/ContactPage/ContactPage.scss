@@ -9,14 +9,25 @@
 }
 
 .contact {
-    padding: 1rem;
     text-align: center;
 
-    @include tablet {
-        padding: 1rem 2rem;
-    }
+    &__title {
+        padding: 1rem;
+        background-color: $prim-color-3;
+        // border-top: 1px solid $prim-color-2;
 
-    @include desktop {
-        padding: 1rem 10rem;
+        & h1 {
+            color: $prim-color-2;
+        }
+
+        & button {
+            margin: 0.5rem 0rem;
+            padding: 4px;
+            background: $prim-color-1;
+            border: 1px solid $sec-color-2;
+            box-shadow: 5px 5px 5px rgba(202, 206, 214, 0.3);
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
     }
 }

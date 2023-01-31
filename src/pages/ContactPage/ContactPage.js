@@ -4,40 +4,40 @@ import { useRef } from 'react';
 import emailjs from 'emailjs-com';
 
 export default function ContactPage() {
-    const form = useRef();
+  const form = useRef();
 
-    const sendEmail = (e) => {
-        e.preventDefault();
+  const sendEmail = (e) => {
+    e.preventDefault();
 
-        emailjs.sendForm(
-            // process.env.REACT_APP_SERVICE_ID, 
-            'service_gwxauj3',
-            // process.env.REACT_APP_TEMPLATE_ID, 
-            'template_lqaclxg',
-            form.current, 
-            // process.env.REACT_APP_USER_ID)
-            '5r561NxOPSpI-g8_D')
-            .then((result) => {
-                console.log(result.text);
-                alert('SUCCESS!')
-            }, (error) => {
-                console.log(error.text);
-                alert('FAILED...', error)
-            });
+    emailjs.sendForm(
+      // process.env.REACT_APP_SERVICE_ID, 
+      'service_gwxauj3',
+      // process.env.REACT_APP_TEMPLATE_ID, 
+      'template_lqaclxg',
+      form.current,
+      // process.env.REACT_APP_USER_ID)
+      '5r561NxOPSpI-g8_D')
+      .then((result) => {
+        console.log(result.text);
+        alert('SUCCESS!')
+      }, (error) => {
+        console.log(error.text);
+        alert('FAILED...', error)
+      });
 
-        e.target.reset();
-    };
+    e.target.reset();
+  };
 
-    return (
-        <>
-    <div class="container">
-      <div class="row">
-        <div class="col align-self-center">
-          <h1 class="text-center">Email - JavaScript Contact Form</h1>
-          {/* <!-- contact form --> */}
+  return (
+    <>
+      <div className='contact'>
+        <div className='contact__title'>
+          <h1>Contact</h1>
+          <h3>Let us know if you have any questions or concerns!</h3>
+        </div>
+        <div className='contact__form'>
           <form ref={form} onSubmit={sendEmail}>
-            {/* <!-- name --> */}
-            <div class="form-group">
+            <div className="form-group">
               <label for="name">Name</label>
               <input
                 type="name"
@@ -47,48 +47,42 @@ export default function ContactPage() {
                 placeholder="enter your name"
               />
             </div>
-
-            {/* <!-- email --> */}
-            <div class="form-group">
-              <label for="email">Email address</label>
+            <div className="form-group">
+              <label for="email">Email</label>
               <input
                 type="email"
                 name="email"
-                class="form-control"
+                className="form-control"
                 id="email"
                 placeholder="enter your email"
               />
             </div>
-
-            {/* <!-- subject --> */}
-            <div class="form-group">
+            <div className="form-group">
               <label for="subject">Subject</label>
               <input
                 type="text"
                 name="subject"
-                class="form-control"
+                className="form-control"
                 id="subject"
                 placeholder="enter email subject"
               />
             </div>
-
-            <div class="form-group">
+            <div className="form-group">
               <label for="message">Message</label>
               <textarea
                 name="message"
-                class="form-control"
+                className="form-control"
                 id="message"
                 rows="5"
               ></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </form>
         </div>
       </div>
-    </div>
-        </>
-    )
+    </>
+  )
 }
