@@ -31,8 +31,6 @@ const markers = [
     }
 ];
 
-const APIKEY = process.env.API_KEY;
-
 export default function GoogleMaps() {
     const [activeMarker, setActiveMarker] = useState(null);
 
@@ -49,11 +47,12 @@ export default function GoogleMaps() {
         map.fitBounds(bounds);
     };
 
+    const API_KEY = process.env.REACT_APP_API_KEY;
+
     return (
         <>
             <LoadScript
-                googleMapsApiKey={APIKEY}
-                // googleMapsApiKey='AIzaSyCfeaOaN3OF4kmuGfRbH6yfmtLbnNE9_Sg'
+                googleMapsApiKey={API_KEY}
             >
                 <GoogleMap
                     onLoad={handleOnLoad}
