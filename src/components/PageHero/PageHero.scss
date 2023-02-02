@@ -16,23 +16,31 @@
     background-image: url(../../assets/images/letys_buko_pie-2.jpg);
     background-color: $prim-color-3;
     background-size: cover;
-    background-position: 50% 100%;
     height: 10rem;
+    display:flex;
+    align-items: center;
+    filter: brightness(80%);
 
     @include tablet {
         padding: 1rem 2rem;
+        height: 15rem;
     }
 
     @include desktop {
         padding: 1rem 10rem;
+        height: 20rem;
     }
 
     & h1 {
         color: $sec-color-1;
         font-family: 'Dancing Script', cursive;
         font-size: 3rem;
-        position:relative;
-        top: 3rem;
         font-weight: 400;
+    }
+
+    & img {
+        width: 20rem;
+        height: 100%;
+        filter: none;
     }
 }

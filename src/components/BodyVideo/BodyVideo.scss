@@ -10,21 +10,13 @@
 
 .video {
     background-color: black;
-    
-    @include tablet {
-        padding: 0rem 2rem;
-    }
-
-    @include desktop {
-        padding: 0rem 10rem;
-    }
 
     &__youtube {
         overflow: hidden;
         padding-bottom: 56.25%;
         position: relative;
         height: 0;
-    
+        
         & iframe {
             top: 0;
             left: 0;
@@ -33,6 +25,15 @@
             height: 100%;
             width: 100%;
             position: absolute;
+
+            @include tablet {
+                padding: 0rem 2rem;
+            }
+
+            @include desktop {
+                padding: 0rem 10rem;
+                height: 90%;
+            }
         }
     }
 
