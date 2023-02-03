@@ -36,41 +36,45 @@ export default function PageBody() {
                     <h1>Products</h1>
                     <div className='body__products-info'>
                         <p>Enjoy some of our products!<br></br>Specialty Pies, Baked Goods, and Pasalubong!</p>
-                        <div className='body__products-item'>
-                            <h2>Buko Pie</h2>
-                            <img src={BukoPie} alt='Buko pie in a box slightly open and a triangle slice on a small plate' />
-                            <HashLink to='/products/specialty#specialty'>
-                                <button>VIEW SPECIALTY</button>
-                            </HashLink>
-                        </div>
-                        <div className='body__products-item'>
-                            <h2>Cassava Cake</h2>
-                            <img src={Cassava} alt='Cassava cake on a board with a rectangular slice cut' />
-                            <HashLink to='/products/bakedgoods#goods'>
-                                <button>VIEW BAKED GOODS</button>
-                            </HashLink>
-                        </div>
-                        <div className='body__products-item'>
-                            <h2>Broas</h2>
-                            <img src={Pasalubong} alt='Various take away products from the pasalubong section' />
-                            <HashLink to='/products/pasalubong#pasalubong'>
-                                <button>VIEW PASALUBONG</button>
-                            </HashLink>
+                        <div className='body__products-group'>
+                            <div className='body__products-item'>
+                                <h2>Buko Pie</h2>
+                                <img src={BukoPie} alt='Buko pie in a box slightly open and a triangle slice on a small plate' />
+                                <HashLink to='/products/specialty#specialty'>
+                                    <button>VIEW SPECIALTY</button>
+                                </HashLink>
+                            </div>
+                            <div className='body__products-item'>
+                                <h2>Cassava Cake</h2>
+                                <img src={Cassava} alt='Cassava cake on a board with a rectangular slice cut' />
+                                <HashLink to='/products/bakedgoods#goods'>
+                                    <button>VIEW BAKED GOODS</button>
+                                </HashLink>
+                            </div>
+                            <div className='body__products-item'>
+                                <h2>Broas</h2>
+                                <img src={Pasalubong} alt='Various take away products from the pasalubong section' />
+                                <HashLink to='/products/pasalubong#pasalubong'>
+                                    <button>VIEW PASALUBONG</button>
+                                </HashLink>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className='body__location'>
                     <h1>Lety's Buko Pie Main Branch</h1>
                     <div className='body__location-info'>
-                        <h3>Location:<br></br>Lety's Buko Pie, National Road,<br></br>Barangay Anos, Los Baños, Laguna<br></br>(in front of Heaven's Memorial Garden)</h3>
+                        <div className='body__location-info-text'>
+                            <h3>Location:<br></br>Lety's Buko Pie, National Road,<br></br>Barangay Anos, Los Baños, Laguna<br></br>(in front of Heaven's Memorial Garden)</h3>
+                            <NavLink to='/locations'>
+                                <button>VIEW MORE LOCATION</button>
+                            </NavLink>
+                            <h3>Store Hours:<br></br>Open daily from 6am to 6pm</h3>
+                            <NavLink to='/contact'>
+                                <button>GET IN TOUCH</button>
+                            </NavLink>
+                        </div>
                         <img src={MainStore} alt='Main store view' />
-                        <NavLink to='/locations'>
-                            <button>VIEW MORE LOCATION</button>
-                        </NavLink>
-                        <h3>Store Hours:<br></br>Open daily from 6am to 6pm</h3>
-                        <NavLink to='/contact'>
-                            <button>GET IN TOUCH</button>
-                        </NavLink>
                     </div>
                 </div>
             </div>

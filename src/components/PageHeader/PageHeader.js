@@ -23,19 +23,19 @@ export default function PageHeader() {
                         <img className='header__top-logo' src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
                     </NavLink>
                     <div className='header__top-burger'>
-                    <ReactBurger
-                        color='#014723'
-                        easing="ease-in"
-                        toggled={isOpen}
-                        toggle={setOpen}
-                        onToggle={toggled => {
-                            if (toggled) {
-                                // open a menu
-                            } if (!toggled) {
-                                // close a menu
-                            }
-                        }}
-                    />
+                        <ReactBurger
+                            color='#014723'
+                            easing="ease-in"
+                            toggled={isOpen}
+                            toggle={setOpen}
+                            onToggle={toggled => {
+                                if (toggled) {
+                                    // open a menu
+                                } if (!toggled) {
+                                    // close a menu
+                                }
+                            }}
+                        />
                     </div>
                 </div>
                 <div className='header__nav'>
