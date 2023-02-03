@@ -10,7 +10,7 @@
 
 .specialty {
 
-    &__group {
+    &__items {
         @include tablet {
             display: flex;
             flex-wrap: wrap;
@@ -19,7 +19,7 @@
             // flex: 1 1 2;
         }
 
-        &-product {
+        &-info {
             padding-top: 1rem;
     
             & img {

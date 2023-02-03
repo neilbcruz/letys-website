@@ -16,30 +16,88 @@
         background-color: $prim-color-3;
         margin-bottom: 1rem;
 
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
         & h1 {
             color: $prim-color-2;
         }
     }
 
-    &__store {
+    &__stores {
+        padding: 1rem 1rem 0rem;
+
+        @include tablet {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            // flex: 1 1 2;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+            justify-content: space-between;
+        }
+
+        &-info {
+            padding: 1rem 0rem;
+            // margin: 0rem 1rem 0rem;
+            border-top: 1px solid $prim-color-2;
+
+            @include tablet {
+                border-top: none;
+                // margin: 0rem 2rem 0rem;
+            }
+    
+            &.main {
+                border-top: none;
+                padding: 0rem 0rem 1rem;
+
+                @include tablet {
+                    padding: 1rem 0rem;
+                }
+            }
+            
+    
+            & h2 {
+                color: $prim-color-2;
+            }
+    
+            & img {
+                width: 100%;
+                height: auto;
+                padding-top: 0.5rem;
+                object-fit: cover;
+
+                @include tablet {
+                    width: 16rem;
+                    height: 14rem;
+                }
+
+                @include tablet {
+                    width: 20rem;
+                    height: 18rem;
+                }
+            }
+        }
+    }
+
+    &__map {
         padding: 1rem 0rem;
-        margin: 0rem 1rem 0rem;
-        border-top: 1px solid $prim-color-2;
 
-        &.main {
-            border-top: none;
-            padding: 0rem 0rem 1rem;
-        }
-        
-
-        & h2 {
-            color: $prim-color-2;
+        @include tablet {
+            padding: 1rem 2rem;
         }
 
-        & img {
-            width: 100%;
-            height: auto;
-            padding-top: 0.5rem;
+        @include desktop {
+            padding: 1rem 10rem;
         }
     }
 }
