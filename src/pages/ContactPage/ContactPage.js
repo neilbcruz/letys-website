@@ -10,13 +10,10 @@ export default function ContactPage() {
     e.preventDefault();
 
     emailjs.sendForm(
-      process.env.REACT_APP_SERVICE_ID, 
-      // 'service_gwxauj3',
-      process.env.REACT_APP_TEMPLATE_ID, 
-      // 'template_lqaclxg',
+      process.env.REACT_APP_SERVICE_ID,
+      process.env.REACT_APP_TEMPLATE_ID,
       form.current,
       process.env.REACT_APP_USER_ID)
-      // '5r561NxOPSpI-g8_D')
       .then((result) => {
         console.log(result.text);
         alert('SUCCESS!')

@@ -14,7 +14,6 @@
     &__title {
         padding: 1rem;
         background-color: $prim-color-3;
-        // border-top: 1px solid $prim-color-2;
         margin-bottom: 1rem;
 
         @include tablet {
@@ -24,7 +23,6 @@
         @include desktop {
             padding: 1rem 10rem;
         }
-
 
         & h1 {
             color: $prim-color-2;
