@@ -14,7 +14,14 @@
     &__title {
         padding: 1rem;
         background-color: $prim-color-3;
-        // border-top: 1px solid $prim-color-2;
+
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
 
         & h1 {
             color: $prim-color-2;
@@ -35,6 +42,13 @@
         padding: 1rem 1rem 0rem;
         text-align: left;
         
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
 
         &-details {
             border: 1px solid black;

@@ -15,8 +15,13 @@
     @include tablet {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         gap: 2rem;
+        padding: 1.25rem 2rem;
+    }
+
+    @include desktop {
+        padding: 1.5rem 10rem;
     }
 
     &__top {

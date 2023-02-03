@@ -13,6 +13,14 @@
     &__buko {
         padding: 1rem 1rem 0rem;
 
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
         & h1 {
             color: $prim-color-2;
             padding: 0.5rem 0rem;
@@ -22,10 +30,25 @@
         &-info {
             text-align: left;
 
+            @include tablet {
+                display: flex;
+                justify-content: space-between;
+                gap: 1.5rem;
+
+                & > * {
+                    flex: auto;
+                }
+            }
+
             & img {
                 width: 100%;
                 height: auto;
                 padding-top: 0.5rem;
+
+                @include tablet {
+                    width: 15rem;
+                    padding-top: 0rem;
+                }
             }
         }
     }
@@ -33,6 +56,14 @@
     &__lety {
         padding: 1rem 1rem 0rem;
 
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
         & h1 {
             color: $prim-color-2;
             padding: 0.5rem 0rem;
@@ -42,16 +73,39 @@
         &-info {
             text-align: left;
 
+            @include tablet {
+                display: flex;
+                justify-content: space-between;
+                gap: 1.5rem;
+                
+                & > * {
+                    flex: auto;
+                }
+            }
+
             & img {
                 width: 100%;
                 height: auto;
                 padding-top: 0.5rem;
+
+                @include tablet {
+                    width: 15rem;
+                    padding-top: 0rem;
+                }
             }
         }
     }
 
     &__products {
         padding: 1rem 1rem 0rem;
+
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
 
         & h1 {
             color: $prim-color-2;
@@ -67,6 +121,25 @@
                 height: auto;
                 padding-bottom: 0.5rem;
                 object-fit: cover;
+                
+                @include tablet {
+                    width: 20rem;
+                    height: 20rem;
+                }
+            }
+        }
+
+        &-group {
+            @include tablet {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 1rem;
+                // flex: 1 1 2;
+            }
+
+            @include desktop {
+                flex-wrap: nowrap;
             }
         }
 
@@ -90,6 +163,14 @@
     &__location {
         padding: 1rem 1rem 0rem;
 
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
         & h1 {
             color: $prim-color-2;
             padding: 0.5rem 0rem;
@@ -98,12 +179,26 @@
 
         &-info {
             text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @include tablet {
+                gap: 2rem;
+            }
 
             & img {
                 display: none;
-                width: 100%;
+                width: 20rem;
                 height: auto;
-                padding-top: 0.5rem;
+
+                @include tablet {
+                    display: flex;
+                }
+
+                @include desktop {
+                    width: 30rem;
+                }
             }
 
             & button {
