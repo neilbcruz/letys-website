@@ -10,11 +10,13 @@ export default function ProductGoods() {
                     <h1>Baked Goods</h1>
                     <p>Lety's Buko Pie Baked Goods</p>
                 </div>
-                <div className='specialty__product'>
-                    <h3>Cassava Cake</h3>
-                    <img src={Cassava} alt='Cassava cake on a board' />
+                <div className='goods__group'>
+                    <div className='goods__group-product'>
+                        <h3>Cassava Cake</h3>
+                        <img src={Cassava} alt='Cassava cake on a board' />
+                    </div>
                 </div>
-                <div className='specialty__list'>
+                <div className='goods__list'>
                     <h2>Other Baked Goods</h2>
                     <h3>Banana Bread</h3>
                     <h3>Carrot Cake</h3>

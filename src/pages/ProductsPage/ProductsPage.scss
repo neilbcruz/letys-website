@@ -16,6 +16,15 @@
         background-color: $prim-color-3;
         // border-top: 1px solid $prim-color-2;
 
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
+
         & h1 {
             color: $prim-color-2;
         }
@@ -24,13 +33,35 @@
     &__nav {
         padding: 1rem;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
+        gap: 1rem;
+        flex-wrap: wrap;
+
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
 
         &-products {
+
             & img {
-                width: 4rem;
-                height: auto;
+                width: 5rem;
+                height: 5rem;
                 padding-top: 0.5rem;
+                object-fit: cover;
+
+                @include tablet {
+                    width: 10rem;
+                    height: 10rem;
+                }
+
+                @include desktop {
+                    width: 12rem;
+                    height: 12rem
+                }
             }
 
             & a {
@@ -49,7 +80,15 @@
 
     &__list {
         margin: 1rem;
-        padding: 0.5rem 0rem;
+        padding-top: 1rem;
         border-top: 1px solid $prim-color-2;
+
+        @include tablet {
+            margin: 2rem;
+        }
+
+        @include desktop {
+            margin: 1rem 10rem;
+        }
     }
 }
