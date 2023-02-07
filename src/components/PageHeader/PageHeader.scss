@@ -58,12 +58,12 @@
             }
 
             &:hover {
-                color: $sec-color-1;
+                color: $prim-color-3 
             }
         }
     }
 }
 
 .active {
-    color: $sec-color-1 !important;
+    color: $prim-color-3 !important;
 }

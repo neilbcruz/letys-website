@@ -33,7 +33,7 @@ export default function ContactPage() {
           <h3>Let us know if you have any questions or concerns!</h3>
         </div>
         <div className='contact__form'>
-          <form ref={form} onSubmit={sendEmail}>
+          <form data-netlify='true' ref={form} onSubmit={sendEmail}>
             <div className='contact__form-group'>
               <label for='name'><h2>Name</h2></label>
               <input
