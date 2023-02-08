@@ -29,10 +29,10 @@
 
         & button {
             margin: 0.5rem 0rem;
-            padding: 4px;
+            padding: 6px;
             background: $prim-color-1;
             border: 1px solid $sec-color-2;
-            box-shadow: 5px 5px 5px rgba(202, 206, 214, 0.3);
+            box-shadow: 5px 5px 5px rgba($prim-color-1, 0.3);
             border-radius: 0.5rem;
             cursor: pointer;
         }
