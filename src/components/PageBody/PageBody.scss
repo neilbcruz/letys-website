@@ -40,6 +40,11 @@
                 }
             }
 
+            & p {
+                text-indent: 2rem;
+                padding-bottom: 0.5rem;
+            }
+
             & img {
                 width: 100%;
                 height: auto;
@@ -81,6 +86,11 @@
                 & > * {
                     flex: auto;
                 }
+            }
+
+            & p {
+                text-indent: 2rem;
+                padding-bottom: 0.5rem;
             }
 
             & img {
