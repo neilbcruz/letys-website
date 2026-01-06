@@ -13,7 +13,7 @@ export default function PageBody() {
     
     // Helper classes to keep the JSX readable
     const sectionClasses = "px-4 pt-4 pb-0 tablet:px-8 desktop:px-40";
-    const h1Classes = "text-primary-2 font-bold text-2xl py-2 border-t border-primary-2 mb-4";
+    const h1Classes = "text-center text-primary-2 font-bold text-2xl py-3 border-y border-primary-2 mb-8 uppercase tracking-widest";
     const btnClasses = "p-1.5 bg-primary-1 border border-secondary-2 rounded-lg shadow-[5px_5px_5px_rgba(249,195,1,0.3)] cursor-pointer hover:opacity-90 transition font-bold text-sm inline-block";
     const pIndent = "indent-8 pb-2";
 
