@@ -1,0 +1,84 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    padding: 0.5rem 1rem;
+    background-color: $prim-color-1;
+
+    @include tablet {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 1rem 2rem;
+    }
+
+    @include desktop {
+        padding: 1.25rem 10rem;
+    }
+
+    &__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0rem;
+        
+        // &-logo1 {
+        //     width: 3rem;
+        // }
+
+        &-logo2 {
+            width: 8rem;
+            height: auto;
+            padding-top: 0.5rem;
+
+            @include tablet {
+                width: 10rem;
+            }
+
+            @include desktop {
+                width: 12rem;
+            }
+        }
+
+        &-burger {
+            @include tablet {
+                display: none;
+            }
+        }
+    }
+
+    &__nav {
+        display: none;
+
+        @include tablet {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+       
+
+        & a {
+            &:link,
+            &:visited {
+                text-decoration: none;
+                color: $prim-color-2;
+            }
+
+            &:hover {
+                color: $prim-color-3 
+            }
+        }
+    }
+}
+
+.active {
+    color: $prim-color-3 !important;
+}

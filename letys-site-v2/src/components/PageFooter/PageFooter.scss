@@ -1,0 +1,78 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.footer {
+    padding-top: 2rem;
+
+    &__social {
+        // padding: 1rem;
+
+        &-contact {
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            @include tablet {
+                display: none;
+            }
+
+            & img {
+                width: 3rem;
+                margin: 0rem 2rem;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $prim-color-1;
+        padding: 0.5rem 1rem;
+        
+
+        @include tablet {
+            padding: 1.25rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1.25rem 10rem;
+        }
+    }
+
+    &__text {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        & img {
+            width: 2.5rem;
+        }
+    }
+
+    &__contact {
+        // display: flex;
+
+        & img {
+            width: 2rem;
+            margin-left: 2rem;
+            cursor: pointer;
+
+            @include tablet {
+                width: 3rem;
+            }
+        }
+
+        // @include tablet {
+        //     display: flex;
+        // }
+    }
+}

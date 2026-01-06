@@ -1,0 +1,46 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero{
+    padding: 1rem;
+    text-align: left;
+    background-image: url(../../assets/images/letys_buko_pie-2.jpg);
+    background-color: $prim-color-3;
+    background-size: cover;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    filter: brightness(80%);
+
+    @include tablet {
+        padding: 1rem 2rem;
+        height: 15rem;
+    }
+
+    @include desktop {
+        padding: 1rem 10rem;
+        height: 20rem;
+    }
+
+    & h1 {
+        color: $sec-color-1;
+        font-family: 'Dancing Script', cursive;
+        font-size: 3rem;
+        font-weight: 400;
+    }
+
+    & img {
+        width: 20rem;
+        height: 100%;
+        filter: none;
+    }
+}

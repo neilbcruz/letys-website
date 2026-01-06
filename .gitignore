@@ -22,3 +22,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# vite
+/letys-site-v2/node_modules
+/letys-site-v2/dist
+/letys-site-v2/.env
+
+/src-backup

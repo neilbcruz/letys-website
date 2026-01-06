@@ -1,0 +1,226 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+
+    &__buko {
+        padding: 1rem 1rem 0rem;
+
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
+        & h1 {
+            color: $prim-color-2;
+            padding: 0.5rem 0rem;
+            border-top: 1px solid $prim-color-2;
+        }
+
+        &-info {
+            text-align: left;
+
+            @include tablet {
+                display: flex;
+                justify-content: space-between;
+                gap: 1.5rem;
+
+                & > * {
+                    flex: auto;
+                }
+            }
+
+            & p {
+                text-indent: 2rem;
+                padding-bottom: 0.5rem;
+            }
+
+            & img {
+                width: 100%;
+                height: auto;
+                padding-top: 0.5rem;
+
+                @include tablet {
+                    width: 15rem;
+                    padding-top: 0rem;
+                }
+            }
+        }
+    }
+
+    &__lety {
+        padding: 1rem 1rem 0rem;
+
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
+        & h1 {
+            color: $prim-color-2;
+            padding: 0.5rem 0rem;
+            border-top: 1px solid $prim-color-2;
+        }
+
+        &-info {
+            text-align: left;
+
+            @include tablet {
+                display: flex;
+                justify-content: space-between;
+                gap: 1.5rem;
+                
+                & > * {
+                    flex: auto;
+                }
+            }
+
+            & p {
+                text-indent: 2rem;
+                padding-bottom: 0.5rem;
+            }
+
+            & img {
+                width: 100%;
+                height: auto;
+                padding-top: 0.5rem;
+
+                @include tablet {
+                    width: 15rem;
+                    padding-top: 0rem;
+                }
+            }
+        }
+    }
+
+    &__products {
+        padding: 1rem 1rem 0rem;
+
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
+        & h1 {
+            color: $prim-color-2;
+            padding: 0.5rem 0rem;
+            border-top: 1px solid $prim-color-2;
+        }
+
+        &-info {
+            text-align: center;
+
+            & img {
+                width: 60%;
+                height: auto;
+                padding-bottom: 0.5rem;
+                object-fit: cover;
+                
+                @include tablet {
+                    width: 20rem;
+                    height: 20rem;
+                }
+            }
+        }
+
+        &-group {
+            @include tablet {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 1rem;
+                // flex: 1 1 2;
+            }
+
+            @include desktop {
+                flex-wrap: nowrap;
+            }
+        }
+
+        &-item {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.5rem 0rem;
+
+            & button {
+                padding: 6px;
+                background: $prim-color-1;
+                border: 1px solid $sec-color-2;
+                box-shadow: 5px 5px 5px rgba($prim-color-1, 0.3);
+                border-radius: 0.5rem;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__location {
+        padding: 1rem 1rem 0rem;
+
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
+        & h1 {
+            color: $prim-color-2;
+            padding: 0.5rem 0rem;
+            border-top: 1px solid $prim-color-2;
+        }
+
+        &-info {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @include tablet {
+                gap: 2rem;
+            }
+
+            & img {
+                display: none;
+                width: 20rem;
+                height: auto;
+
+                @include tablet {
+                    display: flex;
+                }
+
+                @include desktop {
+                    width: 30rem;
+                }
+            }
+
+            & button {
+                margin: 0.5rem 0rem;
+                padding: 6px;
+                background: $prim-color-1;
+                border: 1px solid $sec-color-2;
+                box-shadow: 5px 5px 5px rgba($prim-color-1, 0.3);
+                border-radius: 0.5rem;
+                cursor: pointer;
+            }
+        }
+    }
+}
