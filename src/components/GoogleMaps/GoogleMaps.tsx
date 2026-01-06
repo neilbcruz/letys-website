@@ -1,4 +1,3 @@
-import './GoogleMaps.scss';
 import { useState } from "react";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
@@ -43,7 +42,7 @@ export default function GoogleMaps() {
     const [activeMarker, setActiveMarker] = useState<number | null>(null);
 
     const handleActiveMarker = (marker: number) => {
-        if (marker === activeMarker)return;
+        if (marker === activeMarker) return;
         setActiveMarker(marker);
     };
 
@@ -56,31 +55,26 @@ export default function GoogleMaps() {
     const API_KEY = import.meta.env.REACT_APP_API_KEY;
 
     return (
-        <>
-            <LoadScript
-                googleMapsApiKey={API_KEY}
+        <LoadScript googleMapsApiKey={API_KEY}>
+            <GoogleMap
+                onLoad={handleOnLoad}
+                onClick={() => setActiveMarker(null)}
+                mapContainerStyle={containerStyle}
             >
-                <GoogleMap
-                    onLoad={handleOnLoad}
-                    onClick={() => setActiveMarker(null)}
-                    mapContainerStyle={containerStyle}
-                    // zoom={50}
-                >
-                    {markers.map(({ id, name, position }) => (
-                        <Marker
-                            key={id}                            
-                            position={position}
-                            onClick={() => handleActiveMarker(id)}
-                        >
-                            {activeMarker === id ? (
-                                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                                    <div>{name}</div>
-                                </InfoWindow>
-                            ) : null}
-                        </Marker>
-                    ))}
-                </GoogleMap>
-            </LoadScript>
-        </>
+                {markers.map(({ id, name, position }) => (
+                    <Marker
+                        key={id}                            
+                        position={position}
+                        onClick={() => handleActiveMarker(id)}
+                    >
+                        {activeMarker === id ? (
+                            <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                                <div className="p-2 font-bold text-black">{name}</div>
+                            </InfoWindow>
+                        ) : null}
+                    </Marker>
+                ))}
+            </GoogleMap>
+        </LoadScript>
     )
 }

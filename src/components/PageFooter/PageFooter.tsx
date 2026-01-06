@@ -1,5 +1,3 @@
-import './PageFooter.scss';
-
 import { NavLink } from 'react-router-dom';
 
 import LetysLogo from '../../assets/images/letys-logo.jpg';
@@ -23,40 +21,35 @@ export default function PageFooter({
   }
 
   return (
-    <div className='footer'>
-      <div className='footer__social'>
-        <div className='footer__social-contact'>
-          <img
-            onClick={() => window.location.href = `mailto:${email}`}
-            src={Google}
-            alt='Google Mail icon that is shaped as letter M and envelope'
-          />
-          <img
-            onClick={() => newTab(facebookUrl)}
-            src={Facebook}
-            alt='Facebook icon is a blue circle with a letter f lowercase inside it'
-          />
-          <img
-            onClick={() => window.location.href = `tel:${phone}`}
-            src={Phone}
-            alt='Light blue circle with a phone shape inside it'
-          />
-        </div>
-      </div>
-
-      <div className='footer__container'>
-        <div className='footer__text'>
+    <div className="pt-8">
+      {/* Main Footer Bar */}
+      <div className="flex items-center justify-between bg-primary-1 px-4 py-2 tablet:px-8 tablet:py-5 desktop:px-40">
+        
+        {/* Left Side: Logo + Copyright */}
+        <div className="flex items-center gap-4">
           <NavLink to='/'>
-            <img src={LetysLogo} alt='Yellow Background Letys Name with Coconut' />
+            <img src={LetysLogo} alt='Logo' className="w-10" />
           </NavLink>
-          <h3>© 2023 Lety's Buko Pie</h3>
+          <h3 className="font-bold text-sm">© 2023 Lety's Buko Pie</h3>
         </div>
-        <div className='footer__contact'>
-          <img
-            onClick={() => newTab(facebookUrl)}
-            src={Facebook}
-            alt='Facebook icon is a blue circle with a letter f lowercase inside it'
-          />
+
+        {/* Right Side: Contact Icons */}
+        <div className="flex items-center">
+            <img 
+                onClick={() => window.location.href = `mailto:${email}`}
+                src={Google} alt='Email' 
+                className="w-8 ml-4 cursor-pointer tablet:w-12 hidden tablet:block" 
+            />
+             {/* <img 
+                onClick={() => window.location.href = `tel:${phone}`}
+                src={Phone} alt='Phone' 
+                className="w-8 ml-4 cursor-pointer tablet:w-12 hidden tablet:block" 
+            /> */}
+            <img 
+                onClick={() => newTab(facebookUrl)}
+                src={Facebook} alt='Facebook' 
+                className="w-8 ml-4 cursor-pointer tablet:w-12" 
+            />
         </div>
       </div>
     </div>

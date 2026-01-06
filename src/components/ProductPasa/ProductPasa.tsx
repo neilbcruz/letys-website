@@ -1,17 +1,20 @@
-import './ProductPasa.scss';
-
 import Pasalubong from '../../assets/images/pasalubong-2.png';
 
 export default function ProductPasa() {
     return (
-        <>
-            <div className='pasalubong' id='pasalubong'>
-                <div className='pasalubong__title'>
-                    <h1>Pasalubongs</h1>
-                    <p>Lety's Buko Pie Pasalubongs</p>
-                    <img src={Pasalubong} alt='Buko pie outside the box with a triangle cut piece' />
-                </div>
-                <div className='pasalubong__list'>
+        <div id='pasalubong' className="w-full">
+            <div className="mb-4">
+                <h1 className="font-bold text-2xl">Pasalubongs</h1>
+                <p>Lety's Buko Pie Pasalubongs</p>
+                <img 
+                    src={Pasalubong} 
+                    alt='Pasalubong items' 
+                    className="w-full h-auto mt-4 object-cover tablet:h-72 desktop:h-80 tablet:w-72 desktop:w-80 mx-auto"
+                />
+            </div>
+            
+            <div className="mt-8 pt-4 border-t border-primary-2">
+                <div className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-4 font-bold text-primary-2">
                     <h3>Apas</h3>
                     <h3>Banana Chips</h3>
                     <h3>Broas in Can (small & large)</h3>
@@ -29,6 +32,6 @@ export default function ProductPasa() {
                     <h3>Mineral Water</h3>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

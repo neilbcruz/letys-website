@@ -1,15 +1,15 @@
-import './PageHero.scss';
-
-// import LetysLogo2 from '../../assets/images/letys-logo2.png';
+import HeroImg from '../../assets/images/letys_buko_pie-2.jpg';
 
 export default function PageHero() {
     return (
-        <>
-            <div className='hero'>
-                <div className='hero__title'>
-                    {/* <img src={Logo2} alt='Letys Buko Pie logo but vertical' /> */}
-                </div>
-            </div>
-        </>
+        <div 
+            className="w-full h-40 tablet:h-60 desktop:h-80 bg-cover bg-center flex items-center px-4 tablet:px-8 desktop:px-40 relative"
+            style={{ backgroundImage: `url(${HeroImg})` }}
+        >
+            {/* Overlay to dim the image (80% brightness simulation) */}
+            <div className="absolute inset-0 bg-black/20"></div>
+            
+            {/* If you want text here, add it with relative z-10 */}
+        </div>
     )
 }
