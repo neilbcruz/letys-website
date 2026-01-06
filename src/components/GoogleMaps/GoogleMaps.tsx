@@ -1,6 +1,5 @@
 import './GoogleMaps.scss';
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 const containerStyle = {
@@ -32,16 +31,16 @@ const markers = [
 ];
 
 export default function GoogleMaps() {
-    const [activeMarker, setActiveMarker] = useState(null);
+    const [activeMarker, setActiveMarker] = useState<number | null>(null);
 
-    const handleActiveMarker = (marker) => {
+    const handleActiveMarker = (marker: number) => {
         if (marker === activeMarker) {
             return;
         }
         setActiveMarker(marker);
     };
 
-    const handleOnLoad = (map) => {
+    const handleOnLoad = (map: GoogleMap.maps.Map) => {
         const bounds = new window.google.maps.LatLngBounds();
         markers.forEach(({ position }) => bounds.extend(position));
         map.fitBounds(bounds);

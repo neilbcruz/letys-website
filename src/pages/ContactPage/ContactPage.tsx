@@ -4,25 +4,30 @@ import { useRef } from 'react';
 import emailjs from 'emailjs-com';
 
 export default function ContactPage() {
-  const form = useRef();
+  const form = useRef<HTMLFormElement>(null);
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!form.current) return;
 
     emailjs.sendForm(
       import.meta.env.REACT_APP_SERVICE_ID,
       import.meta.env.REACT_APP_TEMPLATE_ID,
       form.current,
-      import.meta.env.REACT_APP_USER_ID)
-      .then((result) => {
+      import.meta.env.REACT_APP_USER_ID
+    ).then(
+      (result) => {
         console.log(result.text);
-        alert('SUCCESS!')
-      }, (error) => {
+        alert('SUCCESS!');
+      },
+      (error) => {
         console.log(error.text);
-        alert('FAILED...', error)
-      });
+        alert('FAILED...');
+      }
+    );
 
-    e.target.reset();
+    e.currentTarget.reset();
   };
 
   return (
@@ -35,11 +40,11 @@ export default function ContactPage() {
         <div className='contact__form'>
           <form data-netlify='true' ref={form} onSubmit={sendEmail}>
             <div className='contact__form-group'>
-              <label for='name'><h2>Name</h2></label>
+              <label htmlFor='name'><h2>Name</h2></label>
               <input
                 type='name'
                 name='name'
-                class='contact__form-input'
+                className='contact__form-input'
                 id='name'
                 placeholder='enter your name'
                 required
@@ -73,7 +78,7 @@ export default function ContactPage() {
                 name='message'
                 className='contact__form-input'
                 id='message'
-                rows='5'
+                rows={5}
                 placeholder='enter your message'
                 required
               ></textarea>

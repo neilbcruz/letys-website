@@ -8,7 +8,7 @@ import Shell from '../../assets/images/location-shell.jpg';
 import Pansol from '../../assets/images/location-pansol.jpg';
 
 export default function LocationsPage() {
-    const newTab = url => {
+    const newTab = (url: string) => {
         window.open(url, '_blank', 'noopener,noreferrer');
     }
     
