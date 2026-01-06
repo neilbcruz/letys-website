@@ -1,6 +1,5 @@
 import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async'
 
 import PageHeader from './components/PageHeader/PageHeader';
 
@@ -22,13 +21,11 @@ function App() {
   return (
     <>
       <div className='app'>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>Lety's Buko Pie</title>
-          <link rel="icon" href="./assets/icons/favicon.ico" />
-          {/* <link rel="canonical" href="https://neilbcruz.com/" /> */}
-          <meta name="description" content="Lety's Buko Pie Website" />
-        </Helmet>
+        <meta charSet="utf-8" />
+        <title>Lety's Buko Pie</title>
+        <link rel="icon" href="./assets/icons/favicon.ico" />
+        {/* <link rel="canonical" href="https://neilbcruz.com/" /> */}
+        <meta name="description" content="Lety's Buko Pie Website" />
         <Router>
           <PageHeader />
           <Routes>
