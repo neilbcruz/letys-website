@@ -8,9 +8,9 @@ import Google from '../../assets/icons/googlemail.png';
 import Phone from '../../assets/icons/telephone.png';
 
 interface PageFooterProps {
-    fbUrl?: string;
-    mailTo?: string;
-    telTo?: string;
+    facebookUrl?: string;
+    email?: string;
+    phone?: string;
 }
 
 export default function PageFooter({

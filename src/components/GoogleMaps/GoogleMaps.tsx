@@ -7,7 +7,16 @@ const containerStyle = {
     height: '50vh'
 };
 
-const markers = [
+interface MarkerType {
+    id: number;
+    name: string;
+    position: {
+        lat: number;
+        lng: number;
+    };
+}
+
+const markers: MarkerType[] = [
     {
         id: 1,
         name: "Lety's Buko Pie - Main Store",
@@ -34,13 +43,11 @@ export default function GoogleMaps() {
     const [activeMarker, setActiveMarker] = useState<number | null>(null);
 
     const handleActiveMarker = (marker: number) => {
-        if (marker === activeMarker) {
-            return;
-        }
+        if (marker === activeMarker)return;
         setActiveMarker(marker);
     };
 
-    const handleOnLoad = (map: GoogleMap.maps.Map) => {
+    const handleOnLoad = (map: google.maps.Map) => {
         const bounds = new window.google.maps.LatLngBounds();
         markers.forEach(({ position }) => bounds.extend(position));
         map.fitBounds(bounds);

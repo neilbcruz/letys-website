@@ -51,7 +51,7 @@ export default function ContactPage() {
               />
             </div>
             <div className='contact__form-group'>
-              <label for='email'><h2>Email</h2></label>
+              <label htmlFor='email'><h2>Email</h2></label>
               <input
                 type='email'
                 name='email'
@@ -62,7 +62,7 @@ export default function ContactPage() {
               />
             </div>
             <div className='contact__form-group'>
-              <label for='subject'><h2>Subject</h2></label>
+              <label htmlFor='subject'><h2>Subject</h2></label>
               <input
                 type='text'
                 name='subject'
@@ -73,7 +73,7 @@ export default function ContactPage() {
               />
             </div>
             <div className='contact__form-group'>
-              <label for='message'><h2>Message</h2></label>
+              <label htmlFor='message'><h2>Message</h2></label>
               <textarea
                 name='message'
                 className='contact__form-input'
