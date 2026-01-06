@@ -3,17 +3,17 @@ import { NavLink } from 'react-router-dom';
 import LetysLogo from '../../assets/images/letys-logo.jpg';
 import Facebook from '../../assets/icons/facebook.png';
 import Google from '../../assets/icons/googlemail.png';
-import Phone from '../../assets/icons/telephone.png';
+// import Phone from '../../assets/icons/telephone.png';
 
 interface PageFooterProps {
     facebookUrl?: string;
     email?: string;
-    phone?: string;
+    // phone?: string;
 }
 
 export default function PageFooter({
   email = 'hello@letysbukopie.com',
-  phone = '+16478642354',
+  // phone = '+16478642354',
   facebookUrl = 'https://www.facebook.com/letysbukopie/'
 }: PageFooterProps) {
   const newTab = (url: string) => {
