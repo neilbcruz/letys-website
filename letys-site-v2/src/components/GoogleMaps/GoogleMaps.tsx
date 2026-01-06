@@ -47,7 +47,7 @@ export default function GoogleMaps() {
         map.fitBounds(bounds);
     };
 
-    const API_KEY = process.env.REACT_APP_API_KEY;
+    const API_KEY = import.meta.env.REACT_APP_API_KEY;
 
     return (
         <>
