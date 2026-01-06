@@ -4,25 +4,30 @@ import { useRef } from 'react';
 import emailjs from 'emailjs-com';
 
 export default function ContactPage() {
-  const form = useRef();
+  const form = useRef<HTMLFormElement>(null);
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    emailjs.sendForm(
-      process.env.REACT_APP_SERVICE_ID,
-      process.env.REACT_APP_TEMPLATE_ID,
-      form.current,
-      process.env.REACT_APP_USER_ID)
-      .then((result) => {
-        console.log(result.text);
-        alert('SUCCESS!')
-      }, (error) => {
-        console.log(error.text);
-        alert('FAILED...', error)
-      });
+    if (!form.current) return;
 
-    e.target.reset();
+    emailjs.sendForm(
+      import.meta.env.REACT_APP_SERVICE_ID,
+      import.meta.env.REACT_APP_TEMPLATE_ID,
+      form.current,
+      import.meta.env.REACT_APP_USER_ID
+    ).then(
+      (result) => {
+        console.log(result.text);
+        alert('SUCCESS!');
+      },
+      (error) => {
+        console.log(error.text);
+        alert('FAILED...');
+      }
+    );
+
+    e.currentTarget.reset();
   };
 
   return (
@@ -35,18 +40,18 @@ export default function ContactPage() {
         <div className='contact__form'>
           <form data-netlify='true' ref={form} onSubmit={sendEmail}>
             <div className='contact__form-group'>
-              <label for='name'><h2>Name</h2></label>
+              <label htmlFor='name'><h2>Name</h2></label>
               <input
                 type='name'
                 name='name'
-                class='contact__form-input'
+                className='contact__form-input'
                 id='name'
                 placeholder='enter your name'
                 required
               />
             </div>
             <div className='contact__form-group'>
-              <label for='email'><h2>Email</h2></label>
+              <label htmlFor='email'><h2>Email</h2></label>
               <input
                 type='email'
                 name='email'
@@ -57,7 +62,7 @@ export default function ContactPage() {
               />
             </div>
             <div className='contact__form-group'>
-              <label for='subject'><h2>Subject</h2></label>
+              <label htmlFor='subject'><h2>Subject</h2></label>
               <input
                 type='text'
                 name='subject'
@@ -68,12 +73,12 @@ export default function ContactPage() {
               />
             </div>
             <div className='contact__form-group'>
-              <label for='message'><h2>Message</h2></label>
+              <label htmlFor='message'><h2>Message</h2></label>
               <textarea
                 name='message'
                 className='contact__form-input'
                 id='message'
-                rows='5'
+                rows={5}
                 placeholder='enter your message'
                 required
               ></textarea>

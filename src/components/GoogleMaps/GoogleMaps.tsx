@@ -1,6 +1,5 @@
 import './GoogleMaps.scss';
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 const containerStyle = {
@@ -8,7 +7,16 @@ const containerStyle = {
     height: '50vh'
 };
 
-const markers = [
+interface MarkerType {
+    id: number;
+    name: string;
+    position: {
+        lat: number;
+        lng: number;
+    };
+}
+
+const markers: MarkerType[] = [
     {
         id: 1,
         name: "Lety's Buko Pie - Main Store",
@@ -32,22 +40,20 @@ const markers = [
 ];
 
 export default function GoogleMaps() {
-    const [activeMarker, setActiveMarker] = useState(null);
+    const [activeMarker, setActiveMarker] = useState<number | null>(null);
 
-    const handleActiveMarker = (marker) => {
-        if (marker === activeMarker) {
-            return;
-        }
+    const handleActiveMarker = (marker: number) => {
+        if (marker === activeMarker)return;
         setActiveMarker(marker);
     };
 
-    const handleOnLoad = (map) => {
+    const handleOnLoad = (map: google.maps.Map) => {
         const bounds = new window.google.maps.LatLngBounds();
         markers.forEach(({ position }) => bounds.extend(position));
         map.fitBounds(bounds);
     };
 
-    const API_KEY = process.env.REACT_APP_API_KEY;
+    const API_KEY = import.meta.env.REACT_APP_API_KEY;
 
     return (
         <>

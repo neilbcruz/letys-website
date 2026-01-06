@@ -1,55 +1,49 @@
 {
-  "name": "letys-site",
-  "version": "0.1.0",
+  "name": "letys-site-v2",
   "private": true,
-  "dependencies": {
-    "@emailjs/browser": "^3.10.0",
-    "@fortawesome/free-brands-svg-icons": "^6.2.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@react-google-maps/api": "^2.17.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "dotenv": "^16.0.3",
-    "emailjs-com": "^3.2.0",
-    "google-map-react": "^2.2.0",
-    "hamburger-react": "^2.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-facebook": "^9.0.12",
-    "react-google-recaptcha": "^2.1.0",
-    "react-helmet": "^6.1.0",
-    "react-modal": "^3.16.1",
-    "react-native-linking": "^0.0.0",
-    "react-router-dom": "^6.4.4",
-    "react-router-hash-link": "^2.4.3",
-    "react-scripts": "5.0.1",
-    "react-share": "^4.4.1",
-    "sass": "^1.56.1",
-    "web-vitals": "^2.1.4"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "@react-google-maps/api": "^2.20.8",
+    "emailjs-com": "^3.2.0",
+    "hamburger-react": "^2.5.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-helmet-async": "^2.0.5",
+    "react-modal": "^3.16.3",
+    "react-router-dom": "^7.11.0",
+    "react-router-hash-link": "^2.4.3",
+    "sass": "^1.97.2",
+    "tailwindcss": "^4.1.18",
+    "web-vitals": "^5.1.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-modal": "^3.16.3",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/react-router-hash-link": "^2.4.9",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.2.4"
+  },
+  "overrides": {
+    "react-helmet-async": {
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    }
   }
 }
