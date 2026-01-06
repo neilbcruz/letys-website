@@ -1,4 +1,3 @@
-import './ModalMenu.scss';
 import { NavLink } from 'react-router-dom';
 import Modal from 'react-modal';
 import Close from '../../assets/icons/close.svg';
@@ -8,33 +7,32 @@ interface ModalMenuProps {
   closeModal: () => void;
 }
 
+Modal.setAppElement('#root');
+
 export default function ModalMenu({ closeModal, isOpen }: ModalMenuProps) {
+    const linkClass = "no-underline text-primary-2 hover:text-secondary-2 text-xl font-bold my-4 cursor-pointer";
+
     return (
         <Modal
             isOpen={isOpen}
             onRequestClose={closeModal}
-            className='modal'
-            overlayClassName='modal__overlay'
+            // Tailwind classes for the modal content
+            className="absolute top-0 left-0 right-0 bottom-0 p-4 flex flex-col items-center justify-center outline-none"
+            // Tailwind classes for the background overlay
+            overlayClassName="fixed inset-0 bg-primary-1/90 z-[2000]"
         >
-            <button onClick={closeModal} className='modal__close'>
-                <img src={Close} alt='Close modal' />
+            <button onClick={closeModal} className="absolute top-4 right-4 cursor-pointer">
+                <img src={Close} alt='Close modal' className="w-8" />
             </button>
-            <div className='modal__nav'>
-            <NavLink to='/'>
-                <span onClick={closeModal}>Home</span>
-            </NavLink>
-            <NavLink to='/products'>
-                <span onClick={closeModal}>Products</span>
-            </NavLink>
-            <NavLink to='/locations'>
-                <span onClick={closeModal}>Locations</span>
-            </NavLink>
-            <NavLink to='/faq'>
-                <span onClick={closeModal}>FAQ</span>
-            </NavLink>
-            <NavLink to='/contact'>
-                <span onClick={closeModal}>Contact</span>
-            </NavLink>
+            
+            <div className="flex flex-col text-center">
+                <h1 className="mb-12 text-primary-2 font-bold text-2xl">Menu</h1>
+                
+                <NavLink to='/' onClick={closeModal} className={linkClass}>Home</NavLink>
+                <NavLink to='/products' onClick={closeModal} className={linkClass}>Products</NavLink>
+                <NavLink to='/locations' onClick={closeModal} className={linkClass}>Locations</NavLink>
+                <NavLink to='/faq' onClick={closeModal} className={linkClass}>FAQ</NavLink>
+                <NavLink to='/contact' onClick={closeModal} className={linkClass}>Contact</NavLink>
             </div>
         </Modal>
     )

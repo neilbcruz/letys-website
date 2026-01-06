@@ -1,13 +1,136 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import "tailwindcss";
+
+/* 1. DEFINE FONTS --------------------------------------------------------- */
+/* Note: Paths must be relative to this file. 
+   Ensure your files are actually in src/assets/fonts/Nunito_Sans/ */
+
+@font-face {
+  font-family: 'NunitoSans Regular';
+  src: url('./assets/fonts/Nunito_Sans/NunitoSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: 'NunitoSans Bold';
+  src: url('./assets/fonts/Nunito_Sans/NunitoSans-Bold.ttf') format('truetype');
+  font-weight: 600; /* Adjusted to 600 to match SemiBold/Bold usage */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NunitoSans Italic';
+  src: url('./assets/fonts/Nunito_Sans/NunitoSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* 2. THEME CONFIGURATION (Variables) -------------------------------------- */
+@theme {
+  /* COLORS (Mapped from variables.scss) */
+  --color-primary-1: #F9C301;
+  --color-primary-2: #014723;
+  --color-primary-3: #A5C44D;
+
+  --color-secondary-1: #068E46;
+  --color-secondary-2: #61C12A;
+
+  --color-support-1: #fff8e0;
+  --color-support-2: #daef9f;
+
+  /* BREAKPOINTS (Mapped from variables.scss) */
+  /* This allows you to use 'tablet:text-lg' or 'desktop:p-4' */
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1280px;
+
+  /* FONTS (Mapped from typography.scss) */
+  /* This automatically applies Nunito to the body */
+  --font-sans: "NunitoSans Regular", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* 3. BASE TYPOGRAPHY (Mapped from fonts.scss) ----------------------------- */
+/* We use @layer base so these styles are overridable by utilities */
+
+@layer base {
+  /* Default text settings */
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-primary-2); /* Assuming dark green is your text color? */
+  }
+
+  h1 {
+    font-family: "NunitoSans Bold", sans-serif;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 600;
+  }
+  @media (min-width: 768px) {
+    h1 { font-size: 2rem; line-height: 2.5rem; }
+  }
+
+  h2 {
+    font-family: "NunitoSans Bold", sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+  }
+  @media (min-width: 768px) {
+    h2 { font-size: 1.5rem; line-height: 2rem; }
+  }
+
+  h3, link, button, .label {
+    font-family: "NunitoSans Bold", sans-serif;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+  }
+  @media (min-width: 768px) {
+    h3, link, button, .label { font-size: 0.875rem; line-height: 1.125rem; }
+  }
+
+  p {
+    font-size: 0.813rem;
+    line-height: 1.125rem;
+    font-weight: 400;
+  }
+  @media (min-width: 768px) {
+    p { font-size: 0.875rem; line-height: 1.375rem; }
+  }
+  
+  h4 {
+    font-size: 0.6875rem;
+    line-height: 1rem;
+  }
+  @media (min-width: 768px) {
+    h4 { font-size: 0.75rem; line-height: 1.125rem; }
+  }
+}
+
+/* 4. UTILITIES (Mapped from fonts.scss helper classes) -------------------- */
+/* These are your custom classes (.p-large, etc.) */
+
+@layer components {
+  .p-large {
+    font-size: 0.9375rem;
+    line-height: 1.625rem;
+  }
+  @media (min-width: 768px) {
+    .p-large { font-size: 1rem; line-height: 1.75rem; }
+  }
+
+  .p-medium {
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .p-medium { font-size: 0.875rem; line-height: 1.375rem; }
+  }
+
+  .p-small {
+    font-size: 0.6875rem;
+    line-height: 1rem;
+  }
+  @media (min-width: 768px) {
+    .p-small { font-size: 0.75rem; line-height: 1.125rem; }
+  }
 }

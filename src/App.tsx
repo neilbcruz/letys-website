@@ -1,4 +1,3 @@
-import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PageHeader from './components/PageHeader/PageHeader';
 import HomePage from './pages/HomePage/HomePage';
@@ -13,20 +12,24 @@ import PageFooter from './components/PageFooter/PageFooter';
 
 function App() {
   return (
-    <div className='app'>
+    <div className="min-h-screen flex flex-col bg-white">
       <Router>
         <PageHeader />
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/products' element={<ProductsPage />}>
-            <Route path='specialty' element={<ProductSpecialty />} />
-            <Route path='bakedgoods' element={<ProductGoods />} />
-            <Route path='pasalubong' element={<ProductPasa />} />
-          </Route>
-          <Route path='/locations' element={<LocationsPage />} />
-          <Route path='/faq' element={<FaqPage />} />
-          <Route path='/contact' element={<ContactPage />} />
-        </Routes>
+        
+        <main className="flex-grow">
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/products' element={<ProductsPage />}>
+              <Route path='specialty' element={<ProductSpecialty />} />
+              <Route path='bakedgoods' element={<ProductGoods />} />
+              <Route path='pasalubong' element={<ProductPasa />} />
+            </Route>
+            <Route path='/locations' element={<LocationsPage />} />
+            <Route path='/faq' element={<FaqPage />} />
+            <Route path='/contact' element={<ContactPage />} />
+          </Routes>
+        </main>
+
         <PageFooter />
       </Router>
     </div>
