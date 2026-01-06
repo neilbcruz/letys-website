@@ -1,6 +1,6 @@
 import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 import PageHeader from './components/PageHeader/PageHeader';
 
