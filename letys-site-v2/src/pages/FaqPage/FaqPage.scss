@@ -1,0 +1,87 @@
+@use '../../styles/fonts' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.faq {
+    text-align: center;
+
+    &__title {
+        padding: 1rem;
+        background-color: $prim-color-3;
+
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
+        & h1 {
+            color: $prim-color-2;
+        }
+
+        & button {
+            margin: 0.5rem 0rem;
+            padding: 6px;
+            background: $prim-color-1;
+            border: 1px solid $sec-color-2;
+            box-shadow: 5px 5px 5px rgba($prim-color-1, 0.3);
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+    }
+
+    &__body {
+        padding: 1rem 1rem 0rem;
+        text-align: left;
+        
+        @include tablet {
+            padding: 1rem 2rem;
+        }
+
+        @include desktop {
+            padding: 1rem 10rem;
+        }
+
+        &-details {
+            border: 1px solid black;
+            padding: 1rem;
+            margin: 1rem 0rem;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+
+            & h2 {
+                color: $prim-color-2;
+                padding: 0.5rem;
+                border: 1px solid $prim-color-3;
+                background-color: $prim-color-3;
+            }
+
+            & p {
+                padding: 0.5rem;
+            }
+
+            & a {
+                color: $prim-color-2;
+                font-weight: bold;
+
+                &:hover {
+                    color: $prim-color-3;
+                }
+
+                &:link,
+                &:visited {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

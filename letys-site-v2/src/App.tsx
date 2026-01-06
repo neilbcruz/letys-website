@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.scss';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet'
+
+import PageHeader from './components/PageHeader/PageHeader';
+
+import HomePage from './pages/HomePage/HomePage';
+
+import ProductsPage from './pages/ProductsPage/ProductsPages';
+
+import ProductSpecialty from './components/ProductSpecialty/ProductSpecialty';
+import ProductGoods from './components/ProductGoods/ProductGoods';
+import ProductPasa from './components/ProductPasa/ProductPasa';
+
+import LocationsPage from './pages/LocationsPage/LocationsPage';
+import FaqPage from './pages/FaqPage/FaqPage';
+import ContactPage from './pages/ContactPage/ContactPage';
+
+import PageFooter from './components/PageFooter/PageFooter';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='app'>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Lety's Buko Pie</title>
+          <link rel="icon" href="./assets/icons/favicon.ico" />
+          {/* <link rel="canonical" href="https://neilbcruz.com/" /> */}
+          <meta name="description" content="Lety's Buko Pie Website" />
+        </Helmet>
+        <Router>
+          <PageHeader />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/products' element={<ProductsPage />}>
+              <Route path='specialty' element={<ProductSpecialty />} />
+              <Route path='bakedgoods' element={<ProductGoods />} />
+              <Route path='pasalubong' element={<ProductPasa />} />
+            </Route>
+            <Route path='/locations' element={<LocationsPage />} />
+            <Route path='/faq' element={<FaqPage />} />
+            <Route path='/contact' element={<ContactPage />} />
+          </Routes>
+          <PageFooter />
+        </Router>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
