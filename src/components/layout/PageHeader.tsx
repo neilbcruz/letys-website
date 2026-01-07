@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import ReactBurger from 'hamburger-react';
+import { NAV_ITEMS } from '../../data/navItems';
 
 import ModalMenu from './ModalMenu';
 import LetysLogo2 from '../../assets/images/letys-logo2.png';
@@ -42,23 +43,21 @@ export default function PageHeader() {
       </div>
 
       {/* NAVIGATION LINKS */}
-      <nav className="hidden sm:flex items-center gap-8">
-        <NavLink to="/" className={linkClasses}>
-          Home
-        </NavLink>
-        <NavLink to="/products" className={linkClasses}>
-          Products
-        </NavLink>
-        <NavLink to="/locations" className={linkClasses}>
-          Locations
-        </NavLink>
-        <NavLink to="/faq" className={linkClasses}>
-          FAQ
-        </NavLink>
-        <NavLink to="/contact" className={linkClasses}>
-          Contact
-        </NavLink>
-      </nav>
+        <nav className="hidden tablet:flex items-center gap-8">
+        {NAV_ITEMS.map(item => (
+            <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) =>
+                `font-bold text-lg no-underline transition-colors duration-200 ${
+                isActive ? 'text-secondary-2' : 'text-primary-2 hover:text-primary-3'
+                }`
+            }
+            >
+            {item.label}
+            </NavLink>
+        ))}
+        </nav>
 
       {/* MOBILE MODAL MENU */}
       <ModalMenu closeModal={closeModal} isOpen={isOpen} />

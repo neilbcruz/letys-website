@@ -1,5 +1,7 @@
-import { Dialog, Transition, TransitionChild } from '@headlessui/react';
+import { NavLink } from 'react-router-dom';
+import { Dialog, Transition, TransitionChild, DialogPanel, DialogTitle } from '@headlessui/react';
 import { Fragment } from 'react';
+import { NAV_ITEMS } from '../../data/navItems';
 
 interface ModalMenuProps {
   isOpen: boolean;
@@ -7,18 +9,17 @@ interface ModalMenuProps {
 }
 
 export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
+
   return (
-    <Transition appear show={isOpen} as={Fragment}>
+    <Transition show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 z-50 overflow-y-auto"
         onClose={closeModal}
-        aria-label="Main menu"
       >
         <div className="min-h-screen px-4 text-center">
           {/* Overlay */}
           <TransitionChild
-            as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -36,7 +37,6 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
 
           {/* Panel */}
           <TransitionChild
-            as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 scale-95"
             enterTo="opacity-100 scale-100"
@@ -44,40 +44,26 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-center align-middle transition-all transform bg-white rounded-lg shadow-xl relative">
+            <DialogPanel className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-center align-middle transition-all transform bg-white rounded-lg shadow-xl">
+              <DialogTitle as="h3" className="text-2xl font-bold text-primary-2 mb-6">
+                Menu
+              </DialogTitle>
               
-              {/* Close button */}
-              <button
-                type="button"
-                onClick={closeModal}
-                className="absolute top-4 right-4 p-2 text-primary-2 hover:text-secondary-2"
-                aria-label="Close menu"
-              >
-                ✕
-              </button>
-
-              {/* Menu heading */}
-              <h3 className="text-2xl font-bold text-primary-2 mb-6">Menu</h3>
-
-              {/* Links */}
-              <nav className="flex flex-col gap-4">
-                <a href="/" onClick={closeModal} className="text-primary-2 hover:text-secondary-2 font-bold text-xl">
-                  Home
-                </a>
-                <a href="/products" onClick={closeModal} className="text-primary-2 hover:text-secondary-2 font-bold text-xl">
-                  Products
-                </a>
-                <a href="/locations" onClick={closeModal} className="text-primary-2 hover:text-secondary-2 font-bold text-xl">
-                  Locations
-                </a>
-                <a href="/faq" onClick={closeModal} className="text-primary-2 hover:text-secondary-2 font-bold text-xl">
-                  FAQ
-                </a>
-                <a href="/contact" onClick={closeModal} className="text-primary-2 hover:text-secondary-2 font-bold text-xl">
-                  Contact
-                </a>
-              </nav>
-            </div>
+              {/* --- DYNAMIC NAV LINKS --- */}
+              <div className="flex flex-col gap-4">
+                {NAV_ITEMS.map(item => (
+                  <NavLink
+                    key={item.path}
+                    to={item.path}
+                    onClick={closeModal}
+                    className="text-primary-2 hover:text-secondary-2 font-bold text-xl"
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </div>
+              
+            </DialogPanel>
           </TransitionChild>
         </div>
       </Dialog>
