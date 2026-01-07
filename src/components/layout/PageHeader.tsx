@@ -8,15 +8,7 @@ import LetysLogo2 from '../../assets/images/letys-logo2.png';
 
 export default function PageHeader() {
   const [isOpen, setOpen] = useState(false);
-
   const closeModal = () => setOpen(false);
-
-  const linkClasses = ({ isActive }: { isActive: boolean }) =>
-    `font-bold text-lg transition-colors duration-200 ${
-      isActive
-        ? 'text-secondary-2' // Active: Bright green
-        : 'text-primary-2 hover:text-primary-3' // Base: Dark green, Hover: Light green
-    }`;
 
   return (
     <header className="bg-primary-1 px-4 py-3 sm:px-8 sm:py-4 lg:px-40 lg:py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0">
