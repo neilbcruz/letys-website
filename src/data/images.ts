@@ -15,6 +15,7 @@ export const IMAGES = {
   PASALUBONG: IMAGE_MAP['pasalubong-2'],
   MAIN_STORE: IMAGE_MAP['location-main'],
   LETYS_LOGO: IMAGE_MAP['letys-logo'],
+  LETYS_LOGO2: IMAGE_MAP['letys-logo2'],
   FACEBOOK: IMAGE_MAP['facebook'],
   GOOGLE: IMAGE_MAP['googlemail'],
   HERO: IMAGE_MAP['letys_buko_pie-2']

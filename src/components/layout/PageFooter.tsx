@@ -1,8 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { IMAGES } from "../../data/images";
-
-import Facebook from '../../assets/icons/facebook.png';
-import Google from '../../assets/icons/googlemail.png';
+import { IMAGES } from '../../data/images';
+import { siFacebook, siGmail } from 'simple-icons/icons';
 
 interface PageFooterProps {
   facebookUrl?: string;
@@ -17,37 +15,45 @@ export default function PageFooter({
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
+  const iconClasses = 'w-8 sm:w-10 lg:w-12 h-auto cursor-pointer text-primary-2 hover:text-primary-3 transition-colors';
+
   return (
     <footer className="bg-primary-1 text-primary-2">
-      {/* Main Footer Bar */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center px-4 py-6 sm:px-8 lg:px-40 gap-4 sm:gap-0">
         
-        {/* Left Side: Logo + Copyright */}
+        {/* Left Side */}
         <div className="flex items-center gap-3 sm:gap-4">
           <NavLink to="/">
-            <img 
-              src={IMAGES.LETYS_LOGO} 
-              alt="Logo" 
-              className="w-10 sm:w-12 lg:w-14 h-auto" 
+            <img
+              src={IMAGES.LETYS_LOGO}
+              alt="Logo"
+              className="w-10 sm:w-12 lg:w-14 h-auto"
             />
           </NavLink>
           <p className="font-bold text-sm sm:text-base">© 2023 Lety's Buko Pie</p>
         </div>
 
-        {/* Right Side: Contact Icons */}
+        {/* Right Side */}
         <div className="flex items-center gap-3 sm:gap-4">
-          <img
+          {/* Email */}
+          <svg
             onClick={() => window.location.href = `mailto:${email}`}
-            src={Google}
-            alt="Email"
-            className="w-8 sm:w-10 lg:w-12 h-auto cursor-pointer"
-          />
-          <img
+            role="img"
+            viewBox="0 0 24 24"
+            className={iconClasses}
+          >
+            <path d={siGmail.path} />
+          </svg>
+
+          {/* Facebook */}
+          <svg
             onClick={() => newTab(facebookUrl)}
-            src={Facebook}
-            alt="Facebook"
-            className="w-8 sm:w-10 lg:w-12 h-auto cursor-pointer"
-          />
+            role="img"
+            viewBox="0 0 24 24"
+            className={iconClasses}
+          >
+            <path d={siFacebook.path} />
+          </svg>
         </div>
       </div>
     </footer>

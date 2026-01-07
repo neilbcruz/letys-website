@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import ReactBurger from 'hamburger-react';
 import { NAV_ITEMS } from '../../data/navItems';
-
+import { IMAGES } from '../../data/images';
 import ModalMenu from './ModalMenu';
-import LetysLogo2 from '../../assets/images/letys-logo2.png';
 
 export default function PageHeader() {
   const [isOpen, setOpen] = useState(false);
@@ -17,7 +16,10 @@ export default function PageHeader() {
       <div className="flex items-center justify-between w-full sm:w-auto">
         <Link to="/">
           <img
-            src={LetysLogo2}
+            srcSet={IMAGES.LETYS_LOGO2}
+            sizes="192px"
+            width={192}
+            height={64}
             alt="Lety's Buko Pie Logo"
             className="w-32 sm:w-40 lg:w-48 h-auto object-contain"
           />
