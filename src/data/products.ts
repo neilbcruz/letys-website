@@ -1,10 +1,3 @@
-import BukoPie from '../assets/images/buko_pie-3.jpg';
-import PineapplePie from '../assets/images/pineapple_pie-3.jpg';
-import BukoPineapple from '../assets/images/bp_pie-1.jpg';
-import FrozenPie from '../assets/images/frozen_pie-1.jpg';
-import Cassava from '../assets/images/cassava-3.jpg';
-import Pasalubong from '../assets/images/pasalubong-2.png';
-
 export interface ProductItem {
     name: string;
     image?: string;
@@ -28,12 +21,10 @@ export const PRODUCT_DATA: ProductCategory[] = [
         subtitle: "Lety's Buko Pie Specialty Pies",
         layout: 'grid',
         items: [
-            // Example of how to add a price later:
-            // { name: "Buko Pie", img: BukoPie, price: 280 },
-            { name: "Buko Pie", image: BukoPie }, 
-            { name: "Pineapple Pie", image: PineapplePie },
-            { name: "Buko Pineapple Pie", image: BukoPineapple },
-            { name: "Frozen Buko Pie", image: FrozenPie },
+            { name: "Buko Pie", image: "buko_pie-3.jpg" },
+            { name: "Pineapple Pie", image: "pineapple_pie-3.jpg" },
+            { name: "Buko Pineapple Pie", image: "bp_pie-1.jpg" },
+            { name: "Frozen Buko Pie", image: "frozen_pie-1.jpg" },
         ]
     },
     {
@@ -42,8 +33,7 @@ export const PRODUCT_DATA: ProductCategory[] = [
         subtitle: "Lety's Buko Pie Baked Goods",
         layout: 'highlight',
         items: [
-            // The first item here will be the "Highlight"
-            { name: "Cassava Cake", image: Cassava }, 
+            { name: "Cassava Cake", image: "cassava-3.jpg" }, 
             { name: "Banana Bread" },
             { name: "Carrot Cake" },
             { name: "Brownies" },
@@ -56,7 +46,7 @@ export const PRODUCT_DATA: ProductCategory[] = [
         title: 'Pasalubongs',
         subtitle: "Lety's Buko Pie Pasalubongs",
         layout: 'list',
-        heroImage: Pasalubong,
+        heroImage: "pasalubong-2.png",
         items: [
             { name: "Apas" }, 
             { name: "Banana Chips" }, 
