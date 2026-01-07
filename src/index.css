@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
 /* 1. DEFINE FONTS --------------------------------------------------------- */
-/* Note: Paths must be relative to this file. 
-   Ensure your files are actually in src/assets/fonts/Nunito_Sans/ */
-
 @font-face {
   font-family: 'NunitoSans Regular';
   src: url('./assets/fonts/Nunito_Sans/NunitoSans-Regular.ttf') format('truetype');
@@ -14,7 +11,7 @@
 @font-face {
   font-family: 'NunitoSans Bold';
   src: url('./assets/fonts/Nunito_Sans/NunitoSans-Bold.ttf') format('truetype');
-  font-weight: 600; /* Adjusted to 600 to match SemiBold/Bold usage */
+  font-weight: 600;
   font-style: normal;
 }
 
@@ -27,35 +24,42 @@
 
 /* 2. THEME CONFIGURATION (Variables) -------------------------------------- */
 @theme {
-  /* COLORS (Mapped from variables.scss) */
-  --color-primary-1: #F9C301;
-  --color-primary-2: #014723;
-  --color-primary-3: #A5C44D;
+  /* PRIMARY & SECONDARY COLORS */
+  --color-primary-1: #FAC305;  /* gold */
+  --color-primary-2: #074621;  /* dark green */
+  --color-primary-3: #9EBF43;  /* light green */
 
-  --color-secondary-1: #068E46;
-  --color-secondary-2: #61C12A;
+  --color-secondary-1: #659A46; /* soft green */
+  --color-secondary-2: #7C741C; /* muted green/brown */
 
+  /* SUPPORT COLORS */
   --color-support-1: #fff8e0;
-  --color-support-2: #daef9f;
+  --color-support-2: #e6f0c3;
 
-  /* BREAKPOINTS (Mapped from variables.scss) */
-  /* This allows you to use 'tablet:text-lg' or 'desktop:p-4' */
+  /* SEMANTIC ROLES */
+  --color-brand: var(--color-primary-2);
+  --color-accent: var(--color-primary-1);
+  --color-highlight: var(--color-primary-3);
+  --color-muted: #7C741C;
+
+  /* BACKGROUND & TEXT */
+  --color-bg: #FAFAF8;
+  --color-text: #1F2937;
+
+  /* BREAKPOINTS */
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1280px;
 
-  /* FONTS (Mapped from typography.scss) */
-  /* This automatically applies Nunito to the body */
+  /* FONTS */
   --font-sans: "NunitoSans Regular", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* 3. BASE TYPOGRAPHY (Mapped from fonts.scss) ----------------------------- */
-/* We use @layer base so these styles are overridable by utilities */
-
+/* 3. BASE TYPOGRAPHY ------------------------------------------------------ */
 @layer base {
-  /* Default text settings */
   html {
     font-family: var(--font-sans);
-    color: var(--color-primary-2); /* Assuming dark green is your text color? */
+    color: var(--color-text);
+    background-color: var(--color-bg);
   }
 
   h1 {
@@ -96,7 +100,7 @@
   @media (min-width: 768px) {
     p { font-size: 0.875rem; line-height: 1.375rem; }
   }
-  
+
   h4 {
     font-size: 0.6875rem;
     line-height: 1rem;
@@ -106,9 +110,7 @@
   }
 }
 
-/* 4. UTILITIES (Mapped from fonts.scss helper classes) -------------------- */
-/* These are your custom classes (.p-large, etc.) */
-
+/* 4. UTILITIES ------------------------------------------------------------ */
 @layer components {
   .p-large {
     font-size: 0.9375rem;
