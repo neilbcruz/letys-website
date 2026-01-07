@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import emailjs from 'emailjs-com';
+import { Card, CardHeader, CardContent } from '../components/ui/Card';
+import { Mail, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const form = useRef<HTMLFormElement>(null);
@@ -14,56 +16,90 @@ export default function ContactPage() {
       form.current,
       import.meta.env.REACT_APP_USER_ID
     ).then(
-      (result) => {
-        console.log(result.text);
-        alert('SUCCESS!');
-      },
-      (error) => {
-        console.log(error.text);
-        alert('FAILED...');
-      }
+      () => alert('Message sent!'),
+      () => alert('Failed to send.')
     );
+
     e.currentTarget.reset();
   };
 
-  // Reusable styles
-  const bannerClass = "bg-primary-3 p-4 mb-4 tablet:px-8 desktop:px-40 text-center";
-  const containerClass = "px-4 py-4 text-left tablet:px-40 desktop:px-80";
-  // Input: Light yellow bg, dark green text, shadow
-  const inputClass = "w-full p-2 mt-1 rounded bg-primary-3 text-primary-2 border-b border-primary-2/50 shadow-[5px_5px_5px_rgba(97,193,42,0.5)] focus:outline-none focus:ring-1 focus:ring-primary-2 transition";
-  const labelClass = "text-primary-2 font-bold text-lg";
-
   return (
-    <div className="text-center w-full">
-      <div className={bannerClass}>
-        <h1 className="text-primary-2 font-bold text-2xl">Contact</h1>
-        <h3 className="text-sm font-bold">Let us know if you have any questions or concerns!</h3>
+    <div className="w-full text-primary-2">
+      {/* --- Banner --- */}
+      <div className="bg-primary-3 p-6 text-center mb-6">
+        <h1 className="text-3xl font-bold">Contact Us</h1>
+        <p className="mt-2 font-medium">Have questions? Reach out to us!</p>
       </div>
 
-      <div className={containerClass}>
-        <form data-netlify='true' ref={form} onSubmit={sendEmail} className="flex flex-col gap-4">
-          <div>
-            <label htmlFor='name' className={labelClass}>Name</label>
-            <input type='name' name='name' className={inputClass} id='name' placeholder='enter your name' required />
-          </div>
-          <div>
-            <label htmlFor='email' className={labelClass}>Email</label>
-            <input type='email' name='email' className={inputClass} id='email' placeholder='enter your email' required />
-          </div>
-          <div>
-            <label htmlFor='subject' className={labelClass}>Subject</label>
-            <input type='text' name='subject' className={inputClass} id='subject' placeholder='enter email subject' required />
-          </div>
-          <div>
-            <label htmlFor='message' className={labelClass}>Message</label>
-            <textarea name='message' className={inputClass} id='message' rows={5} placeholder='enter your message' required></textarea>
-          </div>
+      <div className="px-4 tablet:px-8 desktop:px-40 flex flex-col tablet:flex-row gap-8">
+        {/* --- Contact Form --- */}
+        <Card className="flex-1 hoverable">
+          <CardHeader>Send us a message</CardHeader>
+          <CardContent>
+            <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-2"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-2"
+                required
+              />
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-2"
+                required
+              />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                rows={5}
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-2"
+                required
+              />
+              <button
+                type="submit"
+                className="mt-2 py-2 px-4 bg-primary-2 text-white rounded-lg hover:bg-secondary-2 transition font-bold"
+              >
+                Submit
+              </button>
+            </form>
+          </CardContent>
+        </Card>
 
-          <button type='submit' className="mt-4 py-2 px-6 bg-primary-2 text-support-1 rounded-lg border border-secondary-2 shadow-[5px_5px_5px_rgba(6,142,70,0.5)] hover:opacity-90 transition font-bold text-xl cursor-pointer">
-            Submit
-          </button>
-        </form>
+        {/* --- Contact Options --- */}
+        <div className="flex-1 flex flex-col gap-4">
+          <Card
+            className="hoverable flex items-center gap-4 p-6 cursor-pointer"
+            onClick={() => window.location.href = "mailto:hello@letysbukopie.com"}
+          >
+            <Mail size={32} className="text-primary-2" />
+            <div>
+              <h3 className="font-bold text-lg">Email Us</h3>
+              <p>hello@letysbukopie.com</p>
+            </div>
+          </Card>
+
+          <Card
+            className="hoverable flex items-center gap-4 p-6 cursor-pointer"
+            onClick={() => window.open('https://m.me/letysbukopie/', '_blank')}
+          >
+            <MessageCircle size={32} className="text-primary-2" />
+            <div>
+              <h3 className="font-bold text-lg">Message on Facebook</h3>
+              <p>Chat with us on Messenger</p>
+            </div>
+          </Card>
+        </div>
       </div>
     </div>
-  )
+  );
 }
