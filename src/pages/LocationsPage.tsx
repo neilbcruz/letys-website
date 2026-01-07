@@ -1,98 +1,107 @@
-import GoogleMaps from '../components/home/GoogleMaps';
+import { useState } from "react";
+// import GoogleMaps from '../components/home/GoogleMaps';
+import { LOCATIONS } from "../data/locations";
+import { IMAGE_MAP } from "../data/images";
 
-import MainStore from '../assets/images/location-main.jpg';
-import Agapita from '../assets/images/location-agapita.jpg';
-import Shell from '../assets/images/location-shell.jpg';
-import Pansol from '../assets/images/location-pansol.jpg';
+function isStoreOpen(hours: Partial<Record<'mon'|'tue'|'wed'|'thu'|'fri'|'sat'|'sun', [string,string]>>): boolean {
+    const now = new Date();
+    const days = ['sun','mon','tue','wed','thu','fri','sat'] as const;
+    const day = days[now.getDay()];
+
+    const today = hours[day];
+    if (!today) return false; // closed today
+
+    const [openStr, closeStr] = today;
+    const [openH, openM] = openStr.split(':').map(Number);
+    const [closeH, closeM] = closeStr.split(':').map(Number);
+
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+    const openMinutes = openH * 60 + openM;
+    const closeMinutes = closeH * 60 + closeM;
+
+    return nowMinutes >= openMinutes && nowMinutes <= closeMinutes;
+}
+
+
+function formatTimeRange([open, close]: [string,string]) {
+    // Convert 24h to 12h format
+    const to12 = (t: string) => {
+        const [h,m] = t.split(":").map(Number);
+        const ampm = h >= 12 ? "PM" : "AM";
+        const hour12 = h % 12 === 0 ? 12 : h % 12;
+        return `${hour12}:${m.toString().padStart(2,'0')}${ampm}`;
+    };
+    return `${to12(open)}-${to12(close)}`;
+}
 
 export default function LocationsPage() {
-    const newTab = (url: string) => {
-        window.open(url, '_blank', 'noopener,noreferrer');
-    }
+    const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
-    // Styles
-    const bannerClass = "bg-primary-3 p-4 mb-4 tablet:px-8 desktop:px-40 text-center";
-    const storeContainer = "px-4 pt-4 tablet:px-8 desktop:px-40 tablet:flex tablet:flex-wrap tablet:justify-between tablet:gap-4";
-    const storeItem = "py-4 border-t border-primary-2 tablet:border-none w-full tablet:w-[48%] desktop:w-[22%] text-left";
-    const storeTitle = "text-primary-2 font-bold text-lg cursor-pointer hover:text-secondary-1 mb-2";
-    const storeImg = "w-full h-auto mt-2 object-cover cursor-pointer tablet:h-56 desktop:h-64 hover:opacity-90 transition";
+    const toggleExpand = (id: string) => {
+        setExpanded(prev => ({ ...prev, [id]: !prev[id] }));
+    };
+
+    const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    const dayKeys = ["mon","tue","wed","thu","fri","sat","sun"];
 
     return (
-        <div className="text-center w-full">
-            <div className={bannerClass}>
+        <div className="w-full text-center">
+            <div className="bg-primary-3 p-4 mb-4 tablet:px-8 desktop:px-40">
                 <h1 className="text-primary-2 font-bold text-2xl">Locations</h1>
             </div>
 
-            <div className={storeContainer}>
-                {/* Main Store */}
-                <div className={storeItem}>
-                    <h2 className={storeTitle} onClick={() => newTab('https://goo.gl/maps/5X7KQ3frkvcYXyMf9')}>MAIN STORE</h2>
-                    <div className="text-sm font-bold text-gray-700">
-                        <p>Location:</p>
-                        <p>Lety's Buko Pie, National Road,</p>
-                        <p>Barangay Anos, Los Baños, Laguna</p>
-                        <p>(in front of Heaven's Memorial Garden)</p>
-                    </div>
-                    <img className={storeImg} onClick={() => newTab('https://goo.gl/maps/5X7KQ3frkvcYXyMf9')} src={MainStore} alt='Main store view' />
-                    <div className="mt-2 text-sm font-bold">
-                        <p>Store Hours:</p>
-                        <p>Open daily from 6am to 6pm</p>
-                    </div>
-                </div>
+            <div className="px-4 pt-4 tablet:px-8 desktop:px-40 tablet:flex tablet:flex-wrap tablet:justify-between tablet:gap-4">
+                {LOCATIONS.map(loc => {
+                    const now = new Date();
+                    const todayKey = dayKeys[now.getDay()];
+                    const isOpen = isStoreOpen(loc.hours);
+                    const todayHours = formatTimeRange(loc.hours[todayKey]);
 
-                {/* Agapita */}
-                <div className={storeItem}>
-                    <h2 className={storeTitle} onClick={() => newTab('https://goo.gl/maps/wQfUpTLt3cBWu29G6')}>AGAPITA BRANCH</h2>
-                    <div className="text-sm font-bold text-gray-700">
-                        <p>Location:</p>
-                        <p>Lety's Buko Pie, Agapita Plaza,</p>
-                        <p>Barangay Batong Malake, Los Baños, Laguna</p>
-                        <p>(near UPLB)</p>
-                    </div>
-                    <img className={storeImg} onClick={() => newTab('https://goo.gl/maps/wQfUpTLt3cBWu29G6')} src={Agapita} alt='Agapita branch' />
-                    <div className="mt-2 text-sm font-bold">
-                        <p>Store Hours:</p>
-                        <p>Open daily from 6am to 5pm</p>
-                    </div>
-                </div>
+                    return (
+                        <div key={loc.id} className="py-4 border-t border-primary-2 tablet:border-none w-full tablet:w-[48%] desktop:w-[22%] text-left">
+                            <h2 className="text-primary-2 font-bold text-lg cursor-pointer hover:text-secondary-1 mb-2" 
+                                onClick={() => window.open(loc.mapLink, "_blank")}>
+                                {loc.name}
+                            </h2>
 
-                {/* Shell */}
-                <div className={storeItem}>
-                    <h2 className={storeTitle} onClick={() => newTab('https://goo.gl/maps/cD73huCuXU57BXfb6')}>ANOS SHELL BRANCH</h2>
-                    <div className="text-sm font-bold text-gray-700">
-                        <p>Location:</p>
-                        <p>56JH+HPC, National Hwy,</p>
-                        <p>Barangay Anos, Los Baños, Laguna</p>
-                        <p>(beside Shell Gas Station)</p>
-                    </div>
-                    <img className={storeImg} onClick={() => newTab('https://goo.gl/maps/cD73huCuXU57BXfb6')} src={Shell} alt='Shell branch' />
-                    <div className="mt-2 text-sm font-bold">
-                        <p>Store Hours:</p>
-                        <p>Open Fri, Sat, Sun ONLY from 6am to 6pm</p>
-                    </div>
-                </div>
+                            <div className="text-sm font-bold text-gray-700 mb-2">
+                                {loc.address.map((line, i) => <p key={i}>{line}</p>)}
+                            </div>
 
-                {/* Pansol */}
-                <div className={storeItem}>
-                    <h2 className={storeTitle} onClick={() => newTab('https://goo.gl/maps/aTFtvHWEaH5N8i54A')}>PANSOL BRANCH</h2>
-                    <div className="text-sm font-bold text-gray-700">
-                        <p>Location:</p>
-                        <p>Lety’s Buko Pie, Pansol,</p>
-                        <p>Calamba City, Laguna</p>
-                        <p>(near Cuyab Resort)</p>
-                    </div>
-                    <img className={storeImg} onClick={() => newTab('https://goo.gl/maps/aTFtvHWEaH5N8i54A')} src={Pansol} alt='Pansol branch' />
-                    <div className="mt-2 text-sm font-bold">
-                        <p>Store Hours:</p>
-                        <p>Open daily from 7am to 5pm</p>
-                    </div>
-                </div>
-            </div>
+                            <img
+                                src={IMAGE_MAP[loc.image]}
+                                alt={loc.name}
+                                className="w-full h-auto mt-2 object-cover cursor-pointer tablet:h-56 desktop:h-64 hover:opacity-90 transition mb-2"
+                                onClick={() => window.open(loc.mapLink, "_blank")}
+                            />
 
-            {/* Map Section */}
-            <div className="hidden tablet:block py-4 px-4 tablet:px-8 desktop:px-40">
-                <GoogleMaps />
+                            <div className="text-sm font-bold mb-2">
+                                <p>
+                                    Today ({days[now.getDay()]}): {todayHours} - 
+                                    <span className={`ml-2 ${isOpen ? "text-green-600" : "text-red-600"}`}>
+                                        {isOpen ? "Open" : "Closed"}
+                                    </span>
+                                </p>
+
+                                {expanded[loc.id] && (
+                                    <div className="mt-1 text-gray-600 text-left">
+                                        {days.map((d, i) => (
+                                            <p key={i}>{d}: {formatTimeRange(loc.hours[dayKeys[i]])}</p>
+                                        ))}
+                                    </div>
+                                )}
+
+                                <button 
+                                    className="mt-1 text-xs text-blue-500 hover:underline"
+                                    onClick={() => toggleExpand(loc.id)}
+                                >
+                                    {expanded[loc.id] ? "Hide full hours" : "Show full hours"}
+                                </button>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
         </div>
-    )
+    );
 }
