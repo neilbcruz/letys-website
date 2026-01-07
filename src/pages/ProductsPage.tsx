@@ -5,30 +5,42 @@ import { IMAGE_MAP } from "../data/images";
 
 // --- SUB-COMPONENTS ---
 const ProductCard = ({ item }: { item: ProductItem }) => {
-  const imageUrl = item.image ? IMAGE_MAP[item.image.replace(/\.(jpg|png)$/, '')] : undefined;
+  const imageUrl = item.image
+    ? IMAGE_MAP[item.image]
+    : undefined;
 
   return (
     <div className="w-full tablet:w-[48%] desktop:w-[23%] flex flex-col pt-4 group">
       <h3 className="font-bold text-lg mb-1">{item.name}</h3>
-      {item.price && <span className="text-secondary-1 font-bold text-sm mb-1">₱{item.price}</span>}
+
+      {item.price && (
+        <span className="text-secondary-1 font-bold text-sm mb-1">
+          ₱{item.price}
+        </span>
+      )}
+
       {imageUrl && (
         <img
-            srcSet={IMAGE_MAP[item.image?.replace(/\.(jpg|png)$/, '') || '']}
-            sizes="(min-width: 1024px) 400px, (min-width: 768px) 320px, 100vw"
-            alt={item.name}
-            loading="lazy"
-            className="w-full h-auto pb-2 object-cover tablet:h-72 desktop:h-80 rounded-sm shadow-sm transition-transform duration-300 group-hover:scale-105"
+          src={imageUrl}
+          alt={item.name}
+          loading="lazy"
+          className="w-full h-auto pb-2 object-cover tablet:h-72 desktop:h-80 rounded-sm shadow-sm transition-transform duration-300 group-hover:scale-105"
         />
       )}
     </div>
   );
 };
 
+
 const CategorySection = ({ category }: { category: ProductCategory }) => {
-  const heroUrl = category.heroImage ? IMAGE_MAP[category.heroImage.replace(/\.(jpg|png)$/, '')] : undefined;
-  const highlightUrl = category.layout === 'highlight' && category.items[0]?.image
-    ? IMAGE_MAP[category.items[0].image.replace(/\.(jpg|png)$/, '')]
+  const heroUrl = category.heroImage
+    ? IMAGE_MAP[category.heroImage]
     : undefined;
+
+  const highlightUrl =
+    category.layout === 'highlight' && category.items[0]?.image
+      ? IMAGE_MAP[category.items[0].image]
+      : undefined;
 
   return (
     <div className="w-full mb-12 animate-in fade-in duration-500">

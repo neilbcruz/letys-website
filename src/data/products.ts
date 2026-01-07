@@ -21,10 +21,10 @@ export const PRODUCT_DATA: ProductCategory[] = [
         subtitle: "Lety's Buko Pie Specialty Pies",
         layout: 'grid',
         items: [
-            { name: "Buko Pie", image: "buko_pie-3.jpg" },
-            { name: "Pineapple Pie", image: "pineapple_pie-3.jpg" },
-            { name: "Buko Pineapple Pie", image: "bp_pie-1.jpg" },
-            { name: "Frozen Buko Pie", image: "frozen_pie-1.jpg" },
+            { name: "Buko Pie", image: "buko_pie-3" },
+            { name: "Pineapple Pie", image: "pineapple_pie-3" },
+            { name: "Buko Pineapple Pie", image: "bp_pie-1" },
+            { name: "Frozen Buko Pie", image: "frozen_pie-1" },
         ]
     },
     {
@@ -33,7 +33,7 @@ export const PRODUCT_DATA: ProductCategory[] = [
         subtitle: "Lety's Buko Pie Baked Goods",
         layout: 'highlight',
         items: [
-            { name: "Cassava Cake", image: "cassava-3.jpg" }, 
+            { name: "Cassava Cake", image: "cassava-3" }, 
             { name: "Banana Bread" },
             { name: "Carrot Cake" },
             { name: "Brownies" },
@@ -46,7 +46,7 @@ export const PRODUCT_DATA: ProductCategory[] = [
         title: 'Pasalubongs',
         subtitle: "Lety's Buko Pie Pasalubongs",
         layout: 'list',
-        heroImage: "pasalubong-2.png",
+        heroImage: "pasalubong-2",
         items: [
             { name: "Apas" }, 
             { name: "Banana Chips" }, 

@@ -1,13 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Button from '../ui/Button';
+import { IMAGES } from "../../data/images";
 
-import BukoTree from '../../assets/images/buko-tree.jpg';
-import Lety from '../../assets/images/lety-1.jpg';
-import BukoPie from '../../assets/images/buko_pie-12.jpg';
-import Cassava from '../../assets/images/cassava-10.jpg';
-import Pasalubong from '../../assets/images/pasalubong-2.png';
-import MainStore from '../../assets/images/location-main.jpg';
 
 export default function PageBody() {
   return (
@@ -20,9 +15,9 @@ export default function PageBody() {
           Enjoy our selection of specialty pies, baked goods, and pasalubong treats made with love.
         </p>
         <img 
-          src={BukoPie} 
-          alt="Buko Pie" 
-          className="w-60 h-60 object-cover mt-6 rounded-lg shadow-lg mx-auto"
+					src={IMAGES.BUKO_PIE}
+					alt="Buko Pie"
+					className="w-60 h-60 object-cover mt-6 rounded-lg shadow-lg mx-auto"
         />
       </section>
 
@@ -37,7 +32,11 @@ export default function PageBody() {
             <p>Buko is packed with nutritional value and antioxidants that protect against cellular damage and heart disease.</p>
             <p>Buko can be enjoyed in many ways: as refreshing dessert treats or in desserts like buko pandan, buko ice cream, and buko pie.</p>
           </div>
-          <img src={BukoTree} alt="Young coconuts" className="w-full lg:w-60 h-auto object-cover rounded-md" />
+          <img 
+						src={IMAGES.BUKO_TREE}
+            alt="Young coconuts" 
+						className="w-full lg:w-60 h-auto object-cover rounded-md" 
+					/>
         </div>
       </section>
 
@@ -52,7 +51,11 @@ export default function PageBody() {
             <p>She started in 1976 with a single oven. Her goal was to earn extra money for her kids' schooling while enjoying her free time.</p>
             <p>Today, she manages multiple store locations with her family.</p>
           </div>
-          <img src={Lety} alt="Lety Belarmino" className="w-full lg:w-60 h-auto object-cover rounded-md" />
+          <img 
+						src={IMAGES.LETY}
+						alt="Lety Belarmino" 
+						className="w-full lg:w-60 h-auto object-cover rounded-md" 
+					/>
         </div>
       </section>
 
@@ -68,7 +71,11 @@ export default function PageBody() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* BUKO PIE */}
           <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition p-4 flex flex-col items-center text-center">
-            <img src={BukoPie} alt="Buko Pie" className="w-3/4 h-48 object-cover rounded-md mb-4" />
+            <img 
+							src={IMAGES.BUKO_PIE}
+							alt="Buko Pie"
+							className="w-3/4 h-48 object-cover rounded-md mb-4" 
+						/>
             <h3 className="font-bold text-lg mb-1">Buko Pie</h3>
             <HashLink to="/products#specialty">
               <Button size="sm">VIEW SPECIALTY</Button>
@@ -77,7 +84,11 @@ export default function PageBody() {
 
           {/* CASSAVA CAKE */}
           <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition p-4 flex flex-col items-center text-center">
-            <img src={Cassava} alt="Cassava Cake" className="w-3/4 h-48 object-cover rounded-md mb-4" />
+            <img 
+							src={IMAGES.CASSAVA}
+							alt="Cassava Cake" 
+							className="w-3/4 h-48 object-cover rounded-md mb-4" 
+						/>
             <h3 className="font-bold text-lg mb-1">Cassava Cake</h3>
             <HashLink to="/products#bakedgoods">
               <Button size="sm">VIEW BAKED GOODS</Button>
@@ -86,7 +97,11 @@ export default function PageBody() {
 
           {/* BROAS */}
           <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition p-4 flex flex-col items-center text-center">
-            <img src={Pasalubong} alt="Broas" className="w-3/4 h-48 object-cover rounded-md mb-4" />
+            <img 
+							src={IMAGES.PASALUBONG}
+							alt="Broas" 
+							className="w-3/4 h-48 object-cover rounded-md mb-4" 
+						/>
             <h3 className="font-bold text-lg mb-1">Broas</h3>
             <HashLink to="/products#pasalubong">
               <Button size="sm">VIEW PASALUBONG</Button>
@@ -120,7 +135,11 @@ export default function PageBody() {
               <Button size="sm">GET IN TOUCH</Button>
             </NavLink>
           </div>
-          <img src={MainStore} alt="Main store view" className="w-full lg:w-96 h-auto rounded-lg shadow-md" />
+          <img 
+						src={IMAGES.MAIN_STORE}
+						alt="Main store view" 
+						className="w-full lg:w-96 h-auto rounded-lg shadow-md" 
+					/>
         </div>
       </section>
     </div>

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
+import { IMAGES } from "../../data/images";
 
-import LetysLogo from '../../assets/images/letys-logo.jpg';
 import Facebook from '../../assets/icons/facebook.png';
 import Google from '../../assets/icons/googlemail.png';
 
@@ -25,7 +25,11 @@ export default function PageFooter({
         {/* Left Side: Logo + Copyright */}
         <div className="flex items-center gap-3 sm:gap-4">
           <NavLink to="/">
-            <img src={LetysLogo} alt="Logo" className="w-10 sm:w-12 lg:w-14 h-auto" />
+            <img 
+              src={IMAGES.LETYS_LOGO} 
+              alt="Logo" 
+              className="w-10 sm:w-12 lg:w-14 h-auto" 
+            />
           </NavLink>
           <p className="font-bold text-sm sm:text-base">© 2023 Lety's Buko Pie</p>
         </div>
