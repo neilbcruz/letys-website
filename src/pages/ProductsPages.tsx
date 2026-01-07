@@ -1,8 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
 
-import BukoPie from '../../assets/images/buko_pie-12.jpg';
-import Cassava from '../../assets/images/cassava-10.jpg';
-import Pasalubong from '../../assets/images/pasalubong-2.png';
+import BukoPie from '../assets/images/buko_pie-12.jpg';
+import Cassava from '../assets/images/cassava-10.jpg';
+import Pasalubong from '../assets/images/pasalubong-2.png';
 
 export default function ProductsPage() {
     // Reusable styles

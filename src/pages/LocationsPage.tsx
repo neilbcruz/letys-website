@@ -1,9 +1,9 @@
-import GoogleMaps from '../../components/GoogleMaps/GoogleMaps';
+import GoogleMaps from '../components/home/GoogleMaps';
 
-import MainStore from '../../assets/images/location-main.jpg';
-import Agapita from '../../assets/images/location-agapita.jpg';
-import Shell from '../../assets/images/location-shell.jpg';
-import Pansol from '../../assets/images/location-pansol.jpg';
+import MainStore from '../assets/images/location-main.jpg';
+import Agapita from '../assets/images/location-agapita.jpg';
+import Shell from '../assets/images/location-shell.jpg';
+import Pansol from '../assets/images/location-pansol.jpg';
 
 export default function LocationsPage() {
     const newTab = (url: string) => {

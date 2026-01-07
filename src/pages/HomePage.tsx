@@ -1,5 +1,5 @@
-import PageHero from '../../components/PageHero/PageHero';
-import PageBody from '../../components/PageBody/PageBody';
+import PageHero from '../components/home/PageHero';
+import PageBody from '../components/home/PageBody';
 
 export default function HomePage() {
     return (

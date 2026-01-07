@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PageHeader from './components/PageHeader/PageHeader';
-import HomePage from './pages/HomePage/HomePage';
-import ProductsPage from './pages/ProductsPage/ProductsPages';
-import ProductSpecialty from './components/ProductSpecialty/ProductSpecialty';
-import ProductGoods from './components/ProductGoods/ProductGoods';
-import ProductPasa from './components/ProductPasa/ProductPasa';
-import LocationsPage from './pages/LocationsPage/LocationsPage';
-import FaqPage from './pages/FaqPage/FaqPage';
-import ContactPage from './pages/ContactPage/ContactPage';
-import PageFooter from './components/PageFooter/PageFooter';
+import PageHeader from './components/layout/PageHeader';
+import HomePage from './pages/HomePage';
+import ProductsPage from './pages/ProductsPages';
+import ProductSpecialty from './components/home/ProductSpecialty';
+import ProductGoods from './components/home/ProductGoods';
+import ProductPasa from './components/home/ProductPasa';
+import LocationsPage from './pages/LocationsPage';
+import FaqPage from './pages/FaqPage';
+import ContactPage from './pages/ContactPage';
+import PageFooter from './components/layout/PageFooter';
 
 function App() {
   return (

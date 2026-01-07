@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import ReactBurger from 'hamburger-react';
 
-import ModalMenu from '../ModalMenu/ModalMenu';
+import ModalMenu from './ModalMenu';
 import LetysLogo2 from '../../assets/images/letys-logo2.png';
 
 export default function PageHeader() {
