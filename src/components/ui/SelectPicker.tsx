@@ -1,11 +1,13 @@
 import { ChevronDownIcon, SearchIcon, XIcon } from 'lucide-react';
 import {
-  ChangeEvent,
-  KeyboardEvent,
-  MouseEvent as ReactMouseEvent,
   useEffect,
   useRef,
   useState,
+} from 'react';
+import type {
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent as ReactMouseEvent,
 } from 'react';
 import { cn } from '../../lib/utils';
 

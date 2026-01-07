@@ -1,11 +1,11 @@
 import { SearchIcon, XIcon } from 'lucide-react';
-import {
+import type {
   ChangeEvent,
   FormEvent,
   InputHTMLAttributes,
   ReactNode,
-  useState,
 } from 'react';
+import {  useState } from 'react';
 import { cn } from '../../lib/utils';
 
 interface SearchInputProps
