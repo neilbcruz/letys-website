@@ -3,55 +3,49 @@ import { NavLink } from 'react-router-dom';
 import LetysLogo from '../../assets/images/letys-logo.jpg';
 import Facebook from '../../assets/icons/facebook.png';
 import Google from '../../assets/icons/googlemail.png';
-// import Phone from '../../assets/icons/telephone.png';
 
 interface PageFooterProps {
-    facebookUrl?: string;
-    email?: string;
-    // phone?: string;
+  facebookUrl?: string;
+  email?: string;
 }
 
 export default function PageFooter({
   email = 'hello@letysbukopie.com',
-  // phone = '+16478642354',
-  facebookUrl = 'https://www.facebook.com/letysbukopie/'
+  facebookUrl = 'https://www.facebook.com/letysbukopie/',
 }: PageFooterProps) {
   const newTab = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer');
-  }
+  };
 
   return (
-    <div className="pt-8">
+    <footer className="bg-primary-1 text-primary-2">
       {/* Main Footer Bar */}
-      <div className="flex items-center justify-between bg-primary-1 px-4 py-2 tablet:px-8 tablet:py-5 desktop:px-40">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center px-4 py-6 sm:px-8 lg:px-40 gap-4 sm:gap-0">
         
         {/* Left Side: Logo + Copyright */}
-        <div className="flex items-center gap-4">
-          <NavLink to='/'>
-            <img src={LetysLogo} alt='Logo' className="w-10" />
+        <div className="flex items-center gap-3 sm:gap-4">
+          <NavLink to="/">
+            <img src={LetysLogo} alt="Logo" className="w-10 sm:w-12 lg:w-14 h-auto" />
           </NavLink>
-          <h3 className="font-bold text-sm">© 2023 Lety's Buko Pie</h3>
+          <p className="font-bold text-sm sm:text-base">© 2023 Lety's Buko Pie</p>
         </div>
 
         {/* Right Side: Contact Icons */}
-        <div className="flex items-center">
-            <img 
-                onClick={() => window.location.href = `mailto:${email}`}
-                src={Google} alt='Email' 
-                className="w-8 ml-4 cursor-pointer tablet:w-12 hidden tablet:block" 
-            />
-             {/* <img 
-                onClick={() => window.location.href = `tel:${phone}`}
-                src={Phone} alt='Phone' 
-                className="w-8 ml-4 cursor-pointer tablet:w-12 hidden tablet:block" 
-            /> */}
-            <img 
-                onClick={() => newTab(facebookUrl)}
-                src={Facebook} alt='Facebook' 
-                className="w-8 ml-4 cursor-pointer tablet:w-12" 
-            />
+        <div className="flex items-center gap-3 sm:gap-4">
+          <img
+            onClick={() => window.location.href = `mailto:${email}`}
+            src={Google}
+            alt="Email"
+            className="w-8 sm:w-10 lg:w-12 h-auto cursor-pointer"
+          />
+          <img
+            onClick={() => newTab(facebookUrl)}
+            src={Facebook}
+            alt="Facebook"
+            className="w-8 sm:w-10 lg:w-12 h-auto cursor-pointer"
+          />
         </div>
       </div>
-    </div>
-  )
+    </footer>
+  );
 }

@@ -1,6 +1,6 @@
 import { PRODUCT_DATA } from "../data/products";
 import type { ProductCategory, ProductItem } from "../data/products";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IMAGE_MAP } from "../data/images";
 
 // --- SUB-COMPONENTS ---
@@ -107,6 +107,13 @@ const CategorySection = ({ category }: { category: ProductCategory }) => {
 // --- MAIN PAGE COMPONENT ---
 export default function ProductsPage() {
   const [activeTab, setActiveTab] = useState<string>('specialty');
+
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && PRODUCT_DATA.some(cat => cat.id === hash)) {
+      setActiveTab(hash);
+    }
+  }, []);
 
   const NAV_IMAGES: Record<string, string> = {
     specialty: IMAGE_MAP['buko_pie-12'],
