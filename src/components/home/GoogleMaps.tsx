@@ -52,7 +52,12 @@ export default function GoogleMaps() {
         map.fitBounds(bounds);
     };
 
-    const API_KEY = import.meta.env.REACT_APP_API_KEY;
+    const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+    
+    if (!API_KEY) {
+        console.error("Google Maps API key is missing! Check your .env file.");
+        return <div className="text-red-600 font-bold">Map cannot load: API key missing</div>;
+    }
 
     return (
         <LoadScript googleMapsApiKey={API_KEY}>
