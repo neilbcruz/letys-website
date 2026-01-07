@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PageHeader from './components/layout/PageHeader';
 import HomePage from './pages/HomePage';
-import ProductsPage from './pages/ProductsPages';
-import ProductSpecialty from './components/home/ProductSpecialty';
-import ProductGoods from './components/home/ProductGoods';
-import ProductPasa from './components/home/ProductPasa';
+import ProductsPage from './pages/ProductsPage';
+// import ProductSpecialty from './components/home/ProductSpecialty';
+// import ProductGoods from './components/home/ProductGoods';
+// import ProductPasa from './components/home/ProductPasa';
 import LocationsPage from './pages/LocationsPage';
 import FaqPage from './pages/FaqPage';
 import ContactPage from './pages/ContactPage';
