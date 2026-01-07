@@ -4,10 +4,11 @@ export interface Location {
     mapLink: string;
     image: string;
     address: string[];
-    hours: Partial<Record<'mon'|'tue'|'wed'|'thu'|'fri'|'sat'|'sun', [string,string]>>;
+    hours: Record<'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun', [string, string]>;
 }
 
-export const LOCATIONS = [
+
+export const LOCATIONS: Location[] = [
     {
         id: 'main',
         name: "MAIN STORE",
