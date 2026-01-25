@@ -3,6 +3,7 @@ import { LOCATIONS } from "@/data/locations";
 import type { Location } from "@/data/locations";
 import { IMAGE_MAP, type ImageSet } from "@/lib/images";
 import LocationsMap from "@/components/ui/LocationMap";
+import { MapPin, Clock, ExternalLink } from "lucide-react";
 
 const DAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 const DAY_KEYS: (keyof Location["hours"])[] = ["sun","mon","tue","wed","thu","fri","sat"];
@@ -22,109 +23,167 @@ function formatTime([open, close]: [string,string]) {
     const [h,m] = t.split(":").map(Number);
     const ampm = h >= 12 ? "PM" : "AM";
     const hour12 = h % 12 || 12;
-    return `${hour12}:${m.toString().padStart(2,"0")}${ampm}`;
+    return `${hour12}:${m.toString().padStart(2,"0")} ${ampm}`;
   };
-  return `${to12(open)}-${to12(close)}`;
+  return `${to12(open)} - ${to12(close)}`;
 }
 
 export default function LocationsPage() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
 
-  // Safety check
   if (!LOCATIONS || LOCATIONS.length === 0) {
-    return <div>No locations available</div>;
+    return (
+      <div className="w-full min-h-screen flex items-center justify-center">
+        <p className="text-xl text-gray-600">No locations available at this time.</p>
+      </div>
+    );
   }
 
   return (
-    <div className="w-full text-center">
-      <div className="bg-primary-3 p-4 mb-4 tablet:px-8 desktop:px-40">
-        <h1 className="text-primary-2 font-bold text-2xl">Locations</h1>
+    <div className="w-full min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-linear-to-br from-primary-2 to-primary-3 text-white py-12 lg:py-16">
+        <div className="container-width text-center">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4">Our Locations</h1>
+          <p className="text-xl lg:text-2xl">Visit us at any of our convenient branches across Laguna</p>
+        </div>
       </div>
 
-      {/* Map */}
-      <div className="px-4 tablet:px-8 desktop:px-40 mb-4">
-        <LocationsMap
-          locations={LOCATIONS}
-          activeLocation={activeLocation}
-          setActiveLocation={setActiveLocation}
-        />
-      </div>
+      {/* Map Section */}
+      <section className="section-padding bg-white">
+        <div className="container-width">
+          <h2 className="heading-secondary text-center mb-8">Find Us on the Map</h2>
+          <div className="rounded-2xl overflow-hidden shadow-xl" role="region" aria-label="Interactive map of store locations">
+            <LocationsMap
+              locations={LOCATIONS}
+              activeLocation={activeLocation}
+              setActiveLocation={setActiveLocation}
+            />
+          </div>
+        </div>
+      </section>
 
-      {/* Location cards */}
-      <div className="px-4 pt-4 tablet:px-8 desktop:px-40 tablet:flex tablet:flex-wrap tablet:justify-between tablet:gap-4">
-        {LOCATIONS.map(loc => {
-          const now = new Date();
-          const todayKey = DAY_KEYS[now.getDay()];
-          const isOpen = isStoreOpen(loc.hours);
-          const imageData: ImageSet | undefined = IMAGE_MAP[loc.image];
-          if (!imageData) return null;
+      {/* Location Cards */}
+      <section className="section-padding bg-linear-to-b from-white to-gray-50">
+        <div className="container-width">
+          <h2 className="heading-secondary text-center mb-12">All Branches</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {LOCATIONS.map(loc => {
+              const now = new Date();
+              const todayKey = DAY_KEYS[now.getDay()];
+              const isOpen = isStoreOpen(loc.hours);
+              const imageData: ImageSet | undefined = IMAGE_MAP[loc.image];
+              if (!imageData) return null;
 
-          const isActive = activeLocation === loc.id;
+              const isActive = activeLocation === loc.id;
 
-          return (
-            <div
-              key={loc.id}
-              className={`py-4 border-t border-primary-2 tablet:border-none w-full tablet:w-[48%] desktop:w-[22%] text-left cursor-pointer
-                ${isActive ? "bg-yellow-50" : ""}`}
-              onClick={() => setActiveLocation(loc.id)}
-            >
-              <h2
-                className="text-primary-2 font-bold text-lg hover:text-secondary-1 mb-2"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(loc.mapLink, "_blank");
-                }}
-              >
-                {loc.name}
-              </h2>
-
-              <div className="text-sm font-bold text-gray-700 mb-2">
-                {loc.address.map((line,i) => <p key={i}>{line}</p>)}
-              </div>
-
-              <img
-                src={imageData.default}
-                srcSet={imageData.srcSet}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 48vw, 22vw"
-                alt={loc.name}
-                className="w-full h-auto mt-2 object-cover cursor-pointer rounded-md tablet:h-56 desktop:h-64 hover:opacity-90 transition mb-2"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(loc.mapLink, "_blank");
-                }}
-              />
-
-              <div className="text-sm font-bold mb-2">
-                <p>
-                  Today ({DAYS[now.getDay()]}): {formatTime(loc.hours[todayKey])} - 
-                  <span className={`ml-2 ${isOpen ? "text-green-600" : "text-red-600"}`}>
-                    {isOpen ? "Open" : "Closed"}
-                  </span>
-                </p>
-
-                {expanded[loc.id] && (
-                  <div className="mt-1 text-gray-600 text-left">
-                    {DAY_KEYS.map((key, i) => (
-                      <p key={key}>{DAYS[i]}: {formatTime(loc.hours[key])}</p>
-                    ))}
-                  </div>
-                )}
-
-                <button 
-                  className="mt-1 text-xs text-blue-500 hover:underline"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setExpanded(prev => ({...prev, [loc.id]: !prev[loc.id]}));
+              return (
+                <article
+                  key={loc.id}
+                  className={`card-elevated overflow-hidden cursor-pointer transform hover:scale-105 transition-all
+                    ${isActive ? "ring-4 ring-primary-1" : ""}`}
+                  onClick={() => setActiveLocation(loc.id === activeLocation ? null : loc.id)}
+                  role="button"
+                  tabIndex={0}
+                  aria-pressed={isActive}
+                  aria-label={`${loc.name} location details`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveLocation(loc.id === activeLocation ? null : loc.id);
+                    }
                   }}
                 >
-                  {expanded[loc.id] ? "Hide full hours" : "Show full hours"}
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+                  {/* Image */}
+                  <div className="relative overflow-hidden h-56">
+                    <img
+                      src={imageData.default}
+                      srcSet={imageData.srcSet}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                      alt={`${loc.name} storefront`}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-4 right-4">
+                      <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                        isOpen ? "bg-green-500 text-white" : "bg-red-500 text-white"
+                      }`}>
+                        {isOpen ? "Open Now" : "Closed"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-primary-2 mb-3 flex items-center justify-between">
+                      {loc.name}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(loc.mapLink, "_blank", "noopener,noreferrer");
+                        }}
+                        className="text-primary-1 hover:text-primary-3 transition-colors"
+                        aria-label={`View ${loc.name} on Google Maps`}
+                      >
+                        <ExternalLink size={20} />
+                      </button>
+                    </h3>
+
+                    {/* Address */}
+                    <div className="mb-4">
+                      <div className="flex items-start gap-2 text-gray-700">
+                        <MapPin size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
+                        <address className="text-sm not-italic">
+                          {loc.address.map((line, i) => (
+                            <span key={i} className="block">{line}</span>
+                          ))}
+                        </address>
+                      </div>
+                    </div>
+
+                    {/* Hours */}
+                    <div className="mb-4">
+                      <div className="flex items-start gap-2">
+                        <Clock size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
+                        <div className="text-sm">
+                          <p className="font-bold text-gray-900">
+                            Today ({DAYS[now.getDay()]}): {formatTime(loc.hours[todayKey])}
+                          </p>
+                          
+                          {expanded[loc.id] && (
+                            <div className="mt-3 space-y-1 text-gray-600">
+                              {DAY_KEYS.map((key, i) => (
+                                <p key={key} className="flex justify-between">
+                                  <span className="font-medium">{DAYS[i]}:</span>
+                                  <span>{formatTime(loc.hours[key])}</span>
+                                </p>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      className="text-sm text-primary-2 font-bold hover:text-primary-1 underline focus:outline-none focus:ring-2 focus:ring-primary-1 rounded"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setExpanded(prev => ({...prev, [loc.id]: !prev[loc.id]}));
+                      }}
+                      aria-expanded={expanded[loc.id]}
+                      aria-controls={`hours-${loc.id}`}
+                    >
+                      {expanded[loc.id] ? "Hide full hours" : "Show full hours"}
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

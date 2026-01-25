@@ -3,116 +3,129 @@ import type { ProductCategory, ProductItem } from "@/data/products";
 import { useState, useEffect } from "react";
 import { IMAGE_MAP } from "@/lib/images";
 
-// --- SUB-COMPONENTS ---
 export const ProductCard = ({ item }: { item: ProductItem }) => {
   const imageData = item.image ? IMAGE_MAP[item.image] : undefined;
   if (!imageData) return null;
 
   return (
-    <div className="w-full tablet:w-[48%] desktop:w-[23%] flex flex-col pt-4 group">
-      <h3 className="font-bold text-lg mb-1">{item.name}</h3>
-
-      {item.price && (
-        <span className="text-secondary-1 font-bold text-sm mb-1">
-          ₱{item.price}
-        </span>
-      )}
-
-      <img
-        src={imageData.default}
-        srcSet={imageData.srcSet}
-        sizes="(max-width: 768px) 48vw, (max-width: 1024px) 23vw, 23vw"
-        alt={item.name}
-        loading="lazy"
-        className="w-full h-auto pb-2 object-cover tablet:h-72 desktop:h-80 rounded-sm shadow-sm transition-transform duration-300 group-hover:scale-105"
-      />
-    </div>
+    <article className="card-elevated overflow-hidden group">
+      <div className="relative overflow-hidden h-64 lg:h-80">
+        <img
+          src={imageData.default}
+          srcSet={imageData.srcSet}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+          alt={item.name}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+        />
+      </div>
+      <div className="p-6">
+        <h3 className="text-xl font-bold text-primary-2 mb-2">{item.name}</h3>
+        {item.price && (
+          <p className="text-2xl font-bold text-secondary-1" aria-label={`Price: ${item.price} pesos`}>
+            ₱{item.price}
+          </p>
+        )}
+      </div>
+    </article>
   );
 };
-
 
 const CategorySection = ({ category }: { category: ProductCategory }) => {
   const hero = category.heroImage ? IMAGE_MAP[category.heroImage] : undefined;
   const highlight = category.items[0]?.image ? IMAGE_MAP[category.items[0].image] : undefined;
 
   return (
-    <div className="w-full mb-12 animate-in fade-in duration-500">
-      <div className="mb-4">
-        <h1 className="font-bold text-2xl mb-2">{category.title}</h1>
-        <p>{category.subtitle}</p>
+    <section className="section-padding animate-in fade-in duration-500" id={category.id}>
+      <div className="container-width">
+        <div className="text-center mb-12">
+          <h2 className="heading-primary">{category.title}</h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">{category.subtitle}</p>
 
-        {hero && (
-          <img
-            src={hero.default}
-            srcSet={hero.srcSet}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 384px"
-            alt={category.title}
-            loading="lazy"
-            className="w-full h-auto mt-4 object-cover tablet:h-72 desktop:h-80 tablet:w-72 desktop:w-80 mx-auto"
-          />
+          {hero && (
+            <div className="mt-8 flex justify-center">
+              <img
+                src={hero.default}
+                srcSet={hero.srcSet}
+                sizes="(max-width: 768px) 100vw, 600px"
+                alt={`${category.title} featured image`}
+                loading="lazy"
+                className="rounded-2xl shadow-2xl max-w-md lg:max-w-lg w-full h-auto"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* GRID LAYOUT */}
+        {category.layout === 'grid' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {category.items.map((item, idx) => (
+              <ProductCard key={idx} item={item} />
+            ))}
+          </div>
         )}
-      </div>
 
-      {/* Layout */}
-      <div className={`
-        ${category.layout === 'grid' ? 'tablet:flex tablet:flex-wrap tablet:justify-between tablet:gap-4' : ''}
-        ${category.layout === 'highlight' ? 'tablet:flex tablet:justify-center tablet:gap-4' : ''}
-        ${category.layout === 'list' ? 'mt-8 pt-4 border-t border-primary-2' : ''}
-      `}>
-        {/* GRID */}
-        {category.layout === 'grid' && category.items.map((item, idx) => (
-          <ProductCard key={idx} item={item} />
-        ))}
-
-        {/* HIGHLIGHT */}
+        {/* HIGHLIGHT LAYOUT */}
         {category.layout === 'highlight' && (
-          <>
-            <div className="pt-4 w-full tablet:w-72 desktop:w-80 flex flex-col items-center">
-              <h3 className="font-bold text-lg mb-1">{category.items[0].name}</h3>
-              {category.items[0].price && <p className="text-secondary-1 font-bold">₱{category.items[0].price}</p>}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="card-elevated overflow-hidden">
+              <h3 className="text-2xl font-bold text-primary-2 p-6 pb-4">{category.items[0].name}</h3>
+              {category.items[0].price && (
+                <p className="text-2xl font-bold text-secondary-1 px-6 pb-4">₱{category.items[0].price}</p>
+              )}
               {highlight && (
                 <img
                   src={highlight.default}
                   srcSet={highlight.srcSet}
-                  sizes="(max-width: 768px) 48vw, (max-width: 1024px) 23vw, 23vw"
+                  sizes="(max-width: 1280px) 100vw, 50vw"
                   alt={category.items[0].name}
                   loading="lazy"
-                  className="w-full h-auto pb-2 object-cover tablet:h-72 desktop:h-80"
+                  className="w-full h-auto"
                 />
               )}
             </div>
 
-            <div className="mt-8 pt-4 border-t border-primary-2 w-full tablet:w-auto tablet:border-none tablet:mt-0 tablet:pt-4 tablet:flex tablet:flex-col tablet:justify-center">
-              <h2 className="font-bold text-xl mb-4 tablet:hidden">Other Baked Goods</h2>
-              <div className="flex flex-col gap-2 font-bold text-primary-2 text-left tablet:pl-8">
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <h3 className="text-2xl font-bold text-primary-2 mb-6">Other Baked Goods</h3>
+              <div className="space-y-4">
                 {category.items.slice(1).map((item, idx) => (
-                  <div key={idx} className="flex justify-between w-full max-w-xs border-b border-gray-100 py-1">
-                    <span>{item.name}</span>
-                    {item.price && <span>₱{item.price}</span>}
+                  <div key={idx} className="flex justify-between items-center pb-4 border-b border-gray-200 last:border-0">
+                    <span className="font-bold text-primary-2">{item.name}</span>
+                    {item.price && <span className="text-lg font-bold text-secondary-1">₱{item.price}</span>}
                   </div>
                 ))}
               </div>
             </div>
-          </>
+          </div>
         )}
 
-        {/* LIST */}
+        {/* LIST LAYOUT */}
         {category.layout === 'list' && (
-          <div className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-4 font-bold text-primary-2 text-left">
-            {category.items.map((item, idx) => (
-              <div key={idx} className="flex justify-center gap-6">
-                <span>{item.name} <span className="font-normal text-sm text-gray-500">{item.description}</span></span>
-                {item.price && <span className="text-secondary-1">₱{item.price}</span>}
-              </div>
-            ))}
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {category.items.map((item, idx) => (
+                <div key={idx} className="flex flex-col gap-2">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-bold text-primary-2">{item.name}</h3>
+                      {item.description && (
+                        <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                      )}
+                    </div>
+                    {item.price && (
+                      <span className="text-lg font-bold text-secondary-1 ml-4">₱{item.price}</span>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
-// --- MAIN PAGE COMPONENT ---
 export default function ProductsPage() {
   const [activeTab, setActiveTab] = useState<string>('specialty');
 
@@ -126,40 +139,60 @@ export default function ProductsPage() {
   const activeData = PRODUCT_DATA.find(cat => cat.id === activeTab);
 
   return (
-    <div className="text-center w-full min-h-screen">
-      {/* Banner */}
-      <div className="bg-primary-3 p-4 mb-4 tablet:px-8 desktop:px-40 text-center">
-        <h1 className="text-primary-2 font-bold text-2xl mb-2">Products</h1>
-        <h3 className="text-sm tablet:text-base text-primary-2">
-          Enjoy Lety's Buko Pie's selection of products.
-        </h3>
+    <div className="w-full min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-linear-to-br from-primary-2 to-primary-3 text-white py-12 lg:py-16">
+        <div className="container-width text-center">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-4">Our Products</h1>
+          <p className="text-xl lg:text-2xl">Discover our delicious selection of Filipino treats</p>
+        </div>
       </div>
 
-      {/* Navigation Tabs */}
-      <div className="flex flex-wrap justify-center gap-6 p-4 tablet:px-8 desktop:px-40 mb-8">
-        {PRODUCT_DATA.map(cat => {
-          const navImage = IMAGE_MAP[cat.id];
-          return (
-            <button key={cat.id} onClick={() => setActiveTab(cat.id)} className="...">
-              <h2 className="...">{cat.title}</h2>
-              {navImage && (
-                <img
-                  src={navImage.default}
-                  srcSet={navImage.srcSet}
-                  sizes="(max-width: 640px) 80px, 160px"
-                  alt={cat.title}
-                  loading="lazy"
-                  className="w-20 h-20 object-cover rounded-full shadow-sm tablet:w-32 tablet:h-32 desktop:w-40 desktop:h-40"
-                />
-              )}
-            </button>
-          );
-        })}
-      </div>
-      {/* Active Content */}
-      <div className="px-4 tablet:px-8 desktop:px-40 pb-12">
+      {/* Category Navigation */}
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-md" aria-label="Product categories">
+        <div className="container-width">
+          <div className="flex flex-wrap justify-center gap-6 py-8">
+            {PRODUCT_DATA.map(cat => {
+              const navImage = IMAGE_MAP[cat.id];
+              const isActive = activeTab === cat.id;
+              
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveTab(cat.id)}
+                  className={`flex flex-col items-center gap-3 p-4 rounded-xl transition-all focus:outline-none focus:ring-4 focus:ring-primary-1
+                    ${isActive ? 'bg-primary-3/20 ring-2 ring-primary-2' : 'hover:bg-gray-100'}`}
+                  aria-current={isActive ? 'page' : undefined}
+                  aria-label={`View ${cat.title}`}
+                >
+                  <h2 className={`text-lg font-bold ${isActive ? 'text-primary-2' : 'text-gray-700'}`}>
+                    {cat.title}
+                  </h2>
+                  {navImage && (
+                    <div className="relative overflow-hidden rounded-full ring-4 ring-white shadow-lg">
+                      <img
+                        src={navImage.default}
+                        srcSet={navImage.srcSet}
+                        sizes="(max-width: 640px) 80px, 120px"
+                        alt=""
+                        role="presentation"
+                        loading="lazy"
+                        className={`w-20 h-20 lg:w-32 lg:h-32 object-cover transition-transform duration-300
+                          ${isActive ? 'scale-110' : 'hover:scale-105'}`}
+                      />
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+
+      {/* Active Category Content */}
+      <main id="main-content">
         {activeData && <CategorySection category={activeData} />}
-      </div>
+      </main>
     </div>
   );
 }
