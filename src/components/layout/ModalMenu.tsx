@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Dialog, Transition, TransitionChild, DialogPanel, DialogTitle } from '@headlessui/react';
 import { Fragment } from 'react';
-import { NAV_ITEMS } from '../../data/navItems';
+import { NAV_ITEMS } from '@/data/navItems';
 
 interface ModalMenuProps {
   isOpen: boolean;

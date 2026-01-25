@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { IMAGES } from '../../data/images';
-import { siFacebook, siGmail } from 'simple-icons/icons';
+import { IMAGES } from '@/lib/images';
+import { siFacebook, siGmail } from 'simple-icons';
 
 interface PageFooterProps {
   facebookUrl?: string;
@@ -25,7 +25,9 @@ export default function PageFooter({
         <div className="flex items-center gap-3 sm:gap-4">
           <NavLink to="/">
             <img
-              src={IMAGES.LETYS_LOGO}
+              src={IMAGES.LETYS_LOGO.default}
+              srcSet={IMAGES.LETYS_LOGO.srcSet}
+              sizes="(max-width: 640px) 2.5rem, (max-width: 1024px) 3rem, 3.5rem"
               alt="Logo"
               className="w-10 sm:w-12 lg:w-14 h-auto"
             />

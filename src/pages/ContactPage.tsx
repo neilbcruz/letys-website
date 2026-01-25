@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import emailjs from 'emailjs-com';
-import { Card, CardHeader, CardContent } from '../components/ui/Card';
+import { Card, CardHeader, CardContent } from '@/components/ui/Card';
 import { Mail, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {

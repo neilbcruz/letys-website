@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import ReactBurger from 'hamburger-react';
-import { NAV_ITEMS } from '../../data/navItems';
-import { IMAGES } from '../../data/images';
+import { NAV_ITEMS } from '@/data/navItems';
+import { IMAGES } from '@/lib/images';
 import ModalMenu from './ModalMenu';
 
 export default function PageHeader() {
@@ -16,7 +16,8 @@ export default function PageHeader() {
       <div className="flex items-center justify-between w-full sm:w-auto">
         <Link to="/">
           <img
-            srcSet={IMAGES.LETYS_LOGO2}
+            src={IMAGES.LETYS_LOGO2.default}
+            srcSet={IMAGES.LETYS_LOGO2.srcSet}
             sizes="192px"
             width={192}
             height={64}

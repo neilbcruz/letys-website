@@ -1,13 +1,12 @@
-import { PRODUCT_DATA } from "../data/products";
-import type { ProductCategory, ProductItem } from "../data/products";
+import { PRODUCT_DATA } from "@/data/products";
+import type { ProductCategory, ProductItem } from "@/data/products";
 import { useState, useEffect } from "react";
-import { IMAGE_MAP } from "../data/images";
+import { IMAGE_MAP } from "@/lib/images";
 
 // --- SUB-COMPONENTS ---
-const ProductCard = ({ item }: { item: ProductItem }) => {
-  const imageUrl = item.image
-    ? IMAGE_MAP[item.image]
-    : undefined;
+export const ProductCard = ({ item }: { item: ProductItem }) => {
+  const imageData = item.image ? IMAGE_MAP[item.image] : undefined;
+  if (!imageData) return null;
 
   return (
     <div className="w-full tablet:w-[48%] desktop:w-[23%] flex flex-col pt-4 group">
@@ -19,39 +18,34 @@ const ProductCard = ({ item }: { item: ProductItem }) => {
         </span>
       )}
 
-      {imageUrl && (
-        <img
-          src={imageUrl}
-          alt={item.name}
-          loading="lazy"
-          className="w-full h-auto pb-2 object-cover tablet:h-72 desktop:h-80 rounded-sm shadow-sm transition-transform duration-300 group-hover:scale-105"
-        />
-      )}
+      <img
+        src={imageData.default}
+        srcSet={imageData.srcSet}
+        sizes="(max-width: 768px) 48vw, (max-width: 1024px) 23vw, 23vw"
+        alt={item.name}
+        loading="lazy"
+        className="w-full h-auto pb-2 object-cover tablet:h-72 desktop:h-80 rounded-sm shadow-sm transition-transform duration-300 group-hover:scale-105"
+      />
     </div>
   );
 };
 
 
 const CategorySection = ({ category }: { category: ProductCategory }) => {
-  const heroUrl = category.heroImage
-    ? IMAGE_MAP[category.heroImage]
-    : undefined;
-
-  const highlightUrl =
-    category.layout === 'highlight' && category.items[0]?.image
-      ? IMAGE_MAP[category.items[0].image]
-      : undefined;
+  const hero = category.heroImage ? IMAGE_MAP[category.heroImage] : undefined;
+  const highlight = category.items[0]?.image ? IMAGE_MAP[category.items[0].image] : undefined;
 
   return (
     <div className="w-full mb-12 animate-in fade-in duration-500">
-      {/* Title & Subtitle */}
       <div className="mb-4">
         <h1 className="font-bold text-2xl mb-2">{category.title}</h1>
         <p>{category.subtitle}</p>
 
-        {heroUrl && (
+        {hero && (
           <img
-            src={heroUrl}
+            src={hero.default}
+            srcSet={hero.srcSet}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 384px"
             alt={category.title}
             loading="lazy"
             className="w-full h-auto mt-4 object-cover tablet:h-72 desktop:h-80 tablet:w-72 desktop:w-80 mx-auto"
@@ -76,9 +70,11 @@ const CategorySection = ({ category }: { category: ProductCategory }) => {
             <div className="pt-4 w-full tablet:w-72 desktop:w-80 flex flex-col items-center">
               <h3 className="font-bold text-lg mb-1">{category.items[0].name}</h3>
               {category.items[0].price && <p className="text-secondary-1 font-bold">₱{category.items[0].price}</p>}
-              {highlightUrl && (
+              {highlight && (
                 <img
-                  src={highlightUrl}
+                  src={highlight.default}
+                  srcSet={highlight.srcSet}
+                  sizes="(max-width: 768px) 48vw, (max-width: 1024px) 23vw, 23vw"
                   alt={category.items[0].name}
                   loading="lazy"
                   className="w-full h-auto pb-2 object-cover tablet:h-72 desktop:h-80"
@@ -127,12 +123,6 @@ export default function ProductsPage() {
     }
   }, []);
 
-  const NAV_IMAGES: Record<string, string> = {
-    specialty: IMAGE_MAP['buko_pie-12'],
-    bakedgoods: IMAGE_MAP['cassava-10'],
-    pasalubong: IMAGE_MAP['pasalubong-2'],
-  };
-
   const activeData = PRODUCT_DATA.find(cat => cat.id === activeTab);
 
   return (
@@ -147,32 +137,25 @@ export default function ProductsPage() {
 
       {/* Navigation Tabs */}
       <div className="flex flex-wrap justify-center gap-6 p-4 tablet:px-8 desktop:px-40 mb-8">
-        {PRODUCT_DATA.map(cat => (
-          <button
-            key={cat.id}
-            onClick={() => setActiveTab(cat.id)}
-          	  className={`
-              flex flex-col items-center p-4 rounded-xl transition-all duration-300
-              ${activeTab === cat.id 
-                ? 'bg-primary-3 scale-105 shadow-md ring-2 ring-primary-2' 
-                : 'hover:bg-gray-50 hover:opacity-80 opacity-60'}
-            `}
-          >
-            <h2 className={`font-bold text-lg mb-2 ${activeTab === cat.id ? 'text-primary-2' : 'text-gray-500'}`}>
-              {cat.title}
-            </h2>
-            {NAV_IMAGES[cat.id] && (
-              <img
-                src={NAV_IMAGES[cat.id]}   // normal src for nav
-                alt={cat.title}
-                loading="lazy"
-                className="w-20 h-20 object-cover rounded-full shadow-sm tablet:w-32 tablet:h-32 desktop:w-40 desktop:h-40"
-              />
-            )}
-          </button>
-        ))}
+        {PRODUCT_DATA.map(cat => {
+          const navImage = IMAGE_MAP[cat.id];
+          return (
+            <button key={cat.id} onClick={() => setActiveTab(cat.id)} className="...">
+              <h2 className="...">{cat.title}</h2>
+              {navImage && (
+                <img
+                  src={navImage.default}
+                  srcSet={navImage.srcSet}
+                  sizes="(max-width: 640px) 80px, 160px"
+                  alt={cat.title}
+                  loading="lazy"
+                  className="w-20 h-20 object-cover rounded-full shadow-sm tablet:w-32 tablet:h-32 desktop:w-40 desktop:h-40"
+                />
+              )}
+            </button>
+          );
+        })}
       </div>
-
       {/* Active Content */}
       <div className="px-4 tablet:px-8 desktop:px-40 pb-12">
         {activeData && <CategorySection category={activeData} />}
