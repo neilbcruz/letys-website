@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import { cn } from '../../lib/utils';
+import { cn } from '@/lib/utils';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -25,38 +25,40 @@ const Button = ({
 }: ButtonProps) => {
   const variants = {
     primary: [
-      'bg-[color:var(--color-accent)]',
-      'text-[color:var(--color-brand)]',
-      'hover:bg-[color:var(--color-highlight)]',
-      'focus:ring-[color:var(--color-brand)]',
+      // Changed to use primary-2 for background and white text for better visibility
+      'bg-[color:var(--color-primary-2)]',
+      'text-white',
+      'hover:bg-[color:var(--color-primary-3)]',
+      'focus:ring-[color:var(--color-primary-1)]', // Focus ring with primary-1
     ].join(' '),
 
     secondary: [
-      'bg-[color:var(--color-brand)]',
-      'text-white',
-      'hover:bg-[color:var(--color-primary-3)]',
-      'focus:ring-[color:var(--color-brand)]',
+      // Changed to use primary-1 for background and primary-2 for text
+      'bg-[color:var(--color-primary-1)]',
+      'text-[color:var(--color-primary-2)]',
+      'hover:bg-[color:var(--color-secondary-1)]', // Changed hover for secondary
+      'focus:ring-[color:var(--color-primary-3)]', // Focus ring with primary-3
     ].join(' '),
 
     outline: [
       'bg-transparent',
       'border',
-      'border-[color:var(--color-muted)]',
-      'text-[color:var(--color-brand)]',
-      'hover:bg-[color:var(--color-support-1)]',
-      'focus:ring-[color:var(--color-brand)]',
+      'border-[color:var(--color-primary-2)]', // Changed border to primary-2
+      'text-[color:var(--color-primary-2)]', // Changed text to primary-2
+      'hover:bg-[color:var(--color-support-1)]', // Changed hover to support-1
+      'focus:ring-[color:var(--color-primary-1)]',
     ].join(' '),
 
     ghost: [
       'bg-transparent',
-      'text-[color:var(--color-brand)]',
-      'hover:bg-[color:var(--color-support-2)]',
-      'focus:ring-[color:var(--color-brand)]',
+      'text-[color:var(--color-primary-2)]', // Changed text to primary-2
+      'hover:bg-[color:var(--color-support-1)]', // Changed hover to support-1
+      'focus:ring-[color:var(--color-primary-1)]',
     ].join(' '),
 
     link: [
       'bg-transparent',
-      'text-[color:var(--color-brand)]',
+      'text-[color:var(--color-primary-2)]', // Changed text to primary-2
       'hover:underline',
       'p-0',
       'h-auto',

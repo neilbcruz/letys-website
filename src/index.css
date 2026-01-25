@@ -1,138 +1,90 @@
 @import "tailwindcss";
 
-/* 1. DEFINE FONTS --------------------------------------------------------- */
-@font-face {
-  font-family: 'NunitoSans Regular';
-  src: url('./assets/fonts/Nunito_Sans/NunitoSans-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
+/* 1. IMPORT FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600;700&display=swap');
 
-@font-face {
-  font-family: 'NunitoSans Bold';
-  src: url('./assets/fonts/Nunito_Sans/NunitoSans-Bold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'NunitoSans Italic';
-  src: url('./assets/fonts/Nunito_Sans/NunitoSans-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-}
-
-/* 2. THEME CONFIGURATION (Variables) -------------------------------------- */
+/* 2. THEME COLORS & FONTS */
 @theme {
-  /* PRIMARY & SECONDARY COLORS */
-  --color-primary-1: #FAC305;  /* gold */
-  --color-primary-2: #074621;  /* dark green */
-  --color-primary-3: #9EBF43;  /* light green */
+  --color-primary-1: #D4A800;
+  --color-primary-2: #074621;
+  --color-primary-3: #7A9B2F;
+  --color-secondary-1: #527A35;
+  --color-secondary-2: #5C5410;
 
-  --color-secondary-1: #659A46; /* soft green */
-  --color-secondary-2: #7C741C; /* muted green/brown */
+  --color-support-1: #FFF8E0;
+  --color-support-2: #E6F0C3;
 
-  /* SUPPORT COLORS */
-  --color-support-1: #fff8e0;
-  --color-support-2: #e6f0c3;
-
-  /* SEMANTIC ROLES */
-  --color-brand: var(--color-primary-2);
-  --color-accent: var(--color-primary-1);
-  --color-highlight: var(--color-primary-3);
-  --color-muted: #7C741C;
-
-  /* BACKGROUND & TEXT */
   --color-bg: #FAFAF8;
   --color-text: #1F2937;
 
-  /* BREAKPOINTS */
+  --font-heading: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1280px;
-
-  /* FONTS */
-  --font-sans: "NunitoSans Regular", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* 3. BASE TYPOGRAPHY ------------------------------------------------------ */
+/* 3. BASE TYPOGRAPHY & ACCESSIBILITY */
 @layer base {
   html {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     color: var(--color-text);
     background-color: var(--color-bg);
   }
 
-  h1 {
-    font-family: "NunitoSans Bold", sans-serif;
-    font-size: 1.75rem;
-    line-height: 2.25rem;
-    font-weight: 600;
-  }
-  @media (min-width: 768px) {
-    h1 { font-size: 2rem; line-height: 2.5rem; }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
   }
 
-  h2 {
-    font-family: "NunitoSans Bold", sans-serif;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
-  }
-  @media (min-width: 768px) {
-    h2 { font-size: 1.5rem; line-height: 2rem; }
+  /* Keyboard focus outline */
+  *:focus-visible {
+    outline: 3px solid var(--color-primary-1);
+    outline-offset: 2px;
   }
 
-  h3, link, button, .label {
-    font-family: "NunitoSans Bold", sans-serif;
-    font-size: 0.8125rem;
-    line-height: 1.25rem;
-    font-weight: 600;
+  /* Skip link */
+  .skip-to-main {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1em;
+    background-color: var(--color-primary-2);
+    color: white;
+    text-decoration: none;
   }
-  @media (min-width: 768px) {
-    h3, link, button, .label { font-size: 0.875rem; line-height: 1.125rem; }
+  .skip-to-main:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
   }
 
   p {
-    font-size: 0.813rem;
-    line-height: 1.125rem;
+    font-size: 1rem;
+    line-height: 1.625rem;
     font-weight: 400;
-  }
-  @media (min-width: 768px) {
-    p { font-size: 0.875rem; line-height: 1.375rem; }
-  }
-
-  h4 {
-    font-size: 0.6875rem;
-    line-height: 1rem;
-  }
-  @media (min-width: 768px) {
-    h4 { font-size: 0.75rem; line-height: 1.125rem; }
   }
 }
 
-/* 4. UTILITIES ------------------------------------------------------------ */
+/* 4. UTILITIES */
 @layer components {
-  .p-large {
-    font-size: 0.9375rem;
-    line-height: 1.625rem;
-  }
-  @media (min-width: 768px) {
-    .p-large { font-size: 1rem; line-height: 1.75rem; }
+  .section-padding { @apply py-16 lg:py-24; }
+  .container-width { @apply max-w-7xl mx-auto px-4 sm:px-8; }
+  .heading-primary { @apply text-3xl lg:text-4xl font-bold text-primary-2 mb-4; }
+  .heading-secondary { @apply text-2xl lg:text-3xl font-bold text-primary-2 mb-3; }
+  .card-elevated { @apply bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300; }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-primary-2 text-white font-bold rounded-lg 
+           hover:bg-primary-3 hover:text-primary-2 
+           focus:ring-4 focus:ring-primary-1 focus:outline-none
+           transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
-  .p-medium {
-    font-size: 0.8125rem;
-    line-height: 1.25rem;
-  }
-  @media (min-width: 768px) {
-    .p-medium { font-size: 0.875rem; line-height: 1.375rem; }
-  }
-
-  .p-small {
-    font-size: 0.6875rem;
-    line-height: 1rem;
-  }
-  @media (min-width: 768px) {
-    .p-small { font-size: 0.75rem; line-height: 1.125rem; }
+  .btn-secondary {
+    @apply px-6 py-3 bg-primary-1 text-primary-2 font-bold rounded-lg 
+           hover:bg-primary-2 hover:text-white 
+           focus:ring-4 focus:ring-primary-3 focus:outline-none
+           transition-all duration-200;
   }
 }

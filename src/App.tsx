@@ -16,7 +16,7 @@ function App() {
       <Router>
         <PageHeader />
         
-        <main className="flex-grow">
+        <main className="grow">
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/products' element={<ProductsPage />}>
