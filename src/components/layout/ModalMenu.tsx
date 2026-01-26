@@ -9,34 +9,30 @@ interface ModalMenuProps {
 }
 
 export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
-
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-50 overflow-y-auto"
+        className="fixed inset-0 z-[100] overflow-y-auto"
         onClose={closeModal}
       >
-        <div className="min-h-screen px-4 text-center">
-          {/* Overlay */}
-          <TransitionChild
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-primary-1/90" />
-          </TransitionChild>
+        {/* Backdrop overlay */}
+        <TransitionChild
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 backdrop-blur-sm bg-black/60" />
+        </TransitionChild>
 
-          {/* Trick to center panel */}
-          <span className="inline-block h-screen align-middle" aria-hidden="true">
-            &#8203;
-          </span>
-
-          {/* Panel */}
+        {/* Container for centering */}
+        <div className="flex fixed inset-0 justify-center items-center p-4">
           <TransitionChild
+            as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 scale-95"
             enterTo="opacity-100 scale-100"
@@ -44,25 +40,44 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <DialogPanel className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-center align-middle transition-all transform bg-white rounded-lg shadow-xl">
-              <DialogTitle as="h3" className="text-2xl font-bold text-primary-2 mb-6">
+            <DialogPanel className="overflow-hidden relative p-6 w-full max-w-sm text-center bg-white rounded-xl shadow-2xl transition-all transform">
+              <DialogTitle 
+                as="h2" 
+                className="mb-6 text-2xl font-bold text-primary-2"
+              >
                 Menu
               </DialogTitle>
               
-              {/* --- DYNAMIC NAV LINKS --- */}
-              <div className="flex flex-col gap-4">
+              {/* Navigation Links */}
+              <nav className="flex flex-col gap-3" aria-label="Mobile navigation">
                 {NAV_ITEMS.map(item => (
                   <NavLink
                     key={item.path}
                     to={item.path}
                     onClick={closeModal}
-                    className="text-primary-2 hover:text-secondary-2 font-bold text-xl"
+                    className={({ isActive }) =>
+                      `text-lg font-bold py-2.5 px-4 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-1 ${
+                        isActive 
+                          ? 'bg-primary-3/20 text-primary-2' 
+                          : 'text-primary-2 hover:text-primary-1 hover:bg-primary-3/10'
+                      }`
+                    }
+                    aria-label={`Navigate to ${item.label}`}
                   >
                     {item.label}
                   </NavLink>
                 ))}
-              </div>
-              
+              </nav>
+
+              {/* Close button */}
+              <button
+                type="button"
+                onClick={closeModal}
+                className="mt-6 w-full btn-primary text-base py-2.5"
+                aria-label="Close menu"
+              >
+                Close Menu
+              </button>
             </DialogPanel>
           </TransitionChild>
         </div>

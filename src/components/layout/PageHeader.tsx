@@ -1,4 +1,3 @@
-// PageHeader.tsx
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import ReactBurger from 'hamburger-react';
@@ -11,14 +10,14 @@ export default function PageHeader() {
   const closeModal = () => setOpen(false);
 
   return (
-    <header className="bg-primary-1 px-4 py-3 sm:px-8 sm:py-4 lg:px-40 lg:py-5 shadow-md sticky top-0 z-50">
+    <header className="sticky top-0 z-40 px-4 py-3 shadow-md bg-primary-1 sm:px-8 sm:py-4 lg:px-40 lg:py-5">
       <a href="#main-content" className="skip-to-main">
         Skip to main content
       </a>
       
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-0">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
         {/* LOGO + BURGER */}
-        <div className="flex items-center justify-between w-full sm:w-auto">
+        <div className="flex justify-between items-center w-full sm:w-auto">
           <Link to="/" aria-label="Lety's Buko Pie - Home">
             <img
               src={IMAGES.LETYS_LOGO2.default}
@@ -27,12 +26,12 @@ export default function PageHeader() {
               width={192}
               height={64}
               alt="Lety's Buko Pie Logo"
-              className="w-32 sm:w-40 lg:w-48 h-auto object-contain"
+              className="object-contain w-32 h-auto sm:w-40 lg:w-48"
             />
           </Link>
           
           {/* Burger menu for mobile */}
-          <div className="sm:hidden" aria-label="Mobile menu toggle">
+          <div className="z-50 sm:hidden" aria-label="Mobile menu toggle">
             <ReactBurger
               color="#074621"
               toggled={isOpen}
@@ -44,7 +43,7 @@ export default function PageHeader() {
         </div>
 
         {/* NAVIGATION LINKS */}
-        <nav className="hidden tablet:flex items-center gap-8" aria-label="Main navigation">
+        <nav className="hidden gap-8 items-center tablet:flex" aria-label="Main navigation">
           {NAV_ITEMS.map(item => (
             <NavLink
               key={item.path}
