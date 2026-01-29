@@ -3,7 +3,7 @@ import { IMAGES } from "@/lib/images";
 interface PageHeroNarrowProps {
   title: string;
   subtitle: string;
-  icon: JSX.Element;
+  icon: React.ReactNode;
 }
 
 export default function PageHeroNarrow({ title, subtitle, icon }: PageHeroNarrowProps) {
