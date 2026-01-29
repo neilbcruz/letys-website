@@ -31,10 +31,7 @@ for (const path in images) {
   }
 }
 
-/**
- * Always return a valid ImageSet.
- * Logs a warning and returns a fallback if image not found.
- */
+// Return valid srcSet
 export function getResponsiveImage(name: string): ImageSet {
   const img = IMAGE_MAP[name];
   if (!img) {
@@ -56,7 +53,8 @@ export const IMAGES = {
   LETYS_LOGO2: getResponsiveImage('letys-logo2'),
   FACEBOOK: getResponsiveImage('facebook'),
   GOOGLE: getResponsiveImage('googlemail'),
-  HERO: getResponsiveImage('letys_buko_pie-2'),
+  HERO: getResponsiveImage('lbp-hero'),
+  HERO_NARROW: getResponsiveImage('lbp-hero-narrow'),
 } as const;
 
 export type ImageKey = keyof typeof IMAGES;

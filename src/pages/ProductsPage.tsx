@@ -1,197 +1,236 @@
-import { PRODUCT_DATA } from "@/data/products";
-import type { ProductCategory, ProductItem } from "@/data/products";
-import { useState, useEffect } from "react";
-import { IMAGE_MAP } from "@/lib/images";
-
-export const ProductCard = ({ item }: { item: ProductItem }) => {
-  const imageData = item.image ? IMAGE_MAP[item.image] : undefined;
-  if (!imageData) return null;
-
-  return (
-    <article className="card-elevated overflow-hidden group">
-      <div className="relative overflow-hidden h-64 lg:h-80">
-        <img
-          src={imageData.default}
-          srcSet={imageData.srcSet}
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
-          alt={item.name}
-          loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-        />
-      </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-primary-2 mb-2">{item.name}</h3>
-        {item.price && (
-          <p className="text-2xl font-bold text-secondary-1" aria-label={`Price: ${item.price} pesos`}>
-            ₱{item.price}
-          </p>
-        )}
-      </div>
-    </article>
-  );
-};
-
-const CategorySection = ({ category }: { category: ProductCategory }) => {
-  const hero = category.heroImage ? IMAGE_MAP[category.heroImage] : undefined;
-  const highlight = category.items[0]?.image ? IMAGE_MAP[category.items[0].image] : undefined;
-
-  return (
-    <section className="section-padding animate-in fade-in duration-500" id={category.id}>
-      <div className="container-width">
-        <div className="text-center mb-12">
-          <h2 className="heading-primary">{category.title}</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">{category.subtitle}</p>
-
-          {hero && (
-            <div className="mt-8 flex justify-center">
-              <img
-                src={hero.default}
-                srcSet={hero.srcSet}
-                sizes="(max-width: 768px) 100vw, 600px"
-                alt={`${category.title} featured image`}
-                loading="lazy"
-                className="rounded-2xl shadow-2xl max-w-md lg:max-w-lg w-full h-auto"
-              />
-            </div>
-          )}
-        </div>
-
-        {/* GRID LAYOUT */}
-        {category.layout === 'grid' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {category.items.map((item, idx) => (
-              <ProductCard key={idx} item={item} />
-            ))}
-          </div>
-        )}
-
-        {/* HIGHLIGHT LAYOUT */}
-        {category.layout === 'highlight' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div className="card-elevated overflow-hidden">
-              <h3 className="text-2xl font-bold text-primary-2 p-6 pb-4">{category.items[0].name}</h3>
-              {category.items[0].price && (
-                <p className="text-2xl font-bold text-secondary-1 px-6 pb-4">₱{category.items[0].price}</p>
-              )}
-              {highlight && (
-                <img
-                  src={highlight.default}
-                  srcSet={highlight.srcSet}
-                  sizes="(max-width: 1280px) 100vw, 50vw"
-                  alt={category.items[0].name}
-                  loading="lazy"
-                  className="w-full h-auto"
-                />
-              )}
-            </div>
-
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h3 className="text-2xl font-bold text-primary-2 mb-6">Other Baked Goods</h3>
-              <div className="space-y-4">
-                {category.items.slice(1).map((item, idx) => (
-                  <div key={idx} className="flex justify-between items-center pb-4 border-b border-gray-200 last:border-0">
-                    <span className="font-bold text-primary-2">{item.name}</span>
-                    {item.price && <span className="text-lg font-bold text-secondary-1">₱{item.price}</span>}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* LIST LAYOUT */}
-        {category.layout === 'list' && (
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {category.items.map((item, idx) => (
-                <div key={idx} className="flex flex-col gap-2">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="font-bold text-primary-2">{item.name}</h3>
-                      {item.description && (
-                        <p className="text-sm text-gray-600 mt-1">{item.description}</p>
-                      )}
-                    </div>
-                    {item.price && (
-                      <span className="text-lg font-bold text-secondary-1 ml-4">₱{item.price}</span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-};
+// src/pages/MultiStoreInventoryPage.tsx
+import { useState } from 'react';
+import { useStoreItems } from '@/hooks/useStoreItems';
+import ProductCardWithStock from '@/components/products/ProductCardWithStock';
+import SearchInput from '@/components/ui/SearchInput';
+import { Loader2, AlertCircle, Package, Store } from 'lucide-react';
+import { getInventoryLocations, getLocationByStoreId, formatHours } from '@/data/locations';
+import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
 
 export default function ProductsPage() {
-  const [activeTab, setActiveTab] = useState<string>('specialty');
+  const STORES = getInventoryLocations(); // Only get stores with inventory API
+  
+  const [selectedStore, setSelectedStore] = useState<string>(STORES[0]?.storeId || '');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-  useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && PRODUCT_DATA.some(cat => cat.id === hash)) {
-      setActiveTab(hash);
-    }
-  }, []);
+  const { items, loading, error, refetch } = useStoreItems({
+    storeName: selectedStore,
+    pageNumber: 1,
+    pageSize: 50,
+    category: selectedCategory,
+    itemName: searchTerm,
+  });
 
-  const activeData = PRODUCT_DATA.find(cat => cat.id === activeTab);
+  // Get unique categories from items
+  const categories = Array.from(new Set(items.map(item => item.category))).sort();
+
+  // Get current store info
+  const currentStore = getLocationByStoreId(selectedStore);
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-gray-50 [scrollbar-gutter:stable]">
       {/* Header */}
-      <div className="bg-linear-to-br from-primary-2 to-primary-3 text-white py-12 lg:py-16">
-        <div className="container-width text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-4">Our Products</h1>
-          <p className="text-xl lg:text-2xl">Discover our delicious selection of Filipino treats</p>
-        </div>
-      </div>
+      <PageHeroNarrow
+        title="Store Inventory"
+        subtitle="Browse our current stock across all locations"
+        icon={<Package size={32} aria-hidden="true" />}
+      />
 
-      {/* Category Navigation */}
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-md" aria-label="Product categories">
+      {/* Store Selection Tabs */}
+      <section className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-md">
         <div className="container-width">
-          <div className="flex flex-wrap justify-center gap-6 py-8">
-            {PRODUCT_DATA.map(cat => {
-              const navImage = IMAGE_MAP[cat.id];
-              const isActive = activeTab === cat.id;
-              
-              return (
+          <div className="flex flex-col gap-4 py-6">
+            {/* Store Tabs */}
+            <div className="flex flex-wrap gap-3 justify-center">
+              {STORES.map((store) => (
                 <button
-                  key={cat.id}
-                  onClick={() => setActiveTab(cat.id)}
-                  className={`flex flex-col items-center gap-3 p-4 rounded-xl transition-all focus:outline-none focus:ring-4 focus:ring-primary-1
-                    ${isActive ? 'bg-primary-3/20 ring-2 ring-primary-2' : 'hover:bg-gray-100'}`}
-                  aria-current={isActive ? 'page' : undefined}
-                  aria-label={`View ${cat.title}`}
+                  key={store.storeId}
+                  onClick={() => {
+                    setSelectedStore(store.storeId);
+                    setSearchTerm('');
+                    setSelectedCategory('');
+                  }}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-base
+                    transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-1
+                    ${selectedStore === store.storeId
+                      ? 'bg-primary-2 text-white shadow-lg scale-105'
+                      : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                  aria-pressed={selectedStore === store.storeId}
+                  aria-label={`View ${store.name} inventory`}
                 >
-                  <h2 className={`text-lg font-bold ${isActive ? 'text-primary-2' : 'text-gray-700'}`}>
-                    {cat.title}
-                  </h2>
-                  {navImage && (
-                    <div className="relative overflow-hidden rounded-full ring-4 ring-white shadow-lg">
-                      <img
-                        src={navImage.default}
-                        srcSet={navImage.srcSet}
-                        sizes="(max-width: 640px) 80px, 120px"
-                        alt=""
-                        role="presentation"
-                        loading="lazy"
-                        className={`w-20 h-20 lg:w-32 lg:h-32 object-cover transition-transform duration-300
-                          ${isActive ? 'scale-110' : 'hover:scale-105'}`}
-                      />
+                  <span className="text-2xl" aria-hidden="true">{store.icon}</span>
+                  <span>{store.name}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Store Info Banner */}
+            {currentStore && (
+              <div className="flex gap-4 items-start p-4 rounded-lg bg-primary-3/10">
+                <Store className="mt-1 text-primary-2 shrink-0" size={24} />
+                <div className="flex-1">
+                  <h2 className="text-lg font-bold text-primary-2">{currentStore.displayName}</h2>
+                  <p className="text-sm text-gray-700">
+                    {currentStore.address[0]} {currentStore.address[1]}
+                  </p>
+                  <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-600">
+                    <span className="flex gap-1 items-center">
+                      <span className="font-medium">Hours:</span> 
+                      {formatHours(currentStore.hours)}
+                    </span>
+                    <a
+                      href={currentStore.mapLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium underline text-primary-2 hover:text-primary-1"
+                    >
+                      Get Directions →
+                    </a>
+                  </div>
+                  {currentStore.specialNotes && currentStore.specialNotes.length > 0 && (
+                    <div className="p-2 mt-2 bg-amber-50 rounded border border-amber-200">
+                      <p className="text-sm text-amber-800">
+                        <span className="font-medium">Note:</span> {currentStore.specialNotes.join('; ')}
+                      </p>
                     </div>
                   )}
-                </button>
-              );
-            })}
+                </div>
+              </div>
+            )}
+
+            {/* Filters */}
+            <div className="flex flex-col gap-4 md:flex-row">
+              {/* Search */}
+              <div className="flex-1">
+                <SearchInput
+                  placeholder="Search products..."
+                  onSearch={setSearchTerm}
+                  size="lg"
+                  clearable
+                />
+              </div>
+
+              {/* Category Filter */}
+              <div className="md:w-64">
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="px-4 w-full h-14 text-base bg-white rounded-lg border-2 border-gray-300 transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent"
+                  aria-label="Filter by category"
+                >
+                  <option value="">All Categories</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Refresh Button */}
+              <button
+                onClick={refetch}
+                disabled={loading}
+                className="flex gap-2 justify-center items-center px-6 py-3 text-base btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Refresh inventory"
+              >
+                <Package size={20} aria-hidden="true" />
+                Refresh
+              </button>
+            </div>
           </div>
         </div>
-      </nav>
+      </section>
 
-      {/* Active Category Content */}
+      {/* Content Section */}
       <main id="main-content">
-        {activeData && <CategorySection category={activeData} />}
+        <section className="section-padding">
+          <div className="container-width">
+            {/* Loading State */}
+            {loading && (
+              <div className="flex flex-col justify-center items-center py-20">
+                <Loader2 className="mb-4 w-12 h-12 animate-spin text-primary-2" />
+                <p className="text-lg text-gray-600">Loading inventory for {currentStore?.name}...</p>
+              </div>
+            )}
+
+            {/* Error State */}
+            {error && (
+              <div className="mx-auto max-w-2xl">
+                <div className="p-8 text-center bg-red-50 rounded-lg border-2 border-red-200">
+                  <AlertCircle className="mx-auto mb-4 w-12 h-12 text-red-600" />
+                  <h2 className="mb-2 text-xl font-bold text-red-800">
+                    Failed to Load Inventory
+                  </h2>
+                  <p className="mb-4 text-red-700">{error.message}</p>
+                  <button
+                    onClick={refetch}
+                    className="btn-primary"
+                  >
+                    Try Again
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Products Grid */}
+            {!loading && !error && items.length > 0 && (
+              <>
+                <div className="flex flex-wrap gap-4 justify-between items-center mb-6">
+                  <h2 className="text-2xl font-bold text-primary-2">
+                    {items.length} {items.length === 1 ? 'Product' : 'Products'} Available
+                    {selectedCategory && ` in ${selectedCategory}`}
+                  </h2>
+                  {(selectedCategory || searchTerm) && (
+                    <button
+                      onClick={() => {
+                        setSelectedCategory('');
+                        setSearchTerm('');
+                      }}
+                      className="underline transition text-primary-2 hover:text-primary-1"
+                    >
+                      Clear All Filters
+                    </button>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {items.map((item) => (
+                    <ProductCardWithStock key={item.itemId} item={item} />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {/* Empty State */}
+            {!loading && !error && items.length === 0 && (
+              <div className="py-20 mx-auto max-w-2xl text-center">
+                <Package className="mx-auto mb-4 w-16 h-16 text-gray-400" />
+                <h2 className="mb-2 text-2xl font-bold text-gray-700">
+                  No Products Found
+                </h2>
+                <p className="mb-6 text-gray-600">
+                  {searchTerm || selectedCategory
+                    ? 'Try adjusting your filters or search terms.'
+                    : `No products available at ${currentStore?.name} at the moment.`}
+                </p>
+                {(searchTerm || selectedCategory) && (
+                  <button
+                    onClick={() => {
+                      setSearchTerm('');
+                      setSelectedCategory('');
+                    }}
+                    className="btn-secondary"
+                  >
+                    Clear All Filters
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
       </main>
     </div>
   );

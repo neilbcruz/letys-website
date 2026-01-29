@@ -13,7 +13,7 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
     <Transition show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-[100] overflow-y-auto"
+        className="fixed inset-0 z-100 overflow-y-auto"
         onClose={closeModal}
       >
         {/* Backdrop overlay */}

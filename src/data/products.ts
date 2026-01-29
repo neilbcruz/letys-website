@@ -1,3 +1,29 @@
+import { getResponsiveImage } from '@/lib/images';
+
+/**
+ * Find the ProductItem in products.ts matching the given GraphQL item name
+ */
+function findProductByName(name: string): ProductItem | undefined {
+  const lowerName = name.toLowerCase();
+  for (const category of PRODUCT_DATA) {
+    const product = category.items.find(item => item.name.toLowerCase() === lowerName);
+    if (product) return product;
+  }
+  return undefined;
+}
+
+/**
+ * Resolve image from a GraphQL item name dynamically
+ */
+export function getInventoryImageFromName(itemName: string) {
+  const product = findProductByName(itemName);
+  if (!product || !product.image) {
+    console.warn(`No image found for product: ${itemName}`);
+    return getResponsiveImage('fallback');
+  }
+  return getResponsiveImage(product.image);
+}
+
 export interface ProductItem {
     name: string;
     image?: string;
