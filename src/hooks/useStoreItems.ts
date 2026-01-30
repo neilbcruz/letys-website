@@ -1,6 +1,7 @@
 // src/hooks/useStoreItems.ts
 import { useState, useEffect } from 'react';
 import { getStoreItems, type StoreItem, type QueryParams } from '@/services/graphql';
+import { isAvailableInStore } from '@/data/products';
 
 interface UseStoreItemsResult {
   items: StoreItem[];
@@ -19,7 +20,10 @@ export function useStoreItems(params: QueryParams): UseStoreItemsResult {
       setLoading(true);
       setError(null);
       const data = await getStoreItems(params);
-      setItems(data);
+      const filteredItems = data.filter(item =>
+        isAvailableInStore(params.storeName, item.name)
+      );
+      setItems(filteredItems);
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Failed to fetch items'));
     } finally {

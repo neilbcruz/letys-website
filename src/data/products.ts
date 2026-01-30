@@ -1,5 +1,20 @@
 import { getResponsiveImage } from '@/lib/images';
 
+// Central rules for per-store product availability
+export const UNAVAILABLE_BY_STORE: Record<string, string[]> = {
+  'letysbukopie-pansol': ['Frozen Buko Pie'],
+};
+
+export function isAvailableInStore(
+  storeId: string,
+  productName: string
+): boolean {
+  const normalizedStore = storeId.toLowerCase();
+
+  return !UNAVAILABLE_BY_STORE[normalizedStore]?.includes(productName);
+}
+
+
 /**
  * Find the ProductItem in products.ts matching the given GraphQL item name
  */

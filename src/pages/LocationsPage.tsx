@@ -69,7 +69,7 @@ function LocationInventoryPreview({ location }: { location: Location }) {
             Inventory Status
           </h4>
           <Link
-            to="/inventory"
+            to="/availability"
             className="text-sm underline text-primary-2 hover:text-primary-1"
           >
             View Full Inventory →
@@ -96,7 +96,7 @@ function LocationInventoryPreview({ location }: { location: Location }) {
       <div className="p-4 bg-white rounded-lg border border-gray-200">
         <h5 className="mb-2 text-sm font-bold text-gray-800">Sample Products</h5>
         <div className="space-y-2">
-          {items.slice(0, 3).map(item => (
+          {items.slice(0, 5).map(item => (
             <div key={item.itemId} className="flex justify-between items-center text-sm">
               <span className="flex-1 font-medium text-gray-700 truncate">
                 {item.name}
@@ -110,7 +110,7 @@ function LocationInventoryPreview({ location }: { location: Location }) {
           ))}
         </div>
         <Link
-          to="/inventory"
+          to="/availability"
           className="block mt-3 text-sm font-medium text-center text-primary-2 hover:text-primary-1"
         >
           See all products at this location
@@ -191,7 +191,7 @@ export default function LocationsPage() {
           <div className="flex justify-between items-center mb-12">
             <h2 className="heading-secondary">All Branches</h2>
             <div className="flex gap-4">
-              <Link to="/inventory" className="px-4 py-2 text-sm btn-primary">
+              <Link to="/availability" className="px-4 py-2 text-sm btn-primary">
                 View Inventory
               </Link>
               <Link to="/availability" className="px-4 py-2 text-sm btn-secondary">
@@ -337,7 +337,7 @@ export default function LocationsPage() {
             <Link to="/availability" className="text-lg btn-primary">
               Compare All Stores
             </Link>
-            <Link to="/inventory" className="text-lg btn-secondary">
+            <Link to="/availability" className="text-lg btn-secondary">
               Browse Inventory
             </Link>
           </div>
