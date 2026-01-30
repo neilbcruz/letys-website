@@ -1,3 +1,4 @@
+// src/components/layout/Hamburger.tsx - UPDATED WITH ARIA LABELS
 import './Hamburger.scss';
 
 interface HamburgerProps {
@@ -7,13 +8,16 @@ interface HamburgerProps {
 
 export default function Hamburger({ setOpen, open }: HamburgerProps) {
     return (
-        <>
-        <button onClick={() => setOpen(!open)} className='hamburger'>
-            <div className='hamburger__div div__one' />
-            <div className='hamburger__div 2' />
-            <div className='hamburger__div 3' />
+        <button 
+            onClick={() => setOpen(!open)} 
+            className='hamburger'
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+        >
+            <div className='hamburger__div div__one' aria-hidden="true" />
+            <div className='hamburger__div div__two' aria-hidden="true" />
+            <div className='hamburger__div div__three' aria-hidden="true" />
         </button>
-    </>
-    )
-
+    );
 }
