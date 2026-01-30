@@ -1,6 +1,6 @@
-import { IMAGES } from "@/lib/images";
+import { IMAGES } from '@/lib/images';
 import { NavLink } from 'react-router-dom';
-import Button from '@/components/ui/Button';
+import { Button } from '@/components/ui';
 
 export default function PageHero() {
   return (

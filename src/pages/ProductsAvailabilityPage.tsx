@@ -1,15 +1,17 @@
-// src/pages/ProductsAvailabilityPage.tsx
+// src/pages/ProductsAvailabilityPage.tsx - UPDATED WITH IMPROVEMENTS
 import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import StockBadge from '@/components/ui/StockBadge';
 import { formatPrice, type StoreItem } from '@/services/graphql';
 import { getInventoryLocations } from '@/data/locations';
-import { Loader2, AlertCircle, TrendingUp, Package } from 'lucide-react';
+import { AlertCircle, TrendingUp, Package } from 'lucide-react';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
+import { LoadingSpinner } from '@/components/ui/';
 
 export default function ProductsAvailabilityPage() {
   const STORES = getInventoryLocations();
-  const [selectedCategory, setSelectedCategory] = useState('');
+  // DEFAULT TO MAIN PRODUCTS
+  const [selectedCategory, setSelectedCategory] = useState('Main Products');
 
   // Fetch items from all stores with inventory
   const storesData = STORES.map(location => ({
@@ -20,7 +22,7 @@ export default function ProductsAvailabilityPage() {
       storeName: location.storeId,
       pageNumber: 1,
       pageSize: 100,
-      category: selectedCategory,
+      category: selectedCategory, // Uses Main Products by default
     }),
   }));
 
@@ -38,7 +40,7 @@ export default function ProductsAvailabilityPage() {
 
   const productNames = Array.from(allProductNames).sort();
 
-  // Get all categories
+  // Get all categories from all stores
   const allCategories = new Set<string>();
   storesData.forEach(store => {
     store.data.items.forEach(item => allCategories.add(item.category));
@@ -79,7 +81,8 @@ export default function ProductsAvailabilityPage() {
               id="category-filter"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="flex-1 px-4 max-w-md h-12 text-base bg-white rounded-lg border-2 border-gray-300 transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent"
+              className="flex-1 px-4 max-w-md h-12 text-base bg-white rounded-lg border-2 border-gray-300 transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent min-h-[48px]"
+              aria-label="Filter products by category"
             >
               <option value="">All Categories</option>
               {categories.map((category) => (
@@ -89,6 +92,11 @@ export default function ProductsAvailabilityPage() {
               ))}
             </select>
           </div>
+          {selectedCategory === 'Main Products' && (
+            <p className="mt-2 text-sm text-gray-600">
+              <span className="font-medium">Note:</span> Showing main products only. Select "All Categories" to see everything.
+            </p>
+          )}
         </div>
       </section>
 
@@ -98,17 +106,16 @@ export default function ProductsAvailabilityPage() {
           <div className="container-width">
             {/* Loading State */}
             {allLoading && (
-              <div className="flex flex-col justify-center items-center py-20">
-                <Loader2 className="mb-4 w-12 h-12 animate-spin text-primary-2" />
-                <p className="text-lg text-gray-600">Loading inventory from all stores...</p>
+              <div role="status" aria-live="polite">
+                <LoadingSpinner label="Loading inventory from all stores..." />
               </div>
             )}
 
             {/* Error State */}
             {hasErrors && !allLoading && (
-              <div className="p-6 mb-8 bg-yellow-50 rounded-lg border-2 border-yellow-200">
+              <div className="p-6 mb-8 bg-yellow-50 rounded-lg border-2 border-yellow-200" role="alert">
                 <div className="flex gap-3 items-start">
-                  <AlertCircle className="mt-1 text-yellow-600 shrink-0" size={24} />
+                  <AlertCircle className="mt-1 text-yellow-600 shrink-0" size={24} aria-hidden="true" />
                   <div>
                     <h3 className="mb-2 font-bold text-yellow-800">Some stores failed to load</h3>
                     <p className="text-yellow-700">Displaying available data. Some information may be incomplete.</p>
@@ -125,18 +132,18 @@ export default function ProductsAvailabilityPage() {
                   <table className="w-full">
                     <thead className="text-white bg-primary-2">
                       <tr>
-                        <th className="px-6 py-4 w-1/4 text-lg font-bold text-left">
+                        <th scope="col" className="px-6 py-4 w-1/4 text-lg font-bold text-left">
                           Product
                         </th>
                         {storesData.map(store => (
-                          <th key={store.id} className="px-6 py-4 text-lg font-bold text-center">
+                          <th key={store.id} scope="col" className="px-6 py-4 text-lg font-bold text-center">
                             <div className="flex flex-col gap-2 items-center">
-                              <span className="text-2xl">{store.icon}</span>
+                              <span className="text-2xl" aria-hidden="true">{store.icon}</span>
                               <span>{store.name}</span>
                             </div>
                           </th>
                         ))}
-                        <th className="px-6 py-4 text-lg font-bold text-center">
+                        <th scope="col" className="px-6 py-4 text-lg font-bold text-center">
                           Total Stock
                         </th>
                       </tr>
@@ -149,7 +156,7 @@ export default function ProductsAvailabilityPage() {
                         return (
                           <tr key={productName} className={idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                             {/* Product Name */}
-                            <td className="px-6 py-4">
+                            <th scope="row" className="px-6 py-4 text-left">
                               <div>
                                 <h3 className="mb-1 font-bold text-primary-2">{productName}</h3>
                                 {anyItem && (
@@ -161,7 +168,7 @@ export default function ProductsAvailabilityPage() {
                                   </>
                                 )}
                               </div>
-                            </td>
+                            </th>
 
                             {/* Store Columns */}
                             {storesData.map(store => {
@@ -183,7 +190,7 @@ export default function ProductsAvailabilityPage() {
                             {/* Total Stock */}
                             <td className="px-6 py-4 text-center">
                               <div className="flex gap-2 justify-center items-center">
-                                <Package size={20} className="text-primary-2" />
+                                <Package size={20} className="text-primary-2" aria-hidden="true" />
                                 <span className="text-xl font-bold text-primary-2">
                                   {totalStock}
                                 </span>
@@ -203,7 +210,7 @@ export default function ProductsAvailabilityPage() {
                     const anyItem = storesData.map(s => findItemInStore(s.id, productName)).find(item => item);
 
                     return (
-                      <div key={productName} className="p-6">
+                      <article key={productName} className="p-6">
                         {/* Product Header */}
                         <div className="mb-4">
                           <h3 className="mb-1 text-lg font-bold text-primary-2">{productName}</h3>
@@ -225,7 +232,7 @@ export default function ProductsAvailabilityPage() {
                             return (
                               <div key={store.id} className="flex justify-between items-center">
                                 <div className="flex gap-2 items-center">
-                                  <span className="text-xl">{store.icon}</span>
+                                  <span className="text-xl" aria-hidden="true">{store.icon}</span>
                                   <span className="font-medium text-gray-700">{store.name}</span>
                                 </div>
                                 {item ? (
@@ -242,11 +249,11 @@ export default function ProductsAvailabilityPage() {
                         <div className="flex justify-between items-center pt-3 border-t border-gray-200">
                           <span className="font-bold text-gray-700">Total Stock:</span>
                           <div className="flex gap-2 items-center">
-                            <Package size={20} className="text-primary-2" />
+                            <Package size={20} className="text-primary-2" aria-hidden="true" />
                             <span className="text-xl font-bold text-primary-2">{totalStock}</span>
                           </div>
                         </div>
-                      </div>
+                      </article>
                     );
                   })}
                 </div>
@@ -256,7 +263,7 @@ export default function ProductsAvailabilityPage() {
             {/* Empty State */}
             {!allLoading && productNames.length === 0 && (
               <div className="py-20 text-center">
-                <Package className="mx-auto mb-4 w-16 h-16 text-gray-400" />
+                <Package className="mx-auto mb-4 w-16 h-16 text-gray-400" aria-hidden="true" />
                 <h2 className="mb-2 text-2xl font-bold text-gray-700">No Products Found</h2>
                 <p className="text-gray-600">
                   {selectedCategory ? 'Try selecting a different category.' : 'No inventory data available.'}

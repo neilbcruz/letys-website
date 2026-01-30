@@ -1,14 +1,15 @@
-// src/pages/MultiStoreInventoryPage.tsx
+// src/pages/ProductsPage.tsx - CORRECTED WITH PROPER LOADING STATES
 import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import ProductCardWithStock from '@/components/products/ProductCardWithStock';
 import SearchInput from '@/components/ui/SearchInput';
-import { Loader2, AlertCircle, Package, Store } from 'lucide-react';
+import { Package, Store, AlertCircle, RefreshCw } from 'lucide-react';
 import { getInventoryLocations, getLocationByStoreId, formatHours } from '@/data/locations';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
+import { SkeletonGrid } from '@/components/ui';
 
 export default function ProductsPage() {
-  const STORES = getInventoryLocations(); // Only get stores with inventory API
+  const STORES = getInventoryLocations();
   
   const [selectedStore, setSelectedStore] = useState<string>(STORES[0]?.storeId || '');
   const [searchTerm, setSearchTerm] = useState('');
@@ -53,6 +54,7 @@ export default function ProductsPage() {
                   }}
                   className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-base
                     transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-1
+                    min-h-[48px]
                     ${selectedStore === store.storeId
                       ? 'bg-primary-2 text-white shadow-lg scale-105'
                       : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -69,7 +71,7 @@ export default function ProductsPage() {
             {/* Store Info Banner */}
             {currentStore && (
               <div className="flex gap-4 items-start p-4 rounded-lg bg-primary-3/10">
-                <Store className="mt-1 text-primary-2 shrink-0" size={24} />
+                <Store className="mt-1 text-primary-2 shrink-0" size={24} aria-hidden="true" />
                 <div className="flex-1">
                   <h2 className="text-lg font-bold text-primary-2">{currentStore.displayName}</h2>
                   <p className="text-sm text-gray-700">
@@ -84,7 +86,7 @@ export default function ProductsPage() {
                       href={currentStore.mapLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-medium underline text-primary-2 hover:text-primary-1"
+                      className="font-medium underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
                     >
                       Get Directions →
                     </a>
@@ -109,12 +111,17 @@ export default function ProductsPage() {
                   onSearch={setSearchTerm}
                   size="lg"
                   clearable
+                  ariaLabel="Search for products"
                 />
               </div>
 
               {/* Category Filter */}
               <div className="md:w-64">
+                <label htmlFor="category-filter" className="sr-only">
+                  Filter by category
+                </label>
                 <select
+                  id="category-filter"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className="px-4 w-full h-14 text-base bg-white rounded-lg border-2 border-gray-300 transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent"
@@ -133,10 +140,10 @@ export default function ProductsPage() {
               <button
                 onClick={refetch}
                 disabled={loading}
-                className="flex gap-2 justify-center items-center px-6 py-3 text-base btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex gap-2 justify-center items-center px-6 py-3 text-base btn-primary disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
                 aria-label="Refresh inventory"
               >
-                <Package size={20} aria-hidden="true" />
+                <RefreshCw size={20} aria-hidden="true" className={loading ? 'animate-spin' : ''} />
                 Refresh
               </button>
             </div>
@@ -148,19 +155,24 @@ export default function ProductsPage() {
       <main id="main-content">
         <section className="section-padding">
           <div className="container-width">
-            {/* Loading State */}
+            {/* Loading State with Skeleton Grid */}
             {loading && (
-              <div className="flex flex-col justify-center items-center py-20">
-                <Loader2 className="mb-4 w-12 h-12 animate-spin text-primary-2" />
-                <p className="text-lg text-gray-600">Loading inventory for {currentStore?.name}...</p>
+              <div role="status" aria-live="polite">
+                <div className="mb-6">
+                  <p className="text-lg text-center text-gray-600">
+                    Loading inventory for {currentStore?.name}...
+                  </p>
+                </div>
+                <SkeletonGrid count={8} />
+                <span className="sr-only">Loading products from {currentStore?.name}</span>
               </div>
             )}
 
             {/* Error State */}
-            {error && (
+            {error && !loading && (
               <div className="mx-auto max-w-2xl">
-                <div className="p-8 text-center bg-red-50 rounded-lg border-2 border-red-200">
-                  <AlertCircle className="mx-auto mb-4 w-12 h-12 text-red-600" />
+                <div className="p-8 text-center bg-red-50 rounded-lg border-2 border-red-200" role="alert">
+                  <AlertCircle className="mx-auto mb-4 w-12 h-12 text-red-600" aria-hidden="true" />
                   <h2 className="mb-2 text-xl font-bold text-red-800">
                     Failed to Load Inventory
                   </h2>
@@ -189,7 +201,7 @@ export default function ProductsPage() {
                         setSelectedCategory('');
                         setSearchTerm('');
                       }}
-                      className="underline transition text-primary-2 hover:text-primary-1"
+                      className="px-2 py-1 underline rounded transition text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
                     >
                       Clear All Filters
                     </button>
@@ -207,7 +219,7 @@ export default function ProductsPage() {
             {/* Empty State */}
             {!loading && !error && items.length === 0 && (
               <div className="py-20 mx-auto max-w-2xl text-center">
-                <Package className="mx-auto mb-4 w-16 h-16 text-gray-400" />
+                <Package className="mx-auto mb-4 w-16 h-16 text-gray-400" aria-hidden="true" />
                 <h2 className="mb-2 text-2xl font-bold text-gray-700">
                   No Products Found
                 </h2>

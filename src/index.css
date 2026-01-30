@@ -1,15 +1,14 @@
-@import "tailwindcss";
-
 /* 1. IMPORT FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600;700&display=swap');
-
+@import "tailwindcss";
 /* 2. THEME COLORS & FONTS */
 @theme {
-  --color-primary-1: #D4A800;
+  /* Updated WCAG AA compliant colors */
+  --color-primary-1: #C29600;
   --color-primary-2: #074621;
-  --color-primary-3: #7A9B2F;
-  --color-secondary-1: #527A35;
-  --color-secondary-2: #5C5410;
+  --color-primary-3: #6B8A28;
+  --color-secondary-1: #476C2D;
+  --color-secondary-2: #4D4A0E;
 
   --color-support-1: #FFF8E0;
   --color-support-2: #E6F0C3;
@@ -20,42 +19,41 @@
   --font-heading: 'Poppins', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 640px;
   --breakpoint-tablet: 768px;
+  --breakpoint-lg: 1024px;
   --breakpoint-desktop: 1280px;
+  --breakpoint-2xl: 1536px;
 }
 
 /* 3. BASE TYPOGRAPHY & ACCESSIBILITY */
 @layer base {
+  /* Fluid typography using clamp() */
   html {
     font-family: var(--font-body);
     color: var(--color-text);
     background-color: var(--color-bg);
+    font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
   }
 
-  /* Keyboard focus outline */
-  *:focus-visible {
-    outline: 3px solid var(--color-primary-1);
-    outline-offset: 2px;
+  h1 {
+    font-size: clamp(1.75rem, 4vw + 1rem, 3rem);
+    line-height: 1.2;
   }
 
-  /* Skip link */
-  .skip-to-main {
-    position: absolute;
-    left: -9999px;
-    z-index: 999;
-    padding: 1em;
-    background-color: var(--color-primary-2);
-    color: white;
-    text-decoration: none;
+  h2 {
+    font-size: clamp(1.5rem, 3vw + 0.75rem, 2.5rem);
+    line-height: 1.3;
   }
-  .skip-to-main:focus {
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0;
+
+  h3 {
+    font-size: clamp(1.25rem, 2vw + 0.5rem, 2rem);
+    line-height: 1.4;
   }
 
   p {
@@ -63,28 +61,232 @@
     line-height: 1.625rem;
     font-weight: 400;
   }
+
+  /* Enhanced keyboard focus outline - WCAG 2.4.7 */
+  *:focus-visible {
+    outline: 3px solid var(--color-primary-1);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(194, 150, 0, 0.2);
+    border-radius: 2px;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    *:focus-visible {
+      outline: 4px solid;
+      outline-offset: 3px;
+      box-shadow: 0 0 0 5px rgba(194, 150, 0, 0.3);
+    }
+  }
+
+  /* Skip link - WCAG 2.4.1 */
+  .skip-to-main {
+    position: absolute;
+    left: -9999px;
+    z-index: 9999;
+    padding: 1rem 1.5rem;
+    background-color: var(--color-primary-2);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0 0 0.5rem 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .skip-to-main:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+  }
+
+  /* Screen reader only utility - WCAG 1.3.1 */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only-focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
 }
 
-/* 4. UTILITIES */
-@layer components {
-  .section-padding { @apply py-16 lg:py-24; }
-  .container-width { @apply max-w-7xl mx-auto px-4 sm:px-8; }
-  .heading-primary { @apply text-3xl lg:text-4xl font-bold text-primary-2 mb-4; }
-  .heading-secondary { @apply text-2xl lg:text-3xl font-bold text-primary-2 mb-3; }
-  .card-elevated { @apply bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300; }
+/* 4. MOTION PREFERENCES - WCAG 2.3.3 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 
+  /* Keep essential feedback */
+  *:focus-visible {
+    transition: outline 0.15s ease-in-out;
+  }
+}
+
+/* 5. UTILITIES */
+@layer components {
+  .section-padding { 
+    @apply py-12 md:py-16 lg:py-24; 
+  }
+  
+  .container-width { 
+    @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8; 
+  }
+  
+  .heading-primary { 
+    @apply mb-4 text-2xl font-bold md:text-3xl lg:text-4xl text-primary-2; 
+  }
+  
+  .heading-secondary { 
+    @apply mb-3 text-xl font-bold md:text-2xl lg:text-3xl text-primary-2; 
+  }
+  
+  .card-elevated { 
+    @apply bg-white rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl; 
+  }
+
+  /* Updated button styles with better contrast */
   .btn-primary {
     @apply px-6 py-3 bg-primary-2 text-white font-bold rounded-lg 
-           hover:bg-primary-3 hover:text-primary-2 
+           hover:bg-primary-3 hover:text-white
            focus:ring-4 focus:ring-primary-1 focus:outline-none
            transition-all duration-200
-           disabled:opacity-50 disabled:cursor-not-allowed;
+           disabled:opacity-60 disabled:cursor-not-allowed
+           min-h-[44px] /* WCAG 2.5.5 - Touch target size */;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-primary-1 text-primary-2 font-bold rounded-lg 
+    @apply px-6 py-3 bg-primary-1 text-white font-bold rounded-lg 
            hover:bg-primary-2 hover:text-white 
            focus:ring-4 focus:ring-primary-3 focus:outline-none
-           transition-all duration-200;
+           transition-all duration-200
+           min-h-[44px];
+  }
+
+  /* Ensure sufficient contrast for links */
+  a:not([class]) {
+    color: var(--color-primary-2);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+  }
+
+  a:not([class]):hover {
+    color: var(--color-primary-3);
+  }
+}
+
+/* 6. PRINT STYLES */
+@media print {
+  /* Hide non-essential elements */
+  .no-print,
+  header,
+  footer,
+  nav,
+  button:not(.print-show) {
+    display: none !important;
+  }
+  
+  /* Optimize for print */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+  
+  /* Show URLs for links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+  
+  /* Prevent page breaks inside elements */
+  .card-elevated,
+  article,
+  section {
+    page-break-inside: avoid;
+  }
+  
+  /* Add page breaks where needed */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+/* 7. DARK MODE SUPPORT (Optional - for future implementation) */
+@media (prefers-color-scheme: dark) {
+  /* Uncomment when implementing dark mode
+  :root {
+    --color-bg: #1F2937;
+    --color-text: #F9FAFB;
+  }
+  */
+}
+
+/* 8. LOADING STATES */
+@layer components {
+  .skeleton {
+    @apply bg-gray-200 rounded animate-pulse;
+  }
+
+  .skeleton-text {
+    @apply h-4 bg-gray-200 rounded;
+  }
+
+  .skeleton-heading {
+    @apply h-6 bg-gray-200 rounded;
+  }
+
+  .skeleton-image {
+    @apply bg-gray-200 rounded aspect-square;
+  }
+}
+
+/* 9. FORM ACCESSIBILITY */
+@layer components {
+  /* Error states with sufficient contrast */
+  .input-error {
+    @apply border-red-600 focus:ring-red-500;
+  }
+
+  .error-message {
+    @apply mt-1 text-sm font-medium text-red-700;
+  }
+
+  /* Success states */
+  .input-success {
+    @apply border-green-600 focus:ring-green-500;
+  }
+
+  .success-message {
+    @apply mt-1 text-sm font-medium text-green-700;
+  }
+
+  /* Required field indicator */
+  .required::after {
+    content: " *";
+    color: #DC2626;
+    font-weight: bold;
   }
 }
