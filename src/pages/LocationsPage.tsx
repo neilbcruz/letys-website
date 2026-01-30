@@ -13,7 +13,7 @@ import LocationsMap from '@/components/ui/LocationsMap';
 import StockBadge from '@/components/ui/StockBadge';
 import { MapPin, Clock, ExternalLink, Package, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
+import HeroBanner from '@/components/ui/HeroBanner';
 import { SEOHead, LocationSchema, useGoogleAnalytics } from '@/components/seo';
 import { PageSection, PageSectionContent, PageSectionGrid, InventoryCTA } from '@/components/layout';
 
@@ -167,7 +167,8 @@ export default function LocationsPage() {
       ))}
 
       {/* Header */}
-      <PageHeroNarrow
+      <HeroBanner
+        variant="narrow"
         title="Our Locations"
         subtitle="Visit us at any of our convenient branches"
         icon={<MapPin size={32} aria-hidden="true" />}

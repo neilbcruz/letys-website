@@ -4,11 +4,9 @@
  * Export all layout components for convenient importing
  */
 
-export { default as PageHeroNarrow } from './PageHeroNarrow';
 export { default as PageHeader } from './PageHeader';
 export { default as PageFooter } from './PageFooter';
 export { default as ModalMenu } from './ModalMenu';
-export { default as Hamburger } from './Hamburger';
 
 // New reusable components
 export { default as PageSection, PageSectionContent, PageSectionGrid } from './PageSection';
@@ -22,3 +20,6 @@ export {
   NoteBanner,
   CompactBanner,
 } from './InfoBanner';
+
+// Re-export HeroBanner for convenience (actual implementation in @/components/ui/HeroBanner)
+export { default as HeroBanner } from '@/components/ui/HeroBanner';

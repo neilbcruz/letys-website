@@ -5,8 +5,8 @@ import ProductCardWithStock from '@/components/products/ProductCardWithStock';
 import SearchInput from '@/components/ui/SearchInput';
 import { Package, Store, RefreshCw } from 'lucide-react';
 import { getInventoryLocations, getLocationByStoreId, formatHours } from '@/data/locations';
-import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
-import { SkeletonGrid } from '@/components/ui';
+import HeroBanner from '@/components/ui/HeroBanner';
+import { LoadingGrid } from '@/components/ui/LoadingStates';
 import { SEOHead, ProductsSchema, useGoogleAnalytics } from '@/components/seo';
 import { ErrorState, EmptyState, InfoBanner } from '@/components/layout';
 
@@ -63,7 +63,8 @@ export default function ProductsPage() {
       <ProductsSchema />
 
       {/* Header */}
-      <PageHeroNarrow
+      <HeroBanner
+        variant="narrow"
         title="Store Inventory"
         subtitle="Browse our current stock across all locations"
         icon={<Package size={32} aria-hidden="true" />}
@@ -191,7 +192,7 @@ export default function ProductsPage() {
                     Loading inventory for {currentStore?.name}...
                   </p>
                 </div>
-                <SkeletonGrid count={8} />
+                <LoadingGrid count={8} />
                 <span className="sr-only">Loading products from {currentStore?.name}</span>
               </div>
             )}

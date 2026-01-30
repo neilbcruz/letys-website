@@ -1,4 +1,4 @@
-import PageHero from '@/components/home/PageHero';
+import HeroBanner from '@/components/ui/HeroBanner';
 import PageBody from '@/components/home/PageBody';
 import { SkipLinks } from '@/components/accessibility';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
@@ -13,7 +13,7 @@ export default function HomePage() {
       <FAQSchema />
       <SkipLinks />
       <div className="w-full">
-        <PageHero />
+        <HeroBanner variant="full" />
         <PageBody />
       </div>
     </ErrorBoundary>

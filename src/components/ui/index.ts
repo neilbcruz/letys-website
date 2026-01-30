@@ -10,5 +10,5 @@ export { default as SearchInput } from './SearchInput';
 export { default as SelectPicker } from './SelectPicker';
 export { default as LocationsMap } from './LocationsMap';
 
-// Re-export everything from Skeleton folder
-export * from './Skeleton';
+// Export loading state components
+export * from './LoadingStates';

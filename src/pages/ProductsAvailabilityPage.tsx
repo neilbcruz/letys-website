@@ -5,7 +5,7 @@ import StockBadge from '@/components/ui/StockBadge';
 import { formatPrice, type StoreItem } from '@/services/graphql';
 import { getInventoryLocations } from '@/data/locations';
 import { TrendingUp, Package } from 'lucide-react';
-import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
+import HeroBanner from '@/components/ui/HeroBanner';
 import { LoadingSpinner } from '@/components/ui/';
 import { SEOHead, useGoogleAnalytics } from '@/components/seo';
 import { InlineErrorState, EmptyState } from '@/components/layout';
@@ -71,7 +71,8 @@ export default function ProductsAvailabilityPage() {
       {/* ProductsSchema commented out - component not found */}
 
       {/* Header */}
-      <PageHeroNarrow
+      <HeroBanner
+        variant="narrow"
         title="Store Availability"
         subtitle="Compare inventory across all locations"
         icon={<TrendingUp size={32} aria-hidden="true" />}

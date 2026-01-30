@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
-import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
+import HeroBanner from '@/components/ui/HeroBanner';
 import { SEOHead, FAQSchema } from '@/components/seo';
 import { PageSection, ContactCTA } from '@/components/layout';
 
@@ -55,7 +55,8 @@ export default function FaqPage() {
       <FAQSchema />
 
       {/* Header */}
-      <PageHeroNarrow
+      <HeroBanner
+        variant="narrow"
         title="Frequently Asked Questions"
         subtitle="Find answers to common questions about Lety's Buko Pie"
         icon={<HelpCircle size={32} aria-hidden="true" />}

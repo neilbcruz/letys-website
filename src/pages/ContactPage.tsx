@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import emailjs from 'emailjs-com';
 import { Mail, MessageCircle, Send, CheckCircle, AlertCircle } from 'lucide-react';
-import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
+import HeroBanner from '@/components/ui/HeroBanner';
 import { SEOHead, useGoogleAnalytics } from '@/components/seo';
 import { PageSection, PageSectionGrid } from '@/components/layout';
 
@@ -46,7 +46,8 @@ export default function ContactPage() {
       <SEOHead pageKey="contact" />
 
       {/* Header */}
-      <PageHeroNarrow
+      <HeroBanner
+        variant="narrow"
         title="Contact Us"
         subtitle="We'd love to hear from you!"
         icon={<Mail size={32} aria-hidden="true" />}
