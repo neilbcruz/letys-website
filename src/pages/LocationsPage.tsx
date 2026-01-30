@@ -1,4 +1,4 @@
-// src/pages/LocationsPage.tsx
+// src/pages/LocationsPage.tsx - FIXED VERSION
 import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import { 
@@ -9,7 +9,7 @@ import {
   type Location 
 } from '@/data/locations';
 import { IMAGE_MAP, type ImageSet } from '@/lib/images';
-import LocationsMap from '@/components/ui/LocationMap';
+import LocationsMap from '@/components/ui/LocationsMap';
 import StockBadge from '@/components/ui/StockBadge';
 import { MapPin, Clock, ExternalLink, Package, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -19,10 +19,12 @@ const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const DAY_KEYS: (keyof Location['hours'])[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
 function LocationInventoryPreview({ location }: { location: Location }) {
+  // FIXED: Filter to only show "Main Products" category
   const { items, loading } = useStoreItems({
     storeName: location.storeId,
     pageNumber: 1,
-    pageSize: 5, // Just show top 5 items
+    pageSize: 5,
+    category: 'Main Products', // Filter to Main Products only
   });
 
   if (!location.hasInventoryAPI) {
@@ -47,7 +49,7 @@ function LocationInventoryPreview({ location }: { location: Location }) {
   if (items.length === 0) {
     return (
       <div className="p-4 mt-4 bg-gray-50 rounded-lg border border-gray-200">
-        <p className="text-sm text-gray-600">No inventory data available</p>
+        <p className="text-sm text-gray-600">No main products available</p>
       </div>
     );
   }
@@ -66,7 +68,7 @@ function LocationInventoryPreview({ location }: { location: Location }) {
         <div className="flex justify-between items-center mb-3">
           <h4 className="flex gap-2 items-center font-bold text-primary-2">
             <Package size={18} />
-            Inventory Status
+            Main Products Status
           </h4>
           <Link
             to="/availability"
@@ -94,7 +96,7 @@ function LocationInventoryPreview({ location }: { location: Location }) {
 
       {/* Top Items Preview */}
       <div className="p-4 bg-white rounded-lg border border-gray-200">
-        <h5 className="mb-2 text-sm font-bold text-gray-800">Sample Products</h5>
+        <h5 className="mb-2 text-sm font-bold text-gray-800">Available Main Products</h5>
         <div className="space-y-2">
           {items.slice(0, 5).map(item => (
             <div key={item.itemId} className="flex justify-between items-center text-sm">
@@ -151,8 +153,8 @@ export default function LocationsPage() {
         icon={<MapPin size={32} aria-hidden="true" />}
       />
 
-      {/* Map Section */}
-      <section className="bg-white section-padding">
+      {/* Map Section - FIXED: Added z-10 to keep it below header */}
+      <section className="relative z-10 bg-white section-padding">
         <div className="container-width">
           <h2 className="mb-8 text-center heading-secondary">Find Us on the Map</h2>
           <div className="overflow-hidden rounded-2xl shadow-xl" role="region" aria-label="Interactive map of store locations">
@@ -178,7 +180,7 @@ export default function LocationsPage() {
               />
               <span className="flex gap-2 items-center font-medium text-gray-800">
                 <Package size={20} className="text-primary-2" />
-                Show inventory status for each location
+                Show main products inventory for each location
               </span>
             </label>
           </div>

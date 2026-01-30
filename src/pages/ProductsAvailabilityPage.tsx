@@ -9,7 +9,7 @@ import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
 
 export default function ProductsAvailabilityPage() {
   const STORES = getInventoryLocations();
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('Main Products');
 
   // Fetch items from all stores with inventory
   const storesData = STORES.map(location => ({
