@@ -11,7 +11,7 @@ export default function PageHero() {
         )}
         <img
           src={IMAGES.HERO.default}
-          alt="Hero"
+          alt="Lety's Buko Pie storefront with招牌sign and entrance"
           className="w-full h-full object-cover"
           loading="eager"
         />

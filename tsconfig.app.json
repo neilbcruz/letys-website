@@ -23,9 +23,22 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
+    "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noImplicitOverride": true
+    // Note: Disabled for compatibility with existing code:
+    // - exactOptionalPropertyTypes: true (too strict for optional props pattern)
+    // - noPropertyAccessFromIndexSignature: true (breaks import.meta.env access)
+    // - noUncheckedIndexedAccess: true (requires many null checks)
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/scripts/**/*"]
 }

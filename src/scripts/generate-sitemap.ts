@@ -5,8 +5,70 @@
  */
 
 import { writeFileSync } from 'fs';
-import { LOCATIONS } from '../data/locations';
-import { PRODUCT_DATA } from '../data/products';
+
+// Simple data extraction for sitemap generation
+// This avoids path alias resolution issues with tsx
+const LOCATIONS = [
+  {
+    id: 'main',
+    name: 'Main Store',
+    address: ["Lety's Buko Pie, National Road,", "Barangay Anos, Los Baños, Laguna"],
+    coords: { lat: 14.181547, lng: 121.230956 },
+    image: "location-main",
+  },
+  {
+    id: 'shell',
+    name: 'Shell Branch',
+    address: ["56JH+HPC, National Hwy,", "Barangay Anos, Los Baños, Laguna"],
+    coords: { lat: 14.181495, lng: 121.229211 },
+    image: "location-shell",
+  },
+  {
+    id: 'agapita',
+    name: 'Agapita Branch',
+    address: ["Lety's Buko Pie, Agapita Plaza,", "Barangay Umali, Los Baños, Laguna"],
+    coords: { lat: 14.172584, lng: 121.243385 },
+    image: "location-agapita",
+  },
+  {
+    id: 'pansol',
+    name: 'Pansol Branch',
+    address: ["Lety's Buko Pie, Pansol,", "Calamba City, Laguna"],
+    coords: { lat: 14.181741, lng: 121.178139 },
+    image: "location-pansol",
+  }
+];
+
+const PRODUCT_DATA: ProductCategory[] = [
+  {
+    id: 'specialty',
+    title: 'Specialties',
+    items: [
+      { name: "Buko Pie", image: "buko_pie-3" },
+      { name: "Pineapple Pie", image: "pineapple_pie-3" },
+      { name: "Buko Pineapple Pie", image: "bp_pie-1" },
+      { name: "Frozen Buko Pie", image: "frozen_pie-1" },
+    ]
+  },
+  {
+    id: 'bakedgoods',
+    title: 'Baked Goods',
+    items: [
+      { name: "Cassava Cake", image: "cassava-3" },
+      { name: "Banana Bread" },
+      { name: "Carrot Cake" },
+    ]
+  },
+  {
+    id: 'pasalubong',
+    title: 'Pasalubongs',
+    items: [
+      { name: "Apas" },
+      { name: "Banana Chips" },
+      { name: "Broas in Can" },
+    ]
+  }
+];
 
 const SITE_URL = 'https://letysbukopie.com';
 
@@ -14,7 +76,7 @@ interface SitemapURL {
   url: string;
   changefreq: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
   priority: number;
-  lastmod?: string;
+  lastmod: string;
   images?: SitemapImage[];
 }
 
@@ -23,7 +85,17 @@ interface SitemapImage {
   caption?: string;
   title?: string;
   geo_location?: string;
-  license?: string;
+}
+
+interface ProductItem {
+  name: string;
+  image?: string;
+}
+
+interface ProductCategory {
+  id: string;
+  title: string;
+  items: ProductItem[];
 }
 
 /**
@@ -194,6 +266,4 @@ export function generateSitemap(outputPath: string = './public/sitemap.xml') {
 }
 
 // Run if executed directly
-if (require.main === module) {
-  generateSitemap();
-}
+generateSitemap();

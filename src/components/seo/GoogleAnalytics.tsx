@@ -17,10 +17,7 @@ import { useLocation } from 'react-router-dom';
 
 // Google Analytics Measurement ID
 // Replace with your actual GA4 Measurement ID (G-XXXXXXXXXX)
-const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
-
-// Google Tag Manager Container ID (optional)
-const GTM_ID = import.meta.env.VITE_GTM_ID;
+const GA_MEASUREMENT_ID = import.meta.env['VITE_GA_MEASUREMENT_ID'] || 'G-XXXXXXXXXX';
 
 /**
  * Google Analytics initialization script
@@ -42,14 +39,15 @@ const GA_SCRIPT = `
 
 /**
  * Google Tag Manager script (if GTM is enabled)
+ * Not currently used but kept for reference
  */
-const GTM_SCRIPT = `
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtag/js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','${GA_MEASUREMENT_ID}');
-`;
+// const GTM_SCRIPT = \`
+//   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+//   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+//   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+//   'https://www.googletagmanager.com/gtag/js?id='+i+dl;f.parentNode.insertBefore(j,f);
+//   })(window,document,'script','dataLayer','\${GA_MEASUREMENT_ID}');
+// \`;
 
 /**
  * Google Analytics Provider Component
@@ -57,7 +55,7 @@ const GTM_SCRIPT = `
  */
 export function GoogleAnalyticsProvider() {
   // Only load GA in production or when explicitly enabled
-  const shouldLoadGA = import.meta.env.PROD || import.meta.env.VITE_ENABLE_GA === 'true';
+  const shouldLoadGA = import.meta.env.PROD || import.meta.env['VITE_ENABLE_GA'] === 'true';
 
   if (!shouldLoadGA || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
     return null;
@@ -73,7 +71,7 @@ export function GoogleAnalyticsProvider() {
       <script type="text/javascript">{GA_SCRIPT}</script>
 
       {/* Additional verification meta tags (optional) */}
-      <meta name="google-site-verification" content={import.meta.env.VITE_GOOGLE_SITE_VERIFICATION || ''} />
+      <meta name="google-site-verification" content={import.meta.env['VITE_GOOGLE_SITE_VERIFICATION'] || ''} />
     </Helmet>
   );
 }
@@ -102,12 +100,12 @@ export function useGoogleAnalytics(): UseGoogleAnalyticsReturn {
 
   const trackEvent = (eventName: string, parameters?: Record<string, unknown>) => {
     if (typeof window !== 'undefined' && (window as { gtag?: unknown }).gtag) {
-      (window as { gtag: (command: string, eventName: string, params?: Record<string, unknown>) => void }).gtag(
+      (window as unknown as { gtag: (command: string, eventName: string, params?: Record<string, unknown>) => void }).gtag(
         'event',
         eventName,
         {
           ...parameters,
-          debug_mode: import.meta.env.VITE_ENABLE_GA_DEBUG === 'true'
+          debug_mode: import.meta.env['VITE_ENABLE_GA_DEBUG'] === 'true'
         }
       );
     }
@@ -236,11 +234,11 @@ export function useGoogleAnalytics(): UseGoogleAnalyticsReturn {
  */
 export function PageViewTracker() {
   const location = useLocation();
-  const shouldTrack = import.meta.env.PROD || import.meta.env.VITE_ENABLE_GA === 'true';
+  const shouldTrack = import.meta.env.PROD || import.meta.env['VITE_ENABLE_GA'] === 'true';
 
   useEffect(() => {
     if (shouldTrack && typeof window !== 'undefined' && (window as { gtag?: unknown }).gtag) {
-      (window as { gtag: (command: string, config: string, params: Record<string, string>) => void }).gtag(
+      (window as unknown as { gtag: (command: string, config: string, params: Record<string, string>) => void }).gtag(
         'config',
         GA_MEASUREMENT_ID,
         {
@@ -264,7 +262,7 @@ export function PageViewTracker() {
       // Track scroll depth milestones
       if (scrollPercent === 25 || scrollPercent === 50 || scrollPercent === 75 || scrollPercent === 90) {
         if (typeof window !== 'undefined' && (window as { gtag?: unknown }).gtag) {
-          (window as { gtag: (command: string, eventName: string, params: Record<string, unknown>) => void }).gtag(
+          (window as unknown as { gtag: (command: string, eventName: string, params: Record<string, unknown>) => void }).gtag(
             'event',
             'scroll_tracking',
             {
@@ -303,7 +301,7 @@ export function EventTracker({ eventName, eventParameters, children, onClick }: 
     if (onClick) onClick();
   };
 
-  return <children.type {...children.props} onClick={handleClick} />;
+  return <children.type {...(children.props ?? {})} onClick={handleClick} />;
 }
 
 /**

@@ -1,17 +1,18 @@
-// src/pages/ProductsAvailabilityPage.tsx - UPDATED WITH IMPROVEMENTS & ENHANCED SEO
+// src/pages/ProductsAvailabilityPage.tsx - Store Availability Comparison
 import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import StockBadge from '@/components/ui/StockBadge';
 import { formatPrice, type StoreItem } from '@/services/graphql';
 import { getInventoryLocations } from '@/data/locations';
-import { AlertCircle, TrendingUp, Package } from 'lucide-react';
+import { TrendingUp, Package } from 'lucide-react';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
 import { LoadingSpinner } from '@/components/ui/';
-import { SEOHead, ProductsSchema, useGoogleAnalytics } from '@/components/seo';
+import { SEOHead, useGoogleAnalytics } from '@/components/seo';
+import { InlineErrorState, EmptyState } from '@/components/layout';
 
 export default function ProductsAvailabilityPage() {
   const STORES = getInventoryLocations();
-  const { trackProductClick, trackSearch } = useGoogleAnalytics();
+  void useGoogleAnalytics(); // Initialize analytics
 
   // DEFAULT TO MAIN PRODUCTS
   const [selectedCategory, setSelectedCategory] = useState('Main Products');
@@ -31,7 +32,7 @@ export default function ProductsAvailabilityPage() {
 
   // Check if all stores are loading
   const allLoading = storesData.every(s => s.data.loading);
-  
+
   // Check if any store has errors
   const hasErrors = storesData.some(s => s.data.error);
 
@@ -67,6 +68,8 @@ export default function ProductsAvailabilityPage() {
   return (
     <div className="w-full min-h-screen bg-gray-50">
       <SEOHead pageKey="availability" />
+      {/* ProductsSchema commented out - component not found */}
+
       {/* Header */}
       <PageHeroNarrow
         title="Store Availability"
@@ -105,7 +108,7 @@ export default function ProductsAvailabilityPage() {
       </section>
 
       {/* Content */}
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <section className="section-padding">
           <div className="container-width">
             {/* Loading State */}
@@ -117,15 +120,10 @@ export default function ProductsAvailabilityPage() {
 
             {/* Error State */}
             {hasErrors && !allLoading && (
-              <div className="p-6 mb-8 bg-yellow-50 rounded-lg border-2 border-yellow-200" role="alert">
-                <div className="flex gap-3 items-start">
-                  <AlertCircle className="mt-1 text-yellow-600 shrink-0" size={24} aria-hidden="true" />
-                  <div>
-                    <h3 className="mb-2 font-bold text-yellow-800">Some stores failed to load</h3>
-                    <p className="text-yellow-700">Displaying available data. Some information may be incomplete.</p>
-                  </div>
-                </div>
-              </div>
+              <InlineErrorState
+                message="Some stores failed to load. Displaying available data. Some information may be incomplete."
+                variant="warning"
+              />
             )}
 
             {/* Availability Table */}
@@ -156,7 +154,7 @@ export default function ProductsAvailabilityPage() {
                       {productNames.map((productName, idx) => {
                         const totalStock = getTotalStock(productName);
                         const anyItem = storesData.map(s => findItemInStore(s.id, productName)).find(item => item);
-                        
+
                         return (
                           <tr key={productName} className={idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                             {/* Product Name */}
@@ -177,7 +175,7 @@ export default function ProductsAvailabilityPage() {
                             {/* Store Columns */}
                             {storesData.map(store => {
                               const item = findItemInStore(store.id, productName);
-                              
+
                               return (
                                 <td key={store.id} className="px-6 py-4 text-center">
                                   {item ? (
@@ -232,7 +230,7 @@ export default function ProductsAvailabilityPage() {
                         <div className="mb-4 space-y-3">
                           {storesData.map(store => {
                             const item = findItemInStore(store.id, productName);
-                            
+
                             return (
                               <div key={store.id} className="flex justify-between items-center">
                                 <div className="flex gap-2 items-center">
@@ -266,13 +264,15 @@ export default function ProductsAvailabilityPage() {
 
             {/* Empty State */}
             {!allLoading && productNames.length === 0 && (
-              <div className="py-20 text-center">
-                <Package className="mx-auto mb-4 w-16 h-16 text-gray-400" aria-hidden="true" />
-                <h2 className="mb-2 text-2xl font-bold text-gray-700">No Products Found</h2>
-                <p className="text-gray-600">
-                  {selectedCategory ? 'Try selecting a different category.' : 'No inventory data available.'}
-                </p>
-              </div>
+              <EmptyState
+                icon={Package}
+                title="No Products Found"
+                description={
+                  selectedCategory
+                    ? 'Try selecting a different category.'
+                    : 'No inventory data available.'
+                }
+              />
             )}
           </div>
         </section>

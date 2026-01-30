@@ -34,25 +34,25 @@ export interface PageMeta {
  * Base URL for the website
  * Uses environment variable or falls back to production URL
  */
-export const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://letysbukopie.com';
+export const SITE_URL = import.meta.env['VITE_SITE_URL'] || 'https://letysbukopie.com';
 
 /**
  * Social media handles from environment
  */
 export const SOCIAL_HANDLES = {
-  facebook: import.meta.env.VITE_FACEBOOK_PAGE_ID || 'letysbukopie',
-  instagram: import.meta.env.VITE_INSTAGRAM_HANDLE || 'letysbukopie',
-  twitter: import.meta.env.VITE_TWITTER_HANDLE || 'letysbukopie'
+  facebook: import.meta.env['VITE_FACEBOOK_PAGE_ID'] || 'letysbukopie',
+  instagram: import.meta.env['VITE_INSTAGRAM_HANDLE'] || 'letysbukopie',
+  twitter: import.meta.env['VITE_TWITTER_HANDLE'] || 'letysbukopie'
 };
 
 /**
  * Business information from environment
  */
 export const BUSINESS_INFO = {
-  phone: import.meta.env.VITE_BUSINESS_PHONE || '+63-917-123-4567',
-  email: import.meta.env.VITE_BUSINESS_EMAIL || 'hello@letysbukopie.com',
-  foundingYear: import.meta.env.VITE_BUSINESS_FOUNDING_YEAR || '1997',
-  priceRange: import.meta.env.VITE_BUSINESS_PRICE_RANGE || '$$'
+  phone: import.meta.env['VITE_BUSINESS_PHONE'] || '+63-917-123-4567',
+  email: import.meta.env['VITE_BUSINESS_EMAIL'] || 'hello@letysbukopie.com',
+  foundingYear: import.meta.env['VITE_BUSINESS_FOUNDING_YEAR'] || '1997',
+  priceRange: import.meta.env['VITE_BUSINESS_PRICE_RANGE'] || '$$'
 };
 
 /**
@@ -276,8 +276,8 @@ export function formatOpeningHoursForSD(
 
   // Check if all days have the same hours
   const allHours = Object.entries(hours);
-  const firstHours = allHours[0][1];
-  const allSame = allHours.every(([, h]) => h[0] === firstHours[0] && h[1] === firstHours[1]);
+  const firstHours = allHours[0]?.[1];
+  const allSame = allHours.every(([, h]) => h?.[0] === firstHours?.[0] && h?.[1] === firstHours?.[1]);
 
   if (allSame) {
     result.push(`Mo-Su ${firstHours[0]}-${firstHours[1]}`);

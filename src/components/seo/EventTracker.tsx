@@ -3,7 +3,7 @@
  * Provides easy-to-use wrappers for tracking user interactions
  */
 
-import { MouseEvent, KeyboardEvent } from 'react';
+import type { MouseEvent, KeyboardEvent } from 'react';
 import { useGoogleAnalytics } from './GoogleAnalytics';
 
 interface TrackClickOptions {

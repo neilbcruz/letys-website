@@ -193,19 +193,19 @@ export function getStoreDisplayName(storeId: string): string {
  */
 export function formatHours(hours: Location['hours'], day?: keyof Location['hours']): string {
   if (day) {
-    const [open, close] = hours[day];
+    const [open, close] = hours[day] ?? ['00:00', '00:00'];
     return formatTimeRange(open, close);
   }
-  
+
   // Check if all days have same hours
   const allHours = Object.values(hours);
-  const firstHours = allHours[0].join('-');
-  const allSame = allHours.every(h => h.join('-') === firstHours);
-  
-  if (allSame) {
-    return `${formatTimeRange(hours.mon[0], hours.mon[1])} Daily`;
+  const firstHours = allHours[0]?.join('-');
+  const allSame = allHours.every(h => h?.join('-') === firstHours);
+
+  if (allSame && firstHours) {
+    return `${formatTimeRange(hours.mon[0] ?? '00:00', hours.mon[1] ?? '00:00')} Daily`;
   }
-  
+
   return 'See schedule for details';
 }
 

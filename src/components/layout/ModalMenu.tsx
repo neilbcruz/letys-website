@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { Dialog, Transition, TransitionChild, DialogPanel, DialogTitle } from '@headlessui/react';
 import { Fragment } from 'react';
 import { NAV_ITEMS } from '@/data/navItems';
+import { FocusTrap } from '@/components/accessibility';
 
 interface ModalMenuProps {
   isOpen: boolean;
@@ -41,6 +42,7 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
             leaveTo="opacity-0 scale-95"
           >
             <DialogPanel className="overflow-hidden relative p-6 w-full max-w-sm text-center bg-white rounded-xl shadow-2xl transition-all transform">
+              <FocusTrap active={isOpen}>
               <DialogTitle 
                 as="h2" 
                 className="mb-6 text-2xl font-bold text-primary-2"
@@ -49,7 +51,7 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
               </DialogTitle>
               
               {/* Navigation Links */}
-              <nav className="flex flex-col gap-3" aria-label="Mobile navigation">
+              <nav id="mobile-navigation" className="flex flex-col gap-3" aria-label="Mobile navigation">
                 {NAV_ITEMS.map(item => (
                   <NavLink
                     key={item.path}
@@ -78,6 +80,7 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
               >
                 Close Menu
               </button>
+              </FocusTrap>
             </DialogPanel>
           </TransitionChild>
         </div>

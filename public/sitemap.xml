@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://letysbukopie.com/</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/products</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/availability</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/locations</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/locations#main</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://letysbukopie.com/images/location-main.jpg</image:loc>
+      <image:caption>Lety&apos;s Buko Pie Main Store - Lety&apos;s Buko Pie, National Road,, Barangay Anos, Los Baños, Laguna</image:caption>
+      <image:title>Main Store Storefront</image:title>
+      <image:geo_location>Lety&apos;s Buko Pie, National Road,, Barangay Anos, Los Baños, Laguna</image:geo_location>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/locations#shell</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://letysbukopie.com/images/location-shell.jpg</image:loc>
+      <image:caption>Lety&apos;s Buko Pie Shell Branch - 56JH+HPC, National Hwy,, Barangay Anos, Los Baños, Laguna</image:caption>
+      <image:title>Shell Branch Storefront</image:title>
+      <image:geo_location>56JH+HPC, National Hwy,, Barangay Anos, Los Baños, Laguna</image:geo_location>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/locations#agapita</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://letysbukopie.com/images/location-agapita.jpg</image:loc>
+      <image:caption>Lety&apos;s Buko Pie Agapita Branch - Lety&apos;s Buko Pie, Agapita Plaza,, Barangay Umali, Los Baños, Laguna</image:caption>
+      <image:title>Agapita Branch Storefront</image:title>
+      <image:geo_location>Lety&apos;s Buko Pie, Agapita Plaza,, Barangay Umali, Los Baños, Laguna</image:geo_location>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/locations#pansol</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://letysbukopie.com/images/location-pansol.jpg</image:loc>
+      <image:caption>Lety&apos;s Buko Pie Pansol Branch - Lety&apos;s Buko Pie, Pansol,, Calamba City, Laguna</image:caption>
+      <image:title>Pansol Branch Storefront</image:title>
+      <image:geo_location>Lety&apos;s Buko Pie, Pansol,, Calamba City, Laguna</image:geo_location>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/faq</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/contact</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/products#specialty</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://letysbukopie.com/images/buko_pie-3.jpg</image:loc>
+      <image:caption>Buko Pie - Specialties from Lety&apos;s Buko Pie</image:caption>
+      <image:title>Buko Pie</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://letysbukopie.com/images/pineapple_pie-3.jpg</image:loc>
+      <image:caption>Pineapple Pie - Specialties from Lety&apos;s Buko Pie</image:caption>
+      <image:title>Pineapple Pie</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://letysbukopie.com/images/bp_pie-1.jpg</image:loc>
+      <image:caption>Buko Pineapple Pie - Specialties from Lety&apos;s Buko Pie</image:caption>
+      <image:title>Buko Pineapple Pie</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://letysbukopie.com/images/frozen_pie-1.jpg</image:loc>
+      <image:caption>Frozen Buko Pie - Specialties from Lety&apos;s Buko Pie</image:caption>
+      <image:title>Frozen Buko Pie</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/products#bakedgoods</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://letysbukopie.com/images/cassava-3.jpg</image:loc>
+      <image:caption>Cassava Cake - Baked Goods from Lety&apos;s Buko Pie</image:caption>
+      <image:title>Cassava Cake</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://letysbukopie.com/products#pasalubong</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

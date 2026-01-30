@@ -11,7 +11,7 @@
  */
 
 import { Helmet } from 'react-helmet-async';
-import { PageMeta, generateMetaTags, getPageMeta, SITE_URL } from '@/lib/seo';
+import { type PageMeta, generateMetaTags, getPageMeta, SITE_URL } from '@/lib/seo';
 
 interface SEOHeadProps {
   pageKey: string;

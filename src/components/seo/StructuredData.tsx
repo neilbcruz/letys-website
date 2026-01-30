@@ -13,7 +13,7 @@ import { Helmet } from 'react-helmet-async';
 import { LOCATIONS } from '@/data/locations';
 import { PRODUCT_DATA } from '@/data/products';
 import { FAQ_ITEMS } from '@/pages/FaqPage';
-import { formatAddressForSD, formatOpeningHoursForSD, SITE_URL } from '@/lib/seo';
+import { SITE_URL } from '@/lib/seo';
 
 interface StructuredDataProps {
   type?: 'localbusiness' | 'products' | 'faqpage' | 'all';

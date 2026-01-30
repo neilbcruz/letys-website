@@ -6,11 +6,13 @@ import { siFacebook, siGmail } from 'simple-icons';
 interface PageFooterProps {
   facebookUrl?: string;
   email?: string;
+  id?: string;
 }
 
 export default function PageFooter({
   email = 'hello@letysbukopie.com',
   facebookUrl = 'https://www.facebook.com/letysbukopie/',
+  id,
 }: PageFooterProps) {
   const newTab = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -19,7 +21,7 @@ export default function PageFooter({
   const iconClasses = 'w-10 sm:w-12 h-auto cursor-pointer text-white hover:text-primary-1 transition-colors';
 
   return (
-    <footer className="bg-primary-2 text-white" role="contentinfo">
+    <footer id={id} className="bg-primary-2 text-white" role="contentinfo">
       <div className="container-width">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-8 gap-6 sm:gap-0">
           {/* Left Side */}

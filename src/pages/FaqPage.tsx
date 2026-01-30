@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
-import { ChevronDown, MessageCircle, HelpCircle } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
 import { SEOHead, FAQSchema } from '@/components/seo';
+import { PageSection, ContactCTA } from '@/components/layout';
 
 export const FAQ_ITEMS = [
   {
@@ -52,6 +53,7 @@ export default function FaqPage() {
     <div className="w-full min-h-screen bg-gray-50">
       <SEOHead pageKey="faq" />
       <FAQSchema />
+
       {/* Header */}
       <PageHeroNarrow
         title="Frequently Asked Questions"
@@ -60,84 +62,60 @@ export default function FaqPage() {
       />
 
       {/* FAQ Content */}
-      <main id="main-content">
-        <section className="section-padding">
-          <div className="container-width">
-            <div className="mx-auto max-w-4xl">
-              <div className="mb-12 text-center">
-                <h2 className="mb-4 text-2xl font-bold lg:text-3xl text-primary-2">
-                  Everything You Need to Know
-                </h2>
-                <p className="text-lg text-gray-600">
-                  Can't find what you're looking for? Feel free to reach out to us directly!
-                </p>
-              </div>
+      <main id="main-content" tabIndex={-1}>
+        <PageSection>
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-12 text-center">
+              <h2 className="mb-4 text-2xl font-bold lg:text-3xl text-primary-2">
+                Everything You Need to Know
+              </h2>
+              <p className="text-lg text-gray-600">
+                Can't find what you're looking for? Feel free to reach out to us directly!
+              </p>
+            </div>
 
-              <div className="grid gap-6">
-                {FAQ_ITEMS.map((item, index) => (
-                  <Disclosure key={index} as="div">
-                    {({ open }) => (
-                      <div className="overflow-hidden card-elevated">
-                        <DisclosureButton 
-                          className="flex justify-between items-center p-6 w-full text-left transition hover:bg-primary-3/10 focus:outline-none focus:ring-4 focus:ring-primary-1"
-                          aria-expanded={open}
-                          aria-controls={`faq-answer-${index}`}
-                        >
-                          <span className="pr-4 text-lg font-bold lg:text-xl text-primary-2">
-                            {item.question}
-                          </span>
-                          <ChevronDown 
-                            className={`w-6 h-6 text-primary-2 transition-transform duration-200 shrink-0 ${
-                              open ? 'rotate-180' : ''}`}
-                            aria-hidden="true"
-                          />
-                        </DisclosureButton>
-                        <DisclosurePanel 
-                          className="p-6 pt-0 bg-white"
-                          id={`faq-answer-${index}`}
-                        >
-                          <div className="py-2 pl-6 text-lg leading-relaxed text-gray-700 border-l-4 border-primary-1">
-                            {item.answer}
-                          </div>
-                        </DisclosurePanel>
-                      </div>
-                    )}
-                  </Disclosure>
-                ))}
-              </div>
+            <div className="grid gap-6">
+              {FAQ_ITEMS.map((item, index) => (
+                <Disclosure key={index} as="div">
+                  {({ open }) => (
+                    <div className="overflow-hidden card-elevated">
+                      <DisclosureButton
+                        className="flex justify-between items-center p-6 w-full text-left transition hover:bg-primary-3/10 focus:outline-none focus:ring-4 focus:ring-primary-1"
+                        aria-expanded={open}
+                        aria-controls={`faq-answer-${index}`}
+                      >
+                        <span className="pr-4 text-lg font-bold lg:text-xl text-primary-2">
+                          {item.question}
+                        </span>
+                        <ChevronDown
+                          className={`w-6 h-6 text-primary-2 transition-transform duration-200 shrink-0 ${
+                            open ? 'rotate-180' : ''}`}
+                          aria-hidden="true"
+                        />
+                      </DisclosureButton>
+                      <DisclosurePanel
+                        className="p-6 pt-0 bg-white"
+                        id={`faq-answer-${index}`}
+                      >
+                        <div className="py-2 pl-6 text-lg leading-relaxed text-gray-700 border-l-4 border-primary-1">
+                          {item.answer}
+                        </div>
+                      </DisclosurePanel>
+                    </div>
+                  )}
+                </Disclosure>
+              ))}
             </div>
           </div>
-        </section>
+        </PageSection>
 
         {/* CTA Section */}
-        <section className="section-padding bg-linear-to-br from-primary-3/20 to-primary-1/10">
-          <div className="text-center container-width">
-            <div className="mx-auto max-w-3xl">
-              <div className="mb-6">
-                <MessageCircle size={48} className="mx-auto text-primary-2" aria-hidden="true" />
-              </div>
-              <h2 className="mb-4 heading-secondary">Still have questions?</h2>
-              <p className="mb-8 text-xl text-gray-600">
-                Our team is here to help! Send us a message and we'll get back to you as soon as possible.
-              </p>
-              <div className="flex flex-col gap-4 justify-center sm:flex-row">
-                <NavLink to='/contact'>
-                  <button className="text-lg btn-primary">
-                    Contact Us
-                  </button>
-                </NavLink>
-                <NavLink to='/locations'>
-                  <button className="text-lg btn-secondary">
-                    Visit Our Stores
-                  </button>
-                </NavLink>
-              </div>
-            </div>
-          </div>
-        </section>
+        <PageSection variant="gradient">
+          <ContactCTA />
+        </PageSection>
 
         {/* Quick Links Section */}
-        <section className="bg-white section-padding">
+        <PageSection variant="white">
           <div className="container-width">
             <div className="mx-auto max-w-4xl">
               <h2 className="mb-12 text-center heading-secondary">Explore More</h2>
@@ -174,7 +152,7 @@ export default function FaqPage() {
               </div>
             </div>
           </div>
-        </section>
+        </PageSection>
       </main>
     </div>
   );

@@ -63,6 +63,7 @@ export default function StockBadge({
         'inline-flex justify-center items-center px-3 py-1 text-sm font-bold rounded-full',
         'min-w-[120px]', // Fixed minimum width to prevent jitter
         'transition-colors duration-200', // Smooth color transitions
+        'min-h-[28px]', // WCAG 2.5.5 - Minimum touch target size
         color,
         className
       )}

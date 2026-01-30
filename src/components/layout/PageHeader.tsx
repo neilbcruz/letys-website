@@ -43,7 +43,7 @@ export default function PageHeader() {
         </div>
 
         {/* NAVIGATION LINKS */}
-        <nav className="hidden gap-8 items-center tablet:flex" aria-label="Main navigation">
+        <nav id="navigation" className="hidden gap-8 items-center tablet:flex" aria-label="Main navigation">
           {NAV_ITEMS.map(item => (
             <NavLink
               key={item.path}

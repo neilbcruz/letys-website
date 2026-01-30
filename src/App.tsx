@@ -7,6 +7,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { LoadingSpinner } from './components/ui';
 import ScrollToTop from './components/ui/ScrollToTop';
 import { GoogleAnalytics, SEOHead, LocalBusinessSchema } from './components/seo';
+import { SkipLinks } from './components/accessibility';
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -25,9 +26,10 @@ function App() {
           <GoogleAnalytics />
           <SEOHead pageKey="home" />
           <LocalBusinessSchema />
+          <SkipLinks />
           <PageHeader />
 
-          <main className="grow">
+          <main id="main-content" className="grow">
             <Suspense
               fallback={
                 <div className="flex justify-center items-center min-h-screen">
@@ -46,7 +48,7 @@ function App() {
             </Suspense>
           </main>
 
-          <PageFooter />
+          <PageFooter id="footer" />
         </Router>
       </div>
     </ErrorBoundary>

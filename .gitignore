@@ -27,3 +27,6 @@ dist-ssr
 *storybook.log
 storybook-static
 CLAUDE.md
+
+# Agent reports and analysis
+/reports/

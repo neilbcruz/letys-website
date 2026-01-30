@@ -1,4 +1,4 @@
-// src/pages/LocationsPage.tsx - FIXED VERSION WITH ENHANCED SEO & ANALYTICS
+// src/pages/LocationsPage.tsx - Store Locations Page
 import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import {
@@ -15,17 +15,18 @@ import { MapPin, Clock, ExternalLink, Package, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
 import { SEOHead, LocationSchema, useGoogleAnalytics } from '@/components/seo';
+import { PageSection, PageSectionContent, PageSectionGrid, InventoryCTA } from '@/components/layout';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const DAY_KEYS: (keyof Location['hours'])[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
 function LocationInventoryPreview({ location }: { location: Location }) {
-  // FIXED: Filter to only show "Main Products" category
+  // Filter to only show "Main Products" category
   const { items, loading } = useStoreItems({
     storeName: location.storeId,
     pageNumber: 1,
     pageSize: 5,
-    category: 'Main Products', // Filter to Main Products only
+    category: 'Main Products',
   });
 
   if (!location.hasInventoryAPI) {
@@ -104,8 +105,8 @@ function LocationInventoryPreview({ location }: { location: Location }) {
               <span className="flex-1 font-medium text-gray-700 truncate">
                 {item.name}
               </span>
-              <StockBadge 
-                stockDetails={item.stockDetails} 
+              <StockBadge
+                stockDetails={item.stockDetails}
                 className="text-xs min-w-[100px]"
                 showQuantity={false}
               />
@@ -164,6 +165,7 @@ export default function LocationsPage() {
       {LOCATIONS.map(loc => (
         <LocationSchema key={loc.id} locationId={loc.id} />
       ))}
+
       {/* Header */}
       <PageHeroNarrow
         title="Our Locations"
@@ -171,19 +173,19 @@ export default function LocationsPage() {
         icon={<MapPin size={32} aria-hidden="true" />}
       />
 
-      {/* Map Section - FIXED: Added z-10 to keep it below header */}
-      <section className="relative z-10 bg-white section-padding">
-        <div className="container-width">
+      {/* Map Section */}
+      <PageSection variant="white" role="region" ariaLabel="Interactive map of store locations">
+        <PageSectionContent>
           <h2 className="mb-8 text-center heading-secondary">Find Us on the Map</h2>
-          <div className="overflow-hidden rounded-2xl shadow-xl" role="region" aria-label="Interactive map of store locations">
+          <div className="overflow-hidden rounded-2xl shadow-xl">
             <LocationsMap
               locations={LOCATIONS}
               activeLocation={activeLocation}
               setActiveLocation={setActiveLocation}
             />
           </div>
-        </div>
-      </section>
+        </PageSectionContent>
+      </PageSection>
 
       {/* Inventory Toggle (if available) */}
       {hasAnyInventory && (
@@ -206,164 +208,163 @@ export default function LocationsPage() {
       )}
 
       {/* Location Cards */}
-      <section className="from-white to-gray-50 section-padding bg-linear-to-b">
-        <div className="container-width">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="heading-secondary">All Branches</h2>
-            <div className="flex gap-4">
-              <Link to="/availability" className="px-4 py-2 text-sm btn-primary">
-                View Inventory
-              </Link>
-              <Link to="/availability" className="px-4 py-2 text-sm btn-secondary">
-                Compare Stores
-              </Link>
+      <main id="main-content" tabIndex={-1}>
+        <PageSection variant="gradient-alt">
+          <PageSectionContent>
+            <div className="flex justify-between items-center mb-12">
+              <h2 className="heading-secondary">All Branches</h2>
+              <div className="flex gap-4">
+                <Link to="/availability" className="px-4 py-2 text-sm btn-primary">
+                  View Inventory
+                </Link>
+                <Link to="/availability" className="px-4 py-2 text-sm btn-secondary">
+                  Compare Stores
+                </Link>
+              </div>
             </div>
-          </div>
-          
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {LOCATIONS.map(loc => {
-              const now = new Date();
-              const todayKey = DAY_KEYS[now.getDay()];
-              const isOpen = isStoreOpen(loc);
-              const imageData: ImageSet | undefined = IMAGE_MAP[loc.image];
-              const isActive = activeLocation === loc.id;
 
-              return (
-                <article
-                  key={loc.id}
-                  className={`card-elevated overflow-hidden transform hover:scale-105 transition-all
-                    ${isActive ? 'ring-4 ring-primary-1' : ''}`}
-                  onClick={() => {
-                    handleLocationClick(loc);
-                    setActiveLocation(loc.id === activeLocation ? null : loc.id);
-                  }}
-                  role="button"
-                  tabIndex={0}
-                  aria-pressed={isActive}
-                  aria-label={`${loc.name} location details`}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
+            <PageSectionGrid cols={4}>
+              {LOCATIONS.map(loc => {
+                const now = new Date();
+                const todayKey = DAY_KEYS[now.getDay()];
+                const isOpen = isStoreOpen(loc);
+                const imageData: ImageSet | undefined = IMAGE_MAP[loc.image];
+                const isActive = activeLocation === loc.id;
+
+                return (
+                  <article
+                    key={loc.id}
+                    className={`card-elevated overflow-hidden transform hover:scale-105 transition-all
+                      ${isActive ? 'ring-4 ring-primary-1' : ''}`}
+                    onClick={() => {
                       handleLocationClick(loc);
                       setActiveLocation(loc.id === activeLocation ? null : loc.id);
-                    }
-                  }}
-                >
-                  {/* Image */}
-                  <div className="overflow-hidden relative h-56">
-                    {imageData ? (
-                      <img
-                        src={imageData.default}
-                        srcSet={imageData.srcSet}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                        alt={`${loc.name} storefront`}
-                        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="flex justify-center items-center w-full h-full bg-linear-to-br from-primary-2 to-primary-3">
-                        <span className="text-6xl">{loc.icon}</span>
-                      </div>
-                    )}
-                    <div className="absolute top-4 right-4">
-                      <span className={`px-3 py-1 rounded-full text-sm font-bold ${
-                        isOpen ? 'text-white bg-green-500' : 'text-white bg-red-500'
-                      }`}>
-                        {isOpen ? 'Open Now' : 'Closed'}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <h3 className="flex justify-between items-center mb-3 text-xl font-bold text-primary-2">
-                      <span className="flex gap-2 items-center">
-                        <span className="text-2xl">{loc.icon}</span>
-                        {loc.name}
-                      </span>
-                      <button
-                        onClick={(e) => handleDirectionsClick(loc, e)}
-                        className="transition-colors text-primary-1 hover:text-primary-3"
-                        aria-label={`View ${loc.name} on Google Maps`}
-                      >
-                        <ExternalLink size={20} />
-                      </button>
-                    </h3>
-
-                    {/* Address */}
-                    <div className="mb-4">
-                      <div className="flex gap-2 items-start text-gray-700">
-                        <MapPin size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
-                        <address className="text-sm not-italic">
-                          {loc.address.map((line, i) => (
-                            <span key={i} className="block">{line}</span>
-                          ))}
-                        </address>
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-pressed={isActive}
+                    aria-label={`${loc.name} location details`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleLocationClick(loc);
+                        setActiveLocation(loc.id === activeLocation ? null : loc.id);
+                      }
+                    }}
+                  >
+                    {/* Image */}
+                    <div className="overflow-hidden relative h-56">
+                      {imageData ? (
+                        <img
+                          src={imageData.default}
+                          srcSet={imageData.srcSet}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                          alt={`${loc.name} storefront`}
+                          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="flex justify-center items-center w-full h-full bg-linear-to-br from-primary-2 to-primary-3">
+                          <span className="text-6xl">{loc.icon}</span>
+                        </div>
+                      )}
+                      <div className="absolute top-4 right-4">
+                        <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                          isOpen ? 'text-white bg-green-500' : 'text-white bg-red-500'
+                        }`}>
+                          {isOpen ? 'Open Now' : 'Closed'}
+                        </span>
                       </div>
                     </div>
 
-                    {/* Hours */}
-                    <div className="mb-4">
-                      <div className="flex gap-2 items-start">
-                        <Clock size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
-                        <div className="text-sm">
-                          <p className="font-bold text-gray-900">
-                            Today ({DAYS[now.getDay()]}): {formatHours(loc.hours, todayKey)}
-                          </p>
-                          
-                          {expanded[loc.id] && (
-                            <div className="mt-3 space-y-1 text-gray-600">
-                              {DAY_KEYS.map((key, i) => (
-                                <p key={key} className="flex justify-between">
-                                  <span className="font-medium">{DAYS[i]}:</span>
-                                  <span>{formatHours(loc.hours, key)}</span>
-                                </p>
-                              ))}
-                            </div>
-                          )}
+                    {/* Content */}
+                    <div className="p-6">
+                      <h3 className="flex justify-between items-center mb-3 text-xl font-bold text-primary-2">
+                        <span className="flex gap-2 items-center">
+                          <span className="text-2xl">{loc.icon}</span>
+                          {loc.name}
+                        </span>
+                        <button
+                          onClick={(e) => handleDirectionsClick(loc, e)}
+                          className="transition-colors text-primary-1 hover:text-primary-3"
+                          aria-label={`View ${loc.name} on Google Maps`}
+                        >
+                          <ExternalLink size={20} />
+                        </button>
+                      </h3>
+
+                      {/* Address */}
+                      <div className="mb-4">
+                        <div className="flex gap-2 items-start text-gray-700">
+                          <MapPin size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
+                          <address className="text-sm not-italic">
+                            {loc.address.map((line, i) => (
+                              <span key={i} className="block">{line}</span>
+                            ))}
+                          </address>
                         </div>
                       </div>
+
+                      {/* Hours */}
+                      <div className="mb-4">
+                        <div className="flex gap-2 items-start">
+                          <Clock size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
+                          <div className="text-sm">
+                            <p className="font-bold text-gray-900">
+                              Today ({DAYS[now.getDay()]}): {formatHours(loc.hours, todayKey)}
+                            </p>
+
+                            {expanded[loc.id] && (
+                              <div
+                                className="mt-3 space-y-1 text-gray-600"
+                                id={`hours-${loc.id}`}
+                              >
+                                {DAY_KEYS.map((key, i) => (
+                                  <p key={key} className="flex justify-between">
+                                    <span className="font-medium">{DAYS[i]}:</span>
+                                    <span>{formatHours(loc.hours, key)}</span>
+                                  </p>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <button
+                        className="mb-4 text-sm font-bold underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setExpanded(prev => ({...prev, [loc.id]: !prev[loc.id]}));
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setExpanded(prev => ({...prev, [loc.id]: !prev[loc.id]}));
+                          }
+                        }}
+                        aria-expanded={expanded[loc.id]}
+                        aria-controls={`hours-${loc.id}`}
+                      >
+                        {expanded[loc.id] ? 'Hide full hours' : 'Show full hours'}
+                      </button>
+
+                      {/* Inventory Preview */}
+                      {showInventory && <LocationInventoryPreview location={loc} />}
                     </div>
+                  </article>
+                );
+              })}
+            </PageSectionGrid>
+          </PageSectionContent>
+        </PageSection>
 
-                    <button
-                      className="mb-4 text-sm font-bold underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setExpanded(prev => ({...prev, [loc.id]: !prev[loc.id]}));
-                      }}
-                      aria-expanded={expanded[loc.id]}
-                      aria-controls={`hours-${loc.id}`}
-                    >
-                      {expanded[loc.id] ? 'Hide full hours' : 'Show full hours'}
-                    </button>
-
-                    {/* Inventory Preview */}
-                    {showInventory && <LocationInventoryPreview location={loc} />}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section-padding bg-primary-3/20">
-        <div className="text-center container-width">
-          <h2 className="mb-4 heading-primary">Can't decide which store to visit?</h2>
-          <p className="mx-auto mb-8 max-w-2xl text-xl text-gray-700">
-            Compare inventory across all our locations to find exactly what you're looking for
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Link to="/availability" className="text-lg btn-primary">
-              Compare All Stores
-            </Link>
-            <Link to="/availability" className="text-lg btn-secondary">
-              Browse Inventory
-            </Link>
-          </div>
-        </div>
-      </section>
+        {/* CTA Section */}
+        <PageSection variant="gradient">
+          <InventoryCTA />
+        </PageSection>
+      </main>
     </div>
   );
 }

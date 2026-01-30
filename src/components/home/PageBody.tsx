@@ -12,7 +12,7 @@ export default function PageBody() {
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
             <div className="text-center lg:text-left">
-              <h1 className="mb-4 text-4xl font-bold lg:text-5xl">Lety's Special Buko Pie</h1>
+              <h2 className="mb-4 text-4xl font-bold lg:text-5xl">Lety's Special Buko Pie</h2>
               <p className="text-xl leading-relaxed lg:text-2xl">
                 Enjoy our selection of specialty pies, baked goods, and pasalubong treats made with love and tradition.
               </p>
@@ -36,9 +36,9 @@ export default function PageBody() {
       </section>
 
       {/* WHY CHOOSE US */}
-      <section className="py-16 bg-white lg:py-24">
+      <section aria-labelledby="why-choose-heading" className="py-16 bg-white lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
-          <h2 className="mb-4 text-3xl font-bold text-center text-primary-2 lg:text-4xl">
+          <h2 id="why-choose-heading" className="mb-4 text-3xl font-bold text-center text-primary-2 lg:text-4xl">
             Why Choose Lety's?
           </h2>
           <p className="mx-auto mb-12 max-w-2xl text-lg text-center text-gray-600">
@@ -63,9 +63,9 @@ export default function PageBody() {
       </section>
 
       {/* BUKO FACTS */}
-      <section className="py-16 lg:py-24 bg-primary-3/10">
+      <section aria-labelledby="buko-facts-heading" className="py-16 lg:py-24 bg-primary-3/10">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
-          <h2 className="mb-12 text-3xl font-bold text-center text-primary-2 lg:text-4xl">Buko Facts</h2>
+          <h2 id="buko-facts-heading" className="mb-12 text-3xl font-bold text-center text-primary-2 lg:text-4xl">Buko Facts</h2>
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
             <div className="order-2 space-y-6 lg:order-1">
               {[
@@ -93,9 +93,9 @@ export default function PageBody() {
       </section>
 
       {/* ABOUT LETY */}
-      <section className="py-16 bg-white lg:py-24">
+      <section aria-labelledby="about-lety-heading" className="py-16 bg-white lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
-          <h2 className="mb-12 text-3xl font-bold text-center text-primary-2 lg:text-4xl">About Lety</h2>
+          <h2 id="about-lety-heading" className="mb-12 text-3xl font-bold text-center text-primary-2 lg:text-4xl">About Lety</h2>
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
             <div>
               <img 
@@ -131,9 +131,9 @@ export default function PageBody() {
       </section>
 
       {/* PRODUCTS */}
-      <section className="py-16 lg:py-24 bg-linear-to-br from-primary-3/20 to-primary-3/5">
+      <section aria-labelledby="our-products-heading" className="py-16 lg:py-24 bg-linear-to-br from-primary-3/20 to-primary-3/5">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
-          <h2 className="mb-4 text-3xl font-bold text-center text-primary-2 lg:text-4xl">Our Products</h2>
+          <h2 id="our-products-heading" className="mb-4 text-3xl font-bold text-center text-primary-2 lg:text-4xl">Our Products</h2>
           <p className="mx-auto mb-12 max-w-2xl text-xl text-center text-gray-600">
             Discover our delicious selection of specialty pies, baked goods, and pasalubong favorites
           </p>
@@ -168,9 +168,9 @@ export default function PageBody() {
       </section>
 
       {/* LOCATION */}
-      <section className="py-16 bg-white lg:py-24">
+      <section aria-labelledby="visit-branch-heading" className="py-16 bg-white lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
-          <h2 className="mb-12 text-3xl font-bold text-center text-primary-2 lg:text-4xl">Visit Our Main Branch</h2>
+          <h2 id="visit-branch-heading" className="mb-12 text-3xl font-bold text-center text-primary-2 lg:text-4xl">Visit Our Main Branch</h2>
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
             <div className="space-y-8">
               <div className="p-8 rounded-2xl bg-primary-3/10">

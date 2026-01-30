@@ -99,9 +99,9 @@ const Button = ({
 
   // Updated sizes to meet WCAG 2.5.5 (Target Size - 44x44px minimum)
   const sizes = {
-    sm: 'text-sm px-4 py-2.5 min-h-[44px]',
-    md: 'text-base px-5 py-3 min-h-[48px]',
-    lg: 'text-lg px-7 py-4 min-h-[52px]',
+    sm: 'text-sm px-4 py-2.5 min-h-[44px] min-w-[44px]', // Ensure both dimensions
+    md: 'text-base px-5 py-3 min-h-[48px] min-w-[48px]',
+    lg: 'text-lg px-7 py-4 min-h-[52px] min-w-[52px]',
   };
 
   const isDisabled = disabled || isLoading;
