@@ -1,0 +1,54 @@
+{
+  "name": "Lety's Buko Pie",
+  "short_name": "Lety's Buko Pie",
+  "description": "Authentic Filipino buko pie and baked goods since 1997",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7C3AED",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["food", "restaurant", "bakery"],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Products",
+      "short_name": "Products",
+      "description": "Browse our delicious buko pie and baked goods",
+      "url": "/products",
+      "icons": [{ "src": "/icon-products.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Find Locations",
+      "short_name": "Locations",
+      "description": "Find a Lety's Buko Pie store near you",
+      "url": "/locations",
+      "icons": [{ "src": "/icon-locations.png", "sizes": "192x192" }]
+    }
+  ]
+}

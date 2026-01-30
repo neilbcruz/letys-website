@@ -1,4 +1,4 @@
-// src/pages/ProductsAvailabilityPage.tsx - UPDATED WITH IMPROVEMENTS
+// src/pages/ProductsAvailabilityPage.tsx - UPDATED WITH IMPROVEMENTS & ENHANCED SEO
 import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import StockBadge from '@/components/ui/StockBadge';
@@ -7,9 +7,12 @@ import { getInventoryLocations } from '@/data/locations';
 import { AlertCircle, TrendingUp, Package } from 'lucide-react';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
 import { LoadingSpinner } from '@/components/ui/';
+import { SEOHead, ProductsSchema, useGoogleAnalytics } from '@/components/seo';
 
 export default function ProductsAvailabilityPage() {
   const STORES = getInventoryLocations();
+  const { trackProductClick, trackSearch } = useGoogleAnalytics();
+
   // DEFAULT TO MAIN PRODUCTS
   const [selectedCategory, setSelectedCategory] = useState('Main Products');
 
@@ -63,6 +66,7 @@ export default function ProductsAvailabilityPage() {
 
   return (
     <div className="w-full min-h-screen bg-gray-50">
+      <SEOHead pageKey="availability" />
       {/* Header */}
       <PageHeroNarrow
         title="Store Availability"

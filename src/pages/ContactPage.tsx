@@ -2,17 +2,26 @@ import { useRef, useState } from 'react';
 import emailjs from 'emailjs-com';
 import { Mail, MessageCircle, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
+import { SEOHead, useGoogleAnalytics } from '@/components/seo';
 
 export default function ContactPage() {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const { trackContactFormSubmit } = useGoogleAnalytics();
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!form.current) return;
 
     setStatus('sending');
-    
+
+    // Track contact form submission
+    const formData = new FormData(form.current);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const subject = formData.get('subject') as string;
+    trackContactFormSubmit({ name, email, subject });
+
     emailjs.sendForm(
       import.meta.env.REACT_APP_SERVICE_ID,
       import.meta.env.REACT_APP_TEMPLATE_ID,
@@ -33,6 +42,7 @@ export default function ContactPage() {
 
   return (
     <div className="w-full min-h-screen bg-gray-50">
+      <SEOHead pageKey="contact" />
       {/* Header */}
       <PageHeroNarrow
         title="Contact Us"

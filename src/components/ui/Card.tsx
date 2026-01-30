@@ -1,9 +1,31 @@
 import type { HTMLAttributes, ImgHTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
+/**
+ * Props for the Card container component
+ *
+ * @remarks
+ * The Card component provides a consistent container for content with
+ * optional hover effects for interactive elements.
+ *
+ * @example
+ * ```tsx
+ * <Card hoverable>
+ *   <CardHeader>
+ *     <h2>Card Title</h2>
+ *   </CardHeader>
+ *   <CardContent>
+ *     <p>Card content goes here</p>
+ *   </CardContent>
+ * </Card>
+ * ```
+ */
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  /** Content to display inside the card */
   children: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Whether the card should have hover elevation effect */
   hoverable?: boolean;
 }
 

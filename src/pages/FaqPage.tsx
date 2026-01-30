@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 import { ChevronDown, MessageCircle, HelpCircle } from 'lucide-react';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
+import { SEOHead, FAQSchema } from '@/components/seo';
 
 export const FAQ_ITEMS = [
   {
@@ -49,6 +50,8 @@ export const FAQ_ITEMS = [
 export default function FaqPage() {
   return (
     <div className="w-full min-h-screen bg-gray-50">
+      <SEOHead pageKey="faq" />
+      <FAQSchema />
       {/* Header */}
       <PageHeroNarrow
         title="Frequently Asked Questions"

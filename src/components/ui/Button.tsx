@@ -2,14 +2,36 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
+/**
+ * Props for the Button component
+ *
+ * @remarks
+ * Extends standard HTML button attributes for full customization while
+ * maintaining accessibility and consistency.
+ *
+ * @example
+ * ```tsx
+ * <Button variant="primary" size="md" onClick={handleClick}>
+ *   Submit
+ * </Button>
+ * ```
+ */
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Content to display inside the button */
   children: ReactNode;
+  /** Visual style variant of the button */
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+  /** Size of the button (affects padding and text size) */
   size?: 'sm' | 'md' | 'lg';
+  /** Whether the button should take full width of its container */
   fullWidth?: boolean;
+  /** Shows loading state with spinner and disables interaction */
   isLoading?: boolean;
+  /** Icon to display on the left side of the button text */
   leftIcon?: ReactNode;
+  /** Icon to display on the right side of the button text */
   rightIcon?: ReactNode;
+  /** Custom aria-label for accessibility (overrides default) */
   ariaLabel?: string;
 }
 

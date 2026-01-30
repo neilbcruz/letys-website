@@ -6,6 +6,7 @@ import PageFooter from './components/layout/PageFooter';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LoadingSpinner } from './components/ui';
 import ScrollToTop from './components/ui/ScrollToTop';
+import { GoogleAnalytics, SEOHead, LocalBusinessSchema } from './components/seo';
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -21,10 +22,13 @@ function App() {
       <div className="flex flex-col min-h-screen bg-white">
         <Router>
           <ScrollToTop />
+          <GoogleAnalytics />
+          <SEOHead pageKey="home" />
+          <LocalBusinessSchema />
           <PageHeader />
-          
+
           <main className="grow">
-            <Suspense 
+            <Suspense
               fallback={
                 <div className="flex justify-center items-center min-h-screen">
                   <LoadingSpinner label="Loading page..." />

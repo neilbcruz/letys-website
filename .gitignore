@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 /src-backup
+*storybook.log
+storybook-static
+CLAUDE.md

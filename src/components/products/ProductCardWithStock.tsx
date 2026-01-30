@@ -1,13 +1,23 @@
 // src/components/products/ProductCardWithStock.tsx
+import { useEffect } from 'react';
 import { formatPrice, getDiscountPercentage, type StoreItem } from '@/services/graphql';
 import StockBadge from '@/components/ui/StockBadge';
 import { getInventoryImageFromName } from '@/data/products';
+import { useGoogleAnalytics } from '@/components/seo';
 
 interface ProductCardWithStockProps {
   item: StoreItem;
 }
 
 export default function ProductCardWithStock({ item }: ProductCardWithStockProps) {
+  const { trackProductView } = useGoogleAnalytics();
+
+  // Track product view when component mounts
+  useEffect(() => {
+    if (item.name) {
+      trackProductView(item.name, item.category);
+    }
+  }, [item.name, item.category, trackProductView]);
   const hasDiscount = item.discount > 0 || (item.price && item.originalPrice && item.price < item.originalPrice);
   const discountPercentage = item.originalPrice && item.price
     ? getDiscountPercentage(item.originalPrice, item.price)

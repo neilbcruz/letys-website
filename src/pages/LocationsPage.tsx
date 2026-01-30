@@ -1,12 +1,12 @@
-// src/pages/LocationsPage.tsx - FIXED VERSION
+// src/pages/LocationsPage.tsx - FIXED VERSION WITH ENHANCED SEO & ANALYTICS
 import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
-import { 
-  LOCATIONS, 
-  isStoreOpen, 
+import {
+  LOCATIONS,
+  isStoreOpen,
   formatHours,
   getInventoryLocations,
-  type Location 
+  type Location
 } from '@/data/locations';
 import { IMAGE_MAP, type ImageSet } from '@/lib/images';
 import LocationsMap from '@/components/ui/LocationsMap';
@@ -14,6 +14,7 @@ import StockBadge from '@/components/ui/StockBadge';
 import { MapPin, Clock, ExternalLink, Package, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
+import { SEOHead, LocationSchema, useGoogleAnalytics } from '@/components/seo';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const DAY_KEYS: (keyof Location['hours'])[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -140,12 +141,29 @@ export default function LocationsPage() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
   const [showInventory, setShowInventory] = useState(true);
+  const { trackLocationClick, trackLocationDirections } = useGoogleAnalytics();
 
   // Check if any locations have inventory
   const hasAnyInventory = getInventoryLocations().length > 0;
 
+  // Track location card click
+  const handleLocationClick = (location: Location) => {
+    trackLocationClick(location.name, location.id);
+  };
+
+  // Track directions click
+  const handleDirectionsClick = (location: Location, e: React.MouseEvent) => {
+    e.stopPropagation();
+    trackLocationDirections(location.name);
+    window.open(location.mapLink, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="w-full min-h-screen bg-gray-50">
+      <SEOHead pageKey="locations" />
+      {LOCATIONS.map(loc => (
+        <LocationSchema key={loc.id} locationId={loc.id} />
+      ))}
       {/* Header */}
       <PageHeroNarrow
         title="Our Locations"
@@ -215,7 +233,10 @@ export default function LocationsPage() {
                   key={loc.id}
                   className={`card-elevated overflow-hidden transform hover:scale-105 transition-all
                     ${isActive ? 'ring-4 ring-primary-1' : ''}`}
-                  onClick={() => setActiveLocation(loc.id === activeLocation ? null : loc.id)}
+                  onClick={() => {
+                    handleLocationClick(loc);
+                    setActiveLocation(loc.id === activeLocation ? null : loc.id);
+                  }}
                   role="button"
                   tabIndex={0}
                   aria-pressed={isActive}
@@ -223,6 +244,7 @@ export default function LocationsPage() {
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
+                      handleLocationClick(loc);
                       setActiveLocation(loc.id === activeLocation ? null : loc.id);
                     }
                   }}
@@ -260,10 +282,7 @@ export default function LocationsPage() {
                         {loc.name}
                       </span>
                       <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.open(loc.mapLink, '_blank', 'noopener,noreferrer');
-                        }}
+                        onClick={(e) => handleDirectionsClick(loc, e)}
                         className="transition-colors text-primary-1 hover:text-primary-3"
                         aria-label={`View ${loc.name} on Google Maps`}
                       >

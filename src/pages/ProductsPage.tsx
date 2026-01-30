@@ -7,10 +7,12 @@ import { Package, Store, AlertCircle, RefreshCw } from 'lucide-react';
 import { getInventoryLocations, getLocationByStoreId, formatHours } from '@/data/locations';
 import PageHeroNarrow from '@/components/layout/PageHeroNarrow';
 import { SkeletonGrid } from '@/components/ui';
+import { SEOHead, ProductsSchema, useGoogleAnalytics } from '@/components/seo';
 
 export default function ProductsPage() {
   const STORES = getInventoryLocations();
-  
+  const { trackProductClick, trackSearch } = useGoogleAnalytics();
+
   const [selectedStore, setSelectedStore] = useState<string>(STORES[0]?.storeId || '');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -29,8 +31,23 @@ export default function ProductsPage() {
   // Get current store info
   const currentStore = getLocationByStoreId(selectedStore);
 
+  // Track search
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    if (term) {
+      trackSearch(term, items.length);
+    }
+  };
+
+  // Track product click
+  const handleProductClick = (productName: string, category: string) => {
+    trackProductClick(productName, category, 'Store Inventory');
+  };
+
   return (
     <div className="w-full min-h-screen bg-gray-50 [scrollbar-gutter:stable]">
+      <SEOHead pageKey="products" />
+      <ProductsSchema />
       {/* Header */}
       <PageHeroNarrow
         title="Store Inventory"
@@ -67,6 +84,89 @@ export default function ProductsPage() {
                 </button>
               ))}
             </div>
+
+            {/* Store Info Banner */}
+            {currentStore && (
+              <div className="flex gap-4 items-start p-4 rounded-lg bg-primary-3/10">
+                <Store className="mt-1 text-primary-2 shrink-0" size={24} aria-hidden="true" />
+                <div className="flex-1">
+                  <h2 className="text-lg font-bold text-primary-2">{currentStore.displayName}</h2>
+                  <p className="text-sm text-gray-700">
+                    {currentStore.address[0]} {currentStore.address[1]}
+                  </p>
+                  <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-600">
+                    <span className="flex gap-1 items-center">
+                      <span className="font-medium">Hours:</span>
+                      {formatHours(currentStore.hours)}
+                    </span>
+                    <a
+                      href={currentStore.mapLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
+                    >
+                      Get Directions →
+                    </a>
+                  </div>
+                  {currentStore.specialNotes && currentStore.specialNotes.length > 0 && (
+                    <div className="p-2 mt-2 bg-amber-50 rounded border border-amber-200">
+                      <p className="text-sm text-amber-800">
+                        <span className="font-medium">Note:</span> {currentStore.specialNotes.join('; ')}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Filters */}
+            <div className="flex flex-col gap-4 md:flex-row">
+              {/* Search */}
+              <div className="flex-1">
+                <SearchInput
+                  placeholder="Search products..."
+                  onSearch={handleSearch}
+                  size="lg"
+                  clearable
+                  ariaLabel="Search for products"
+                />
+              </div>
+
+              {/* Category Filter */}
+              <div className="md:w-64">
+                <label htmlFor="category-filter" className="sr-only">
+                  Filter by category
+                </label>
+                <select
+                  id="category-filter"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="px-4 w-full h-14 text-base bg-white rounded-lg border-2 border-gray-300 transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent"
+                  aria-label="Filter by category"
+                >
+                  <option value="">All Categories</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Refresh Button */}
+              <button
+                onClick={refetch}
+                disabled={loading}
+                className="flex gap-2 justify-center items-center px-6 py-3 text-base btn-primary disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
+                aria-label="Refresh inventory"
+              >
+                <RefreshCw size={20} aria-hidden="true" className={loading ? 'animate-spin' : ''} />
+                Refresh
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
             {/* Store Info Banner */}
             {currentStore && (
@@ -210,7 +310,13 @@ export default function ProductsPage() {
 
                 <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {items.map((item) => (
-                    <ProductCardWithStock key={item.itemId} item={item} />
+                    <div
+                      key={item.itemId}
+                      onClick={() => handleProductClick(item.name, item.category)}
+                      className="cursor-pointer"
+                    >
+                      <ProductCardWithStock item={item} />
+                    </div>
                   ))}
                 </div>
               </>

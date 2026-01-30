@@ -1,4 +1,4 @@
-// src/components/ui/SearchInput.tsx - UPDATED WITH ARIA IMPROVEMENTS
+// src/components/ui/SearchInput.tsx - Accessible search input component
 import { SearchIcon, XIcon } from 'lucide-react';
 import type {
   ChangeEvent,
@@ -9,6 +9,21 @@ import type {
 import { useState, useId } from 'react';
 import { cn } from '@/lib/utils';
 
+/**
+ * Props for the SearchInput component
+ *
+ * Extends standard HTML input attributes while excluding onChange and size
+ * to provide custom implementations.
+ *
+ * @interface SearchInputProps
+ * @property {(value: string) => void} [onSearch] - Callback when search is submitted
+ * @property {string} [className] - Additional CSS classes
+ * @property {string} [placeholder] - Placeholder text (default: "Search...")
+ * @property {ReactNode} [icon] - Custom search icon
+ * @property {'sm' | 'md' | 'lg'} [size] - Input size variant (default: "md")
+ * @property {boolean} [clearable=true] - Show clear button when has text
+ * @property {string} [ariaLabel] - Accessibility label for screen readers
+ */
 interface SearchInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size'> {
   onSearch?: (value: string) => void;
@@ -20,6 +35,54 @@ interface SearchInputProps
   ariaLabel?: string;
 }
 
+/**
+ * Accessible search input component with clear button
+ *
+ * Provides a fully accessible search input with:
+ * - Screen reader support via proper labels and ARIA attributes
+ * - Keyboard navigation support
+ * - Optional clear button for easy text clearing
+ * - Size variants for different contexts
+ * - Form submission handling
+ *
+ * @component
+ * @param {SearchInputProps} props - Component props
+ * @returns {JSX.Element} Rendered search input
+ *
+ * @example
+ * ```typescript
+ * // Basic usage
+ * <SearchInput onSearch={(value) => console.log(value)} />
+ *
+ * // With custom placeholder
+ * <SearchInput
+ *   placeholder="Search products..."
+ *   onSearch={handleSearch}
+ * />
+ *
+ * // Small size without clear button
+ * <SearchInput
+ *   size="sm"
+ *   clearable={false}
+ *   ariaLabel="Search products"
+ * />
+ *
+ * // Controlled component
+ * <SearchInput
+ *   value={searchQuery}
+ *   onSearch={setSearchQuery}
+ *   placeholder="Find items..."
+ * />
+ * ```
+ *
+ * @accessibility
+ * - Uses unique ID for label association
+ * - Includes sr-only label for screen readers
+ * - Clear button has proper aria-label
+ * - Icons marked with aria-hidden
+ * - Minimum touch target size (44x44px) for clear button
+ * - Full keyboard navigation support
+ */
 const SearchInput = ({
   onSearch,
   className,
