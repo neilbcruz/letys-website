@@ -1,5 +1,5 @@
 // src/services/graphql.ts
-const GRAPHQL_ENDPOINT = 'https://graphql-server-hotfix-x3nt7antfq-de.a.run.app/';
+const GRAPHQL_ENDPOINT = 'https://graphql.kahero.co/';
 
 export interface StockDetails {
   qty: number;
