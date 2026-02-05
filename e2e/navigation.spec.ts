@@ -18,9 +18,21 @@ test.describe('Navigation Smoke Tests', () => {
   test('should have working navigation links', async ({ page }) => {
     await page.goto('/');
 
-    // Click products link
-    const productsLink = page.locator('a').filter({ hasText: 'Products' }).first();
-    await productsLink.click();
+    // On mobile, navigation is inside a hamburger menu - open it first
+    const menuToggle = page.getByRole('button', { name: 'Toggle menu' });
+    const isMobile = await menuToggle.isVisible().catch(() => false);
+
+    if (isMobile) {
+      await menuToggle.click();
+      // Use the mobile navigation link
+      await page.getByRole('navigation', { name: 'Mobile navigation' })
+        .getByRole('link', { name: 'Navigate to Products' })
+        .click();
+    } else {
+      // Desktop: click Products link in main navigation
+      await page.getByRole('link', { name: 'Products' }).first().click();
+    }
+
     await expect(page).toHaveURL(/\/products/);
   });
 
