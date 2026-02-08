@@ -1,0 +1,24 @@
+<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="8.467727">
+<testsuite name="keyboard-nav.spec.ts" timestamp="2026-02-08T05:45:24.392Z" hostname="chromium" tests="3" failures="0" skipped="0" time="14.233" errors="0">
+<testcase name="Keyboard Navigation › should be keyboard navigable" classname="keyboard-nav.spec.ts" time="4.962">
+</testcase>
+<testcase name="Keyboard Navigation › should have visible focus indicators" classname="keyboard-nav.spec.ts" time="4.587">
+</testcase>
+<testcase name="Keyboard Navigation › should support skip links" classname="keyboard-nav.spec.ts" time="4.684">
+</testcase>
+</testsuite>
+<testsuite name="navigation.spec.ts" timestamp="2026-02-08T05:45:24.392Z" hostname="chromium" tests="3" failures="0" skipped="0" time="15.979" errors="0">
+<testcase name="Navigation Smoke Tests › should navigate between all main pages" classname="navigation.spec.ts" time="5.911">
+</testcase>
+<testcase name="Navigation Smoke Tests › should have working navigation links" classname="navigation.spec.ts" time="4.871">
+<system-out>
+<![CDATA[Page loaded: URL=http://localhost:5173/, Title=Lety's Buko Pie - The Best Buko Pie in Laguna Since 1997
+Body elements found: 1
+Page text content length: 2315
+]]>
+</system-out>
+</testcase>
+<testcase name="Navigation Smoke Tests › should work browser back button" classname="navigation.spec.ts" time="5.197">
+</testcase>
+</testsuite>
+</testsuites>
