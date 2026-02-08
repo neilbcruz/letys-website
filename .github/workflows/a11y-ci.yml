@@ -38,7 +38,7 @@ jobs:
       - name: Run Pa11y CI
         run: |
           npm install -g pa11y
-          pa11y http://localhost:4173 --threshold 0
+          pa11y http://localhost:4173 --threshold 0 --chrome-launch-preferences='{"args": ["--no-sandbox", "--disable-setuid-sandbox"]}'
 
       - name: Run axe-core on all pages
         run: |
