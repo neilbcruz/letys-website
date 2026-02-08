@@ -36,10 +36,9 @@ jobs:
           npx wait-on http://localhost:4173
 
       - name: Run Pa11y CI
-        uses: pa11y/ci-action@0.15.0
-        with:
-          url: http://localhost:4173
-          threshold: 0
+        run: |
+          npm install -g pa11y
+          pa11y http://localhost:4173 --threshold 0
 
       - name: Run axe-core on all pages
         run: |
@@ -255,60 +254,7 @@ jobs:
         run: npm run build
 
       - name: Run keyboard navigation tests
-        run: |
-          cat > e2e/keyboard-nav.spec.ts << 'EOF'
-          import { test, expect } from '@playwright/test';
-
-          test.describe('Keyboard Navigation', () => {
-            test('should be keyboard navigable', async ({ page }) => {
-              await page.goto('/');
-
-              // Test tab order
-              const focusableElements = page.locator('a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])');
-
-              const count = await focusableElements.count();
-              expect(count).toBeGreaterThan(0);
-
-              // Tab through elements
-              for (let i = 0; i < Math.min(count, 10); i++) {
-                await page.keyboard.press('Tab');
-                const focusedElement = page.locator(':focus');
-                await expect(focusedElement).toBeVisible();
-              }
-            });
-
-            test('should have visible focus indicators', async ({ page }) => {
-              await page.goto('/');
-
-              const firstLink = page.locator('a[href]').first();
-              await firstLink.focus();
-
-              // Check for focus styles
-              const focusOutline = await firstLink.evaluate(el => {
-                const styles = window.getComputedStyle(el);
-                return styles.outline !== 'none' ||
-                       styles.boxShadow !== 'none' ||
-                       styles.border !== 'none';
-              });
-
-              expect(focusOutline).toBeTruthy();
-            });
-
-            test('should support skip links', async ({ page }) => {
-              await page.goto('/');
-
-              const skipLink = page.locator('a[href^="#"]').first();
-              const exists = await skipLink.count() > 0;
-
-              if (exists) {
-                await skipLink.press('Enter');
-                // Should jump to target
-              }
-            });
-          });
-          EOF
-
-          npx playwright test e2e/keyboard-nav.spec.ts
+        run: npx playwright test e2e/keyboard-nav.spec.ts
 
       - name: Upload keyboard navigation results
         uses: actions/upload-artifact@v4
