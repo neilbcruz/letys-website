@@ -38,19 +38,21 @@ export default function HeroBanner({
 
         {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <h1 className="font-bold text-4xl sm:text-5xl lg:text-6xl mb-4 drop-shadow-lg text-white">
-            Welcome to Lety's Buko Pie
-          </h1>
-          <p className="text-lg sm:text-xl lg:text-2xl mb-8 drop-shadow-md font-medium text-white">
-            Authentic Filipino buko pie made with love since 1976
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <NavLink to="/products">
-              <Button size="lg" variant="secondary">View Our Products</Button>
-            </NavLink>
-            <NavLink to="/locations">
-              <Button size="lg" variant="primary">Find a Location</Button>
-            </NavLink>
+          <div className="inline-block bg-black/50 backdrop-blur-sm rounded-xl p-6 sm:p-8">
+            <h1 className="font-bold text-4xl sm:text-5xl lg:text-6xl mb-4 text-white">
+              Welcome to Lety's Buko Pie
+            </h1>
+            <p className="text-lg sm:text-xl lg:text-2xl mb-8 font-medium text-white">
+              Authentic Filipino buko pie made with love since 1976
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <NavLink to="/products">
+                <Button size="lg" variant="secondary">View Our Products</Button>
+              </NavLink>
+              <NavLink to="/locations">
+                <Button size="lg" variant="primary">Find a Location</Button>
+              </NavLink>
+            </div>
           </div>
         </div>
       </div>
@@ -89,15 +91,19 @@ export default function HeroBanner({
             <div className="p-4 rounded-full bg-white/20">{icon}</div>
           </div>
 
-          {/* Title */}
-          <h1 className="mb-4 text-3xl font-bold text-white drop-shadow-lg sm:text-4xl lg:text-5xl">
-            {title}
-          </h1>
+          {/* Title with background for contrast */}
+          <div className="inline-block bg-black/50 backdrop-blur-sm rounded-lg p-4 mb-4">
+            <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+              {title}
+            </h1>
+          </div>
 
-          {/* Subtitle */}
-          <p className="max-w-3xl text-lg font-medium text-white drop-shadow-md sm:text-xl lg:text-2xl">
-            {subtitle}
-          </p>
+          {/* Subtitle with background for contrast */}
+          <div className="inline-block bg-black/40 backdrop-blur-sm rounded-lg px-4 py-2 max-w-3xl">
+            <p className="text-lg font-medium text-white sm:text-xl lg:text-2xl">
+              {subtitle}
+            </p>
+          </div>
         </div>
       </div>
     );
