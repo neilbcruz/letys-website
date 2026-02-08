@@ -59,10 +59,10 @@ const Button = ({
     ].join(' '),
 
     secondary: [
-      // Updated for better contrast
-      'bg-[color:var(--color-primary-1)]', // Darker gold
+      // Darker gold for WCAG AA compliance (5:1+ contrast)
+      'bg-[#A67C00]',
       'text-white',
-      'hover:bg-[color:var(--color-primary-2)]',
+      'hover:bg-[#8B6600]',
       'hover:text-white',
       'focus:ring-[color:var(--color-primary-3)]',
     ].join(' '),

@@ -46,7 +46,7 @@ export default function PageHeader() {
               to={item.path}
               className={({ isActive }) =>
                 `font-bold text-lg no-underline transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-2 rounded px-2 py-1 ${
-                  isActive ? 'text-primary-2' : 'text-primary-2/80 hover:text-primary-2'
+                  isActive ? 'text-[#03200E]' : 'text-[#042B14] hover:text-[#03200E]'
                 }`
               }
             >
