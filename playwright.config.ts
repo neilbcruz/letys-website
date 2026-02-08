@@ -1,7 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-import { defineConfig as defineViteConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
 
 /**
  * Playwright E2E Testing Configuration

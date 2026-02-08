@@ -17,18 +17,36 @@ export default function ProductsAvailabilityPage() {
   // DEFAULT TO MAIN PRODUCTS
   const [selectedCategory, setSelectedCategory] = useState('Main Products');
 
-  // Fetch items from all stores with inventory
-  const storesData = STORES.map(location => ({
-    id: location.storeId,
-    name: location.name,
-    icon: location.icon,
-    data: useStoreItems({
-      storeName: location.storeId,
-      pageNumber: 1,
-      pageSize: 100,
-      category: selectedCategory, // Uses Main Products by default
-    }),
-  }));
+  // Fetch items from all stores - call hooks at top level, not in callbacks
+  const store1Data = useStoreItems({
+    storeName: STORES[0]?.storeId || '',
+    pageNumber: 1,
+    pageSize: 100,
+    category: selectedCategory,
+  });
+  const store2Data = useStoreItems({
+    storeName: STORES[1]?.storeId || '',
+    pageNumber: 1,
+    pageSize: 100,
+    category: selectedCategory,
+  });
+  const store3Data = useStoreItems({
+    storeName: STORES[2]?.storeId || '',
+    pageNumber: 1,
+    pageSize: 100,
+    category: selectedCategory,
+  });
+
+  // Combine store data
+  const storesData = STORES.map((location, index) => {
+    const dataMap = [store1Data, store2Data, store3Data];
+    return {
+      id: location.storeId,
+      name: location.name,
+      icon: location.icon,
+      data: dataMap[index] || store1Data,
+    };
+  });
 
   // Check if all stores are loading
   const allLoading = storesData.every(s => s.data.loading);

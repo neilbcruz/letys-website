@@ -11,6 +11,7 @@
  * @see https://developers.google.com/analytics/devguides/collection/ga4
  */
 
+/* eslint-disable react-refresh/only-export-components */
 import { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';

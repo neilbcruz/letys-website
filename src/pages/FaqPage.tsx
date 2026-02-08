@@ -5,6 +5,7 @@ import HeroBanner from '@/components/ui/HeroBanner';
 import { SEOHead, FAQSchema } from '@/components/seo';
 import { PageSection, ContactCTA } from '@/components/layout';
 
+/* eslint-disable react-refresh/only-export-components */
 export const FAQ_ITEMS = [
   {
     question: "Can you deliver my order?",
