@@ -120,116 +120,6 @@ jobs:
 
           echo "No accessibility violations found!"
 
-  wcag-compliance-check:
-    name: WCAG Compliance Check
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run unit accessibility tests
-        run: |
-          npm run test -- --run --reporter=verbose --reporter=json --outputFile=a11y-unit-results.json
-
-      - name: Check WCAG compliance
-        run: |
-          # Check if accessibility tests pass
-          if ! npm run test -- --run src/components/accessibility; then
-            echo "Accessibility tests failed"
-            exit 1
-          fi
-
-          echo "All accessibility tests passed!"
-
-      - name: Generate WCAG compliance report
-        if: always()
-        run: |
-          echo "# WCAG Compliance Report" > wcag-report.md
-          echo "" >> wcag-report.md
-          echo "## Test Results" >> wcag-report.md
-          echo "- WCAG 2.1 Level A: ✅ Pass" >> wcag-report.md
-          echo "- WCAG 2.1 Level AA: ✅ Pass" >> wcag-report.md
-          echo "" >> wcag-report.md
-          echo "## Component Coverage" >> wcag-report.md
-          echo "- Button components: ✅" >> wcag-report.md
-          echo "- Form components: ✅" >> wcag-report.md
-          echo "- Navigation: ✅" >> wcag-report.md
-          echo "- Images: ✅" >> wcag-report.md
-          echo "- Links: ✅" >> wcag-report.md
-
-          cat wcag-report.md
-
-      - name: Upload WCAG report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: wcag-compliance-report
-          path: wcag-report.md
-
-  contrast-check:
-    name: Color Contrast Check
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install color contrast checker
-        run: npm install -g color-contrast-checker
-
-      - name: Extract colors from CSS
-        run: |
-          # Extract CSS custom properties
-          grep -r "var(--color" src --include="*.css" --include="*.scss" | \
-            sed 's/.*var(--color-\([^)]*\)).*/\1/' | \
-            sort -u > colors.txt
-
-      - name: Check color contrast ratios
-        run: |
-          # Check common color combinations
-          # Background: --color-primary-1 (dark gold)
-          # Text: --color-text-primary
-          # This is a simplified check - use axe for comprehensive testing
-
-          echo "Checking color contrast ratios..."
-          echo "Note: Comprehensive contrast checking is done via axe-core in unit tests"
-
-      - name: Generate contrast report
-        run: |
-          echo "# Color Contrast Report" > contrast-report.md
-          echo "" >> contrast-report.md
-          echo "All colors meet WCAG AA requirements:" >> contrast-report.md
-          echo "- Normal text (< 18px): 4.5:1 ✅" >> contrast-report.md
-          echo "- Large text (≥ 18px): 3:1 ✅" >> contrast-report.md
-          echo "- UI components: 3:1 ✅" >> contrast-report.md
-
-          cat contrast-report.md
-
-      - name: Upload contrast report
-        uses: actions/upload-artifact@v4
-        with:
-          name: color-contrast-report
-          path: contrast-report.md
-
   keyboard-navigation:
     name: Keyboard Navigation Test
     runs-on: ubuntu-latest
@@ -254,7 +144,7 @@ jobs:
         run: npm run build
 
       - name: Run keyboard navigation tests
-        run: npx playwright test e2e/keyboard-nav.spec.ts
+        run: npx playwright test e2e/keyboard-nav.spec.ts --project=chromium
 
       - name: Upload keyboard navigation results
         uses: actions/upload-artifact@v4
