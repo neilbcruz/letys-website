@@ -85,6 +85,7 @@ export function useStoreItems(params: QueryParams): UseStoreItemsResult {
 
   useEffect(() => {
     fetchItems();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     params.storeName,
     params.pageNumber,

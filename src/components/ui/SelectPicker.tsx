@@ -1,6 +1,7 @@
 import { ChevronDownIcon, SearchIcon, XIcon } from 'lucide-react';
 import {
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -42,8 +43,6 @@ const SelectPicker = ({
 }: SelectPickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOption, setSelectedOption] =
-    useState<SelectPickerOption | null>(null);
   const [dropdownPosition, setDropdownPosition] = useState<'bottom' | 'top'>(
     'bottom'
   );
@@ -51,13 +50,11 @@ const SelectPicker = ({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  // Find selected option based on selectedValue prop
-  useEffect(() => {
-    if (selectedValue) {
-      const option = options.find(opt => opt.value === selectedValue);
-      setSelectedOption(option || null);
-    }
-  }, [selectedValue, options]);
+  // Derive selected option from props - no need for separate state
+  const selectedOption = useMemo(
+    () => options.find(opt => opt.value === selectedValue) || null,
+    [selectedValue, options]
+  );
 
   // Filter options based on search term
   const filteredOptions = options.filter(option =>
@@ -66,7 +63,6 @@ const SelectPicker = ({
 
   // Handle option selection
   const handleSelect = (option: SelectPickerOption) => {
-    setSelectedOption(option);
     setIsOpen(false);
     setSearchTerm('');
     onSelect(option);
@@ -75,7 +71,6 @@ const SelectPicker = ({
   // Handle clear selection
   const handleClear = (e: ReactMouseEvent) => {
     e.stopPropagation();
-    setSelectedOption(null);
     onSelect(null);
   };
 
