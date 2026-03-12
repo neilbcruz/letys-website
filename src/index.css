@@ -249,7 +249,7 @@
   button:not(.print-show) {
     display: none !important;
   }
-  
+
   /* Optimize for print */
   body {
     font-size: 12pt;
@@ -257,21 +257,22 @@
     color: #000;
     background: #fff;
   }
-  
-  /* Show URLs for links */
-  a[href]::after {
+
+  /* Show URLs for links - ONLY for external links, not mailto: or m.me */
+  a[href^="http"]::after,
+  a[href^="https"]::after {
     content: " (" attr(href) ")";
     font-size: 0.8em;
     color: #666;
   }
-  
+
   /* Prevent page breaks inside elements */
   .card-elevated,
   article,
   section {
     page-break-inside: avoid;
   }
-  
+
   /* Add page breaks where needed */
   h1, h2, h3 {
     page-break-after: avoid;
