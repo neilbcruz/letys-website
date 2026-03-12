@@ -12,7 +12,7 @@
 import { Helmet } from 'react-helmet-async';
 import { LOCATIONS } from '@/data/locations';
 import { PRODUCT_DATA } from '@/data/products';
-import { FAQ_ITEMS } from '@/pages/FaqPage';
+import { FAQ_ITEMS_PLAIN } from '@/data/faqs';
 import { SITE_URL } from '@/lib/seo';
 
 interface StructuredDataProps {
@@ -259,13 +259,13 @@ function generateFAQSchema() {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     '@id': `${SITE_URL}/faq#faqpage`,
-    mainEntity: FAQ_ITEMS.map(item => ({
+    mainEntity: FAQ_ITEMS_PLAIN.map(item => ({
       '@type': 'Question',
       '@id': `${SITE_URL}/faq#${item.question.toLowerCase().replace(/\s+/g, '-').replace(/[?]/g, '')}`,
       name: item.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: extractTextFromAnswer(item.answer),
+        text: item.answer,
         author: {
           '@type': 'Organization',
           name: "Lety's Buko Pie"
@@ -277,25 +277,6 @@ function generateFAQSchema() {
   };
 
   return faqSchema;
-}
-
-/**
- * Extract plain text from answer (handles both string and React elements)
- */
-function extractTextFromAnswer(answer: string | React.ReactNode): string {
-  if (typeof answer === 'string') {
-    return answer;
-  }
-
-  // If it's a React element, extract text content
-  if (answer && typeof answer === 'object' && 'props' in answer) {
-    const props = answer.props as { children?: React.ReactNode };
-    if (props.children) {
-      return String(props.children);
-    }
-  }
-
-  return 'Check our pages for more information';
 }
 
 /**
