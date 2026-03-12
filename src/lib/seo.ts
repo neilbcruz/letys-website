@@ -51,7 +51,7 @@ export const SOCIAL_HANDLES = {
 export const BUSINESS_INFO = {
   phone: import.meta.env['VITE_BUSINESS_PHONE'] || '+63-917-123-4567',
   email: import.meta.env['VITE_BUSINESS_EMAIL'] || 'hello@letysbukopie.com',
-  foundingYear: import.meta.env['VITE_BUSINESS_FOUNDING_YEAR'] || '1997',
+  foundingYear: import.meta.env['VITE_BUSINESS_FOUNDING_YEAR'] || '1976',
   priceRange: import.meta.env['VITE_BUSINESS_PRICE_RANGE'] || '$$'
 };
 
@@ -92,7 +92,7 @@ export const DEFAULT_META = {
  */
 export const PAGE_META: Record<string, PageMeta> = {
   home: {
-    title: "Lety's Buko Pie - The Best Buko Pie in Laguna Since 1997",
+    title: "Lety's Buko Pie - The Best Buko Pie in Laguna Since 1976",
     description: "Experience the authentic taste of Lety's Buko Pie! Freshly baked buko pie, pineapple pie, and Filipino pasalubong treats. Visit our stores in Los Baños and Laguna.",
     keywords: [
       'buko pie',
@@ -105,7 +105,7 @@ export const PAGE_META: Record<string, PageMeta> = {
     canonical: SITE_URL,
     og: {
       title: "Lety's Buko Pie - Home of the Authentic Buko Pie",
-      description: "Taste the legacy! Lety's Buko Pie has been serving the best buko pie in Laguna since 1997. Visit us today!",
+      description: "Taste the legacy! Lety's Buko Pie has been serving the best buko pie in Laguna since 1976. Visit us today!",
       image: `${SITE_URL}/og-home.jpg`,
       url: SITE_URL
     }

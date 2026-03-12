@@ -7,7 +7,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { LoadingSpinner } from './components/ui';
 import ScrollToTop from './components/ui/ScrollToTop';
 import { GoogleAnalytics, SEOHead, LocalBusinessSchema } from './components/seo';
-import { SkipLinks } from './components/accessibility';
+import { SkipLinks } from './components/accessibility/SkipLinks';
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));

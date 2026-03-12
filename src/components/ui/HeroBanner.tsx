@@ -27,18 +27,26 @@ export default function HeroBanner({
           )}
           <img
             src={IMAGES.HERO.default}
-            alt="Lety's Buko Pie storefront with招牌sign and entrance"
+            alt="Lety's Buko Pie storefront entrance with signage"
             className="w-full h-full object-cover"
             loading="eager"
           />
         </picture>
 
         {/* Overlay - stronger for better contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to bottom, var(--color-overlay-heavy), var(--color-overlay-medium), var(--color-overlay-black))`
+          }}
+        ></div>
 
         {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="inline-block bg-black/50 backdrop-blur-sm rounded-xl p-6 sm:p-8">
+          <div
+            className="inline-block backdrop-blur-sm rounded-xl p-6 sm:p-8"
+            style={{ backgroundColor: 'var(--color-overlay-medium)' }}
+          >
             <h1 className="font-bold text-4xl sm:text-5xl lg:text-6xl mb-4 text-white">
               Welcome to Lety's Buko Pie
             </h1>
@@ -82,7 +90,10 @@ export default function HeroBanner({
         </picture>
 
         {/* Overlay + Blur for Contrast */}
-        <div className="absolute inset-0 backdrop-blur-sm bg-black/50"></div>
+        <div
+          className="absolute inset-0 backdrop-blur-sm"
+          style={{ backgroundColor: 'var(--color-overlay-medium)' }}
+        ></div>
 
         {/* Content */}
         <div className="flex relative z-10 flex-col justify-center items-center px-4 h-full text-center container-width">
@@ -92,14 +103,20 @@ export default function HeroBanner({
           </div>
 
           {/* Title with background for contrast */}
-          <div className="inline-block bg-black/50 backdrop-blur-sm rounded-lg p-4 mb-4">
+          <div
+            className="inline-block backdrop-blur-sm rounded-lg p-4 mb-4"
+            style={{ backgroundColor: 'var(--color-overlay-medium)' }}
+          >
             <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
               {title}
             </h1>
           </div>
 
           {/* Subtitle with background for contrast */}
-          <div className="inline-block bg-black/40 backdrop-blur-sm rounded-lg px-4 py-2 max-w-3xl">
+          <div
+            className="inline-block backdrop-blur-sm rounded-lg px-4 py-2 max-w-3xl"
+            style={{ backgroundColor: 'var(--color-overlay-light)' }}
+          >
             <p className="text-lg font-medium text-white sm:text-xl lg:text-2xl">
               {subtitle}
             </p>

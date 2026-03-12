@@ -44,7 +44,7 @@ export default function SEOHead({ pageKey, customMeta }: SEOHeadProps) {
 
       {/* Additional SEO Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="theme-color" content="#7C3AED" />
+      <meta name="theme-color" content="#C29600" />
       <meta name="author" content="Lety's Buko Pie" />
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />

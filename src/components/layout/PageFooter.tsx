@@ -14,11 +14,7 @@ export default function PageFooter({
   facebookUrl = 'https://www.facebook.com/letysbukopie/',
   id,
 }: PageFooterProps) {
-  const newTab = (url: string) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
-
-  const iconClasses = 'w-10 sm:w-12 h-auto cursor-pointer text-white hover:text-primary-1 transition-colors';
+  const iconClasses = 'w-10 sm:w-12 h-auto text-white hover:text-primary-1 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-1 rounded';
 
   return (
     <footer id={id} className="bg-primary-2 text-white" role="contentinfo">
@@ -42,8 +38,8 @@ export default function PageFooter({
 
           {/* Right Side */}
           <div className="flex items-center gap-6">
-            <button
-              onClick={() => window.location.href = `mailto:${email}`}
+            <a
+              href={`mailto:${email}`}
               className={iconClasses}
               aria-label="Send us an email"
             >
@@ -55,12 +51,14 @@ export default function PageFooter({
               >
                 <path d={siGmail.path} />
               </svg>
-            </button>
+            </a>
 
-            <button
-              onClick={() => newTab(facebookUrl)}
+            <a
+              href={facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className={iconClasses}
-              aria-label="Visit our Facebook page"
+              aria-label="Visit our Facebook page (opens in new tab)"
             >
               <svg
                 role="img"
@@ -70,7 +68,7 @@ export default function PageFooter({
               >
                 <path d={siFacebook.path} />
               </svg>
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 import { Mail, MessageCircle, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import HeroBanner from '@/components/ui/HeroBanner';
 import { SEOHead, useGoogleAnalytics } from '@/components/seo';
@@ -24,10 +24,10 @@ export default function ContactPage() {
     trackContactFormSubmit({ name, email, subject });
 
     emailjs.sendForm(
-      import.meta.env.REACT_APP_SERVICE_ID,
-      import.meta.env.REACT_APP_TEMPLATE_ID,
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
       form.current,
-      import.meta.env.REACT_APP_USER_ID
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
     ).then(
       () => {
         setStatus('success');

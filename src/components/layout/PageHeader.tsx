@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import ReactBurger from 'hamburger-react';
 import { NAV_ITEMS } from '@/data/navItems';
@@ -7,7 +7,15 @@ import ModalMenu from './ModalMenu';
 
 export default function PageHeader() {
   const [isOpen, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
+  const burgerButtonRef = useRef<HTMLDivElement>(null);
+
+  const closeModal = () => {
+    setOpen(false);
+    // Return focus to burger button after modal closes
+    setTimeout(() => {
+      burgerButtonRef.current?.querySelector('button')?.focus();
+    }, 0);
+  };
 
   return (
     <header className="sticky top-0 z-40 px-4 py-3 shadow-md bg-primary-1 sm:px-8 sm:py-4 lg:px-40 lg:py-5">
@@ -25,11 +33,11 @@ export default function PageHeader() {
               className="object-contain w-32 h-auto sm:w-40 lg:w-48"
             />
           </Link>
-          
+
           {/* Burger menu for mobile */}
-          <div className="z-50 sm:hidden" aria-label="Mobile menu toggle">
+          <div ref={burgerButtonRef} className="z-50 sm:hidden" aria-label="Mobile menu toggle">
             <ReactBurger
-              color="#074621"
+              color="var(--color-brand-primary)"
               toggled={isOpen}
               toggle={setOpen}
               easing="ease-in"
@@ -46,7 +54,7 @@ export default function PageHeader() {
               to={item.path}
               className={({ isActive }) =>
                 `font-bold text-lg no-underline transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-2 rounded px-2 py-1 ${
-                  isActive ? 'text-[#03200E]' : 'text-[#042B14] hover:text-[#03200E]'
+                  isActive ? 'text-primary-2' : 'text-primary-2/80 hover:text-primary-2'
                 }`
               }
             >

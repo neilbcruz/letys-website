@@ -320,9 +320,9 @@ VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 VITE_ENABLE_GA=true
 
 # EmailJS (for contact form)
-REACT_APP_SERVICE_ID=your_service_id
-REACT_APP_TEMPLATE_ID=your_template_id
-REACT_APP_USER_ID=your_user_id
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
 ```
 
 ### Site URL

@@ -7,29 +7,29 @@ export default function PageBody() {
   return (
     <div className="w-full">
 
-      {/* HERO BANNER */}
-      <section className="relative py-16 bg-linear-to-br from-primary-1 to-primary-1/80 text-primary-2 lg:py-24">
+      {/* FEATURED PRODUCT INTRO */}
+      <section aria-labelledby="featured-heading" className="py-16 bg-white lg:py-20">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
-            <div className="text-center lg:text-left">
-              <h2 className="mb-4 text-4xl font-bold lg:text-5xl">Lety's Special Buko Pie</h2>
-              <p className="text-xl leading-relaxed lg:text-2xl">
-                Enjoy our selection of specialty pies, baked goods, and pasalubong treats made with love and tradition.
-              </p>
-              <div className="flex gap-4 justify-center mt-8 lg:justify-start">
-                <NavLink to="/products">
-                  <Button size="lg" variant="primary">Order Now</Button>
-                </NavLink>
-              </div>
-            </div>
-            <div className="flex justify-center lg:justify-end">
-              <img 
+            <div className="order-2 lg:order-1">
+              <img
                 src={IMAGES.BUKO_PIE.default}
                 srcSet={IMAGES.BUKO_PIE.srcSet}
                 sizes="(max-width: 640px) 16rem, (max-width: 1024px) 20rem, 24rem"
-                alt="Buko Pie"
-                className="object-cover w-64 h-64 rounded-2xl shadow-2xl transition-transform duration-300 lg:w-96 lg:h-96 hover:scale-105"
+                alt="Lety's signature Buko Pie"
+                className="object-cover w-64 h-64 mx-auto rounded-2xl shadow-xl transition-transform duration-300 lg:w-80 lg:h-80 hover:scale-105"
               />
+            </div>
+            <div className="order-1 text-center lg:order-2 lg:text-left">
+              <h2 id="featured-heading" className="mb-4 text-3xl font-bold text-primary-2 lg:text-4xl">Our Signature Buko Pie</h2>
+              <p className="text-lg leading-relaxed text-gray-700 lg:text-xl">
+                Experience Lety's famous specialty pie, crafted with fresh young coconuts and a legacy of baking excellence since 1976. Each pie is made with love using our time-honored family recipe.
+              </p>
+              <div className="flex gap-4 justify-center mt-8 lg:justify-start">
+                <NavLink to="/products">
+                  <Button size="lg" variant="primary">View All Products</Button>
+                </NavLink>
+              </div>
             </div>
           </div>
         </div>
