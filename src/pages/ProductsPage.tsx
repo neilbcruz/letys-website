@@ -230,7 +230,16 @@ export default function ProductsPage() {
                     <div
                       key={item.itemId}
                       onClick={() => handleProductClick(item.name, item.category)}
-                      className="cursor-pointer"
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`${item.name} — ${item.category}`}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleProductClick(item.name, item.category);
+                        }
+                      }}
+                      className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-1 rounded-lg"
                     >
                       <ProductCardWithStock item={item} />
                     </div>

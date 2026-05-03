@@ -1,7 +1,11 @@
 // PageFooter.tsx
 import { NavLink } from 'react-router-dom';
 import { IMAGES } from '@/lib/images';
-import { siFacebook, siGmail } from 'simple-icons';
+const SVG_PATHS = {
+  facebook:
+    'M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z',
+  gmail: 'M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z',
+} as const;
 
 interface PageFooterProps {
   facebookUrl?: string;
@@ -49,7 +53,7 @@ export default function PageFooter({
                 fill="currentColor"
                 aria-hidden="true"
               >
-                <path d={siGmail.path} />
+                <path d={SVG_PATHS.gmail} />
               </svg>
             </a>
 
@@ -66,7 +70,7 @@ export default function PageFooter({
                 fill="currentColor"
                 aria-hidden="true"
               >
-                <path d={siFacebook.path} />
+                <path d={SVG_PATHS.facebook} />
               </svg>
             </a>
           </div>
