@@ -3,39 +3,30 @@
 //
 // Optimizes source JPGs into responsive WebP variants.
 //
-// Source:  src/assets/images/*.jpg
-// Output:  src/assets/images/webp/{subdir}/{name}.webp
-//          src/assets/images/webp/{subdir}/{name}-{W}w.webp
+// Convention: source folder = output folder.
+//   src/assets/images/products/*.jpg  → src/assets/images/webp/products/*-{W}w.webp
+//   src/assets/images/banners/*.jpg   → src/assets/images/webp/banners/*-{W}w.webp
+//   src/assets/images/locations/*.jpg → src/assets/images/webp/locations/*-{W}w.webp
 //
-// Subdirectory routing (matches existing structure):
-//   location-*  → locations/   (breakpoints: 640, 1024, 1920)
-//   bp_pie-*    → products/    (breakpoints: 400, 800, 1200)
-//   buko_pie-*  → products/
-//   cassava-*   → products/
-//   frozen_pie-→ products/
-//   pineapple_*→ products/
-//   bukopie_box→ products/
-//   cassava_box→ products/
-//   tropical_* → products/
-//   lety-*      → banners/     (breakpoints: 640, 1024, 1920)
-//   letys_*     → banners/
-//   buko-tree   → banners/
-//   pasalubong-*→ banners/
-//   buko_pie-12 → banners/     (hero product shot)
-//   cassava-10  → banners/     (hero product shot)
-//   *           → banners/     (default)
+// Breakpoints per category:
+//   products:  400, 800, 1200
+//   banners:   640, 1024, 1920
+//   locations: 640, 1024, 1920
 //
-// Idempotent: skips images whose outputs are newer than the source JPG.
+// Drop new JPGs in the right source folder, run this script, done.
+// Idempotent: skips images whose webp outputs are newer than the source JPG.
 // Usage: node scripts/optimize-images.mjs [--force]
 
 import { readdir, stat, mkdir } from 'node:fs/promises';
 import { join, basename } from 'node:path';
 import sharp from 'sharp';
 
-const SRC_DIR = join(process.cwd(), 'src/assets/images');
+const SRC_ROOT = join(process.cwd(), 'src/assets/images');
 const OUT_ROOT = join(process.cwd(), 'src/assets/images/webp');
 const QUALITY = 80;
 const FORCE = process.argv.includes('--force');
+const MAX_DEFAULT_WIDTH = 1920;
+const MIN_SRC_WIDTH_FOR_VARIANTS = 500;
 
 const BREAKPOINTS = {
   products: [400, 800, 1200],
@@ -43,35 +34,35 @@ const BREAKPOINTS = {
   locations: [640, 1024, 1920],
 };
 
-const MAX_DEFAULT_WIDTH = 1920;
-const MIN_SRC_WIDTH_FOR_VARIANTS = 500;
-
-function routeToSubdir(name) {
-  if (name.startsWith('location-')) return 'locations';
-  if (name.startsWith('bp_pie-')) return 'products';
-  if (name.startsWith('buko_pie-') && name !== 'buko_pie-12') return 'products';
-  if (name.startsWith('cassava-') && name !== 'cassava-10') return 'products';
-  if (name.startsWith('cassava_box-')) return 'products';
-  if (name.startsWith('frozen_pie-')) return 'products';
-  if (name.startsWith('pineapple_')) return 'products';
-  if (name.startsWith('bukopie_box-')) return 'products';
-  if (name.startsWith('tropical_')) return 'products';
-  return 'banners';
-}
+const CATEGORIES = Object.keys(BREAKPOINTS);
 
 async function getSourceJpgs() {
-  const files = await readdir(SRC_DIR);
-  return files.filter(f => f.endsWith('.jpg')).sort();
+  const results = [];
+  for (const cat of CATEGORIES) {
+    const dir = join(SRC_ROOT, cat);
+    try {
+      const files = await readdir(dir);
+      for (const f of files.sort()) {
+        if (f.endsWith('.jpg')) {
+          results.push({ category: cat, file: f, path: join(dir, f) });
+        }
+      }
+    } catch {
+      // Category dir doesn't exist yet — skip
+    }
+  }
+  return results;
 }
 
-function outPath(subdir, name, width) {
-  if (width) return join(OUT_ROOT, subdir, `${name}-${width}w.webp`);
-  return join(OUT_ROOT, subdir, `${name}.webp`);
+function outPath(category, name, width) {
+  const dir = join(OUT_ROOT, category);
+  if (width) return join(dir, `${name}-${width}w.webp`);
+  return join(dir, `${name}.webp`);
 }
 
-async function needsProcessing(srcFile, outputs) {
+async function needsProcessing(srcPath, outputs) {
   if (FORCE) return true;
-  const srcStat = await stat(join(SRC_DIR, srcFile));
+  const srcStat = await stat(srcPath);
   for (const out of outputs) {
     try {
       const outStat = await stat(out);
@@ -83,40 +74,34 @@ async function needsProcessing(srcFile, outputs) {
   return false;
 }
 
-async function processImage(srcFile) {
-  const name = basename(srcFile, '.jpg');
-  const srcPath = join(SRC_DIR, srcFile);
-  const subdir = routeToSubdir(name);
-  const breakpoints = BREAKPOINTS[subdir];
+async function processImage({ category, file, path: srcPath }) {
+  const name = basename(file, '.jpg');
+  const breakpoints = BREAKPOINTS[category];
+  await mkdir(join(OUT_ROOT, category), { recursive: true });
 
-  // Ensure subdir exists
-  await mkdir(join(OUT_ROOT, subdir), { recursive: true });
+  const outputs = [outPath(category, name, null), ...breakpoints.map(w => outPath(category, name, w))];
 
-  const outputs = [outPath(subdir, name, null), ...breakpoints.map(w => outPath(subdir, name, w))];
-
-  if (!(await needsProcessing(srcFile, outputs))) {
-    return { name, subdir, status: 'skipped' };
+  if (!(await needsProcessing(srcPath, outputs))) {
+    return { name, category, status: 'skipped' };
   }
 
   const metadata = await sharp(srcPath).metadata();
   const srcWidth = metadata.width;
   const defaultWidth = Math.min(srcWidth, MAX_DEFAULT_WIDTH);
 
-  // Default image
   await sharp(srcPath)
     .resize(defaultWidth)
     .webp({ quality: QUALITY })
-    .toFile(outPath(subdir, name, null));
+    .toFile(outPath(category, name, null));
 
-  const result = { name, subdir, status: 'processed', defaultWidth, srcWidth, variants: [] };
+  const result = { name, category, status: 'processed', defaultWidth, srcWidth, variants: [] };
 
-  // Responsive variants
   for (const w of breakpoints) {
     if (srcWidth >= MIN_SRC_WIDTH_FOR_VARIANTS && w < srcWidth) {
       await sharp(srcPath)
         .resize(w)
         .webp({ quality: QUALITY })
-        .toFile(outPath(subdir, name, w));
+        .toFile(outPath(category, name, w));
       result.variants.push(w);
     }
   }
@@ -127,32 +112,29 @@ async function processImage(srcFile) {
 async function main() {
   const jpgs = await getSourceJpgs();
   if (jpgs.length === 0) {
-    console.log('No source JPGs found in', SRC_DIR);
+    console.log('No source JPGs found in', SRC_ROOT);
     return;
   }
 
   console.log(`Found ${jpgs.length} source JPGs\n`);
 
-  const counts = { processed: 0, skipped: 0 };
-  const bySubdir = {};
+  let processed = 0;
+  let skipped = 0;
 
   for (const jpg of jpgs) {
     const result = await processImage(jpg);
-    bySubdir[result.subdir] = (bySubdir[result.subdir] || 0) + 1;
-
     if (result.status === 'skipped') {
-      counts.skipped++;
+      skipped++;
       continue;
     }
-    counts.processed++;
+    processed++;
     const variantStr = result.variants.length > 0
       ? ` + ${result.variants.map(w => `${w}w`).join(', ')}`
       : '';
-    console.log(`  ✓ ${result.name} → ${result.subdir}/ (${result.srcWidth}px → ${result.defaultWidth}px${variantStr})`);
+    console.log(`  ✓ ${result.category}/${result.name} (${result.srcWidth}px → ${result.defaultWidth}px${variantStr})`);
   }
 
-  console.log(`\nDone: ${counts.processed} processed, ${counts.skipped} up-to-date`);
-  console.log('By directory:', bySubdir);
+  console.log(`\nDone: ${processed} processed, ${skipped} up-to-date`);
 }
 
 main().catch(err => {
