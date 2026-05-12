@@ -51,10 +51,8 @@ export const IMAGES = {
   MAIN_STORE: getResponsiveImage('location-main'),
   LETYS_LOGO: getResponsiveImage('letys-logo'),
   LETYS_LOGO2: getResponsiveImage('letys-logo2'),
-  FACEBOOK: getResponsiveImage('facebook'),
-  GOOGLE: getResponsiveImage('googlemail'),
-  HERO: getResponsiveImage('lbp-hero'),
-  HERO_NARROW: getResponsiveImage('lbp-hero-narrow'),
+  HERO: getResponsiveImage('letys_buko_pie-1'),
+  HERO_NARROW: getResponsiveImage('buko-tree'),
 } as const;
 
 export type ImageKey = keyof typeof IMAGES;
