@@ -3,15 +3,10 @@
 //
 // Optimizes source JPGs into responsive WebP variants.
 //
-// Convention: source folder = output folder.
-//   src/assets/images/products/*.jpg  → src/assets/images/webp/products/*-{W}w.webp
-//   src/assets/images/banners/*.jpg   → src/assets/images/webp/banners/*-{W}w.webp
-//   src/assets/images/locations/*.jpg → src/assets/images/webp/locations/*-{W}w.webp
-//
-// Breakpoints per category:
-//   products:  400, 800, 1200
-//   banners:   640, 1024, 1920
-//   locations: 640, 1024, 1920
+// Convention: source folder determines treatment.
+//   products/  → square crop (fit: cover) → 400w, 800w, 1200w
+//   banners/   → preserve aspect ratio    → 640w, 1024w, 1920w
+//   locations/ → preserve aspect ratio    → 640w, 1024w, 1920w
 //
 // Drop new JPGs in the right source folder, run this script, done.
 // Idempotent: skips images whose webp outputs are newer than the source JPG.
@@ -28,17 +23,15 @@ const FORCE = process.argv.includes('--force');
 const MAX_DEFAULT_WIDTH = 1920;
 const MIN_SRC_WIDTH_FOR_VARIANTS = 500;
 
-const BREAKPOINTS = {
-  products: [400, 800, 1200],
-  banners: [640, 1024, 1920],
-  locations: [640, 1024, 1920],
+const CATEGORIES = {
+  products: { breakpoints: [400, 800, 1200], square: true },
+  banners: { breakpoints: [640, 1024, 1920], square: false },
+  locations: { breakpoints: [640, 1024, 1920], square: false },
 };
-
-const CATEGORIES = Object.keys(BREAKPOINTS);
 
 async function getSourceJpgs() {
   const results = [];
-  for (const cat of CATEGORIES) {
+  for (const cat of Object.keys(CATEGORIES)) {
     const dir = join(SRC_ROOT, cat);
     try {
       const files = await readdir(dir);
@@ -76,7 +69,7 @@ async function needsProcessing(srcPath, outputs) {
 
 async function processImage({ category, file, path: srcPath }) {
   const name = basename(file, '.jpg');
-  const breakpoints = BREAKPOINTS[category];
+  const { breakpoints, square } = CATEGORIES[category];
   await mkdir(join(OUT_ROOT, category), { recursive: true });
 
   const outputs = [outPath(category, name, null), ...breakpoints.map(w => outPath(category, name, w))];
@@ -87,19 +80,34 @@ async function processImage({ category, file, path: srcPath }) {
 
   const metadata = await sharp(srcPath).metadata();
   const srcWidth = metadata.width;
-  const defaultWidth = Math.min(srcWidth, MAX_DEFAULT_WIDTH);
+
+  // Default image: max 1920px (square for products, original ratio for others)
+  const defaultSize = square
+    ? Math.min(srcWidth, metadata.height, MAX_DEFAULT_WIDTH)
+    : Math.min(srcWidth, MAX_DEFAULT_WIDTH);
+
+  const resizeOpts = square
+    ? { width: defaultSize, height: defaultSize, fit: 'cover' }
+    : { width: defaultSize };
 
   await sharp(srcPath)
-    .resize(defaultWidth)
+    .resize(resizeOpts)
     .webp({ quality: QUALITY })
     .toFile(outPath(category, name, null));
 
-  const result = { name, category, status: 'processed', defaultWidth, srcWidth, variants: [] };
+  const result = { name, category, status: 'processed', srcWidth, defaultSize, square, variants: [] };
 
   for (const w of breakpoints) {
-    if (srcWidth >= MIN_SRC_WIDTH_FOR_VARIANTS && w < srcWidth) {
+    const shouldGenerate = square
+      ? (Math.min(srcWidth, metadata.height) >= MIN_SRC_WIDTH_FOR_VARIANTS && w < Math.min(srcWidth, metadata.height))
+      : (srcWidth >= MIN_SRC_WIDTH_FOR_VARIANTS && w < srcWidth);
+
+    if (shouldGenerate) {
+      const variantOpts = square
+        ? { width: w, height: w, fit: 'cover' }
+        : { width: w };
       await sharp(srcPath)
-        .resize(w)
+        .resize(variantOpts)
         .webp({ quality: QUALITY })
         .toFile(outPath(category, name, w));
       result.variants.push(w);
@@ -128,10 +136,11 @@ async function main() {
       continue;
     }
     processed++;
+    const tag = result.square ? ' [square]' : '';
     const variantStr = result.variants.length > 0
       ? ` + ${result.variants.map(w => `${w}w`).join(', ')}`
       : '';
-    console.log(`  ✓ ${result.category}/${result.name} (${result.srcWidth}px → ${result.defaultWidth}px${variantStr})`);
+    console.log(`  ✓ ${result.category}/${result.name}${tag} (${result.srcWidth}px → ${result.defaultSize}px${variantStr})`);
   }
 
   console.log(`\nDone: ${processed} processed, ${skipped} up-to-date`);
