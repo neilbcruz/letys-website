@@ -1,5 +1,5 @@
 /*
-/* Design Tokens — Lety's Buko Pie
+ * Design Tokens — Lety's Buko Pie
  *
  * All color pairs verified against WCAG 2.1 AA (4.5:1 minimum).
  * Contrast ratios against #FFFFFF unless noted:
@@ -15,82 +15,122 @@
  * https://webaim.org/resources/contrastchecker/
  */
 
+/* ========================================================================
+ * 1. RAW VALUES (:root)
+ * All token values defined here. @theme inline below bridges to Tailwind.
+ * ======================================================================== */
 :root {
-  /* ============================================
-   * COLORS
-   * ============================================ */
-
-  /* Brand Palette — raw color values */
+  /* ─── Brand Palette ────────────────────────────────────────── */
   --color-gold:    #C29600;
   --color-forest:  #074621;
   --color-olive:   #5E7E22;
   --color-fern:    #476C2D;
   --color-moss:    #4D4A0E;
 
-  /* Semantic Brand Aliases — what components should reference */
-  --color-brand-primary:  var(--color-forest);   /* main CTAs, headings */
-  --color-brand-accent:   var(--color-gold);     /* highlights, secondary buttons */
-  --color-brand-muted:    var(--color-olive);    /* hover states, tertiary */
-  --color-brand-dark:     var(--color-fern);     /* dark green variants */
-  --color-brand-darkest:  var(--color-moss);     /* brown-green variants */
+  /* ─── Brand Semantic Aliases ─────────────────────────────── */
+  --color-brand-primary:  var(--color-forest);
+  --color-brand-accent:   var(--color-gold);
+  --color-brand-muted:    var(--color-olive);
+  --color-brand-dark:     var(--color-fern);
+  --color-brand-darkest:  var(--color-moss);
 
-  /* Surface Colors — backgrounds */
-  --color-surface-cream:  #FFF8E0;
-  --color-surface-sage:   #E6F0C3;
-  --color-surface-base:   #FAFAF8;
-  --color-surface-white:  #FFFFFF;
+  /* ─── Surfaces ───────────────────────────────────────────── */
+  --color-surface-base:    #FAFAF8;
+  --color-surface-white:   #FFFFFF;
+  --color-surface-cream:   #FFF8E0;
+  --color-surface-sage:    #E6F0C3;
+  --color-surface-subtle:  #F5F5F0;
+  --color-surface-muted:   #EDEDEA;
+  --color-surface-emphasis:#DDDDD8;
+  --color-surface-strong:  #C8C8C2;
+  --color-surface-inverse: #1A1A18;
 
-  /* Text Colors */
-  --color-text-default:   #1F2937;
-  --color-text-muted:     #4B5563;
-  --color-text-light:     #6B7280;
-  --color-text-inverse:   #FFFFFF;
+  /* ─── Foreground ─────────────────────────────────────────── */
+  --color-fg-default:     #1C1C1A;
+  --color-fg-strong:      #2E2E2B;
+  --color-fg-base:        #454540;
+  --color-fg-muted:       #5C5C56;
+  --color-fg-subtle:      #70706B;
+  --color-fg-faint:       #9A9A90;
+  --color-fg-inverse:     #FFFFFF;
+  --color-fg-placeholder: #9A9A90;
 
-  /* Overlay Colors — for hero banners, modals, etc. */
+  /* ─── Strokes ────────────────────────────────────────────── */
+  --color-stroke-default:  #E2E2DC;
+  --color-stroke-emphasis: #8E8E86;
+  --color-stroke-strong:   #B8B8B0;
+
+  /* ─── Status — Error ─────────────────────────────────────── */
+  --color-status-error-fg:        #C0152A;
+  --color-status-error-fg-strong: #8B0E1C;
+  --color-status-error-bg:        #FFF0F0;
+  --color-status-error-bg-muted:  #FFE0E0;
+  --color-status-error-bg-solid:  #C0152A;
+  --color-status-error-border:    #D07070;
+
+  /* ─── Status — Success ───────────────────────────────────── */
+  --color-status-success-fg:        #1A6B38;
+  --color-status-success-fg-strong: #14522B;
+  --color-status-success-bg:        #E6F0C3;
+  --color-status-success-bg-solid:  #1A6B38;
+  --color-status-success-border:    #709050;
+
+  /* ─── Status — Warning ───────────────────────────────────── */
+  --color-status-warning-fg:        #92660A;
+  --color-status-warning-fg-strong: #6B4A07;
+  --color-status-warning-bg:        #FFFBEB;
+  --color-status-warning-bg-muted:  #FEF3C7;
+  --color-status-warning-border:    #A89040;
+
+  /* ─── Status — Info ──────────────────────────────────────── */
+  --color-status-info-fg:     #1E4E8C;
+  --color-status-info-bg:     #EFF6FF;
+  --color-status-info-border: #7088A0;
+
+  /* ─── Text (legacy aliases) ──────────────────────────────── */
+  --color-text-default:  #1F2937;
+  --color-text-muted:    #4B5563;
+  --color-text-light:    #6B7280;
+  --color-text-inverse:  #FFFFFF;
+
+  /* ─── Overlays ───────────────────────────────────────────── */
   --color-overlay-light:  rgba(0, 0, 0, 0.4);
   --color-overlay-medium: rgba(0, 0, 0, 0.5);
   --color-overlay-heavy:  rgba(0, 0, 0, 0.6);
   --color-overlay-black:  rgba(0, 0, 0, 0.7);
 
-  /* Status Colors — functional UI states */
-  --color-error:          #DC2626;
-  --color-error-bg:       #FEE2E2;
-  --color-success:        #16A34A;
-  --color-success-bg:     #DCFCE7;
-  --color-warning:        #F59E0B;
-  --color-warning-bg:     #FEF3C7;
-  --color-info:           #3B82F6;
-  --color-info-bg:        #DBEAFE;
+  /* ─── Status (legacy aliases) ────────────────────────────── */
+  --color-error:     #DC2626;
+  --color-error-bg:  #FEE2E2;
+  --color-success:   #16A34A;
+  --color-success-bg:#DCFCE7;
+  --color-warning:   #F59E0B;
+  --color-warning-bg:#FEF3C7;
+  --color-info:      #3B82F6;
+  --color-info-bg:   #DBEAFE;
 
-  /* ============================================
-   * TYPOGRAPHY
-   * ============================================ */
-
-  /* Font Families */
+  /* ─── Typography ─────────────────────────────────────────── */
   --font-heading:  'Figtree', ui-sans-serif, system-ui, sans-serif;
   --font-body:     'Figtree', ui-sans-serif, system-ui, sans-serif;
   --font-mono:     ui-monospace, 'SF Mono', 'Roboto Mono', monospace;
 
-  /* Font Sizes — using a consistent scale */
-  --text-xs:   0.75rem;    /* 12px */
-  --text-sm:   0.875rem;   /* 14px */
-  --text-base: 1rem;       /* 16px */
-  --text-lg:   1.125rem;   /* 18px */
-  --text-xl:   1.25rem;    /* 20px */
-  --text-2xl:  1.5rem;     /* 24px */
-  --text-3xl:  1.875rem;   /* 30px */
-  --text-4xl:  2.25rem;    /* 36px */
-  --text-5xl:  3rem;       /* 48px */
-  --text-6xl:  3.75rem;    /* 60px */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --text-6xl:  3.75rem;
 
-  /* Font Weights */
   --font-normal:   400;
   --font-medium:   500;
   --font-semibold: 600;
   --font-bold:     700;
-  --font-extrabold: 800;
+  --font-extrabold:800;
 
-  /* Line Heights */
   --leading-none:    1;
   --leading-tight:   1.2;
   --leading-snug:    1.375;
@@ -98,85 +138,65 @@
   --leading-relaxed: 1.625;
   --leading-loose:   2;
 
-  /* Letter Spacing */
   --tracking-tight:  -0.025em;
   --tracking-normal: 0;
   --tracking-wide:   0.025em;
 
-  /* ============================================
-   * SPACING SCALE (4px base unit)
-   * ============================================ */
-
+  /* ─── Spacing ────────────────────────────────────────────── */
   --space-0:   0;
   --space-px:  1px;
-  --space-0-5: 0.125rem;   /* 2px */
-  --space-1:   0.25rem;    /* 4px */
-  --space-2:   0.5rem;     /* 8px */
-  --space-3:   0.75rem;    /* 12px */
-  --space-4:   1rem;       /* 16px */
-  --space-5:   1.25rem;    /* 20px */
-  --space-6:   1.5rem;     /* 24px */
-  --space-8:   2rem;       /* 32px */
-  --space-10:  2.5rem;     /* 40px */
-  --space-12:  3rem;       /* 48px */
-  --space-16:  4rem;       /* 64px */
-  --space-20:  5rem;       /* 80px */
-  --space-24:  6rem;       /* 96px */
-  --space-32:  8rem;       /* 128px */
+  --space-0-5: 0.125rem;
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.25rem;
+  --space-6:   1.5rem;
+  --space-8:   2rem;
+  --space-10:  2.5rem;
+  --space-12:  3rem;
+  --space-16:  4rem;
+  --space-20:  5rem;
+  --space-24:  6rem;
+  --space-32:  8rem;
 
-  /* ============================================
-   * BORDER RADIUS
-   * ============================================ */
-
+  /* ─── Border Radius ──────────────────────────────────────── */
   --radius-none:  0;
-  --radius-sm:    0.25rem;   /* 4px — small elements */
-  --radius-base:  0.375rem;  /* 6px — buttons, inputs */
-  --radius-md:    0.5rem;    /* 8px — cards small */
-  --radius-lg:    0.75rem;   /* 12px — modals, panels */
-  --radius-xl:    1rem;      /* 16px — hero overlays */
-  --radius-2xl:   1.5rem;    /* 24px — large cards */
-  --radius-3xl:   2rem;      /* 32px — extra large */
-  --radius-full:  9999px;    /* pills, avatars, badges */
+  --radius-sm:    0.25rem;
+  --radius-base:  0.375rem;
+  --radius-md:    0.5rem;
+  --radius-lg:    0.75rem;
+  --radius-xl:    1rem;
+  --radius-2xl:   1.5rem;
+  --radius-3xl:   2rem;
+  --radius-full:  9999px;
 
-  /* ============================================
-   * SHADOWS
-   * ============================================ */
+  /* ─── Shadows ────────────────────────────────────────────── */
+  --shadow-sm:     0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-base:   0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md:     0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:     0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl:     0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl:    0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner:  inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --shadow-brand-sm: 0 1px 2px 0 rgb(199 150 11 / 0.1);
+  --shadow-brand-md: 0 4px 6px -1px rgb(199 150 11 / 0.15), 0 2px 4px -2px rgb(199 150 11 / 0.1);
+  --shadow-brand-lg: 0 10px 15px -3px rgb(199 150 11 / 0.2), 0 4px 6px -4px rgb(199 150 11 / 0.15);
 
-  --shadow-sm:  0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-base:  0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl:  0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  /* ─── Motion ─────────────────────────────────────────────── */
+  --duration-instant: 50ms;
+  --duration-fast:    150ms;
+  --duration-normal:  200ms;
+  --duration-slow:    300ms;
+  --duration-slower:  500ms;
 
-  /* Brand-specific shadows with color tint */
-  --shadow-brand-sm:  0 1px 2px 0 rgb(199 150 11 / 0.1);
-  --shadow-brand-md:  0 4px 6px -1px rgb(199 150 11 / 0.15), 0 2px 4px -2px rgb(199 150 11 / 0.1);
-  --shadow-brand-lg:  0 10px 15px -3px rgb(199 150 11 / 0.2), 0 4px 6px -4px rgb(199 150 11 / 0.15);
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in:      cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out:  cubic-bezier(0.4, 0, 0.6, 1);
+  --ease-bounce:  cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-  /* ============================================
-   * MOTION / ANIMATION
-   * ============================================ */
-
-  /* Durations */
-  --duration-instant:  50ms;
-  --duration-fast:     150ms;
-  --duration-normal:   200ms;
-  --duration-slow:     300ms;
-  --duration-slower:   500ms;
-
-  /* Easing Functions */
-  --ease-default:  cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-in:       cubic-bezier(0.4, 0, 1, 1);
-  --ease-out:      cubic-bezier(0, 0, 0.2, 1);
-  --ease-in-out:   cubic-bezier(0.4, 0, 0.6, 1);
-  --ease-bounce:   cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-  /* ============================================
-   * Z-INDEX SCALE
-   * ============================================ */
-
+  /* ─── Z-Index ────────────────────────────────────────────── */
   --z-base:     0;
   --z-raised:   10;
   --z-dropdown: 20;
@@ -187,112 +207,112 @@
   --z-tooltip:  300;
   --z-skip:     9999;
 
-  /* ============================================
-   * LAYOUT
-   * ============================================ */
-
-  /* Container max-widths */
+  /* ─── Layout ─────────────────────────────────────────────── */
   --container-sm:  640px;
   --container-md:  768px;
   --container-lg:  1024px;
   --container-xl:  1280px;
   --container-2xl: 1536px;
 
-  /* Breakpoints — for reference (Tailwind uses these in @theme) */
-  --bp-xs:    375px;
-  --bp-sm:    640px;
-  --bp-md:    768px;
-  --bp-lg:    1024px;
-  --bp-xl:    1280px;
-  --bp-2xl:   1536px;
+  --bp-xs:  375px;
+  --bp-sm:  640px;
+  --bp-md:  768px;
+  --bp-lg:  1024px;
+  --bp-xl:  1280px;
+  --bp-2xl: 1536px;
 
-  /* ============================================
-   * INTERACTION
-   * ============================================ */
-
-  /* Touch target minimum size (WCAG 2.5.5) */
-  --touch-target: 44px;
-
-  /* Focus ring */
+  /* ─── Interaction ────────────────────────────────────────── */
+  --touch-target:      44px;
   --focus-ring-width:  2px;
   --focus-ring-offset: 2px;
   --focus-ring-color:  var(--color-brand-accent);
 
-  /* ============================================
-   * SURFACE SCALE — warm-tinted, harmonious with #FAFAF8 base
-   * Hue: ~60° (yellow-green warmth, matching existing surfaces)
-   * ============================================ */
-
-  --color-surface-subtle:    #F5F5F0;   /* bg-gray-50 replacement   — warm off-white      */
-  --color-surface-muted:     #EDEDEA;   /* bg-gray-100 replacement  — light warm gray      */
-  --color-surface-emphasis:  #DDDDD8;   /* bg-gray-200 replacement  — mid warm gray        */
-  --color-surface-strong:    #C8C8C2;   /* bg-gray-300/400 replace  — stronger warm gray   */
-  --color-surface-inverse:   #1A1A18;   /* bg-black replacement     — near-black, warm     */
-
-  /* Already exists — mapped here for completeness:
-     --color-surface-base    #FAFAF8    bg-white replacement (33 instances)
-     --color-surface-white   #FFFFFF    pure white where needed               */
-
-
-  /* ============================================
-   * FOREGROUND SCALE — warm-tinted grays, not pure neutral
-   * ============================================ */
-
-  --color-fg-default:        #1C1C1A;   /* text-gray-900  — near-black, warm               */
-  --color-fg-strong:         #2E2E2B;   /* text-gray-800  — very dark warm gray             */
-  --color-fg-base:           #454540;   /* text-gray-700  — main body text                 */
-  --color-fg-muted:          #5C5C56;   /* text-gray-600  — secondary text (35 instances)  */
-  --color-fg-subtle:         #70706B;   /* text-gray-500  — tertiary / helper text         */
-  --color-fg-faint:          #9A9A90;   /* text-gray-400  — decorative / disabled only      */
-  --color-fg-inverse:        #FFFFFF;   /* text-white     — on dark backgrounds             */
-  --color-fg-placeholder:    #9A9A90;   /* placeholder-gray-500 — same as faint            */
-
-
-  /* ============================================
-   * STROKE SCALE — borders and dividers
-   * ============================================ */
-
-  --color-stroke-default:    #E2E2DC;   /* border-gray-200 + divide-gray-200 (18 instances) */
-  --color-stroke-emphasis:   #8E8E86;   /* border-gray-300 — form inputs (3.16:1 on base)  */
-  --color-stroke-strong:     #B8B8B0;   /* border-gray-400                                  */
-
-
-  /* ============================================
-   * STATUS — pure semantic, not brand-derived
-   * ============================================ */
-
-  /* Error / Destructive */
-  --color-status-error-fg:        #C0152A;   /* text-red-600/700 unified              */
-  --color-status-error-fg-strong: #8B0E1C;   /* text-red-800 specifically             */
-  --color-status-error-bg:        #FFF0F0;   /* bg-red-50                             */
-  --color-status-error-bg-muted:  #FFE0E0;   /* bg-red-100                            */
-  --color-status-error-bg-solid:  #C0152A;   /* bg-red-500/600 (solid button/badge)   */
-  --color-status-error-border:    #D07070;   /* border-red-200 (3.04:1 on error-bg)             */
-
-  /* Success */
-  --color-status-success-fg:        #1A6B38;   /* text-green-700/800 unified            */
-  --color-status-success-fg-strong: #14522B;   /* text-green-800 specifically           */
-  --color-status-success-bg:        #E6F0C3;   /* bg-green-50/100 → reuse surface-sage  */
-  --color-status-success-bg-solid:  #1A6B38;   /* bg-green-500 (solid)                  */
-  --color-status-success-border:    #709050;   /* border-green-200 (3.04:1 on success-bg)       */
-
-  /* Warning */
-  --color-status-warning-fg:        #92660A;   /* text-yellow-700/800 unified           */
-  --color-status-warning-fg-strong: #6B4A07;   /* text-yellow-800 specifically          */
-  --color-status-warning-bg:        #FFFBEB;   /* bg-yellow-50                          */
-  --color-status-warning-bg-muted:  #FEF3C7;   /* bg-yellow-100                         */
-  --color-status-warning-border:    #A89040;   /* border-yellow-200 (3.01:1 on warning-bg)      */
-
-  /* Info */
-  --color-status-info-fg:        #1E4E8C;   /* text-blue-800                           */
-  --color-status-info-bg:        #EFF6FF;   /* bg-blue-50                              */
-  --color-status-info-border:    #7088A0;   /* border-blue-200 (3.37:1 on info-bg)             */
-
-  /* ============================================
-   * GRADIENTS
-   * ============================================ */
-
-  --gradient-brand: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-dark) 100%);
-  --gradient-gold:   linear-gradient(135deg, var(--color-brand-accent) 0%, #D4A520 100%);
+  /* ─── Gradients ──────────────────────────────────────────── */
+  --gradient-brand:   linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-dark) 100%);
+  --gradient-gold:    linear-gradient(135deg, var(--color-brand-accent) 0%, #D4A520 100%);
   --gradient-overlay: linear-gradient(to bottom, var(--color-overlay-light), var(--color-overlay-black));
+}
+
+
+/* ========================================================================
+ * 2. TAILWIND BRIDGE (@theme inline)
+ * Registers tokens as Tailwind utilities. Uses var() so values stay
+ * runtime-responsive (not baked at build time).
+ * ======================================================================== */
+@theme inline {
+  /* ─── Brand Colors ───────────────────────────────────────── */
+  --color-primary-1: var(--color-brand-accent);
+  --color-primary-2: var(--color-brand-primary);
+  --color-primary-3: var(--color-brand-muted);
+
+  --color-secondary-1: var(--color-brand-dark);
+  --color-secondary-2: var(--color-brand-darkest);
+
+  --color-support-1: var(--color-surface-cream);
+  --color-support-2: var(--color-surface-sage);
+
+  /* ─── Base ───────────────────────────────────────────────── */
+  --color-bg:   var(--color-surface-base);
+  --color-text: var(--color-text-default);
+
+  /* ─── Surfaces ───────────────────────────────────────────── */
+  --color-surface-base:     var(--color-surface-base);
+  --color-surface-subtle:   var(--color-surface-subtle);
+  --color-surface-muted:    var(--color-surface-muted);
+  --color-surface-emphasis: var(--color-surface-emphasis);
+  --color-surface-strong:   var(--color-surface-strong);
+  --color-surface-inverse:  var(--color-surface-inverse);
+
+  /* ─── Foreground ─────────────────────────────────────────── */
+  --color-fg-default:  var(--color-fg-default);
+  --color-fg-strong:   var(--color-fg-strong);
+  --color-fg-base:     var(--color-fg-base);
+  --color-fg-muted:    var(--color-fg-muted);
+  --color-fg-subtle:   var(--color-fg-subtle);
+  --color-fg-faint:    var(--color-fg-faint);
+  --color-fg-inverse:  var(--color-fg-inverse);
+
+  /* ─── Strokes ────────────────────────────────────────────── */
+  --color-stroke-default:  var(--color-stroke-default);
+  --color-stroke-emphasis: var(--color-stroke-emphasis);
+  --color-stroke-strong:   var(--color-stroke-strong);
+
+  /* ─── Status — Error ─────────────────────────────────────── */
+  --color-status-error-fg:        var(--color-status-error-fg);
+  --color-status-error-fg-strong: var(--color-status-error-fg-strong);
+  --color-status-error-bg:        var(--color-status-error-bg);
+  --color-status-error-bg-muted:  var(--color-status-error-bg-muted);
+  --color-status-error-bg-solid:  var(--color-status-error-bg-solid);
+  --color-status-error-border:    var(--color-status-error-border);
+
+  /* ─── Status — Success ───────────────────────────────────── */
+  --color-status-success-fg:        var(--color-status-success-fg);
+  --color-status-success-fg-strong: var(--color-status-success-fg-strong);
+  --color-status-success-bg:        var(--color-status-success-bg);
+  --color-status-success-bg-solid:  var(--color-status-success-bg-solid);
+  --color-status-success-border:    var(--color-status-success-border);
+
+  /* ─── Status — Warning ───────────────────────────────────── */
+  --color-status-warning-fg:        var(--color-status-warning-fg);
+  --color-status-warning-fg-strong: var(--color-status-warning-fg-strong);
+  --color-status-warning-bg:        var(--color-status-warning-bg);
+  --color-status-warning-bg-muted:  var(--color-status-warning-bg-muted);
+  --color-status-warning-border:    var(--color-status-warning-border);
+
+  /* ─── Status — Info ──────────────────────────────────────── */
+  --color-status-info-fg:     var(--color-status-info-fg);
+  --color-status-info-bg:     var(--color-status-info-bg);
+  --color-status-info-border: var(--color-status-info-border);
+
+  /* ─── Typography ─────────────────────────────────────────── */
+  --font-heading: var(--font-heading);
+  --font-body:    var(--font-body);
+
+  /* ─── Breakpoints (literal values required by Tailwind v4) ── */
+  --breakpoint-xs:       375px;
+  --breakpoint-sm:       640px;
+  --breakpoint-tablet:   768px;
+  --breakpoint-lg:       1024px;
+  --breakpoint-desktop:  1280px;
+  --breakpoint-2xl:      1536px;
 }

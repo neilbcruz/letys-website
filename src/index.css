@@ -1,95 +1,11 @@
-/* 1. IMPORT DESIGN TOKENS & TAILWIND */
-/* Design tokens imported first — single source of truth */
+/* 1. TAILWIND + TOKENS */
 @import "./tokens.css";
 @import "tailwindcss";
 
 /* WCAG 2.1/2.2 Level AA Compliance */
 /* All color combinations meet or exceed 4.5:1 contrast ratio for normal text */
 
-/* 2. THEME MAPPING TO TAILWIND */
-/* Maps design tokens from tokens.css to Tailwind's expected naming */
-/* This keeps all existing class names (text-primary-2, bg-primary-1) working */
-@theme {
-  /* Primary brand colors — mapped to semantic tokens */
-  --color-primary-1: var(--color-brand-accent);    /* Gold */
-  --color-primary-2: var(--color-brand-primary);  /* Forest green */
-  --color-primary-3: var(--color-brand-muted);    /* Olive green */
-
-  /* Secondary brand colors */
-  --color-secondary-1: var(--color-brand-dark);   /* Fern green */
-  --color-secondary-2: var(--color-brand-darkest); /* Moss brown */
-
-  /* Support/surface colors */
-  --color-support-1: var(--color-surface-cream);
-  --color-support-2: var(--color-surface-sage);
-
-  /* Base colors */
-  --color-bg: var(--color-surface-base);
-  --color-text: var(--color-text-default);
-
-  /* Surfaces */
-  --color-surface-base:       var(--color-surface-base);
-  --color-surface-subtle:     var(--color-surface-subtle);
-  --color-surface-muted:      var(--color-surface-muted);
-  --color-surface-emphasis:   var(--color-surface-emphasis);
-  --color-surface-strong:     var(--color-surface-strong);
-  --color-surface-inverse:    var(--color-surface-inverse);
-
-  /* Foreground */
-  --color-fg-default:     var(--color-fg-default);
-  --color-fg-strong:      var(--color-fg-strong);
-  --color-fg-base:        var(--color-fg-base);
-  --color-fg-muted:       var(--color-fg-muted);
-  --color-fg-subtle:      var(--color-fg-subtle);
-  --color-fg-faint:       var(--color-fg-faint);
-  --color-fg-inverse:     var(--color-fg-inverse);
-
-  /* Strokes */
-  --color-stroke-default:  var(--color-stroke-default);
-  --color-stroke-emphasis: var(--color-stroke-emphasis);
-  --color-stroke-strong:   var(--color-stroke-strong);
-
-  /* Status — Error */
-  --color-status-error-fg:        var(--color-status-error-fg);
-  --color-status-error-fg-strong: var(--color-status-error-fg-strong);
-  --color-status-error-bg:        var(--color-status-error-bg);
-  --color-status-error-bg-muted:  var(--color-status-error-bg-muted);
-  --color-status-error-bg-solid:  var(--color-status-error-bg-solid);
-  --color-status-error-border:    var(--color-status-error-border);
-
-  /* Status — Success */
-  --color-status-success-fg:        var(--color-status-success-fg);
-  --color-status-success-fg-strong: var(--color-status-success-fg-strong);
-  --color-status-success-bg:        var(--color-status-success-bg);
-  --color-status-success-bg-solid:  var(--color-status-success-bg-solid);
-  --color-status-success-border:    var(--color-status-success-border);
-
-  /* Status — Warning */
-  --color-status-warning-fg:        var(--color-status-warning-fg);
-  --color-status-warning-fg-strong: var(--color-status-warning-fg-strong);
-  --color-status-warning-bg:        var(--color-status-warning-bg);
-  --color-status-warning-bg-muted:  var(--color-status-warning-bg-muted);
-  --color-status-warning-border:    var(--color-status-warning-border);
-
-  /* Status — Info */
-  --color-status-info-fg:     var(--color-status-info-fg);
-  --color-status-info-bg:     var(--color-status-info-bg);
-  --color-status-info-border: var(--color-status-info-border);
-
-  /* Typography — mapped to tokens */
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
-
-  /* Breakpoints — must use actual values, not var() for Tailwind v4 */
-  --breakpoint-xs: 375px;
-  --breakpoint-sm: 640px;
-  --breakpoint-tablet: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-desktop: 1280px;
-  --breakpoint-2xl: 1536px;
-}
-
-/* 3. BASE TYPOGRAPHY & ACCESSIBILITY */
+/* 2. BASE TYPOGRAPHY & ACCESSIBILITY */
 @layer base {
   /* Fluid typography using clamp() */
   html {
@@ -208,7 +124,7 @@
   }
 }
 
-/* 4. MOTION PREFERENCES - WCAG 2.3.3 */
+/* 3. MOTION PREFERENCES - WCAG 2.3.3 */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -225,7 +141,7 @@
   }
 }
 
-/* 5. UTILITIES */
+/* 4. UTILITIES */
 @layer components {
   .section-padding { 
     @apply py-12 md:py-16 lg:py-24; 
@@ -288,7 +204,7 @@
   }
 }
 
-/* 6. PRINT STYLES */
+/* 5. PRINT STYLES */
 @media print {
   /* Hide non-essential elements */
   .no-print,
@@ -329,7 +245,7 @@
   }
 }
 
-/* 7. DARK MODE SUPPORT (Optional - for future implementation) */
+/* 6. DARK MODE SUPPORT (Optional - for future implementation) */
 @media (prefers-color-scheme: dark) {
   /* Uncomment when implementing dark mode
   :root {
@@ -339,7 +255,7 @@
   */
 }
 
-/* 8. LOADING STATES */
+/* 7. LOADING STATES */
 @layer components {
   .skeleton {
     @apply bg-surface-emphasis rounded animate-pulse;
@@ -358,7 +274,7 @@
   }
 }
 
-/* 9. FORM ACCESSIBILITY */
+/* 8. FORM ACCESSIBILITY */
 @layer components {
   /* Error states with sufficient contrast */
   .input-error {
