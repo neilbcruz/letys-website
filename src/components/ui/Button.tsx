@@ -50,43 +50,41 @@ const Button = ({
 }: ButtonProps) => {
   const variants = {
     primary: [
-      // Updated colors for WCAG AA compliance
-      'bg-[color:var(--color-primary-2)]', // Dark green
-      'text-white',
-      'hover:bg-[color:var(--color-primary-3)]', // Darker light green
-      'hover:text-white',
-      'focus:ring-[color:var(--color-primary-1)]',
+      'bg-primary-2',
+      'text-fg-inverse',
+      'hover:bg-primary-3',
+      'hover:text-fg-inverse',
+      'focus:ring-primary-1',
     ].join(' '),
 
     secondary: [
-      // Very dark gold for WCAG AA compliance (4.5:1+ contrast)
-      'bg-[#8B6914]',
-      'text-white',
-      'hover:bg-[#6B4F0F]',
-      'hover:text-white',
-      'focus:ring-[color:var(--color-primary-3)]',
+      'bg-primary-1',
+      'text-fg-default',
+      'hover:bg-primary-3',
+      'hover:text-fg-inverse',
+      'focus:ring-primary-3',
     ].join(' '),
 
     outline: [
       'bg-transparent',
-      'border-2', // Thicker border for visibility
-      'border-[color:var(--color-primary-2)]',
-      'text-[color:var(--color-primary-2)]',
-      'hover:bg-[color:var(--color-primary-2)]',
-      'hover:text-white',
-      'focus:ring-[color:var(--color-primary-1)]',
+      'border-2',
+      'border-primary-2',
+      'text-primary-2',
+      'hover:bg-primary-2',
+      'hover:text-fg-inverse',
+      'focus:ring-primary-1',
     ].join(' '),
 
     ghost: [
       'bg-transparent',
-      'text-[color:var(--color-primary-2)]',
-      'hover:bg-[color:var(--color-support-2)]',
-      'focus:ring-[color:var(--color-primary-1)]',
+      'text-primary-2',
+      'hover:bg-support-2',
+      'focus:ring-primary-1',
     ].join(' '),
 
     link: [
       'bg-transparent',
-      'text-[color:var(--color-primary-2)]',
+      'text-primary-2',
       'hover:underline',
       'underline-offset-4',
       'decoration-2',

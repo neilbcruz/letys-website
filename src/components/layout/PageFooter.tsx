@@ -18,10 +18,10 @@ export default function PageFooter({
   facebookUrl = 'https://www.facebook.com/letysbukopie/',
   id,
 }: PageFooterProps) {
-  const iconClasses = 'w-10 sm:w-12 h-auto text-white hover:text-primary-1 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-1 rounded';
+  const iconClasses = 'w-10 sm:w-12 h-auto text-fg-inverse hover:text-primary-1 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-1 rounded';
 
   return (
-    <footer id={id} className="bg-primary-2 text-white" role="contentinfo">
+    <footer id={id} className="bg-primary-2 text-fg-inverse" role="contentinfo">
       <div className="container-width">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-8 gap-6 sm:gap-0">
           {/* Left Side */}

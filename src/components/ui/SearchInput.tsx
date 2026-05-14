@@ -87,7 +87,7 @@ const SearchInput = ({
   onSearch,
   className,
   placeholder = 'Search...',
-  icon = <SearchIcon className='w-5 h-5 text-gray-800' aria-hidden="true" />,
+  icon = <SearchIcon className='w-5 h-5 text-fg-base' aria-hidden="true" />,
   size = 'md',
   clearable = true,
   ariaLabel,
@@ -135,8 +135,8 @@ const SearchInput = ({
           id={inputId}
           type='text'
           className={cn(
-            'w-full rounded-lg border border-gray-300 focus:border-primary-1 focus:ring-2 focus:ring-primary-1/20',
-            'bg-white text-gray-900 placeholder-gray-500',
+            'w-full rounded-lg border border-stroke-emphasis focus:border-primary-1 focus:ring-2 focus:ring-primary-1/20',
+            'bg-surface-base text-fg-default placeholder:text-fg-placeholder',
             'transition-all duration-200 ease-in-out',
             sizes[size],
             'pl-10',
@@ -151,7 +151,7 @@ const SearchInput = ({
         {clearable && value && (
           <button
             type='button'
-            className='absolute inset-y-0 right-0 flex items-center pr-3 text-gray-800 hover:text-gray-700 min-w-[44px] min-h-[44px]'
+            className='absolute inset-y-0 right-0 flex items-center pr-3 text-fg-base hover:text-fg-strong min-w-[44px] min-h-[44px]'
             onClick={handleClear}
             aria-label="Clear search"
           >

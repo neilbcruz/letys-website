@@ -29,7 +29,7 @@ export default function ProductCardWithStock({ item }: ProductCardWithStockProps
   return (
     <article className="flex overflow-hidden flex-col h-full card-elevated group">
       {/* IMAGE CONTAINER */}
-      <div className="overflow-hidden relative bg-gray-100 aspect-square">
+      <div className="overflow-hidden relative bg-surface-subtle aspect-square">
         {imageData ? (
           <img
             src={imageData.default}
@@ -40,7 +40,7 @@ export default function ProductCardWithStock({ item }: ProductCardWithStockProps
             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
           />
         ) : (
-          <div className="flex justify-center items-center w-full h-full bg-gray-200">
+          <div className="flex justify-center items-center w-full h-full bg-surface-emphasis">
             <img
               src="/assets/images/fallback.png"
               alt="Product placeholder"
@@ -52,7 +52,7 @@ export default function ProductCardWithStock({ item }: ProductCardWithStockProps
         {/* Discount Badge */}
         {hasDiscount && discountPercentage > 0 && (
           <div className="absolute top-4 left-4">
-            <span className="px-3 py-1 text-sm font-bold text-white bg-red-600 rounded-full shadow-lg">
+            <span className="px-3 py-1 text-sm font-bold text-fg-inverse bg-status-error-bg-solid rounded-full shadow-lg">
               {discountPercentage}% OFF
             </span>
           </div>
@@ -66,7 +66,7 @@ export default function ProductCardWithStock({ item }: ProductCardWithStockProps
 
       {/* CONTENT */}
       <div className="flex flex-col flex-1 p-6">
-        <p className="mb-1 text-xs font-bold tracking-wider text-gray-400 uppercase">
+        <p className="mb-1 text-xs font-bold tracking-wider text-fg-subtle uppercase">
           {item.category}
         </p>
 
@@ -75,7 +75,7 @@ export default function ProductCardWithStock({ item }: ProductCardWithStockProps
         </h3>
 
         {item.description && (
-          <p className="flex-1 mb-4 text-sm text-gray-600 line-clamp-2">
+          <p className="flex-1 mb-4 text-sm text-fg-muted line-clamp-2">
             {item.description}
           </p>
         )}
@@ -87,7 +87,7 @@ export default function ProductCardWithStock({ item }: ProductCardWithStockProps
             </span>
           )}
           {hasDiscount && item.originalPrice && (
-            <span className="text-sm text-gray-400 line-through">
+            <span className="text-sm text-fg-subtle line-through">
               {formatPrice(item.originalPrice)}
             </span>
           )}

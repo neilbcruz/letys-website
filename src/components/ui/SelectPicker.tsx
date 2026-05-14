@@ -178,14 +178,14 @@ const SelectPicker = ({
         ref={triggerRef}
         type='button'
         className={cn(
-          'w-full flex items-center justify-between rounded-lg border border-gray-300 bg-white text-left',
+          'w-full flex items-center justify-between rounded-lg border border-stroke-emphasis bg-surface-base text-left',
           'focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500',
           'transition-all duration-200 ease-in-out',
           sizes[size],
           'px-3',
           disabled
-            ? 'opacity-60 cursor-not-allowed bg-gray-50'
-            : 'hover:border-gray-400',
+            ? 'opacity-60 cursor-not-allowed bg-surface-subtle'
+            : 'hover:border-stroke-strong',
           isOpen && 'border-primary-500 ring-2 ring-primary-500/20'
         )}
         onClick={handleToggle}
@@ -196,7 +196,7 @@ const SelectPicker = ({
         <span
           className={cn(
             'truncate',
-            selectedOption ? 'text-gray-900' : 'text-gray-500'
+            selectedOption ? 'text-fg-default' : 'text-fg-subtle'
           )}
         >
           {selectedOption ? selectedOption.label : placeholder}
@@ -205,16 +205,16 @@ const SelectPicker = ({
           {clearable && selectedOption && !disabled && (
             <button
               type='button'
-              className='p-1 hover:bg-gray-100 rounded-full transition-colors'
+              className='p-1 hover:bg-surface-muted rounded-full transition-colors'
               onClick={handleClear}
               aria-label='Clear selection'
             >
-              <XIcon className='h-4 w-4 text-gray-500' />
+              <XIcon className='h-4 w-4 text-fg-subtle' />
             </button>
           )}
           <ChevronDownIcon
             className={cn(
-              'h-4 w-4 text-gray-500 transition-transform duration-200',
+              'h-4 w-4 text-fg-subtle transition-transform duration-200',
               isOpen && 'rotate-180'
             )}
           />
@@ -225,19 +225,19 @@ const SelectPicker = ({
       {isOpen && (
         <div
           className={cn(
-            'absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-hidden',
+            'absolute z-50 w-full bg-surface-base border border-stroke-emphasis rounded-lg shadow-lg max-h-60 overflow-hidden',
             dropdownPosition === 'top' ? 'bottom-full mb-1' : 'top-full mt-1'
           )}
         >
           {/* Search Input */}
           {searchable && (
-            <div className='p-2 border-b border-gray-200'>
+            <div className='p-2 border-b border-stroke-default'>
               <div className='relative'>
-                <SearchIcon className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500' />
+                <SearchIcon className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-fg-subtle' />
                 <input
                   ref={searchInputRef}
                   type='text'
-                  className='w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500'
+                  className='w-full pl-9 pr-3 py-2 text-sm border border-stroke-emphasis rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500'
                   placeholder='Search options...'
                   value={searchTerm}
                   onChange={handleSearchChange}
@@ -269,7 +269,7 @@ const SelectPicker = ({
                 ))}
               </ul>
             ) : (
-              <div className='px-3 py-2 text-sm text-gray-500 text-center'>
+              <div className='px-3 py-2 text-sm text-fg-subtle text-center'>
                 No options found
               </div>
             )}

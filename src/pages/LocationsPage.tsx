@@ -31,8 +31,8 @@ function LocationInventoryPreview({ location }: { location: Location }) {
 
   if (!location.hasInventoryAPI) {
     return (
-      <div className="p-4 mt-4 bg-gray-50 rounded-lg border border-gray-200">
-        <p className="flex gap-2 items-center text-sm text-gray-600">
+      <div className="p-4 mt-4 bg-surface-subtle rounded-lg border border-stroke-default">
+        <p className="flex gap-2 items-center text-sm text-fg-muted">
           <Info size={16} />
           Inventory information not available for this location
         </p>
@@ -42,16 +42,16 @@ function LocationInventoryPreview({ location }: { location: Location }) {
 
   if (loading) {
     return (
-      <div className="p-4 mt-4 bg-gray-50 rounded-lg border border-gray-200">
-        <p className="text-sm text-gray-600">Loading inventory...</p>
+      <div className="p-4 mt-4 bg-surface-subtle rounded-lg border border-stroke-default">
+        <p className="text-sm text-fg-muted">Loading inventory...</p>
       </div>
     );
   }
 
   if (items.length === 0) {
     return (
-      <div className="p-4 mt-4 bg-gray-50 rounded-lg border border-gray-200">
-        <p className="text-sm text-gray-600">No main products available</p>
+      <div className="p-4 mt-4 bg-surface-subtle rounded-lg border border-stroke-default">
+        <p className="text-sm text-fg-muted">No main products available</p>
       </div>
     );
   }
@@ -81,28 +81,28 @@ function LocationInventoryPreview({ location }: { location: Location }) {
         </div>
 
         <div className="grid grid-cols-3 gap-2 text-sm text-center">
-          <div className="p-2 bg-white rounded">
-            <div className="font-bold text-green-600">{inStock}</div>
-            <div className="text-gray-600">In Stock</div>
+          <div className="p-2 bg-surface-base rounded">
+            <div className="font-bold text-status-success-fg">{inStock}</div>
+            <div className="text-fg-muted">In Stock</div>
           </div>
-          <div className="p-2 bg-white rounded">
-            <div className="font-bold text-yellow-600">{lowStock}</div>
-            <div className="text-gray-600">Low Stock</div>
+          <div className="p-2 bg-surface-base rounded">
+            <div className="font-bold text-status-warning-fg">{lowStock}</div>
+            <div className="text-fg-muted">Low Stock</div>
           </div>
-          <div className="p-2 bg-white rounded">
-            <div className="font-bold text-red-600">{outOfStock}</div>
-            <div className="text-gray-600">Out</div>
+          <div className="p-2 bg-surface-base rounded">
+            <div className="font-bold text-status-error-fg">{outOfStock}</div>
+            <div className="text-fg-muted">Out</div>
           </div>
         </div>
       </div>
 
       {/* Top Items Preview */}
-      <div className="p-4 bg-white rounded-lg border border-gray-200">
-        <h5 className="mb-2 text-sm font-bold text-gray-800">Available Main Products</h5>
+      <div className="p-4 bg-surface-base rounded-lg border border-stroke-default">
+        <h5 className="mb-2 text-sm font-bold text-fg-strong">Available Main Products</h5>
         <div className="space-y-2">
           {items.slice(0, 5).map(item => (
             <div key={item.itemId} className="flex justify-between items-center text-sm">
-              <span className="flex-1 font-medium text-gray-700 truncate">
+              <span className="flex-1 font-medium text-fg-base truncate">
                 {item.name}
               </span>
               <StockBadge
@@ -123,10 +123,10 @@ function LocationInventoryPreview({ location }: { location: Location }) {
 
       {/* Special Notes */}
       {location.specialNotes && location.specialNotes.length > 0 && (
-        <div className="p-3 bg-amber-50 rounded-lg border border-amber-200">
+        <div className="p-3 bg-status-warning-bg rounded-lg border border-status-warning-border">
           <div className="flex gap-2 items-start">
-            <Info size={16} className="text-amber-600 shrink-0 mt-0.5" />
-            <div className="text-sm text-amber-800">
+            <Info size={16} className="text-status-warning-fg shrink-0 mt-0.5" />
+            <div className="text-sm text-status-warning-fg-strong">
               {location.specialNotes.map((note, idx) => (
                 <p key={idx}>{note}</p>
               ))}
@@ -160,7 +160,7 @@ export default function LocationsPage() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-surface-subtle">
       <SEOHead pageKey="locations" />
       {LOCATIONS.map(loc => (
         <LocationSchema key={loc.id} locationId={loc.id} />
@@ -197,9 +197,9 @@ export default function LocationsPage() {
                 type="checkbox"
                 checked={showInventory}
                 onChange={(e) => setShowInventory(e.target.checked)}
-                className="w-5 h-5 rounded border-gray-300 cursor-pointer text-primary-2 focus:ring-2 focus:ring-primary-1"
+                className="w-5 h-5 rounded border-stroke-emphasis cursor-pointer text-primary-2 focus:ring-2 focus:ring-primary-1"
               />
-              <span className="flex gap-2 items-center font-medium text-gray-800">
+              <span className="flex gap-2 items-center font-medium text-fg-strong">
                 <Package size={20} className="text-primary-2" />
                 Show main products inventory for each location
               </span>
@@ -271,7 +271,7 @@ export default function LocationsPage() {
                       )}
                       <div className="absolute top-4 right-4">
                         <span className={`px-3 py-1 rounded-full text-sm font-bold ${
-                          isOpen ? 'text-white bg-green-500' : 'text-white bg-red-500'
+                          isOpen ? 'text-fg-inverse bg-status-success-bg-solid' : 'text-fg-inverse bg-status-error-bg-solid'
                         }`}>
                           {isOpen ? 'Open Now' : 'Closed'}
                         </span>
@@ -296,7 +296,7 @@ export default function LocationsPage() {
 
                       {/* Address */}
                       <div className="mb-4">
-                        <div className="flex gap-2 items-start text-gray-700">
+                        <div className="flex gap-2 items-start text-fg-base">
                           <MapPin size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
                           <address className="text-sm not-italic">
                             {loc.address.map((line, i) => (
@@ -311,13 +311,13 @@ export default function LocationsPage() {
                         <div className="flex gap-2 items-start">
                           <Clock size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
                           <div className="text-sm">
-                            <p className="font-bold text-gray-900">
+                            <p className="font-bold text-fg-default">
                               Today ({DAYS[now.getDay()]}): {formatHours(loc.hours, todayKey)}
                             </p>
 
                             {expanded[loc.id] && (
                               <div
-                                className="mt-3 space-y-1 text-gray-600"
+                                className="mt-3 space-y-1 text-fg-muted"
                                 id={`hours-${loc.id}`}
                               >
                                 {DAY_KEYS.map((key, i) => (

@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(ls:*)",
+      "Bash(npm test:*)",
+      "Bash(tree:*)",
+      "Bash(npx tsc:*)",
+      "Bash(tee:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run lint:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(curl:*)",
+      "Bash(git restore:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)",
+      "Bash(git push:*)",
+      "Bash(npx:*)",
+      "Bash(sudo npx:*)",
+      "Bash(lsof:*)",
+      "Bash(ss:*)",
+      "Bash(kill:*)",
+      "Bash(npm run test:*)",
+      "Bash(pkill:*)",
+      "Bash(xargs:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(git rm:*)",
+      "Bash(rtk git:*)",
+      "Bash(rtk npm run lint)",
+      "Bash(rtk cat:*)",
+      "Bash(rtk vitest:*)"
+    ]
+  }
+}

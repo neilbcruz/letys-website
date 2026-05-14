@@ -8,7 +8,7 @@ import { FAQ_ITEMS } from '@/data/faqs';
 
 export default function FaqPage() {
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-surface-subtle">
       <SEOHead pageKey="faq" />
       <FAQSchema />
 
@@ -28,7 +28,7 @@ export default function FaqPage() {
               <h2 className="mb-4 text-2xl font-bold lg:text-3xl text-primary-2">
                 Everything You Need to Know
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-fg-muted">
                 Can't find what you're looking for? Feel free to reach out to us directly!
               </p>
             </div>
@@ -53,10 +53,10 @@ export default function FaqPage() {
                         />
                       </DisclosureButton>
                       <DisclosurePanel
-                        className="p-6 pt-0 bg-white"
+                        className="p-6 pt-0 bg-surface-base"
                         id={`faq-answer-${index}`}
                       >
-                        <div className="py-2 pl-6 text-lg leading-relaxed text-gray-700 border-l-4 border-primary-1">
+                        <div className="py-2 pl-6 text-lg leading-relaxed text-fg-base border-l-4 border-primary-1">
                           {item.answer}
                         </div>
                       </DisclosurePanel>
@@ -84,7 +84,7 @@ export default function FaqPage() {
                   <h3 className="mb-2 text-xl font-bold transition text-primary-2 group-hover:text-primary-1">
                     Our Products
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-fg-muted">
                     Browse our delicious selection
                   </p>
                 </NavLink>
@@ -94,7 +94,7 @@ export default function FaqPage() {
                   <h3 className="mb-2 text-xl font-bold transition text-primary-2 group-hover:text-primary-1">
                     Store Locations
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-fg-muted">
                     Find a store near you
                   </p>
                 </NavLink>
@@ -104,7 +104,7 @@ export default function FaqPage() {
                   <h3 className="mb-2 text-xl font-bold transition text-primary-2 group-hover:text-primary-1">
                     Get in Touch
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-fg-muted">
                     We're here to help
                   </p>
                 </NavLink>

@@ -8,7 +8,7 @@ export default function PageBody() {
     <div className="w-full">
 
       {/* FEATURED PRODUCT INTRO */}
-      <section aria-labelledby="featured-heading" className="py-16 bg-white lg:py-20">
+      <section aria-labelledby="featured-heading" className="py-16 bg-surface-base lg:py-20">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
             <div className="order-2 lg:order-1">
@@ -22,7 +22,7 @@ export default function PageBody() {
             </div>
             <div className="order-1 text-center lg:order-2 lg:text-left">
               <h2 id="featured-heading" className="mb-4 text-3xl font-bold text-primary-2 lg:text-4xl">Our Signature Buko Pie</h2>
-              <p className="text-lg leading-relaxed text-gray-700 lg:text-xl">
+              <p className="text-lg leading-relaxed text-fg-base lg:text-xl">
                 Experience Lety's famous specialty pie, crafted with fresh young coconuts and a legacy of baking excellence since 1976. Each pie is made with love using our time-honored family recipe.
               </p>
               <div className="flex gap-4 justify-center mt-8 lg:justify-start">
@@ -36,12 +36,12 @@ export default function PageBody() {
       </section>
 
       {/* WHY CHOOSE US */}
-      <section aria-labelledby="why-choose-heading" className="py-16 bg-white lg:py-24">
+      <section aria-labelledby="why-choose-heading" className="py-16 bg-surface-base lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <h2 id="why-choose-heading" className="mb-4 text-3xl font-bold text-center text-primary-2 lg:text-4xl">
             Why Choose Lety's?
           </h2>
-          <p className="mx-auto mb-12 max-w-2xl text-lg text-center text-gray-600">
+          <p className="mx-auto mb-12 max-w-2xl text-lg text-center text-fg-muted">
             Four decades of tradition, quality, and authentic Filipino taste
           </p>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12">
@@ -55,7 +55,7 @@ export default function PageBody() {
                   <span className="text-4xl">{item.icon}</span>
                 </div>
                 <h3 className="mb-3 text-xl font-bold text-primary-2">{item.title}</h3>
-                <p className="leading-relaxed text-gray-600">{item.desc}</p>
+                <p className="leading-relaxed text-fg-muted">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -73,9 +73,9 @@ export default function PageBody() {
                 { title: 'Health Benefits', desc: 'Buko is packed with nutritional value and antioxidants that protect against cellular damage and heart disease.' },
                 { title: 'Versatile Ingredient', desc: 'Buko can be enjoyed in many ways: as refreshing dessert treats or in desserts like buko pandan, buko ice cream, and of course, buko pie.' },
               ].map((item, idx) => (
-                <div key={idx} className="p-6 bg-white rounded-lg shadow-md">
+                <div key={idx} className="p-6 bg-surface-base rounded-lg shadow-md">
                   <h3 className="mb-2 text-lg font-bold text-primary-2">{item.title}</h3>
-                  <p className="leading-relaxed text-gray-700">{item.desc}</p>
+                  <p className="leading-relaxed text-fg-base">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -93,7 +93,7 @@ export default function PageBody() {
       </section>
 
       {/* ABOUT LETY */}
-      <section aria-labelledby="about-lety-heading" className="py-16 bg-white lg:py-24">
+      <section aria-labelledby="about-lety-heading" className="py-16 bg-surface-base lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <h2 id="about-lety-heading" className="mb-12 text-3xl font-bold text-center text-primary-2 lg:text-4xl">About Lety</h2>
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
@@ -109,19 +109,19 @@ export default function PageBody() {
             <div className="space-y-6">
               <div>
                 <h3 className="mb-4 text-2xl font-bold text-primary-2">The Woman Behind the Pie</h3>
-                <p className="text-lg leading-relaxed text-gray-700">
+                <p className="text-lg leading-relaxed text-fg-base">
                   Leticia Ocampo Belarmino is the person behind Lety's Special Buko Pie. A native of Los Baños, she turned her hobby into a thriving business that has become a beloved local institution.
                 </p>
               </div>
               <div>
                 <h3 className="mb-3 text-xl font-bold text-primary-2">Humble Beginnings</h3>
-                <p className="leading-relaxed text-gray-700">
+                <p className="leading-relaxed text-fg-base">
                   She started in 1976 with a single oven. Her goal was simple: to earn extra money for her kids' schooling while enjoying her free time baking.
                 </p>
               </div>
               <div>
                 <h3 className="mb-3 text-xl font-bold text-primary-2">Growing Legacy</h3>
-                <p className="leading-relaxed text-gray-700">
+                <p className="leading-relaxed text-fg-base">
                   Today, she manages multiple store locations with her family, continuing the tradition of quality and authentic taste that made Lety's a household name.
                 </p>
               </div>
@@ -134,7 +134,7 @@ export default function PageBody() {
       <section aria-labelledby="our-products-heading" className="py-16 lg:py-24 bg-linear-to-br from-primary-3/20 to-primary-3/5">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <h2 id="our-products-heading" className="mb-4 text-3xl font-bold text-center text-primary-2 lg:text-4xl">Our Products</h2>
-          <p className="mx-auto mb-12 max-w-2xl text-xl text-center text-gray-600">
+          <p className="mx-auto mb-12 max-w-2xl text-xl text-center text-fg-muted">
             Discover our delicious selection of specialty pies, baked goods, and pasalubong favorites
           </p>
 
@@ -144,7 +144,7 @@ export default function PageBody() {
               { name: 'Cassava Cake', img: IMAGES.CASSAVA, link: '/products#bakedgoods', desc: 'Freshly baked daily treats' },
               { name: 'Broas', img: IMAGES.PASALUBONG, link: '/products#pasalubong', desc: 'Perfect pasalubong gifts' },
             ].map((item, idx) => (
-              <div key={idx} className="overflow-hidden bg-white rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl group">
+              <div key={idx} className="overflow-hidden bg-surface-base rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl group">
                 <div className="overflow-hidden">
                   <img 
                     src={item.img.default}
@@ -156,7 +156,7 @@ export default function PageBody() {
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="mb-2 text-2xl font-bold text-primary-2">{item.name}</h3>
-                  <p className="mb-4 text-gray-600">{item.desc}</p>
+                  <p className="mb-4 text-fg-muted">{item.desc}</p>
                   <HashLink to={item.link}>
                     <Button size="md" variant="secondary">View {item.name}</Button>
                   </HashLink>
@@ -168,7 +168,7 @@ export default function PageBody() {
       </section>
 
       {/* LOCATION */}
-      <section aria-labelledby="visit-branch-heading" className="py-16 bg-white lg:py-24">
+      <section aria-labelledby="visit-branch-heading" className="py-16 bg-surface-base lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <h2 id="visit-branch-heading" className="mb-12 text-3xl font-bold text-center text-primary-2 lg:text-4xl">Visit Our Main Branch</h2>
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
@@ -177,11 +177,11 @@ export default function PageBody() {
                 <h3 className="flex gap-2 items-center mb-4 text-2xl font-bold text-primary-2">
                   <span>📍</span> Location
                 </h3>
-                <p className="mb-2 text-lg text-gray-700">
+                <p className="mb-2 text-lg text-fg-base">
                   Lety's Buko Pie, National Road,<br />
                   Barangay Anos, Los Baños, Laguna
                 </p>
-                <p className="text-gray-600">(in front of Heaven's Memorial Garden)</p>
+                <p className="text-fg-muted">(in front of Heaven's Memorial Garden)</p>
                 <div className="mt-4">
                   <NavLink to="/locations">
                     <Button size="md" variant="primary">View All Locations</Button>
@@ -193,7 +193,7 @@ export default function PageBody() {
                 <h3 className="flex gap-2 items-center mb-4 text-2xl font-bold text-primary-2">
                   <span>🕐</span> Store Hours
                 </h3>
-                <p className="mb-4 text-lg text-gray-700">Open daily from 6:00 AM to 6:00 PM</p>
+                <p className="mb-4 text-lg text-fg-base">Open daily from 6:00 AM to 6:00 PM</p>
                 <NavLink to="/contact">
                   <Button size="md" variant="primary">Get in Touch</Button>
                 </NavLink>

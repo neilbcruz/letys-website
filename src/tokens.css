@@ -1,12 +1,15 @@
 /*
- * Design Tokens — Lety's Buko Pie
+/* Design Tokens — Lety's Buko Pie
  *
- * All brand color pairs verified against WCAG 2.1 AA (4.5:1 minimum):
- *   --color-gold   on white:   4.52:1  (AA)
+ * All color pairs verified against WCAG 2.1 AA (4.5:1 minimum).
+ * Contrast ratios against #FFFFFF unless noted:
+ *   --color-gold   on white:   2.74:1  (decorative only — dark text used on gold bg)
  *   --color-forest on white:  15.20:1  (AAA)
- *   --color-olive  on white:   4.51:1  (AA)
+ *   --color-olive  on white:   4.68:1  (AA, darkened from 6B8A28)
  *   --color-fern   on white:   7.21:1  (AAA)
  *   --color-moss   on white:   7.83:1  (AAA)
+ *   fg-default on gold:        6.22:1  (AAA — text on gold backgrounds)
+ *   fg-inverse on forest:     11.01:1  (AAA — white on primary-2)
  *
  * DO NOT replace brand colors without re-checking contrast ratios at:
  * https://webaim.org/resources/contrastchecker/
@@ -20,7 +23,7 @@
   /* Brand Palette — raw color values */
   --color-gold:    #C29600;
   --color-forest:  #074621;
-  --color-olive:   #6B8A28;
+  --color-olive:   #5E7E22;
   --color-fern:    #476C2D;
   --color-moss:    #4D4A0E;
 
@@ -214,6 +217,76 @@
   --focus-ring-width:  2px;
   --focus-ring-offset: 2px;
   --focus-ring-color:  var(--color-brand-accent);
+
+  /* ============================================
+   * SURFACE SCALE — warm-tinted, harmonious with #FAFAF8 base
+   * Hue: ~60° (yellow-green warmth, matching existing surfaces)
+   * ============================================ */
+
+  --color-surface-subtle:    #F5F5F0;   /* bg-gray-50 replacement   — warm off-white      */
+  --color-surface-muted:     #EDEDEA;   /* bg-gray-100 replacement  — light warm gray      */
+  --color-surface-emphasis:  #DDDDD8;   /* bg-gray-200 replacement  — mid warm gray        */
+  --color-surface-strong:    #C8C8C2;   /* bg-gray-300/400 replace  — stronger warm gray   */
+  --color-surface-inverse:   #1A1A18;   /* bg-black replacement     — near-black, warm     */
+
+  /* Already exists — mapped here for completeness:
+     --color-surface-base    #FAFAF8    bg-white replacement (33 instances)
+     --color-surface-white   #FFFFFF    pure white where needed               */
+
+
+  /* ============================================
+   * FOREGROUND SCALE — warm-tinted grays, not pure neutral
+   * ============================================ */
+
+  --color-fg-default:        #1C1C1A;   /* text-gray-900  — near-black, warm               */
+  --color-fg-strong:         #2E2E2B;   /* text-gray-800  — very dark warm gray             */
+  --color-fg-base:           #454540;   /* text-gray-700  — main body text                 */
+  --color-fg-muted:          #5C5C56;   /* text-gray-600  — secondary text (35 instances)  */
+  --color-fg-subtle:         #70706B;   /* text-gray-500  — tertiary / helper text         */
+  --color-fg-faint:          #9A9A90;   /* text-gray-400  — decorative / disabled only      */
+  --color-fg-inverse:        #FFFFFF;   /* text-white     — on dark backgrounds             */
+  --color-fg-placeholder:    #9A9A90;   /* placeholder-gray-500 — same as faint            */
+
+
+  /* ============================================
+   * STROKE SCALE — borders and dividers
+   * ============================================ */
+
+  --color-stroke-default:    #E2E2DC;   /* border-gray-200 + divide-gray-200 (18 instances) */
+  --color-stroke-emphasis:   #8E8E86;   /* border-gray-300 — form inputs (3.16:1 on base)  */
+  --color-stroke-strong:     #B8B8B0;   /* border-gray-400                                  */
+
+
+  /* ============================================
+   * STATUS — pure semantic, not brand-derived
+   * ============================================ */
+
+  /* Error / Destructive */
+  --color-status-error-fg:        #C0152A;   /* text-red-600/700 unified              */
+  --color-status-error-fg-strong: #8B0E1C;   /* text-red-800 specifically             */
+  --color-status-error-bg:        #FFF0F0;   /* bg-red-50                             */
+  --color-status-error-bg-muted:  #FFE0E0;   /* bg-red-100                            */
+  --color-status-error-bg-solid:  #C0152A;   /* bg-red-500/600 (solid button/badge)   */
+  --color-status-error-border:    #D07070;   /* border-red-200 (3.04:1 on error-bg)             */
+
+  /* Success */
+  --color-status-success-fg:        #1A6B38;   /* text-green-700/800 unified            */
+  --color-status-success-fg-strong: #14522B;   /* text-green-800 specifically           */
+  --color-status-success-bg:        #E6F0C3;   /* bg-green-50/100 → reuse surface-sage  */
+  --color-status-success-bg-solid:  #1A6B38;   /* bg-green-500 (solid)                  */
+  --color-status-success-border:    #709050;   /* border-green-200 (3.04:1 on success-bg)       */
+
+  /* Warning */
+  --color-status-warning-fg:        #92660A;   /* text-yellow-700/800 unified           */
+  --color-status-warning-fg-strong: #6B4A07;   /* text-yellow-800 specifically          */
+  --color-status-warning-bg:        #FFFBEB;   /* bg-yellow-50                          */
+  --color-status-warning-bg-muted:  #FEF3C7;   /* bg-yellow-100                         */
+  --color-status-warning-border:    #A89040;   /* border-yellow-200 (3.01:1 on warning-bg)      */
+
+  /* Info */
+  --color-status-info-fg:        #1E4E8C;   /* text-blue-800                           */
+  --color-status-info-bg:        #EFF6FF;   /* bg-blue-50                              */
+  --color-status-info-border:    #7088A0;   /* border-blue-200 (3.37:1 on info-bg)             */
 
   /* ============================================
    * GRADIENTS

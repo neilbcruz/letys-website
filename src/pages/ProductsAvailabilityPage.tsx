@@ -84,7 +84,7 @@ export default function ProductsAvailabilityPage() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-surface-subtle">
       <SEOHead pageKey="availability" />
       {/* ProductsSchema commented out - component not found */}
 
@@ -97,17 +97,17 @@ export default function ProductsAvailabilityPage() {
       />
 
       {/* Filters */}
-      <section className="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-md">
+      <section className="sticky top-0 z-30 bg-surface-base border-b border-stroke-default shadow-md">
         <div className="py-6 container-width">
           <div className="flex gap-4 items-center">
-            <label htmlFor="category-filter" className="font-bold text-gray-700 whitespace-nowrap">
+            <label htmlFor="category-filter" className="font-bold text-fg-base whitespace-nowrap">
               Filter by Category:
             </label>
             <select
               id="category-filter"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="flex-1 px-4 max-w-md h-12 text-base bg-white rounded-lg border-2 border-gray-300 transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent min-h-[48px]"
+              className="flex-1 px-4 max-w-md h-12 text-base bg-surface-base rounded-lg border-2 border-stroke-emphasis transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent min-h-[48px]"
               aria-label="Filter products by category"
             >
               <option value="">All Categories</option>
@@ -119,7 +119,7 @@ export default function ProductsAvailabilityPage() {
             </select>
           </div>
           {selectedCategory === 'Main Products' && (
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-fg-muted">
               <span className="font-medium">Note:</span> Showing main products only. Select "All Categories" to see everything.
             </p>
           )}
@@ -147,11 +147,11 @@ export default function ProductsAvailabilityPage() {
 
             {/* Availability Table */}
             {!allLoading && productNames.length > 0 && (
-              <div className="overflow-hidden bg-white rounded-2xl shadow-lg">
+              <div className="overflow-hidden bg-surface-base rounded-2xl shadow-lg">
                 {/* Desktop Table */}
                 <div className="hidden overflow-x-auto lg:block">
                   <table className="w-full">
-                    <thead className="text-white bg-primary-2">
+                    <thead className="text-fg-inverse bg-primary-2">
                       <tr>
                         <th scope="col" className="px-6 py-4 w-1/4 text-lg font-bold text-left">
                           Product
@@ -169,20 +169,20 @@ export default function ProductsAvailabilityPage() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200">
+                    <tbody className="divide-y divide-stroke-default">
                       {productNames.map((productName, idx) => {
                         const totalStock = getTotalStock(productName);
                         const anyItem = storesData.map(s => findItemInStore(s.id, productName)).find(item => item);
 
                         return (
-                          <tr key={productName} className={idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                          <tr key={productName} className={idx % 2 === 0 ? 'bg-surface-subtle' : 'bg-surface-base'}>
                             {/* Product Name */}
                             <th scope="row" className="px-6 py-4 text-left">
                               <div>
                                 <h3 className="mb-1 font-bold text-primary-2">{productName}</h3>
                                 {anyItem && (
                                   <>
-                                    <p className="text-sm text-gray-600">{anyItem.category}</p>
+                                    <p className="text-sm text-fg-muted">{anyItem.category}</p>
                                     <p className="mt-1 text-lg font-bold text-secondary-1">
                                       {formatPrice(anyItem.price)}
                                     </p>
@@ -202,7 +202,7 @@ export default function ProductsAvailabilityPage() {
                                       <StockBadge stockDetails={item.stockDetails} />
                                     </div>
                                   ) : (
-                                    <span className="text-sm text-gray-400">Not Available</span>
+                                    <span className="text-sm text-fg-subtle">Not Available</span>
                                   )}
                                 </td>
                               );
@@ -225,7 +225,7 @@ export default function ProductsAvailabilityPage() {
                 </div>
 
                 {/* Mobile Cards */}
-                <div className="divide-y divide-gray-200 lg:hidden">
+                <div className="divide-y divide-stroke-default lg:hidden">
                   {productNames.map((productName) => {
                     const totalStock = getTotalStock(productName);
                     const anyItem = storesData.map(s => findItemInStore(s.id, productName)).find(item => item);
@@ -237,7 +237,7 @@ export default function ProductsAvailabilityPage() {
                           <h3 className="mb-1 text-lg font-bold text-primary-2">{productName}</h3>
                           {anyItem && (
                             <>
-                              <p className="text-sm text-gray-600">{anyItem.category}</p>
+                              <p className="text-sm text-fg-muted">{anyItem.category}</p>
                               <p className="mt-2 text-xl font-bold text-secondary-1">
                                 {formatPrice(anyItem.price)}
                               </p>
@@ -254,12 +254,12 @@ export default function ProductsAvailabilityPage() {
                               <div key={store.id} className="flex justify-between items-center">
                                 <div className="flex gap-2 items-center">
                                   <span className="text-xl" aria-hidden="true">{store.icon}</span>
-                                  <span className="font-medium text-gray-700">{store.name}</span>
+                                  <span className="font-medium text-fg-base">{store.name}</span>
                                 </div>
                                 {item ? (
                                   <StockBadge stockDetails={item.stockDetails} />
                                 ) : (
-                                  <span className="text-sm text-gray-400">Not Available</span>
+                                  <span className="text-sm text-fg-subtle">Not Available</span>
                                 )}
                               </div>
                             );
@@ -267,8 +267,8 @@ export default function ProductsAvailabilityPage() {
                         </div>
 
                         {/* Total */}
-                        <div className="flex justify-between items-center pt-3 border-t border-gray-200">
-                          <span className="font-bold text-gray-700">Total Stock:</span>
+                        <div className="flex justify-between items-center pt-3 border-t border-stroke-default">
+                          <span className="font-bold text-fg-base">Total Stock:</span>
                           <div className="flex gap-2 items-center">
                             <Package size={20} className="text-primary-2" aria-hidden="true" />
                             <span className="text-xl font-bold text-primary-2">{totalStock}</span>

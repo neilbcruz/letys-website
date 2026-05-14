@@ -28,16 +28,16 @@ export default function ErrorState({
 }: ErrorStateProps) {
   const variantStyles = {
     error: {
-      container: 'bg-red-50 border-red-200',
-      iconColor: 'text-red-600',
-      titleColor: 'text-red-800',
-      messageColor: 'text-red-700',
+      container: 'bg-status-error-bg border-status-error-border',
+      iconColor: 'text-status-error-fg',
+      titleColor: 'text-status-error-fg-strong',
+      messageColor: 'text-status-error-fg',
     },
     warning: {
-      container: 'bg-yellow-50 border-yellow-200',
-      iconColor: 'text-yellow-600',
-      titleColor: 'text-yellow-800',
-      messageColor: 'text-yellow-700',
+      container: 'bg-status-warning-bg border-status-warning-border',
+      iconColor: 'text-status-warning-fg',
+      titleColor: 'text-status-warning-fg-strong',
+      messageColor: 'text-status-warning-fg',
     },
   };
 
@@ -118,8 +118,8 @@ export function InlineErrorState({
 }: InlineErrorStateProps) {
   const Icon = variant === 'error' ? AlertCircle : AlertTriangle;
   const styles = {
-    error: 'bg-red-50 border-red-200 text-red-700',
-    warning: 'bg-yellow-50 border-yellow-200 text-yellow-700',
+    error: 'bg-status-error-bg border-status-error-border text-status-error-fg',
+    warning: 'bg-status-warning-bg border-status-warning-border text-status-warning-fg',
   };
 
   return (

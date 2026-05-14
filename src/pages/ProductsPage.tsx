@@ -58,7 +58,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 [scrollbar-gutter:stable]">
+    <div className="w-full min-h-screen bg-surface-subtle [scrollbar-gutter:stable]">
       <SEOHead pageKey="products" />
       <ProductsSchema />
 
@@ -71,7 +71,7 @@ export default function ProductsPage() {
       />
 
       {/* Store Selection Tabs */}
-      <section className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-md">
+      <section className="sticky top-0 z-40 bg-surface-base border-b border-stroke-default shadow-md">
         <div className="container-width">
           <div className="flex flex-col gap-4 py-6">
             {/* Store Tabs */}
@@ -84,8 +84,8 @@ export default function ProductsPage() {
                     transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-1
                     min-h-[48px]
                     ${selectedStore === store.storeId
-                      ? 'bg-primary-2 text-white shadow-lg scale-105'
-                      : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
+                      ? 'bg-primary-2 text-fg-inverse shadow-lg scale-105'
+                      : 'bg-surface-base border-2 border-stroke-emphasis text-fg-base hover:bg-surface-subtle'
                     }`}
                   aria-pressed={selectedStore === store.storeId}
                   aria-label={`View ${store.name} inventory`}
@@ -103,10 +103,10 @@ export default function ProductsPage() {
                 title={currentStore.displayName}
                 variant="primary"
               >
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-fg-base">
                   {currentStore.address[0]} {currentStore.address[1]}
                 </p>
-                <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-600">
+                <div className="flex flex-wrap gap-4 mt-2 text-sm text-fg-muted">
                   <span className="flex gap-1 items-center">
                     <span className="font-medium">Hours:</span>
                     {formatHours(currentStore.hours)}
@@ -125,7 +125,7 @@ export default function ProductsPage() {
 
             {currentStore?.specialNotes && currentStore.specialNotes.length > 0 && (
               <InfoBanner variant="warning">
-                <p className="text-sm text-amber-800">
+                <p className="text-sm text-status-warning-fg-strong">
                   <span className="font-medium">Note:</span> {currentStore.specialNotes.join('; ')}
                 </p>
               </InfoBanner>
@@ -153,7 +153,7 @@ export default function ProductsPage() {
                   id="category-filter"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="px-4 w-full h-14 text-base bg-white rounded-lg border-2 border-gray-300 transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent"
+                  className="px-4 w-full h-14 text-base bg-surface-base rounded-lg border-2 border-stroke-emphasis transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent"
                   aria-label="Filter by category"
                 >
                   <option value="">All Categories</option>
@@ -188,7 +188,7 @@ export default function ProductsPage() {
             {loading && (
               <div role="status" aria-live="polite">
                 <div className="mb-6">
-                  <p className="text-lg text-center text-gray-600">
+                  <p className="text-lg text-center text-fg-muted">
                     Loading inventory for {currentStore?.name}...
                   </p>
                 </div>

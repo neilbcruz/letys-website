@@ -20,7 +20,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 function App() {
   return (
     <ErrorBoundary>
-      <div className="flex flex-col min-h-screen bg-white">
+      <div className="flex flex-col min-h-screen bg-surface-base">
         <Router>
           <ScrollToTop />
           <GoogleAnalytics />

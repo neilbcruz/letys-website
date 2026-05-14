@@ -7,7 +7,7 @@ describe('getStockStatus', () => {
     expect(result).toEqual({
       status: 'out-of-stock',
       label: 'Out of Stock',
-      color: 'text-red-600 bg-red-100',
+      color: 'text-status-error-fg bg-status-error-bg-muted',
     });
   });
 
@@ -35,9 +35,9 @@ describe('getStockStatus', () => {
   });
 
   it('returns correct color classes for each status', () => {
-    expect(getStockStatus({ qty: 0, min: 5 }).color).toBe('text-red-600 bg-red-100');
-    expect(getStockStatus({ qty: 3, min: 5 }).color).toBe('text-yellow-700 bg-yellow-100');
-    expect(getStockStatus({ qty: 10, min: 5 }).color).toBe('text-green-700 bg-green-100');
+    expect(getStockStatus({ qty: 0, min: 5 }).color).toBe('text-status-error-fg bg-status-error-bg-muted');
+    expect(getStockStatus({ qty: 3, min: 5 }).color).toBe('text-status-warning-fg bg-status-warning-bg-muted');
+    expect(getStockStatus({ qty: 10, min: 5 }).color).toBe('text-status-success-fg bg-status-success-bg');
   });
 });
 

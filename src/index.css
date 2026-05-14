@@ -27,6 +27,55 @@
   --color-bg: var(--color-surface-base);
   --color-text: var(--color-text-default);
 
+  /* Surfaces */
+  --color-surface-base:       var(--color-surface-base);
+  --color-surface-subtle:     var(--color-surface-subtle);
+  --color-surface-muted:      var(--color-surface-muted);
+  --color-surface-emphasis:   var(--color-surface-emphasis);
+  --color-surface-strong:     var(--color-surface-strong);
+  --color-surface-inverse:    var(--color-surface-inverse);
+
+  /* Foreground */
+  --color-fg-default:     var(--color-fg-default);
+  --color-fg-strong:      var(--color-fg-strong);
+  --color-fg-base:        var(--color-fg-base);
+  --color-fg-muted:       var(--color-fg-muted);
+  --color-fg-subtle:      var(--color-fg-subtle);
+  --color-fg-faint:       var(--color-fg-faint);
+  --color-fg-inverse:     var(--color-fg-inverse);
+
+  /* Strokes */
+  --color-stroke-default:  var(--color-stroke-default);
+  --color-stroke-emphasis: var(--color-stroke-emphasis);
+  --color-stroke-strong:   var(--color-stroke-strong);
+
+  /* Status — Error */
+  --color-status-error-fg:        var(--color-status-error-fg);
+  --color-status-error-fg-strong: var(--color-status-error-fg-strong);
+  --color-status-error-bg:        var(--color-status-error-bg);
+  --color-status-error-bg-muted:  var(--color-status-error-bg-muted);
+  --color-status-error-bg-solid:  var(--color-status-error-bg-solid);
+  --color-status-error-border:    var(--color-status-error-border);
+
+  /* Status — Success */
+  --color-status-success-fg:        var(--color-status-success-fg);
+  --color-status-success-fg-strong: var(--color-status-success-fg-strong);
+  --color-status-success-bg:        var(--color-status-success-bg);
+  --color-status-success-bg-solid:  var(--color-status-success-bg-solid);
+  --color-status-success-border:    var(--color-status-success-border);
+
+  /* Status — Warning */
+  --color-status-warning-fg:        var(--color-status-warning-fg);
+  --color-status-warning-fg-strong: var(--color-status-warning-fg-strong);
+  --color-status-warning-bg:        var(--color-status-warning-bg);
+  --color-status-warning-bg-muted:  var(--color-status-warning-bg-muted);
+  --color-status-warning-border:    var(--color-status-warning-border);
+
+  /* Status — Info */
+  --color-status-info-fg:     var(--color-status-info-fg);
+  --color-status-info-bg:     var(--color-status-info-bg);
+  --color-status-info-border: var(--color-status-info-border);
+
   /* Typography — mapped to tokens */
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
@@ -195,13 +244,13 @@
   }
   
   .card-elevated { 
-    @apply bg-white rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl; 
+    @apply bg-surface-base rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl; 
   }
 
   /* Updated button styles with better contrast */
   .btn-primary {
-    @apply px-6 py-3 bg-primary-2 text-white font-bold rounded-lg
-           hover:bg-primary-3 hover:text-white
+    @apply px-6 py-3 bg-primary-2 text-fg-inverse font-bold rounded-lg
+           hover:bg-primary-3 hover:text-fg-inverse
            focus:ring-4 focus:ring-primary-1 focus:outline-none
            transition-all duration-200
            disabled:opacity-60 disabled:cursor-not-allowed;
@@ -209,8 +258,8 @@
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-primary-1 text-white font-bold rounded-lg
-           hover:bg-primary-2 hover:text-white
+    @apply px-6 py-3 bg-primary-1 text-fg-default font-bold rounded-lg
+           hover:bg-primary-2 hover:text-fg-inverse
            focus:ring-4 focus:ring-primary-3 focus:outline-none
            transition-all duration-200;
     min-height: var(--touch-target);
@@ -293,19 +342,19 @@
 /* 8. LOADING STATES */
 @layer components {
   .skeleton {
-    @apply bg-gray-200 rounded animate-pulse;
+    @apply bg-surface-emphasis rounded animate-pulse;
   }
 
   .skeleton-text {
-    @apply h-4 bg-gray-200 rounded;
+    @apply h-4 bg-surface-emphasis rounded;
   }
 
   .skeleton-heading {
-    @apply h-6 bg-gray-200 rounded;
+    @apply h-6 bg-surface-emphasis rounded;
   }
 
   .skeleton-image {
-    @apply bg-gray-200 rounded aspect-square;
+    @apply bg-surface-emphasis rounded aspect-square;
   }
 }
 
@@ -313,26 +362,26 @@
 @layer components {
   /* Error states with sufficient contrast */
   .input-error {
-    @apply border-red-600 focus:ring-red-500;
+    @apply border-status-error-fg focus:ring-status-error-fg;
   }
 
   .error-message {
-    @apply mt-1 text-sm font-medium text-red-700;
+    @apply mt-1 text-sm font-medium text-status-error-fg;
   }
 
   /* Success states */
   .input-success {
-    @apply border-green-600 focus:ring-green-500;
+    @apply border-status-success-fg focus:ring-status-success-fg;
   }
 
   .success-message {
-    @apply mt-1 text-sm font-medium text-green-700;
+    @apply mt-1 text-sm font-medium text-status-success-fg;
   }
 
   /* Required field indicator */
   .required::after {
     content: " *";
-    color: #DC2626;
+    color: var(--color-status-error-fg);
     font-weight: bold;
   }
 }

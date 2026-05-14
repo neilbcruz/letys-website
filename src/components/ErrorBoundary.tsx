@@ -53,38 +53,38 @@ export class ErrorBoundary extends Component<Props, State> {
 
       // Default error UI
       return (
-        <div className="flex justify-center items-center px-4 min-h-screen bg-gray-50">
+        <div className="flex justify-center items-center px-4 min-h-screen bg-surface-subtle">
           <div className="w-full max-w-2xl">
-            <div className="p-8 text-center bg-white rounded-2xl shadow-xl">
+            <div className="p-8 text-center bg-surface-base rounded-2xl shadow-xl">
               {/* Icon */}
               <div className="flex justify-center mb-6">
-                <div className="flex justify-center items-center w-20 h-20 bg-red-100 rounded-full">
-                  <AlertCircle className="w-10 h-10 text-red-600" aria-hidden="true" />
+                <div className="flex justify-center items-center w-20 h-20 bg-status-error-bg-muted rounded-full">
+                  <AlertCircle className="w-10 h-10 text-status-error-fg" aria-hidden="true" />
                 </div>
               </div>
 
               {/* Title */}
-              <h1 className="mb-4 text-3xl font-bold text-gray-900">
+              <h1 className="mb-4 text-3xl font-bold text-fg-default">
                 Oops! Something went wrong
               </h1>
 
               {/* Description */}
-              <p className="mb-6 text-lg text-gray-600">
+              <p className="mb-6 text-lg text-fg-muted">
                 We're sorry for the inconvenience. An unexpected error occurred.
               </p>
 
               {/* Error details (only in development) */}
               {isDevelopment && this.state.error && (
                 <details className="mb-6 text-left">
-                  <summary className="mb-2 text-sm font-medium text-gray-700 cursor-pointer hover:text-gray-900">
+                  <summary className="mb-2 text-sm font-medium text-fg-base cursor-pointer hover:text-fg-default">
                     Technical details (for developers)
                   </summary>
-                  <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-                    <p className="mb-2 font-mono text-sm text-red-600">
+                  <div className="p-4 bg-surface-subtle rounded-lg border border-stroke-default">
+                    <p className="mb-2 font-mono text-sm text-status-error-fg">
                       {this.state.error.toString()}
                     </p>
                     {this.state.errorInfo && (
-                      <pre className="overflow-auto max-h-40 text-xs text-gray-700">
+                      <pre className="overflow-auto max-h-40 text-xs text-fg-base">
                         {this.state.errorInfo.componentStack}
                       </pre>
                     )}
@@ -114,7 +114,7 @@ export class ErrorBoundary extends Component<Props, State> {
               </div>
 
               {/* Support link */}
-              <p className="mt-6 text-sm text-gray-500">
+              <p className="mt-6 text-sm text-fg-subtle">
                 If this problem persists, please{' '}
                 <a
                   href="/contact"

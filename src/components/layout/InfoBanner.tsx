@@ -30,11 +30,11 @@ export default function InfoBanner({
   ariaLabel,
 }: InfoBannerProps) {
   const variantStyles = {
-    info: 'bg-blue-50 border-blue-200 text-blue-800',
-    warning: 'bg-amber-50 border-amber-200 text-amber-800',
-    success: 'bg-green-50 border-green-200 text-green-800',
+    info: 'bg-status-info-bg border-status-info-border text-status-info-fg',
+    warning: 'bg-status-warning-bg border-status-warning-border text-status-warning-fg',
+    success: 'bg-status-success-bg border-status-success-border text-status-success-fg-strong',
     primary: 'bg-primary-3/10 border-primary-3/30 text-primary-2',
-    gray: 'bg-gray-50 border-gray-200 text-gray-700',
+    gray: 'bg-surface-subtle border-stroke-default text-fg-base',
   };
 
   const iconMap: Record<string, LucideIcon> = {
@@ -86,10 +86,10 @@ export function StoreInfoBanner({
   return (
     <>
       <InfoBanner icon={Store} title={name} variant="primary" className={className}>
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-fg-base">
           {address[0]} {address[1]}
         </p>
-        <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-600">
+        <div className="flex flex-wrap gap-4 mt-2 text-sm text-fg-muted">
           <span className="flex gap-1 items-center">
             <span className="font-medium">Hours:</span> {hours}
           </span>
@@ -105,7 +105,7 @@ export function StoreInfoBanner({
       </InfoBanner>
       {specialNotes && specialNotes.length > 0 && (
         <InfoBanner variant="warning" className="mt-4">
-          <p className="text-sm text-amber-800">
+          <p className="text-sm text-status-warning-fg-strong">
             <span className="font-medium">Note:</span> {specialNotes.join('; ')}
           </p>
         </InfoBanner>
@@ -132,17 +132,17 @@ export function InventorySummary({
   return (
     <InfoBanner icon={Package} title="Main Products Status" variant="primary" className={className}>
       <div className="grid grid-cols-3 gap-2 text-sm text-center">
-        <div className="p-2 bg-white rounded">
-          <div className="font-bold text-green-600">{inStock}</div>
-          <div className="text-gray-600">In Stock</div>
+        <div className="p-2 bg-surface-base rounded">
+          <div className="font-bold text-status-success-fg">{inStock}</div>
+          <div className="text-fg-muted">In Stock</div>
         </div>
-        <div className="p-2 bg-white rounded">
-          <div className="font-bold text-yellow-600">{lowStock}</div>
-          <div className="text-gray-600">Low Stock</div>
+        <div className="p-2 bg-surface-base rounded">
+          <div className="font-bold text-status-warning-fg">{lowStock}</div>
+          <div className="text-fg-muted">Low Stock</div>
         </div>
-        <div className="p-2 bg-white rounded">
-          <div className="font-bold text-red-600">{outOfStock}</div>
-          <div className="text-gray-600">Out</div>
+        <div className="p-2 bg-surface-base rounded">
+          <div className="font-bold text-status-error-fg">{outOfStock}</div>
+          <div className="text-fg-muted">Out</div>
         </div>
       </div>
       {onViewFullInventory && (
@@ -167,7 +167,7 @@ interface NoteBannerProps {
 export function NoteBanner({ children, className = '' }: NoteBannerProps) {
   return (
     <InfoBanner variant="gray" className={className}>
-      <p className="text-sm text-gray-700">
+      <p className="text-sm text-fg-base">
         <span className="font-medium">Note:</span> {children}
       </p>
     </InfoBanner>
@@ -191,11 +191,11 @@ export function CompactBanner({
   className = '',
 }: CompactBannerProps) {
   const variantStyles = {
-    info: 'bg-blue-50 border-blue-200 text-blue-800',
-    warning: 'bg-amber-50 border-amber-200 text-amber-800',
-    success: 'bg-green-50 border-green-200 text-green-800',
+    info: 'bg-status-info-bg border-status-info-border text-status-info-fg',
+    warning: 'bg-status-warning-bg border-status-warning-border text-status-warning-fg',
+    success: 'bg-status-success-bg border-status-success-border text-status-success-fg-strong',
     primary: 'bg-primary-3/10 border-primary-3/30 text-primary-2',
-    gray: 'bg-gray-50 border-gray-200 text-gray-700',
+    gray: 'bg-surface-subtle border-stroke-default text-fg-base',
   };
 
   return (

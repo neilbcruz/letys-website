@@ -47,10 +47,10 @@ export default function HeroBanner({
             className="inline-block backdrop-blur-sm rounded-xl p-6 sm:p-8"
             style={{ backgroundColor: 'var(--color-overlay-medium)' }}
           >
-            <h1 className="font-bold text-4xl sm:text-5xl lg:text-6xl mb-4 text-white">
+            <h1 className="font-bold text-4xl sm:text-5xl lg:text-6xl mb-4 text-fg-inverse">
               Welcome to Lety's Buko Pie
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl mb-8 font-medium text-white">
+            <p className="text-lg sm:text-xl lg:text-2xl mb-8 font-medium text-fg-inverse">
               Authentic Filipino buko pie made with love since 1976
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -75,7 +75,7 @@ export default function HeroBanner({
     }
 
     return (
-      <div className="overflow-hidden relative w-full bg-gray-50 h-[220px] sm:h-[260px] lg:h-[300px]">
+      <div className="overflow-hidden relative w-full bg-surface-subtle h-[220px] sm:h-[260px] lg:h-[300px]">
         {/* Background Image */}
         <picture className="absolute inset-0 w-full h-full">
           {IMAGES.HERO_NARROW.srcSet && (
@@ -99,7 +99,7 @@ export default function HeroBanner({
         <div className="flex relative z-10 flex-col justify-center items-center px-4 h-full text-center container-width">
           {/* Icon */}
           <div className="flex justify-center mb-4">
-            <div className="p-4 rounded-full bg-white/20">{icon}</div>
+            <div className="p-4 rounded-full bg-fg-inverse/20">{icon}</div>
           </div>
 
           {/* Title with background for contrast */}
@@ -107,7 +107,7 @@ export default function HeroBanner({
             className="inline-block backdrop-blur-sm rounded-lg p-4 mb-4"
             style={{ backgroundColor: 'var(--color-overlay-medium)' }}
           >
-            <h1 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+            <h1 className="text-3xl font-bold text-fg-inverse sm:text-4xl lg:text-5xl">
               {title}
             </h1>
           </div>
@@ -117,7 +117,7 @@ export default function HeroBanner({
             className="inline-block backdrop-blur-sm rounded-lg px-4 py-2 max-w-3xl"
             style={{ backgroundColor: 'var(--color-overlay-light)' }}
           >
-            <p className="text-lg font-medium text-white sm:text-xl lg:text-2xl">
+            <p className="text-lg font-medium text-fg-inverse sm:text-xl lg:text-2xl">
               {subtitle}
             </p>
           </div>

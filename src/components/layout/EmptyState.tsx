@@ -26,9 +26,9 @@ export default function EmptyState({
 }: EmptyStateProps) {
   return (
     <div className={`py-20 text-center ${className}`.trim()}>
-      <Icon className="mx-auto mb-4 w-16 h-16 text-gray-400" aria-hidden="true" />
-      <h2 className="mb-2 text-2xl font-bold text-gray-700">{title}</h2>
-      <p className="mb-6 max-w-md mx-auto text-gray-600">{description}</p>
+      <Icon className="mx-auto mb-4 w-16 h-16 text-fg-faint" aria-hidden="true" />
+      <h2 className="mb-2 text-2xl font-bold text-fg-base">{title}</h2>
+      <p className="mb-6 max-w-md mx-auto text-fg-muted">{description}</p>
       {action && (
         <button
           onClick={action.onClick}
@@ -108,10 +108,10 @@ export function EmptyStateCard({
   className = '',
 }: EmptyStateCardProps) {
   return (
-    <div className={`p-8 text-center bg-gray-50 rounded-lg border border-gray-200 ${className}`.trim()}>
-      <Icon className="mx-auto mb-3 w-12 h-12 text-gray-400" aria-hidden="true" />
-      <h3 className="mb-2 text-lg font-bold text-gray-700">{title}</h3>
-      <p className="text-sm text-gray-600">{description}</p>
+    <div className={`p-8 text-center bg-surface-subtle rounded-lg border border-stroke-default ${className}`.trim()}>
+      <Icon className="mx-auto mb-3 w-12 h-12 text-fg-faint" aria-hidden="true" />
+      <h3 className="mb-2 text-lg font-bold text-fg-base">{title}</h3>
+      <p className="text-sm text-fg-muted">{description}</p>
     </div>
   );
 }

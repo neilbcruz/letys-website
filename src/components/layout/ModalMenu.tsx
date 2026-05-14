@@ -27,7 +27,7 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 backdrop-blur-sm bg-black/60" />
+          <div className="fixed inset-0 backdrop-blur-sm bg-surface-inverse/60" />
         </TransitionChild>
 
         {/* Container for centering */}
@@ -41,7 +41,7 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <DialogPanel className="overflow-hidden relative p-6 w-full max-w-sm text-center bg-white rounded-xl shadow-2xl transition-all transform">
+            <DialogPanel className="overflow-hidden relative p-6 w-full max-w-sm text-center bg-surface-base rounded-xl shadow-2xl transition-all transform">
               <FocusTrap active={isOpen}>
               <DialogTitle 
                 as="h2" 

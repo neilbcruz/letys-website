@@ -20,7 +20,7 @@ interface BaseSkeletonProps {
 function BaseSkeleton({ className, ariaLabel }: BaseSkeletonProps) {
   return (
     <div
-      className={cn('bg-gray-200 rounded animate-pulse', className)}
+      className={cn('bg-surface-emphasis rounded animate-pulse', className)}
       aria-hidden="true"
       aria-label={ariaLabel}
     />
@@ -69,7 +69,7 @@ interface LoadingCardProps {
 export function LoadingCard({ className }: LoadingCardProps) {
   return (
     <div className={cn('animate-pulse card-elevated', className)}>
-      <div className="h-48 bg-gray-200" />
+      <div className="h-48 bg-surface-emphasis" />
       <div className="p-6 space-y-3">
         <BaseSkeleton className="w-1/4 h-4" />
         <BaseSkeleton className="w-3/4 h-6" />
@@ -236,12 +236,12 @@ interface LoadingTableProps {
 export function LoadingTable({ rows = 5, columns = 4 }: LoadingTableProps) {
   return (
     <div
-      className="overflow-hidden bg-white rounded-lg shadow"
+      className="overflow-hidden bg-surface-base rounded-lg shadow"
       role="status"
       aria-live="polite"
     >
       {/* Header */}
-      <div className="px-6 py-4 bg-gray-100">
+      <div className="px-6 py-4 bg-surface-muted">
         <div
           className="grid gap-4"
           style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
@@ -253,7 +253,7 @@ export function LoadingTable({ rows = 5, columns = 4 }: LoadingTableProps) {
       </div>
 
       {/* Rows */}
-      <div className="divide-y divide-gray-200">
+      <div className="divide-y divide-stroke-default">
         {Array.from({ length: rows }).map((_, rowIndex) => (
           <div key={rowIndex} className="px-6 py-4">
             <div
@@ -331,14 +331,14 @@ export function LoadingSpinner({
     >
       <div
         className={cn(
-          'inline-block rounded-full border-4 border-gray-300 animate-spin border-t-primary-2',
+          'inline-block rounded-full border-4 border-stroke-emphasis animate-spin border-t-primary-2',
           sizes[size],
           className
         )}
         aria-hidden="true"
       />
       <span className="sr-only">{label}</span>
-      <p className="mt-4 text-gray-600" aria-live="polite">
+      <p className="mt-4 text-fg-muted" aria-live="polite">
         {label}
       </p>
     </div>

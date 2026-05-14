@@ -64,7 +64,7 @@ export default function CallToAction({
             </div>
           )}
           <h2 className="mb-4 heading-primary">{title}</h2>
-          {description && <p className="mx-auto mb-8 max-w-2xl text-xl text-gray-700">{description}</p>}
+          {description && <p className="mx-auto mb-8 max-w-2xl text-xl text-fg-base">{description}</p>}
           <div className={`flex flex-col gap-4 sm:flex-row ${buttonAlignClasses[align]}`}>
             {buttons.map((btn, index) => (
               <CTAButton key={index} {...btn} />
@@ -75,7 +75,7 @@ export default function CallToAction({
         // Compact CTA
         <div className="mx-auto max-w-3xl">
           <h2 className="mb-2 heading-secondary">{title}</h2>
-          {description && <p className="mb-6 text-lg text-gray-600">{description}</p>}
+          {description && <p className="mb-6 text-lg text-fg-muted">{description}</p>}
           <div className={`flex flex-col gap-3 sm:flex-row ${buttonAlignClasses[align]}`}>
             {buttons.map((btn, index) => (
               <CTAButton key={index} {...btn} />

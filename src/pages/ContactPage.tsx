@@ -5,7 +5,7 @@ import { PageSection } from '@/components/layout';
 
 export default function ContactPage() {
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full min-h-screen bg-surface-subtle">
       <SEOHead pageKey="contact" />
 
       {/* Header */}
@@ -22,7 +22,7 @@ export default function ContactPage() {
           <div className="max-w-2xl mx-auto space-y-8">
             <div className="text-center">
               <h2 className="mb-4 heading-secondary">Get in Touch</h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-fg-muted">
                 Choose your preferred method to reach our team
               </p>
             </div>
@@ -38,8 +38,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="mb-2 text-2xl font-bold text-primary-2">Email Us</h3>
-                  <p className="text-lg font-semibold text-gray-700">hello@letysbukopie.com</p>
-                  <p className="mt-2 text-sm text-gray-500">We'll respond within 24 hours</p>
+                  <p className="text-lg font-semibold text-fg-base">hello@letysbukopie.com</p>
+                  <p className="mt-2 text-sm text-fg-subtle">We'll respond within 24 hours</p>
                 </div>
               </div>
             </a>
@@ -57,8 +57,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="mb-2 text-2xl font-bold text-primary-2">Facebook Messenger</h3>
-                  <p className="text-lg text-gray-700">Chat with us instantly</p>
-                  <p className="mt-2 text-sm text-gray-500">Available during business hours</p>
+                  <p className="text-lg text-fg-base">Chat with us instantly</p>
+                  <p className="mt-2 text-sm text-fg-subtle">Available during business hours</p>
                 </div>
               </div>
             </a>
@@ -66,10 +66,10 @@ export default function ContactPage() {
             {/* Business Hours Card */}
             <div className="card-elevated p-8 bg-linear-to-br from-primary-3/10 to-primary-1/10">
               <h3 className="mb-4 text-xl font-bold text-primary-2">Business Hours</h3>
-              <p className="mb-2 text-gray-700">
+              <p className="mb-2 text-fg-base">
                 <span className="font-bold">Monday - Sunday:</span> 6:00 AM - 6:00 PM
               </p>
-              <p className="mt-4 text-sm text-gray-600">
+              <p className="mt-4 text-sm text-fg-muted">
                 We typically respond to messages within 24 hours during business days.
               </p>
             </div>

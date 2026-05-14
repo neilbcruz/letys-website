@@ -183,13 +183,13 @@ export async function searchItems(
  * @example
  * ```typescript
  * const status = getStockStatus({ qty: 15, min: 5 });
- * // Returns: { status: 'in-stock', label: 'In Stock (15)', color: 'text-green-700 bg-green-100' }
+ * // Returns: { status: 'in-stock', label: 'In Stock (15)', color: 'text-status-success-fg bg-status-success-bg' }
  *
  * const lowStock = getStockStatus({ qty: 3, min: 5 });
- * // Returns: { status: 'low-stock', label: 'Low Stock (3 left)', color: 'text-yellow-700 bg-yellow-100' }
+ * // Returns: { status: 'low-stock', label: 'Low Stock (3 left)', color: 'text-status-warning-fg bg-status-warning-bg-muted' }
  *
  * const outOfStock = getStockStatus({ qty: 0, min: 5 });
- * // Returns: { status: 'out-of-stock', label: 'Out of Stock', color: 'text-red-600 bg-red-100' }
+ * // Returns: { status: 'out-of-stock', label: 'Out of Stock', color: 'text-status-error-fg bg-status-error-bg-muted' }
  * ```
  */
 export function getStockStatus(stockDetails: StockDetails): {
@@ -203,7 +203,7 @@ export function getStockStatus(stockDetails: StockDetails): {
     return {
       status: 'out-of-stock',
       label: 'Out of Stock',
-      color: 'text-red-600 bg-red-100',
+      color: 'text-status-error-fg bg-status-error-bg-muted',
     };
   }
 
@@ -211,14 +211,14 @@ export function getStockStatus(stockDetails: StockDetails): {
     return {
       status: 'low-stock',
       label: `Low Stock (${qty} left)`,
-      color: 'text-yellow-700 bg-yellow-100',
+      color: 'text-status-warning-fg bg-status-warning-bg-muted',
     };
   }
 
   return {
     status: 'in-stock',
     label: `In Stock (${qty})`,
-    color: 'text-green-700 bg-green-100',
+    color: 'text-status-success-fg bg-status-success-bg',
   };
 }
 
