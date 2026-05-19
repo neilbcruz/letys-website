@@ -18,7 +18,7 @@ export default function PageHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-40 px-4 py-3 shadow-md bg-primary-1 sm:px-8 sm:py-4 lg:px-40 lg:py-5">
+    <header className="sticky top-0 z-40 bg-primary-1 px-[var(--space-4)] py-[var(--space-4)] shadow-md sm:px-[var(--space-8)] lg:px-[var(--space-20)] lg:py-[var(--space-6)]">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
         {/* LOGO + BURGER */}
         <div className="flex justify-between items-center w-full sm:w-auto">

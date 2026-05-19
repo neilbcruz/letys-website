@@ -3,6 +3,14 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 /**
+ * Icon Sizing Pattern:
+ * Match icon size to text line-height for alignment
+ * - text-base (16px, ~26px leading) → w-6 h-6
+ * - text-lg (18px, ~29px leading) → w-7 h-7
+ * - text-xl (20px, ~32px leading) → w-8 h-8
+ */
+
+/**
  * Props for the Button component
  *
  * @remarks
@@ -54,6 +62,7 @@ const Button = ({
       'text-fg-inverse',
       'hover:bg-primary-3',
       'hover:text-fg-inverse',
+      'active:scale-95',
       'focus:ring-primary-1',
     ].join(' '),
 
@@ -62,6 +71,7 @@ const Button = ({
       'text-fg-default',
       'hover:bg-primary-3',
       'hover:text-fg-inverse',
+      'active:scale-95',
       'focus:ring-primary-3',
     ].join(' '),
 
@@ -72,6 +82,7 @@ const Button = ({
       'text-primary-2',
       'hover:bg-primary-2',
       'hover:text-fg-inverse',
+      'active:scale-95',
       'focus:ring-primary-1',
     ].join(' '),
 
@@ -79,6 +90,7 @@ const Button = ({
       'bg-transparent',
       'text-primary-2',
       'hover:bg-support-2',
+      'active:scale-95',
       'focus:ring-primary-1',
     ].join(' '),
 
@@ -86,6 +98,7 @@ const Button = ({
       'bg-transparent',
       'text-primary-2',
       'hover:underline',
+      'active:scale-95',
       'underline-offset-4',
       'decoration-2',
       'p-0',
@@ -97,9 +110,9 @@ const Button = ({
 
   // Updated sizes to meet WCAG 2.5.5 (Target Size - 44x44px minimum)
   const sizes = {
-    sm: 'text-sm px-4 py-2.5 min-h-[44px] min-w-[44px]', // Ensure both dimensions
-    md: 'text-base px-5 py-3 min-h-[48px] min-w-[48px]',
-    lg: 'text-lg px-7 py-4 min-h-[52px] min-w-[52px]',
+    sm: 'text-sm px-6 py-2 min-h-[44px] min-w-[44px]', // Ensure both dimensions
+    md: 'text-base px-8 py-3 min-h-[48px] min-w-[48px]',
+    lg: 'text-lg px-10 py-4 min-h-[52px] min-w-[52px]',
   };
 
   const isDisabled = disabled || isLoading;

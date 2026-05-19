@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown, Coffee, HelpCircle, MapPin, MessageCircle } from 'lucide-react';
 import HeroBanner from '@/components/ui/HeroBanner';
 import { SEOHead, FAQSchema } from '@/components/seo';
 import { PageSection, ContactCTA } from '@/components/layout';
@@ -80,7 +80,7 @@ export default function FaqPage() {
               <h2 className="mb-12 text-center heading-secondary">Explore More</h2>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 <NavLink to="/products" className="p-6 text-center transition-transform card-elevated hover:scale-105 group">
-                  <div className="mb-4 text-4xl">🥥</div>
+                  <Coffee className="w-12 h-12 mx-auto mb-4 text-primary-2" />
                   <h3 className="mb-2 text-xl font-bold transition text-primary-2 group-hover:text-primary-1">
                     Our Products
                   </h3>
@@ -90,7 +90,7 @@ export default function FaqPage() {
                 </NavLink>
 
                 <NavLink to="/locations" className="p-6 text-center transition-transform card-elevated hover:scale-105 group">
-                  <div className="mb-4 text-4xl">📍</div>
+                  <MapPin className="w-12 h-12 mx-auto mb-4 text-primary-2" />
                   <h3 className="mb-2 text-xl font-bold transition text-primary-2 group-hover:text-primary-1">
                     Store Locations
                   </h3>
@@ -100,7 +100,7 @@ export default function FaqPage() {
                 </NavLink>
 
                 <NavLink to="/contact" className="p-6 text-center transition-transform card-elevated hover:scale-105 group">
-                  <div className="mb-4 text-4xl">💬</div>
+                  <MessageCircle className="w-12 h-12 mx-auto mb-4 text-primary-2" />
                   <h3 className="mb-2 text-xl font-bold transition text-primary-2 group-hover:text-primary-1">
                     Get in Touch
                   </h3>

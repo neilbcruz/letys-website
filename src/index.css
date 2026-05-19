@@ -17,6 +17,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    letter-spacing: -0.025em;
   }
 
   h1 {
@@ -31,7 +32,7 @@
 
   h3 {
     font-size: clamp(1.25rem, 2vw + 0.5rem, 2rem);
-    line-height: 1.4;
+    line-height: 1.2;
   }
 
   p {
@@ -179,6 +180,19 @@
            focus:ring-4 focus:ring-primary-3 focus:outline-none
            transition-all duration-200;
     min-height: var(--touch-target);
+  }
+
+  /* Pressed state for interactive elements */
+  button, a, [role="button"] {
+    @apply active:scale-95 transition-transform duration-75;
+  }
+
+  /* Exception: skip link shouldn't scale */
+  .skip-to-main {
+    transform: none;
+  }
+  .skip-to-main:active {
+    transform: translateX(-50%);
   }
 
   /* Ensure sufficient contrast for links */

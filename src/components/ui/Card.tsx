@@ -39,8 +39,7 @@ const Card = ({
     <div
       className={cn(
         'bg-surface-base rounded-lg border border-stroke-default shadow-xs overflow-hidden',
-        hoverable &&
-          'transition-all duration-300 hover:shadow-md hover:-translate-y-1',
+        hoverable && 'transition-all duration-300 hover:shadow-lg',
         className
       )}
       role='article'
@@ -60,7 +59,10 @@ interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {
 const CardHeader = ({ children, className, ...props }: CardHeaderProps) => {
   return (
     <div
-      className={cn('p-4 md:p-6 border-b border-stroke-default', className)}
+      className={cn(
+        'p-[var(--space-4)] md:p-[var(--space-6)] border-b border-stroke-default',
+        className
+      )}
       role='heading'
       aria-level={2}
       {...props}
@@ -78,7 +80,7 @@ interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
 const CardContent = ({ children, className, ...props }: CardContentProps) => {
   return (
     <div
-      className={cn('p-4 md:p-6', className)}
+      className={cn('p-[var(--space-4)] md:p-[var(--space-6)]', className)}
       role='region'
       aria-label='Service details'
       {...props}
@@ -97,7 +99,7 @@ const CardFooter = ({ children, className, ...props }: CardFooterProps) => {
   return (
     <div
       className={cn(
-        'p-4 md:p-6 border-t border-stroke-default bg-surface-subtle',
+        'p-[var(--space-4)] md:p-[var(--space-6)] border-t border-stroke-default bg-surface-subtle',
         className
       )}
       {...props}

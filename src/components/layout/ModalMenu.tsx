@@ -58,7 +58,7 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
                     to={item.path}
                     onClick={closeModal}
                     className={({ isActive }) =>
-                      `text-lg font-bold py-2.5 px-4 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-1 ${
+                      `px-4 py-3 text-lg font-bold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-1 ${
                         isActive 
                           ? 'bg-primary-3/20 text-primary-2' 
                           : 'text-primary-2 hover:text-primary-1 hover:bg-primary-3/10'
@@ -75,7 +75,7 @@ export default function ModalMenu({ isOpen, closeModal }: ModalMenuProps) {
               <button
                 type="button"
                 onClick={closeModal}
-                className="mt-6 w-full btn-primary text-base py-2.5"
+                className="mt-6 w-full text-base btn-primary"
                 aria-label="Close menu"
               >
                 Close Menu

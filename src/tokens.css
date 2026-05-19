@@ -160,6 +160,13 @@
   --space-24:  6rem;
   --space-32:  8rem;
 
+  /* ─── Component Heights ───────────────────────────────────── */
+  --height-card-image:   12rem;  /* 192px - from Card.tsx */
+  --height-hero-narrow:  220px;
+  --height-hero-mobile:  60vh;
+  --height-hero-tablet:  70vh;
+  --height-hero-desktop: 80vh;
+
   /* ─── Border Radius ──────────────────────────────────────── */
   --radius-none:  0;
   --radius-sm:    0.25rem;
@@ -270,7 +277,7 @@
   --color-fg-muted:    var(--color-fg-muted);
   --color-fg-subtle:   var(--color-fg-subtle);
   --color-fg-faint:    var(--color-fg-faint);
-  --color-fg-inverse:  var(--color-fg-inverse);
+  --color-fg-inverse:  #FFFFFF;
 
   /* ─── Strokes ────────────────────────────────────────────── */
   --color-stroke-default:  var(--color-stroke-default);

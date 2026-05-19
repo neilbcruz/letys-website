@@ -20,7 +20,7 @@ export default function HeroBanner({
   // Full-width variant (from PageHero.tsx)
   if (variant === 'full') {
     return (
-      <div className="w-full h-[60vh] sm:h-[70vh] lg:h-[80vh] relative overflow-hidden flex items-center justify-center">
+      <div className="w-full h-[var(--height-hero-mobile)] sm:h-[var(--height-hero-tablet)] lg:h-[var(--height-hero-desktop)] relative overflow-hidden flex items-center justify-center">
         <picture className="absolute inset-0 w-full h-full">
           {IMAGES.HERO.srcSet && (
             <source srcSet={IMAGES.HERO.srcSet} sizes="100vw" type="image/webp" />
@@ -75,7 +75,7 @@ export default function HeroBanner({
     }
 
     return (
-      <div className="overflow-hidden relative w-full bg-surface-subtle h-[220px] sm:h-[260px] lg:h-[300px]">
+      <div className="overflow-hidden relative w-full bg-surface-subtle h-[var(--height-hero-narrow)] sm:h-[var(--height-hero-narrow)] lg:h-[var(--height-hero-narrow)]">
         {/* Background Image */}
         <picture className="absolute inset-0 w-full h-full">
           {IMAGES.HERO_NARROW.srcSet && (
