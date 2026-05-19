@@ -9,6 +9,7 @@ import HeroBanner from '@/components/ui/HeroBanner';
 import { LoadingSpinner } from '@/components/ui/';
 import { SEOHead, useGoogleAnalytics } from '@/components/seo';
 import { InlineErrorState, EmptyState } from '@/components/layout';
+import { getLocationIcon } from '@/lib/locationIcons';
 
 export default function ProductsAvailabilityPage() {
   const STORES = getInventoryLocations();
@@ -156,14 +157,18 @@ export default function ProductsAvailabilityPage() {
                         <th scope="col" className="px-6 py-4 w-1/4 text-lg font-bold text-left">
                           Product
                         </th>
-                        {storesData.map(store => (
-                          <th key={store.id} scope="col" className="px-6 py-4 text-lg font-bold text-center">
-                            <div className="flex flex-col gap-2 items-center">
-                              <span className="text-2xl" aria-hidden="true">{store.icon}</span>
-                              <span>{store.name}</span>
-                            </div>
-                          </th>
-                        ))}
+                        {storesData.map(store => {
+                          const StoreIcon = getLocationIcon(store.icon);
+
+                          return (
+                            <th key={store.id} scope="col" className="px-6 py-4 text-lg font-bold text-center">
+                              <div className="flex flex-col gap-2 items-center">
+                                <StoreIcon size={24} aria-hidden="true" />
+                                <span>{store.name}</span>
+                              </div>
+                            </th>
+                          );
+                        })}
                         <th scope="col" className="px-6 py-4 text-lg font-bold text-center">
                           Total Stock
                         </th>
@@ -249,11 +254,12 @@ export default function ProductsAvailabilityPage() {
                         <div className="mb-4 space-y-3">
                           {storesData.map(store => {
                             const item = findItemInStore(store.id, productName);
+                            const StoreIcon = getLocationIcon(store.icon);
 
                             return (
                               <div key={store.id} className="flex justify-between items-center">
                                 <div className="flex gap-2 items-center">
-                                  <span className="text-xl" aria-hidden="true">{store.icon}</span>
+                                  <StoreIcon size={20} aria-hidden="true" />
                                   <span className="font-medium text-fg-base">{store.name}</span>
                                 </div>
                                 {item ? (

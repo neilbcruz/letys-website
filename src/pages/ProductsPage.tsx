@@ -9,6 +9,7 @@ import HeroBanner from '@/components/ui/HeroBanner';
 import { LoadingGrid } from '@/components/ui/LoadingStates';
 import { SEOHead, ProductsSchema, useGoogleAnalytics } from '@/components/seo';
 import { ErrorState, EmptyState, InfoBanner } from '@/components/layout';
+import { getLocationIcon } from '@/lib/locationIcons';
 
 export default function ProductsPage() {
   const STORES = getInventoryLocations();
@@ -76,24 +77,28 @@ export default function ProductsPage() {
           <div className="flex flex-col gap-4 py-6">
             {/* Store Tabs */}
             <div className="flex flex-wrap gap-3 justify-center">
-              {STORES.map((store) => (
-                <button
-                  key={store.storeId}
-                  onClick={() => handleStoreChange(store.storeId)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-base
-                    transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-1
-                    min-h-[48px]
-                    ${selectedStore === store.storeId
-                      ? 'bg-primary-2 text-fg-inverse shadow-lg scale-105'
-                      : 'bg-surface-base border-2 border-stroke-emphasis text-fg-base hover:bg-surface-subtle'
-                    }`}
-                  aria-pressed={selectedStore === store.storeId}
-                  aria-label={`View ${store.name} inventory`}
-                >
-                  <span className="text-2xl" aria-hidden="true">{store.icon}</span>
-                  <span>{store.name}</span>
-                </button>
-              ))}
+              {STORES.map((store) => {
+                const StoreIcon = getLocationIcon(store.icon);
+
+                return (
+                  <button
+                    key={store.storeId}
+                    onClick={() => handleStoreChange(store.storeId)}
+                    className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-base
+                      transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-1
+                      min-h-[48px]
+                      ${selectedStore === store.storeId
+                        ? 'bg-primary-2 text-fg-inverse shadow-lg scale-105'
+                        : 'bg-surface-base border-2 border-stroke-emphasis text-fg-base hover:bg-surface-subtle'
+                      }`}
+                    aria-pressed={selectedStore === store.storeId}
+                    aria-label={`View ${store.name} inventory`}
+                  >
+                    <StoreIcon size={24} aria-hidden="true" />
+                    <span>{store.name}</span>
+                  </button>
+                );
+              })}
             </div>
 
             {/* Store Info Banner */}

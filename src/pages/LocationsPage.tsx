@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import HeroBanner from '@/components/ui/HeroBanner';
 import { SEOHead, LocationSchema, useGoogleAnalytics } from '@/components/seo';
 import { PageSection, PageSectionContent, PageSectionGrid, InventoryCTA } from '@/components/layout';
+import { getLocationIcon } from '@/lib/locationIcons';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const DAY_KEYS: (keyof Location['hours'])[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -231,6 +232,7 @@ export default function LocationsPage() {
                 const isOpen = isStoreOpen(loc);
                 const imageData: ImageSet | undefined = IMAGE_MAP[loc.image];
                 const isActive = activeLocation === loc.id;
+                const LocationIcon = getLocationIcon(loc.icon);
 
                 return (
                   <article
@@ -266,7 +268,7 @@ export default function LocationsPage() {
                         />
                       ) : (
                         <div className="flex justify-center items-center w-full h-full bg-linear-to-br from-primary-2 to-primary-3">
-                          <span className="text-6xl">{loc.icon}</span>
+                          <LocationIcon size={56} className="text-fg-inverse" aria-hidden="true" />
                         </div>
                       )}
                       <div className="absolute top-4 right-4">
@@ -282,7 +284,7 @@ export default function LocationsPage() {
                     <div className="p-6">
                       <h3 className="flex justify-between items-center mb-3 text-xl font-bold text-primary-2">
                         <span className="flex gap-2 items-center">
-                          <span className="text-2xl">{loc.icon}</span>
+                          <LocationIcon size={24} aria-hidden="true" />
                           {loc.name}
                         </span>
                         <button

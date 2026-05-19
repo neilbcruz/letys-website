@@ -12,7 +12,7 @@ function makeLocation(hours: Location['hours']): Location {
     coords: { lat: 0, lng: 0 },
     mapLink: '',
     image: '',
-    icon: '',
+    icon: 'Store',
     color: '',
     hours,
     hasInventoryAPI: true,

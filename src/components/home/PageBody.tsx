@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import { Clock3, Coffee, MapPin, Store, Users } from 'lucide-react';
 import { IMAGES } from '@/lib/images';
 import { Button } from '@/components/ui';
 
@@ -46,13 +47,13 @@ export default function PageBody() {
           </p>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12">
             {[
-              { icon: '🥥', title: 'Fresh Ingredients', desc: 'Made daily with fresh young coconuts and premium ingredients for the perfect taste' },
-              { icon: '👨‍👩‍👧‍👦', title: 'Family Tradition', desc: 'A legacy since 1976, passed down through generations with the same authentic recipe' },
-              { icon: '🏪', title: 'Multiple Locations', desc: 'Conveniently located across Laguna for easy access to your favorite treats' },
+              { icon: Coffee, title: 'Fresh Ingredients', desc: 'Made daily with fresh young coconuts and premium ingredients for the perfect taste' },
+              { icon: Users, title: 'Family Tradition', desc: 'A legacy since 1976, passed down through generations with the same authentic recipe' },
+              { icon: Store, title: 'Multiple Locations', desc: 'Conveniently located across Laguna for easy access to your favorite treats' },
             ].map((item, idx) => (
               <div key={idx} className="p-6 text-center">
                 <div className="flex justify-center items-center mx-auto mb-4 w-20 h-20 rounded-full bg-primary-3">
-                  <span className="text-4xl">{item.icon}</span>
+                  <item.icon size={36} className="text-primary-2" aria-hidden="true" />
                 </div>
                 <h3 className="mb-3 text-xl font-bold text-primary-2">{item.title}</h3>
                 <p className="leading-relaxed text-fg-muted">{item.desc}</p>
@@ -175,7 +176,8 @@ export default function PageBody() {
             <div className="space-y-8">
               <div className="p-8 rounded-2xl bg-primary-3/10">
                 <h3 className="flex gap-2 items-center mb-4 text-2xl font-bold text-primary-2">
-                  <span>📍</span> Location
+                  <MapPin size={24} aria-hidden="true" />
+                  <span>Location</span>
                 </h3>
                 <p className="mb-2 text-lg text-fg-base">
                   Lety's Buko Pie, National Road,<br />
@@ -191,7 +193,8 @@ export default function PageBody() {
 
               <div className="p-8 rounded-2xl bg-primary-3/10">
                 <h3 className="flex gap-2 items-center mb-4 text-2xl font-bold text-primary-2">
-                  <span>🕐</span> Store Hours
+                  <Clock3 size={24} aria-hidden="true" />
+                  <span>Store Hours</span>
                 </h3>
                 <p className="mb-4 text-lg text-fg-base">Open daily from 6:00 AM to 6:00 PM</p>
                 <NavLink to="/contact">

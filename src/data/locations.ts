@@ -1,6 +1,8 @@
 // src/data/locations.ts
 // Unified location and store data for all branches
 
+import type { LocationIconName } from '@/lib/locationIcons';
+
 export interface Location {
   // Core identification
   id: string;
@@ -15,7 +17,7 @@ export interface Location {
   // Store details
   storeId: string; // GraphQL store identifier
   image: string;
-  icon: string;
+  icon: LocationIconName;
   color: string; // Theme color for UI
   
   // Operating hours
@@ -42,7 +44,7 @@ export const LOCATIONS: Location[] = [
     mapLink: "https://goo.gl/maps/6v5HKFPuKa7StZoMA",
     
     image: "location-main",
-    icon: "🏪",
+    icon: "Store",
     color: "primary-2",
     
     hours: {
@@ -72,7 +74,7 @@ export const LOCATIONS: Location[] = [
     mapLink: "https://maps.app.goo.gl/sJpTk76p5udHyA6b8",
     
     image: "location-shell",
-    icon: "⛽",
+    icon: "Fuel",
     color: "primary-3",
     
     hours: {
@@ -102,7 +104,7 @@ export const LOCATIONS: Location[] = [
     mapLink: "https://goo.gl/maps/TX86xgAPRUh7VyRm8",
     
     image: "location-agapita",
-    icon: "🎓",
+    icon: "GraduationCap",
     color: "secondary-1",
     
     hours: {
@@ -132,7 +134,7 @@ export const LOCATIONS: Location[] = [
     mapLink: "https://goo.gl/maps/n4piamTpgqPmFqpH6",
     
     image: "location-pansol",
-    icon: "🏖️",
+    icon: "MapPin",
     color: "secondary-2",
     
     hours: {
