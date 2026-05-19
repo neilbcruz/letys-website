@@ -259,17 +259,7 @@
   }
 }
 
-/* 6. DARK MODE SUPPORT (Optional - for future implementation) */
-@media (prefers-color-scheme: dark) {
-  /* Uncomment when implementing dark mode
-  :root {
-    --color-bg: #1F2937;
-    --color-text: #F9FAFB;
-  }
-  */
-}
-
-/* 7. LOADING STATES */
+/* 6. LOADING STATES */
 @layer components {
   .skeleton {
     @apply bg-surface-emphasis rounded animate-pulse;

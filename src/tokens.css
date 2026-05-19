@@ -240,6 +240,57 @@
   --gradient-overlay: linear-gradient(to bottom, var(--color-overlay-light), var(--color-overlay-black));
 }
 
+/* ========================================================================
+ * 3. DARK MODE TOKENS
+ * Dedicated dark mode palette - not a simple inversion of light mode
+ * ======================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* ─── Dark Surfaces ───────────────────────────────────── */
+    --color-surface-base:    #1A1A18;
+    --color-surface-white:   #242421;
+    --color-surface-cream:   #2E2E2B;
+    --color-surface-sage:    #3A3A36;
+    --color-surface-subtle:  #242421;
+    --color-surface-muted:   #2E2E2B;
+    --color-surface-emphasis:#3A3A36;
+    --color-surface-strong:  #454540;
+    --color-surface-inverse: #F5F5F0;
+
+    /* ─── Dark Foreground ─────────────────────────────────── */
+    --color-fg-default:     #F5F5F0;
+    --color-fg-strong:      #FFFFFF;
+    --color-fg-base:        #DDDDD8;
+    --color-fg-muted:       #C8C8C2;
+    --color-fg-subtle:      #9A9A90;
+    --color-fg-faint:       #70706B;
+    --color-fg-inverse:     #1A1A18;
+    --color-fg-placeholder: #70706B;
+
+    /* ─── Dark Strokes ────────────────────────────────────── */
+    --color-stroke-default:  #454540;
+    --color-stroke-emphasis: #70706B;
+    --color-stroke-strong:   #5C5C56;
+
+    /* ─── Dark Brand (lighter for contrast) ───────────────── */
+    --color-brand-accent:   #D4A520;
+    --color-brand-primary:  var(--color-forest);
+    --color-brand-muted:    var(--color-olive);
+
+    /* ─── Dark Overlays ──────────────────────────────────── */
+    --color-overlay-light:  rgba(255, 255, 255, 0.1);
+    --color-overlay-medium: rgba(255, 255, 255, 0.15);
+    --color-overlay-heavy:  rgba(255, 255, 255, 0.2);
+    --color-overlay-black:  rgba(255, 255, 255, 0.25);
+
+    /* ─── Dark Shadows ───────────────────────────────────── */
+    --shadow-sm:     0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-base:   0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+    --shadow-md:     0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+    --shadow-lg:     0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  }
+}
+
 
 /* ========================================================================
  * 2. TAILWIND BRIDGE (@theme inline)
