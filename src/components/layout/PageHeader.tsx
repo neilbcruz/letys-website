@@ -1,13 +1,16 @@
 import { useState, useRef } from 'react';
+import { Moon, Sun } from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
 import ReactBurger from 'hamburger-react';
 import { NAV_ITEMS } from '@/data/navItems';
+import { useTheme } from '@/hooks/useTheme';
 import { IMAGES } from '@/lib/images';
 import ModalMenu from './ModalMenu';
 
 export default function PageHeader() {
   const [isOpen, setOpen] = useState(false);
   const burgerButtonRef = useRef<HTMLDivElement>(null);
+  const { resolvedTheme, toggleTheme } = useTheme();
 
   const closeModal = () => {
     setOpen(false);
@@ -47,7 +50,7 @@ export default function PageHeader() {
         </div>
 
         {/* NAVIGATION LINKS */}
-        <nav id="navigation" className="hidden gap-8 items-center tablet:flex" aria-label="Main navigation">
+        <nav id="navigation" className="hidden gap-4 items-center tablet:flex" aria-label="Main navigation">
           {NAV_ITEMS.map(item => (
             <NavLink
               key={item.path}
@@ -61,6 +64,16 @@ export default function PageHeader() {
               {item.label}
             </NavLink>
           ))}
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md border border-stroke-default bg-surface-white p-3 text-primary-2 shadow-sm transition-colors duration-200 hover:bg-support-2 focus:outline-none focus:ring-2 focus:ring-primary-1 focus:ring-offset-2"
+            aria-label={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {resolvedTheme === 'dark' ? <Sun className="h-5 w-5" aria-hidden="true" /> : <Moon className="h-5 w-5" aria-hidden="true" />}
+          </button>
         </nav>
       </div>
 
