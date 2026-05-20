@@ -9,5 +9,4 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Availability", path: "/availability" },
   { label: "Locations", path: "/locations" },
   { label: "FAQ", path: "/faq" },
-  { label: "Contact", path: "/contact" },
 ];

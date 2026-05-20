@@ -118,7 +118,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 If this problem persists, please{' '}
                 <a
                   href="/contact"
-                  className="font-medium underline text-primary-2 hover:text-primary-3"
+                  className="font-medium underline text-brand hover:text-brand-muted"
                 >
                   contact our support team
                 </a>

@@ -55,18 +55,18 @@ export default function StockBadge({
   className,
   showQuantity = true,
 }: StockBadgeProps) {
-  const { label, color } = getStockStatus(stockDetails);
+  const { label, status } = getStockStatus(stockDetails);
 
   return (
     <span
       className={cn(
-        'inline-flex justify-center items-center px-3 py-1 text-sm font-bold rounded-full',
+        'stock-badge inline-flex justify-center items-center px-3 py-1 text-sm font-bold rounded-full',
         'min-w-[120px]', // Fixed minimum width to prevent jitter
         'transition-colors duration-200', // Smooth color transitions
         'min-h-[28px]', // WCAG 2.5.5 - Minimum touch target size
-        color,
         className
       )}
+      data-status={status}
       role="status"
       aria-label={`Stock status: ${label}`}
     >

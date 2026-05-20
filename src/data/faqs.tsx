@@ -27,19 +27,19 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     question: "When are your stores open?",
-    answer: <>We're open daily from 6:00 AM to 6:00 PM. Check out the full details on our <NavLink to='/locations' className="font-bold underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1">locations page</NavLink>.</>
+    answer: <>We're open daily from 6:00 AM to 6:00 PM. Check out the full details on our <NavLink to='/locations' className="font-bold underline rounded text-brand hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent">locations page</NavLink>.</>
   },
   {
     question: "Where can I find your stores?",
-    answer: <>You can see all our store locations on our <NavLink to='/locations' className="font-bold underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1">locations page</NavLink>. Come visit us!</>
+    answer: <>You can see all our store locations on our <NavLink to='/locations' className="font-bold underline rounded text-brand hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent">locations page</NavLink>. Come visit us!</>
   },
   {
     question: "Can I order or reserve online?",
-    answer: "Not just yet. We love seeing you in person — it's the best way to pick your favorite pies!"
+    answer: "Not just yet. We love seeing you in person. It's the best way to pick your favorite pies!"
   },
   {
     question: "What products do you offer?",
-    answer: <>Check out all our delicious treats on our <NavLink to='/products' className="font-bold underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1">products page</NavLink>. You won't want to miss them!</>
+    answer: <>Check out all our delicious treats on our <NavLink to='/products' className="font-bold underline rounded text-brand hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent">products page</NavLink>. You won't want to miss them!</>
   },
   {
     question: "Do you cater for events?",
@@ -79,7 +79,7 @@ export const FAQ_ITEMS_PLAIN: Array<{ question: string; answer: string }> = [
   },
   {
     question: "Can I order or reserve online?",
-    answer: "Not just yet. We love seeing you in person — it's the best way to pick your favorite pies!"
+    answer: "Not just yet. We love seeing you in person. It's the best way to pick your favorite pies!"
   },
   {
     question: "What products do you offer?",

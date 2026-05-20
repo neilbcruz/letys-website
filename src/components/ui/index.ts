@@ -8,6 +8,7 @@ export { default as StandardSidebar } from './StandardSidebar';
 export { default as StockBadge } from './StockBadge';
 export { default as SearchInput } from './SearchInput';
 export { default as SelectPicker } from './SelectPicker';
+export { default as SegmentedControl } from './SegmentedControl';
 export { default as LocationsMap } from './LocationsMap';
 
 // Export loading state components

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import ProductCardWithStock from '@/components/products/ProductCardWithStock';
-import SearchInput from '@/components/ui/SearchInput';
+import { SearchInput, SegmentedControl } from '@/components/ui';
 import { Package, Store, RefreshCw } from 'lucide-react';
 import { getInventoryLocations, getLocationByStoreId, formatHours } from '@/data/locations';
 import HeroBanner from '@/components/ui/HeroBanner';
@@ -66,38 +66,40 @@ export default function ProductsPage() {
       {/* Header */}
       <HeroBanner
         variant="narrow"
-        title="Store Inventory"
+        title={<>Shop Our <span className="text-accent">Products</span></>}
         icon={<Package size={32} aria-hidden="true" />}
       />
 
+      {/* Subheading */}
+      <section className="bg-surface-base border-b border-stroke-default">
+        <div className="container-width px-4 py-6 sm:px-8 text-center">
+          <p className="text-lg text-fg-muted">
+            Fresh baked goods, specialty pies, and pasalubong favorites
+          </p>
+        </div>
+      </section>
+
       {/* Store Selection Tabs */}
-      <section className="sticky top-0 z-40 bg-surface-base border-b border-stroke-default shadow-md">
+      <section className="sticky top-[84px] z-30 bg-surface-base border-b border-stroke-default shadow-md">
         <div className="container-width">
           <div className="flex flex-col gap-4 py-6">
             {/* Store Tabs */}
-            <div className="flex flex-wrap gap-3 justify-center">
-              {STORES.map((store) => {
-                const StoreIcon = getLocationIcon(store.icon);
+            <div className="flex justify-center">
+              <SegmentedControl
+                ariaLabel="Choose inventory location"
+                value={selectedStore}
+                onChange={handleStoreChange}
+                options={STORES.map(store => {
+                  const StoreIcon = getLocationIcon(store.icon);
 
-                return (
-                  <button
-                    key={store.storeId}
-                    onClick={() => handleStoreChange(store.storeId)}
-                    className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-base
-                      transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-1
-                      min-h-[48px]
-                      ${selectedStore === store.storeId
-                        ? 'bg-primary-2 text-fg-inverse shadow-lg scale-105'
-                        : 'bg-surface-base border-2 border-stroke-emphasis text-fg-base hover:bg-surface-subtle'
-                      }`}
-                    aria-pressed={selectedStore === store.storeId}
-                    aria-label={`View ${store.name} inventory`}
-                  >
-                    <StoreIcon size={24} aria-hidden="true" />
-                    <span>{store.name}</span>
-                  </button>
-                );
-              })}
+                  return {
+                    label: store.name,
+                    value: store.storeId,
+                    ariaLabel: `View ${store.name} inventory`,
+                    icon: <StoreIcon size={20} aria-hidden="true" />,
+                  };
+                })}
+              />
             </div>
 
             {/* Store Info Banner */}
@@ -119,7 +121,7 @@ export default function ProductsPage() {
                     href={currentStore.mapLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-medium underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
+                    className="font-medium underline rounded text-brand hover:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand"
                   >
                     Get Directions →
                   </a>
@@ -136,49 +138,60 @@ export default function ProductsPage() {
             )}
 
             {/* Filters */}
-            <div className="flex flex-col gap-4 md:flex-row">
-              {/* Search */}
-              <div className="flex-1">
-                <SearchInput
-                  placeholder="Search products..."
-                  onSearch={handleSearch}
-                  size="lg"
-                  clearable
-                  ariaLabel="Search for products"
-                />
-              </div>
-
-              {/* Category Filter */}
-              <div className="md:w-64">
-                <label htmlFor="category-filter" className="sr-only">
-                  Filter by category
-                </label>
-                <select
-                  id="category-filter"
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="px-4 w-full h-14 text-base bg-surface-base rounded-lg border-2 border-stroke-emphasis transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent"
-                  aria-label="Filter by category"
+            <div className="flex flex-col gap-4">
+              {/* Category Pills */}
+              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                <button
+                  onClick={() => setSelectedCategory('')}
+                  className={`px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand ${
+                    selectedCategory === ''
+                      ? 'ui-chip-selected'
+                      : 'ui-chip'
+                  }`}
+                  aria-label="All categories"
                 >
-                  <option value="">All Categories</option>
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
+                  All
+                </button>
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand ${
+                      selectedCategory === category
+                        ? 'ui-chip-selected'
+                        : 'ui-chip'
+                    }`}
+                    aria-label={`Filter by ${category}`}
+                    aria-pressed={selectedCategory === category}
+                  >
+                    {category}
+                  </button>
+                ))}
               </div>
 
-              {/* Refresh Button */}
-              <button
-                onClick={refetch}
-                disabled={loading}
-                className="flex gap-2 justify-center items-center px-6 py-3 text-base btn-primary disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
-                aria-label="Refresh inventory"
-              >
-                <RefreshCw size={20} aria-hidden="true" className={loading ? 'animate-spin' : ''} />
-                Refresh
-              </button>
+              {/* Search */}
+              <div className="flex gap-4">
+                <div className="flex-1">
+                  <SearchInput
+                    placeholder="Search products..."
+                    onSearch={handleSearch}
+                    size="lg"
+                    clearable
+                    ariaLabel="Search for products"
+                  />
+                </div>
+
+                {/* Refresh Button */}
+                <button
+                  onClick={refetch}
+                  disabled={loading}
+                  className="flex gap-2 justify-center items-center px-6 py-3 text-base btn-primary disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
+                  aria-label="Refresh inventory"
+                >
+                  <RefreshCw size={20} aria-hidden="true" className={loading ? 'animate-spin' : ''} />
+                  Refresh
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -190,7 +203,7 @@ export default function ProductsPage() {
           <div className="container-width">
             {/* Loading State with Skeleton Grid */}
             {loading && (
-              <div role="status" aria-live="polite">
+              <div role="status" aria-live="polite" aria-busy="true">
                 <div className="mb-6">
                   <p className="text-lg text-center text-fg-muted">
                     Loading inventory for {currentStore?.name}...
@@ -215,35 +228,26 @@ export default function ProductsPage() {
             {!loading && !error && items.length > 0 && (
               <>
                 <div className="flex flex-wrap gap-4 justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold text-primary-2">
+                  <h2 className="text-2xl font-bold text-brand">
                     {items.length} {items.length === 1 ? 'Product' : 'Products'} Available
                     {selectedCategory && ` in ${selectedCategory}`}
                   </h2>
                   {(selectedCategory || searchTerm) && (
                     <button
                       onClick={clearFilters}
-                      className="px-2 py-1 underline rounded transition text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
+                      className="px-2 py-1 underline rounded transition text-brand hover:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand"
                     >
                       Clear All Filters
                     </button>
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {items.map((item) => (
                     <div
                       key={item.itemId}
                       onClick={() => handleProductClick(item.name, item.category)}
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`${item.name} — ${item.category}`}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          handleProductClick(item.name, item.category);
-                        }
-                      }}
-                      className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-1 rounded-lg"
+                      className="rounded-lg"
                     >
                       <ProductCardWithStock item={item} />
                     </div>
@@ -265,6 +269,11 @@ export default function ProductsPage() {
                 action={
                   searchTerm || selectedCategory
                     ? { label: 'Clear All Filters', onClick: clearFilters, variant: 'secondary' }
+                    : undefined
+                }
+                secondaryAction={
+                  !searchTerm && !selectedCategory
+                    ? { label: 'Check Other Stores', onClick: () => window.location.href = '/availability' }
                     : undefined
                 }
               />

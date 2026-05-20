@@ -5,13 +5,12 @@ import {
   LOCATIONS,
   isStoreOpen,
   formatHours,
-  getInventoryLocations,
   type Location
 } from '@/data/locations';
 import { IMAGE_MAP, type ImageSet } from '@/lib/images';
 import LocationsMap from '@/components/ui/LocationsMap';
 import StockBadge from '@/components/ui/StockBadge';
-import { MapPin, Clock, ExternalLink, Package, Info } from 'lucide-react';
+import { MapPin, Clock, ExternalLink, Info, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import HeroBanner from '@/components/ui/HeroBanner';
 import { SEOHead, LocationSchema, useGoogleAnalytics } from '@/components/seo';
@@ -43,7 +42,7 @@ function LocationInventoryPreview({ location }: { location: Location }) {
 
   if (loading) {
     return (
-      <div className="p-4 mt-4 bg-surface-subtle rounded-lg border border-stroke-default">
+      <div className="p-4 mt-4 bg-surface-subtle rounded-lg border border-stroke-default" role="status" aria-live="polite" aria-busy="true">
         <p className="text-sm text-fg-muted">Loading inventory...</p>
       </div>
     );
@@ -57,46 +56,8 @@ function LocationInventoryPreview({ location }: { location: Location }) {
     );
   }
 
-  // Count stock status
-  const inStock = items.filter(item => item.stockDetails.qty > item.stockDetails.min).length;
-  const lowStock = items.filter(
-    item => item.stockDetails.qty > 0 && item.stockDetails.qty <= item.stockDetails.min
-  ).length;
-  const outOfStock = items.filter(item => item.stockDetails.qty === 0).length;
-
   return (
     <div className="mt-4 space-y-3">
-      {/* Stock Summary */}
-      <div className="p-4 rounded-lg border bg-primary-3/10 border-primary-3/30">
-        <div className="flex justify-between items-center mb-3">
-          <h4 className="flex gap-2 items-center font-bold text-primary-2">
-            <Package size={18} />
-            Main Products Status
-          </h4>
-          <Link
-            to="/availability"
-            className="text-sm underline text-primary-2 hover:text-primary-1"
-          >
-            View Full Inventory →
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 text-sm text-center">
-          <div className="p-2 bg-surface-base rounded">
-            <div className="font-bold text-status-success-fg">{inStock}</div>
-            <div className="text-fg-muted">In Stock</div>
-          </div>
-          <div className="p-2 bg-surface-base rounded">
-            <div className="font-bold text-status-warning-fg">{lowStock}</div>
-            <div className="text-fg-muted">Low Stock</div>
-          </div>
-          <div className="p-2 bg-surface-base rounded">
-            <div className="font-bold text-status-error-fg">{outOfStock}</div>
-            <div className="text-fg-muted">Out</div>
-          </div>
-        </div>
-      </div>
-
       {/* Top Items Preview */}
       <div className="p-4 bg-surface-base rounded-lg border border-stroke-default">
         <h5 className="mb-2 text-sm font-bold text-fg-strong">Available Main Products</h5>
@@ -116,7 +77,8 @@ function LocationInventoryPreview({ location }: { location: Location }) {
         </div>
         <Link
           to="/availability"
-          className="block mt-3 text-sm font-medium text-center text-primary-2 hover:text-primary-1"
+          onClick={(e) => e.stopPropagation()}
+          className="block mt-3 text-sm font-medium text-center text-brand hover:text-brand-muted"
         >
           See all products at this location
         </Link>
@@ -142,11 +104,7 @@ function LocationInventoryPreview({ location }: { location: Location }) {
 export default function LocationsPage() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [activeLocation, setActiveLocation] = useState<string | null>(null);
-  const [showInventory, setShowInventory] = useState(true);
   const { trackLocationClick, trackLocationDirections } = useGoogleAnalytics();
-
-  // Check if any locations have inventory
-  const hasAnyInventory = getInventoryLocations().length > 0;
 
   // Track location card click
   const handleLocationClick = (location: Location) => {
@@ -170,9 +128,18 @@ export default function LocationsPage() {
       {/* Header */}
       <HeroBanner
         variant="narrow"
-        title="Our Locations"
+        title={<>Visit <span className="text-accent">Our Stores</span> in Los Baños</>}
         icon={<MapPin size={32} aria-hidden="true" />}
       />
+
+      {/* Subheading */}
+      <section className="bg-surface-base border-b border-stroke-default">
+        <div className="container-width px-4 py-6 sm:px-8 text-center">
+          <p className="text-lg text-fg-muted">
+            5 locations, same homemade taste
+          </p>
+        </div>
+      </section>
 
       {/* Map Section */}
       <PageSection variant="white" role="region" ariaLabel="Interactive map of store locations">
@@ -188,40 +155,12 @@ export default function LocationsPage() {
         </PageSectionContent>
       </PageSection>
 
-      {/* Inventory Toggle (if available) */}
-      {hasAnyInventory && (
-        <section className="bg-primary-3/10 border-y border-primary-3/30">
-          <div className="py-4 container-width">
-            <label className="flex gap-3 justify-center items-center cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showInventory}
-                onChange={(e) => setShowInventory(e.target.checked)}
-                className="w-5 h-5 rounded border-stroke-emphasis cursor-pointer text-primary-2 focus:ring-2 focus:ring-primary-1"
-              />
-              <span className="flex gap-2 items-center font-medium text-fg-strong">
-                <Package size={20} className="text-primary-2" />
-                Show main products inventory for each location
-              </span>
-            </label>
-          </div>
-        </section>
-      )}
-
       {/* Location Cards */}
       <main id="main-content" tabIndex={-1}>
         <PageSection variant="gradient-alt">
           <PageSectionContent>
-            <div className="flex justify-between items-center mb-12">
+            <div className="mb-12">
               <h2 className="heading-secondary">All Branches</h2>
-              <div className="flex gap-4">
-                <Link to="/availability" className="px-4 py-2 text-sm btn-primary">
-                  View Inventory
-                </Link>
-                <Link to="/availability" className="px-4 py-2 text-sm btn-secondary">
-                  Compare Stores
-                </Link>
-              </div>
             </div>
 
             <PageSectionGrid cols={4}>
@@ -236,23 +175,24 @@ export default function LocationsPage() {
                 return (
                   <article
                     key={loc.id}
-                    className={`card-elevated overflow-hidden transform hover:scale-105 transition-all
-                      ${isActive ? 'ring-4 ring-primary-1' : ''}`}
+                    className={`card-elevated overflow-hidden border border-stroke-default transition-all cursor-pointer hover:border-brand-muted hover:-translate-y-0.5
+                      ${isActive ? 'ring-4 ring-brand' : ''}`}
                     onClick={() => {
                       handleLocationClick(loc);
                       setActiveLocation(loc.id === activeLocation ? null : loc.id);
                     }}
-                    role="button"
-                    tabIndex={0}
-                    aria-pressed={isActive}
-                    aria-label={`${loc.name} location details`}
                     onKeyDown={(e) => {
+                      if (e.target !== e.currentTarget) return;
                       if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
                         handleLocationClick(loc);
                         setActiveLocation(loc.id === activeLocation ? null : loc.id);
                       }
                     }}
+                    role="button"
+                    tabIndex={0}
+                    aria-pressed={isActive}
+                    aria-label={`${loc.name} location details`}
                   >
                     {/* Image */}
                     <div className="overflow-hidden relative h-56">
@@ -262,17 +202,17 @@ export default function LocationsPage() {
                           srcSet={imageData.srcSet}
                           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                           alt={`${loc.name} storefront`}
-                          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
+                          className="object-cover w-full h-full"
                           loading="lazy"
                         />
                       ) : (
-                        <div className="flex justify-center items-center w-full h-full bg-linear-to-br from-primary-2 to-primary-3">
+                        <div className="flex justify-center items-center w-full h-full bg-linear-to-br from-brand to-brand-muted">
                           <LocationIcon size={56} className="text-fg-inverse" aria-hidden="true" />
                         </div>
                       )}
                       <div className="absolute top-4 right-4">
-                        <span className={`px-3 py-1 rounded-full text-sm font-bold ${
-                          isOpen ? 'text-fg-inverse bg-status-success-bg-solid' : 'text-fg-inverse bg-status-error-bg-solid'
+                        <span className={`status-chip ${
+                          isOpen ? 'border-status-success-border bg-status-success-bg text-status-success-fg' : 'border-status-error-border bg-status-error-bg-muted text-status-error-fg'
                         }`}>
                           {isOpen ? 'Open Now' : 'Closed'}
                         </span>
@@ -281,14 +221,14 @@ export default function LocationsPage() {
 
                     {/* Content */}
                     <div className="p-6">
-                      <h3 className="flex justify-between items-center mb-3 text-xl font-bold text-primary-2">
+                      <h3 className="flex justify-between items-center mb-3 text-xl font-bold text-brand">
                         <span className="flex gap-2 items-center">
                           <LocationIcon size={24} aria-hidden="true" />
                           {loc.name}
                         </span>
                         <button
                           onClick={(e) => handleDirectionsClick(loc, e)}
-                          className="transition-colors text-primary-1 hover:text-primary-3"
+                          className="transition-colors text-brand hover:text-brand-muted"
                           aria-label={`View ${loc.name} on Google Maps`}
                         >
                           <ExternalLink size={20} />
@@ -298,7 +238,7 @@ export default function LocationsPage() {
                       {/* Address */}
                       <div className="mb-4">
                         <div className="flex gap-2 items-start text-fg-base">
-                          <MapPin size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
+                          <MapPin size={18} className="mt-1 shrink-0 text-brand" aria-hidden="true" />
                           <address className="text-sm not-italic">
                             {loc.address.map((line, i) => (
                               <span key={i} className="block">{line}</span>
@@ -310,11 +250,30 @@ export default function LocationsPage() {
                       {/* Hours */}
                       <div className="mb-4">
                         <div className="flex gap-2 items-start">
-                          <Clock size={18} className="mt-1 shrink-0 text-primary-2" aria-hidden="true" />
+                          <Clock size={18} className="mt-1 shrink-0 text-brand" aria-hidden="true" />
                           <div className="text-sm">
-                            <p className="font-bold text-fg-default">
-                              Today ({DAYS[now.getDay()]}): {formatHours(loc.hours, todayKey)}
-                            </p>
+                            <div className="flex gap-2 items-center">
+                              <p className="font-bold text-fg-default">
+                                Today ({DAYS[now.getDay()]}): {formatHours(loc.hours, todayKey)}
+                              </p>
+                              <button
+                                type="button"
+                                className="inline-flex justify-center items-center w-7 h-7 rounded-full text-brand transition-colors hover:bg-brand-muted/15 hover:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setExpanded(prev => ({...prev, [loc.id]: !prev[loc.id]}));
+                                }}
+                                aria-expanded={expanded[loc.id]}
+                                aria-controls={`hours-${loc.id}`}
+                                aria-label={expanded[loc.id] ? `Hide full hours for ${loc.name}` : `Show full hours for ${loc.name}`}
+                              >
+                                <ChevronDown
+                                  size={16}
+                                  className={`transition-transform ${expanded[loc.id] ? 'rotate-180' : ''}`}
+                                  aria-hidden="true"
+                                />
+                              </button>
+                            </div>
 
                             {expanded[loc.id] && (
                               <div
@@ -333,27 +292,8 @@ export default function LocationsPage() {
                         </div>
                       </div>
 
-                      <button
-                        className="mb-4 text-sm font-bold underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setExpanded(prev => ({...prev, [loc.id]: !prev[loc.id]}));
-                        }}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setExpanded(prev => ({...prev, [loc.id]: !prev[loc.id]}));
-                          }
-                        }}
-                        aria-expanded={expanded[loc.id]}
-                        aria-controls={`hours-${loc.id}`}
-                      >
-                        {expanded[loc.id] ? 'Hide full hours' : 'Show full hours'}
-                      </button>
-
                       {/* Inventory Preview */}
-                      {showInventory && <LocationInventoryPreview location={loc} />}
+                      <LocationInventoryPreview location={loc} />
                     </div>
                   </article>
                 );

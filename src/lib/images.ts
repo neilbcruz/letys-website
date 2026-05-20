@@ -36,7 +36,7 @@ export function getResponsiveImage(name: string): ImageSet {
   const img = IMAGE_MAP[name];
   if (!img) {
     console.warn(`Image not found: ${name}. Using fallback.`);
-    return { default: '/assets/images/fallback.png' as string }; // fallback image path
+    return { default: '' };
   }
   return img;
 }

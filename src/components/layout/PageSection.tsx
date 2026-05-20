@@ -17,7 +17,7 @@ interface PageSectionProps {
  * - white: White background
  * - gray: surface-subtle background
  * - primary-light: primary-3/10 background with border
- * - gradient: bg-linear-to-br from-primary-3/20 to-primary-1/10
+ * - gradient: bg-linear-to-br from-brand-muted/20 to-primary-1/10
  * - gradient-alt: from-surface-base to-surface-subtle bg-linear-to-b
  */
 export default function PageSection({
@@ -32,8 +32,8 @@ export default function PageSection({
     default: '',
     white: 'bg-surface-base',
     gray: 'bg-surface-subtle',
-    'primary-light': 'bg-primary-3/10 border-y border-primary-3/30',
-    gradient: 'bg-linear-to-br from-primary-3/20 to-primary-1/10',
+    'primary-light': 'bg-brand-muted/10 border-y border-brand-muted/30',
+    gradient: 'bg-linear-to-br from-brand-muted/20 to-primary-1/10',
     'gradient-alt': 'from-surface-base to-surface-subtle bg-linear-to-b',
   };
 

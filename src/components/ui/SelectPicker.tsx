@@ -27,6 +27,7 @@ interface SelectPickerProps {
   searchable?: boolean;
   clearable?: boolean;
   selectedValue?: string;
+  ariaLabel?: string;
 }
 
 const SelectPicker = ({
@@ -39,6 +40,7 @@ const SelectPicker = ({
   searchable = true,
   clearable = true,
   selectedValue,
+  ariaLabel,
   ...props
 }: SelectPickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -179,19 +181,20 @@ const SelectPicker = ({
         type='button'
         className={cn(
           'w-full flex items-center justify-between rounded-lg border border-stroke-emphasis bg-surface-base text-left',
-          'focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500',
+          'focus:outline-hidden focus:ring-2 focus:ring-brand/20 focus:border-brand',
           'transition-all duration-200 ease-in-out',
           sizes[size],
           'px-3',
           disabled
             ? 'opacity-60 cursor-not-allowed bg-surface-subtle'
             : 'hover:border-stroke-strong',
-          isOpen && 'border-primary-500 ring-2 ring-primary-500/20'
+          isOpen && 'border-brand ring-2 ring-brand/20'
         )}
         onClick={handleToggle}
         disabled={disabled}
         aria-haspopup='listbox'
         aria-expanded={isOpen}
+        aria-label={ariaLabel || placeholder}
       >
         <span
           className={cn(
@@ -237,7 +240,7 @@ const SelectPicker = ({
                 <input
                   ref={searchInputRef}
                   type='text'
-                  className='w-full pl-9 pr-3 py-2 text-sm border border-stroke-emphasis rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500'
+                  className='w-full pl-9 pr-3 py-2 text-sm border border-stroke-emphasis rounded-md bg-surface-base text-fg-default placeholder:text-fg-placeholder focus:outline-hidden focus:ring-2 focus:ring-brand/20 focus:border-brand'
                   placeholder='Search options...'
                   value={searchTerm}
                   onChange={handleSearchChange}
@@ -256,9 +259,9 @@ const SelectPicker = ({
                     key={option.value}
                     className={cn(
                       'px-3 py-2 cursor-pointer text-sm transition-colors',
-                      'hover:bg-primary-50 hover:text-primary-700',
+                      'text-fg-base hover:bg-support-2 hover:text-brand',
                       selectedOption?.value === option.value &&
-                        'bg-primary-100 text-primary-700'
+                        'bg-support-2 text-brand font-semibold'
                     )}
                     onClick={() => handleSelect(option)}
                     role='option'

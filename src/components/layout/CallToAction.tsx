@@ -60,7 +60,7 @@ export default function CallToAction({
         <>
           {Icon && (
             <div className="mb-6">
-              <Icon className="mx-auto text-primary-2" size={iconSize} aria-hidden="true" />
+              <Icon className="mx-auto text-brand" size={iconSize} aria-hidden="true" />
             </div>
           )}
           <h2 className="mb-4 heading-primary">{title}</h2>
@@ -117,7 +117,7 @@ export function ContactCTA({ className = '' }: { className?: string }) {
       title="Still have questions?"
       description="Our team is here to help! Send us a message and we'll get back to you as soon as possible."
       buttons={[
-        { label: 'Contact Us', href: '/contact', variant: 'primary' },
+        { label: 'Email Us', href: 'mailto:hello@letysbukopie.com', variant: 'primary' },
         { label: 'Visit Our Stores', href: '/locations', variant: 'secondary' },
       ]}
       className={className}

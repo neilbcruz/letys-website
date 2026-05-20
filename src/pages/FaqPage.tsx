@@ -15,16 +15,25 @@ export default function FaqPage() {
       {/* Header */}
       <HeroBanner
         variant="narrow"
-        title="Frequently Asked Questions"
+        title={<>Common <span className="text-accent">Questions</span></>}
         icon={<HelpCircle size={32} aria-hidden="true" />}
       />
+
+      {/* Subheading */}
+      <section className="bg-surface-base border-b border-stroke-default">
+        <div className="container-width px-4 py-6 sm:px-8 text-center">
+          <p className="text-lg text-fg-muted">
+            Quick answers about our pies, stores, and orders
+          </p>
+        </div>
+      </section>
 
       {/* FAQ Content */}
       <main id="main-content" tabIndex={-1}>
         <PageSection>
           <div className="mx-auto max-w-4xl">
             <div className="mb-12 text-center">
-              <h2 className="mb-4 text-2xl font-bold lg:text-3xl text-primary-2">
+              <h2 className="mb-4 text-2xl font-bold lg:text-3xl text-brand">
                 Everything You Need to Know
               </h2>
               <p className="text-lg text-fg-muted">
@@ -38,15 +47,15 @@ export default function FaqPage() {
                   {({ open }) => (
                     <div className="overflow-hidden card-elevated">
                       <DisclosureButton
-                        className="flex justify-between items-center p-6 w-full text-left transition hover:bg-primary-3/10 focus:outline-none focus:ring-4 focus:ring-primary-1"
+                        className="flex justify-between items-center p-6 w-full text-left transition-all duration-200 hover:bg-brand-muted/5 focus:outline-none focus:ring-4 focus:ring-brand/50 group"
                         aria-expanded={open}
                         aria-controls={`faq-answer-${index}`}
                       >
-                        <span className="pr-4 text-lg font-bold lg:text-xl text-primary-2">
+                        <span className="pr-4 text-lg font-bold lg:text-xl text-brand group-hover:text-brand-hover">
                           {item.question}
                         </span>
                         <ChevronDown
-                          className={`w-6 h-6 text-primary-2 transition-transform duration-200 shrink-0 ${
+                          className={`w-6 h-6 text-brand transition-transform duration-200 shrink-0 group-hover:text-brand-hover ${
                             open ? 'rotate-180' : ''}`}
                           aria-hidden="true"
                         />
@@ -55,7 +64,7 @@ export default function FaqPage() {
                         className="p-6 pt-0 bg-surface-base"
                         id={`faq-answer-${index}`}
                       >
-                        <div className="py-2 pl-6 text-lg leading-relaxed text-fg-base border-l-4 border-primary-1">
+                        <div className="py-2 pl-6 text-lg leading-relaxed text-fg-base border-l-4 border-accent">
                           {item.answer}
                         </div>
                       </DisclosurePanel>
@@ -78,9 +87,9 @@ export default function FaqPage() {
             <div className="mx-auto max-w-4xl">
               <h2 className="mb-12 text-center heading-secondary">Explore More</h2>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                <NavLink to="/products" className="p-6 text-center transition-transform card-elevated hover:scale-105 group">
-                  <Coffee className="w-12 h-12 mx-auto mb-4 text-primary-2" />
-                  <h3 className="mb-2 text-xl font-bold transition text-primary-2 group-hover:text-primary-1">
+                <NavLink to="/products" className="p-6 text-center card-elevated hover:border-brand-muted group">
+                  <Coffee className="w-12 h-12 mx-auto mb-4 text-brand" />
+                  <h3 className="mb-2 text-xl font-bold transition text-brand group-hover:text-accent">
                     Our Products
                   </h3>
                   <p className="text-fg-muted">
@@ -88,9 +97,9 @@ export default function FaqPage() {
                   </p>
                 </NavLink>
 
-                <NavLink to="/locations" className="p-6 text-center transition-transform card-elevated hover:scale-105 group">
-                  <MapPin className="w-12 h-12 mx-auto mb-4 text-primary-2" />
-                  <h3 className="mb-2 text-xl font-bold transition text-primary-2 group-hover:text-primary-1">
+                <NavLink to="/locations" className="p-6 text-center card-elevated hover:border-brand-muted group">
+                  <MapPin className="w-12 h-12 mx-auto mb-4 text-brand" />
+                  <h3 className="mb-2 text-xl font-bold transition text-brand group-hover:text-accent">
                     Store Locations
                   </h3>
                   <p className="text-fg-muted">
@@ -98,15 +107,15 @@ export default function FaqPage() {
                   </p>
                 </NavLink>
 
-                <NavLink to="/contact" className="p-6 text-center transition-transform card-elevated hover:scale-105 group">
-                  <MessageCircle className="w-12 h-12 mx-auto mb-4 text-primary-2" />
-                  <h3 className="mb-2 text-xl font-bold transition text-primary-2 group-hover:text-primary-1">
+                <a href="mailto:hello@letysbukopie.com" className="p-6 text-center card-elevated hover:border-brand-muted group">
+                  <MessageCircle className="w-12 h-12 mx-auto mb-4 text-brand" />
+                  <h3 className="mb-2 text-xl font-bold transition text-brand group-hover:text-accent">
                     Get in Touch
                   </h3>
                   <p className="text-fg-muted">
                     We're here to help
                   </p>
-                </NavLink>
+                </a>
               </div>
             </div>
           </div>

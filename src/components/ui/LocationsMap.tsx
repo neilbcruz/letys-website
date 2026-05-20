@@ -64,6 +64,7 @@ export default function LocationsMap({
 
   return (
     <MapContainer
+      className="relative z-0"
       style={{ width: "100%", height: "300px" }}
       center={[locations[0].coords.lat, locations[0].coords.lng]}
       zoom={13}

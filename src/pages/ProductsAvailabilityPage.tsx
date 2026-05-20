@@ -92,34 +92,53 @@ export default function ProductsAvailabilityPage() {
       {/* Header */}
       <HeroBanner
         variant="narrow"
-        title="Store Availability"
+        title={<>Compare <span className="text-accent">Stock</span> Across Our Stores</>}
         icon={<TrendingUp size={32} aria-hidden="true" />}
       />
 
+      {/* Subheading */}
+      <section className="bg-surface-base border-b border-stroke-default">
+        <div className="container-width px-4 py-6 sm:px-8 text-center">
+          <p className="text-lg text-fg-muted">
+            See what's available before you visit
+          </p>
+        </div>
+      </section>
+
       {/* Filters */}
-      <section className="sticky top-0 z-30 bg-surface-base border-b border-stroke-default shadow-md">
+      <section className="sticky top-[84px] z-30 bg-surface-base border-b border-stroke-default shadow-md">
         <div className="py-6 container-width">
-          <div className="flex gap-4 items-center">
-            <label htmlFor="category-filter" className="font-bold text-fg-base whitespace-nowrap">
-              Filter by Category:
-            </label>
-            <select
-              id="category-filter"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="flex-1 px-4 max-w-md h-12 text-base bg-surface-base rounded-lg border-2 border-stroke-emphasis transition focus:outline-none focus:ring-2 focus:ring-primary-1 focus:border-transparent min-h-[48px]"
-              aria-label="Filter products by category"
+          {/* Category Pills */}
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <button
+              onClick={() => setSelectedCategory('')}
+              className={`px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand ${
+                selectedCategory === ''
+                  ? 'ui-chip-selected'
+                  : 'ui-chip'
+              }`}
+              aria-label="All categories"
             >
-              <option value="">All Categories</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
+              All
+            </button>
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand ${
+                  selectedCategory === category
+                    ? 'ui-chip-selected'
+                    : 'ui-chip'
+                }`}
+                aria-label={`Filter by ${category}`}
+                aria-pressed={selectedCategory === category}
+              >
+                {category}
+              </button>
+            ))}
           </div>
           {selectedCategory === 'Main Products' && (
-            <p className="mt-2 text-sm text-fg-muted">
+            <p className="mt-3 text-sm text-fg-muted">
               <span className="font-medium">Note:</span> Showing main products only. Select "All Categories" to see everything.
             </p>
           )}
@@ -132,7 +151,7 @@ export default function ProductsAvailabilityPage() {
           <div className="container-width">
             {/* Loading State */}
             {allLoading && (
-              <div role="status" aria-live="polite">
+              <div role="status" aria-live="polite" aria-busy="true">
                 <LoadingSpinner label="Loading inventory from all stores..." />
               </div>
             )}
@@ -147,20 +166,20 @@ export default function ProductsAvailabilityPage() {
 
             {/* Availability Table */}
             {!allLoading && productNames.length > 0 && (
-              <div className="overflow-hidden bg-surface-base rounded-2xl shadow-lg">
+              <div className="overflow-hidden bg-surface-base rounded-lg border border-stroke-default shadow-sm">
                 {/* Desktop Table */}
                 <div className="hidden overflow-x-auto lg:block">
                   <table className="w-full">
-                    <thead className="text-fg-inverse bg-primary-2">
+                    <thead className="text-fg-inverse bg-brand">
                       <tr>
-                        <th scope="col" className="px-6 py-4 w-1/4 text-lg font-bold text-left">
+                        <th scope="col" className="px-5 py-3 w-1/4 text-base font-bold text-left">
                           Product
                         </th>
                         {storesData.map(store => {
                           const StoreIcon = getLocationIcon(store.icon);
 
                           return (
-                            <th key={store.id} scope="col" className="px-6 py-4 text-lg font-bold text-center">
+                            <th key={store.id} scope="col" className="px-5 py-3 text-base font-bold text-center">
                               <div className="flex flex-col gap-2 items-center">
                                 <StoreIcon size={24} aria-hidden="true" />
                                 <span>{store.name}</span>
@@ -168,7 +187,7 @@ export default function ProductsAvailabilityPage() {
                             </th>
                           );
                         })}
-                        <th scope="col" className="px-6 py-4 text-lg font-bold text-center">
+                        <th scope="col" className="px-5 py-3 text-base font-bold text-center">
                           Total Stock
                         </th>
                       </tr>
@@ -181,13 +200,13 @@ export default function ProductsAvailabilityPage() {
                         return (
                           <tr key={productName} className={idx % 2 === 0 ? 'bg-surface-subtle' : 'bg-surface-base'}>
                             {/* Product Name */}
-                            <th scope="row" className="px-6 py-4 text-left">
+                            <th scope="row" className="px-5 py-3 text-left">
                               <div>
-                                <h3 className="mb-1 font-bold text-primary-2">{productName}</h3>
+                                <h3 className="mb-1 font-bold text-brand">{productName}</h3>
                                 {anyItem && (
                                   <>
                                     <p className="text-sm text-fg-muted">{anyItem.category}</p>
-                                    <p className="mt-1 text-lg font-bold text-secondary-1">
+                                    <p className="mt-1 text-base font-bold text-brand">
                                       {formatPrice(anyItem.price)}
                                     </p>
                                   </>
@@ -200,7 +219,7 @@ export default function ProductsAvailabilityPage() {
                               const item = findItemInStore(store.id, productName);
 
                               return (
-                                <td key={store.id} className="px-6 py-4 text-center">
+                                <td key={store.id} className="px-5 py-3 text-center">
                                   {item ? (
                                     <div className="flex flex-col gap-2 items-center">
                                       <StockBadge stockDetails={item.stockDetails} />
@@ -213,10 +232,10 @@ export default function ProductsAvailabilityPage() {
                             })}
 
                             {/* Total Stock */}
-                            <td className="px-6 py-4 text-center">
+                            <td className="px-5 py-3 text-center">
                               <div className="flex gap-2 justify-center items-center">
-                                <Package size={20} className="text-primary-2" aria-hidden="true" />
-                                <span className="text-xl font-bold text-primary-2">
+                                <Package size={20} className="text-brand" aria-hidden="true" />
+                                <span className="text-xl font-bold text-brand">
                                   {totalStock}
                                 </span>
                               </div>
@@ -238,11 +257,11 @@ export default function ProductsAvailabilityPage() {
                       <article key={productName} className="p-6">
                         {/* Product Header */}
                         <div className="mb-4">
-                          <h3 className="mb-1 text-lg font-bold text-primary-2">{productName}</h3>
+                          <h3 className="mb-1 text-lg font-bold text-brand">{productName}</h3>
                           {anyItem && (
                             <>
                               <p className="text-sm text-fg-muted">{anyItem.category}</p>
-                              <p className="mt-2 text-xl font-bold text-secondary-1">
+                              <p className="mt-2 text-xl font-bold text-brand">
                                 {formatPrice(anyItem.price)}
                               </p>
                             </>
@@ -275,8 +294,8 @@ export default function ProductsAvailabilityPage() {
                         <div className="flex justify-between items-center pt-3 border-t border-stroke-default">
                           <span className="font-bold text-fg-base">Total Stock:</span>
                           <div className="flex gap-2 items-center">
-                            <Package size={20} className="text-primary-2" aria-hidden="true" />
-                            <span className="text-xl font-bold text-primary-2">{totalStock}</span>
+                            <Package size={20} className="text-brand" aria-hidden="true" />
+                            <span className="text-xl font-bold text-brand">{totalStock}</span>
                           </div>
                         </div>
                       </article>

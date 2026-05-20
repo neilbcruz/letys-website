@@ -1,15 +1,15 @@
 /*
- * Design Tokens — Lety's Buko Pie
+ * Design Tokens: Lety's Buko Pie
  *
  * All color pairs verified against WCAG 2.1 AA (4.5:1 minimum).
  * Contrast ratios against #FFFFFF unless noted:
- *   --color-gold   on white:   2.74:1  (decorative only — dark text used on gold bg)
+ *   --color-gold   on white:   2.74:1  (decorative only; dark text used on gold bg)
  *   --color-forest on white:  15.20:1  (AAA)
  *   --color-olive  on white:   4.68:1  (AA, darkened from 6B8A28)
  *   --color-fern   on white:   7.21:1  (AAA)
  *   --color-moss   on white:   7.83:1  (AAA)
- *   fg-default on gold:        6.22:1  (AAA — text on gold backgrounds)
- *   fg-inverse on forest:     11.01:1  (AAA — white on primary-2)
+ *   fg-default on gold:        6.22:1  (AAA, text on gold backgrounds)
+ *   fg-inverse on forest:     11.01:1  (AAA, white on primary-2)
  *
  * DO NOT replace brand colors without re-checking contrast ratios at:
  * https://webaim.org/resources/contrastchecker/
@@ -20,12 +20,12 @@
  * All token values defined here. @theme inline below bridges to Tailwind.
  * ======================================================================== */
 :root {
-  /* ─── Brand Palette ────────────────────────────────────────── */
-  --color-gold:    #C29600;
-  --color-forest:  #074621;
-  --color-olive:   #5E7E22;
-  --color-fern:    #476C2D;
-  --color-moss:    #4D4A0E;
+  /* ─── Brand Palette (OKLCH) ────────────────────────────────── */
+  --color-gold:    oklch(72% 0.18 85);   /* Warm gold accent */
+  --color-forest:  oklch(35% 0.14 155);  /* Deep green brand */
+  --color-olive:   oklch(52% 0.15 148);  /* Olive green */
+  --color-fern:    oklch(42% 0.14 150);  /* Light green hover */
+  --color-moss:    oklch(45% 0.10 125);  /* Dark olive */
 
   /* ─── Brand Semantic Aliases ─────────────────────────────── */
   --color-brand-primary:  var(--color-forest);
@@ -34,38 +34,45 @@
   --color-brand-dark:     var(--color-fern);
   --color-brand-darkest:  var(--color-moss);
 
-  /* ─── Surfaces ───────────────────────────────────────────── */
-  --color-surface-base:    #FAFAF8;
-  --color-surface-white:   #FFFFFF;
-  --color-surface-cream:   #FFF8E0;
-  --color-surface-sage:    #E6F0C3;
-  --color-surface-subtle:  #F5F5F0;
-  --color-surface-muted:   #EDEDEA;
+  /* ─── Brand/Accent (shorter semantic names) ────────────────── */
+  --color-brand:          var(--color-forest);     /* Green - 30% secondary */
+  --color-brand-hover:    var(--color-fern);      /* Lighter green */
+  --color-brand-muted:    var(--color-olive);     /* Olive green */
+  --color-accent:         var(--color-gold);      /* Gold - 10% highlights */
+  --color-accent-hover:   #D4A520;                /* Lighter gold */
+
+  /* ─── Surfaces (OKLCH - warmer neutrals) ─────────────────── */
+  --color-surface-base:    oklch(98% 0.004 90);  /* Warm cream-white */
+  --color-surface-white:   oklch(100% 0 0);      /* Pure white */
+  --color-surface-cream:   oklch(98% 0.03 85);   /* Cream */
+  --color-surface-sage:    oklch(94% 0.04 145);  /* Sage green */
+  --color-surface-subtle:  oklch(96% 0.006 90);  /* Subtle warm */
+  --color-surface-muted:   oklch(93% 0.008 90);  /* Muted warm */
   --color-surface-emphasis:#DDDDD8;
   --color-surface-strong:  #C8C8C2;
-  --color-surface-inverse: #1A1A18;
+  --color-surface-inverse: oklch(20% 0.008 90);
 
-  /* ─── Foreground ─────────────────────────────────────────── */
-  --color-fg-default:     #1C1C1A;
-  --color-fg-strong:      #2E2E2B;
-  --color-fg-base:        #454540;
-  --color-fg-muted:       #5C5C56;
-  --color-fg-subtle:      #70706B;
-  --color-fg-faint:       #9A9A90;
+  /* ─── Foreground (OKLCH) ─────────────────────────────────── */
+  --color-fg-default:     oklch(20% 0.008 90);
+  --color-fg-strong:      oklch(25% 0.010 90);
+  --color-fg-base:        oklch(35% 0.012 90);
+  --color-fg-muted:       oklch(42% 0.015 90);
+  --color-fg-subtle:      oklch(50% 0.018 90);
+  --color-fg-faint:       oklch(60% 0.020 90);
   --color-fg-inverse:     var(--color-fg-soft);
-  /* ─── Soft Whites (for reduced eye strain) ────────────────── */
-  --color-fg-soft:        #FAFAF8;  /* Soft white - general use */
-  --color-fg-softer:      #F5F5F0;  /* Softer white - large areas */
-  --color-fg-softest:     #EDEDEA;  /* Softest white - subtle text */
-  --color-fg-emphasis:    #FFFFFF;  /* Pure white - for emphasis only */
-  --color-fg-placeholder: #9A9A90;
+  /* ─── Soft Whites (OKLCH - for reduced eye strain) ──────────── */
+  --color-fg-soft:        oklch(98% 0.004 90);  /* Soft white - general use */
+  --color-fg-softer:      oklch(96% 0.006 90);  /* Softer white - large areas */
+  --color-fg-softest:     oklch(93% 0.008 90);  /* Softest white - subtle text */
+  --color-fg-emphasis:    oklch(100% 0 0);      /* Pure white - for emphasis only */
+  --color-fg-placeholder: oklch(60% 0.020 90);
 
-  /* ─── Strokes ────────────────────────────────────────────── */
-  --color-stroke-default:  #E2E2DC;
-  --color-stroke-emphasis: #8E8E86;
+  /* ─── Strokes (OKLCH) ───────────────────────────────────────── */
+  --color-stroke-default:  oklch(88% 0.010 90);
+  --color-stroke-emphasis: oklch(60% 0.025 90);
   --color-stroke-strong:   #B8B8B0;
 
-  /* ─── Status — Error ─────────────────────────────────────── */
+  /* Status: Error */
   --color-status-error-fg:        #C0152A;
   --color-status-error-fg-strong: #8B0E1C;
   --color-status-error-bg:        #FFF0F0;
@@ -73,46 +80,30 @@
   --color-status-error-bg-solid:  #C0152A;
   --color-status-error-border:    #D07070;
 
-  /* ─── Status — Success ───────────────────────────────────── */
+  /* Status: Success */
   --color-status-success-fg:        #1A6B38;
   --color-status-success-fg-strong: #14522B;
   --color-status-success-bg:        #E6F0C3;
   --color-status-success-bg-solid:  #1A6B38;
   --color-status-success-border:    #709050;
 
-  /* ─── Status — Warning ───────────────────────────────────── */
+  /* Status: Warning */
   --color-status-warning-fg:        #92660A;
   --color-status-warning-fg-strong: #6B4A07;
   --color-status-warning-bg:        #FFFBEB;
   --color-status-warning-bg-muted:  #FEF3C7;
   --color-status-warning-border:    #A89040;
 
-  /* ─── Status — Info ──────────────────────────────────────── */
+  /* Status: Info */
   --color-status-info-fg:     #1E4E8C;
   --color-status-info-bg:     #EFF6FF;
   --color-status-info-border: #7088A0;
-
-  /* ─── Text (legacy aliases) ──────────────────────────────── */
-  --color-text-default:  #1F2937;
-  --color-text-muted:    #4B5563;
-  --color-text-light:    #6B7280;
-  --color-text-inverse:  #FFFFFF;
 
   /* ─── Overlays ───────────────────────────────────────────── */
   --color-overlay-light:  rgba(0, 0, 0, 0.4);
   --color-overlay-medium: rgba(0, 0, 0, 0.5);
   --color-overlay-heavy:  rgba(0, 0, 0, 0.6);
   --color-overlay-black:  rgba(0, 0, 0, 0.7);
-
-  /* ─── Status (legacy aliases) ────────────────────────────── */
-  --color-error:     #DC2626;
-  --color-error-bg:  #FEE2E2;
-  --color-success:   #16A34A;
-  --color-success-bg:#DCFCE7;
-  --color-warning:   #F59E0B;
-  --color-warning-bg:#FEF3C7;
-  --color-info:      #3B82F6;
-  --color-info-bg:   #DBEAFE;
 
   /* ─── Typography ─────────────────────────────────────────── */
   --font-heading:  'Figtree', ui-sans-serif, system-ui, sans-serif;
@@ -206,6 +197,8 @@
   --ease-in:      cubic-bezier(0.4, 0, 1, 1);
   --ease-out:     cubic-bezier(0, 0, 0.2, 1);
   --ease-in-out:  cubic-bezier(0.4, 0, 0.6, 1);
+  --ease-smooth:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring:  cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-bounce:  cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
   /* ─── Z-Index ────────────────────────────────────────────── */
@@ -251,43 +244,43 @@
  * ======================================================================== */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    /* ─── Dark Surfaces ───────────────────────────────────── */
-    --color-surface-base:    #1A1A18;
-    --color-surface-white:   #242421;
-    --color-surface-cream:   #2E2E2B;
-    --color-surface-sage:    #3A3A36;
-    --color-surface-subtle:  #242421;
-    --color-surface-muted:   #2E2E2B;
-    --color-surface-emphasis:#3A3A36;
-    --color-surface-strong:  #454540;
-    --color-surface-inverse: #F5F5F0;
+    /* ─── Dark Surfaces (OKLCH - warm dark) ─────────────────── */
+    --color-surface-base:    oklch(20% 0.008 90);
+    --color-surface-white:   oklch(25% 0.010 90);
+    --color-surface-cream:   oklch(30% 0.012 90);
+    --color-surface-sage:    oklch(35% 0.015 100);
+    --color-surface-subtle:  oklch(25% 0.010 90);
+    --color-surface-muted:   oklch(30% 0.012 90);
+    --color-surface-emphasis: oklch(35% 0.015 90);
+    --color-surface-strong:  oklch(40% 0.018 90);
+    --color-surface-inverse: oklch(96% 0.006 90);
 
-    /* ─── Dark Foreground ─────────────────────────────────── */
-    --color-fg-default:     #F5F5F0;
-    --color-fg-strong:      #FAFAF8;
-    --color-fg-base:        #DDDDD8;
-    --color-fg-muted:       #C8C8C2;
-    --color-fg-subtle:      #9A9A90;
-    --color-fg-faint:       #70706B;
-    --color-fg-inverse:     #1A1A18;
-    --color-fg-emphasis:    #FFFFFF;
-    --color-fg-placeholder: #70706B;
+    /* ─── Dark Foreground (OKLCH) ─────────────────────────── */
+    --color-fg-default:     oklch(96% 0.006 90);
+    --color-fg-strong:      oklch(98% 0.004 90);
+    --color-fg-base:        oklch(85% 0.012 90);
+    --color-fg-muted:       oklch(78% 0.015 90);
+    --color-fg-subtle:      oklch(60% 0.020 90);
+    --color-fg-faint:       oklch(45% 0.018 90);
+    --color-fg-inverse:     oklch(20% 0.008 90);
+    --color-fg-emphasis:    oklch(100% 0 0);
+    --color-fg-placeholder: oklch(45% 0.018 90);
 
-    /* ─── Dark Strokes ────────────────────────────────────── */
-    --color-stroke-default:  #454540;
-    --color-stroke-emphasis: #70706B;
-    --color-stroke-strong:   #5C5C56;
+    /* ─── Dark Strokes (OKLCH) ────────────────────────────── */
+    --color-stroke-default:  oklch(40% 0.018 90);
+    --color-stroke-emphasis: oklch(45% 0.018 90);
+    --color-stroke-strong:   oklch(42% 0.015 90);
 
-    /* ─── Dark Brand (lighter for contrast) ───────────────── */
-    --color-brand-accent:   #D4A520;
-    --color-brand-primary:  var(--color-forest);
-    --color-brand-muted:    var(--color-olive);
+    /* ─── Dark Brand (lighter for contrast, OKLCH) ───────────── */
+    --color-brand-accent:   oklch(78% 0.16 85);
+    --color-brand-primary:  oklch(45% 0.14 155);
+    --color-brand-muted:    oklch(55% 0.15 148);
 
     /* ─── Dark Overlays ──────────────────────────────────── */
-    --color-overlay-light:  rgba(255, 255, 255, 0.1);
-    --color-overlay-medium: rgba(255, 255, 255, 0.15);
-    --color-overlay-heavy:  rgba(255, 255, 255, 0.2);
-    --color-overlay-black:  rgba(255, 255, 255, 0.25);
+    --color-overlay-light:  rgba(0, 0, 0, 0.28);
+    --color-overlay-medium: rgba(0, 0, 0, 0.38);
+    --color-overlay-heavy:  rgba(0, 0, 0, 0.48);
+    --color-overlay-black:  rgba(0, 0, 0, 0.58);
 
     /* ─── Dark Shadows ───────────────────────────────────── */
     --shadow-sm:     0 1px 2px 0 rgb(0 0 0 / 0.3);
@@ -299,38 +292,38 @@
 
 /* Manual dark mode toggle */
 :root[data-theme='dark'] {
-  --color-surface-base:    #1A1A18;
-  --color-surface-white:   #242421;
-  --color-surface-cream:   #2E2E2B;
-  --color-surface-sage:    #3A3A36;
-  --color-surface-subtle:  #242421;
-  --color-surface-muted:   #2E2E2B;
-  --color-surface-emphasis:#3A3A36;
-  --color-surface-strong:  #454540;
-  --color-surface-inverse: #F5F5F0;
+  --color-surface-base:    oklch(20% 0.008 90);
+  --color-surface-white:   oklch(25% 0.010 90);
+  --color-surface-cream:   oklch(30% 0.012 90);
+  --color-surface-sage:    oklch(35% 0.015 100);
+  --color-surface-subtle:  oklch(25% 0.010 90);
+  --color-surface-muted:   oklch(30% 0.012 90);
+  --color-surface-emphasis: oklch(35% 0.015 90);
+  --color-surface-strong:  oklch(40% 0.018 90);
+  --color-surface-inverse: oklch(96% 0.006 90);
 
-  --color-fg-default:     #F5F5F0;
-  --color-fg-strong:      #FAFAF8;
-  --color-fg-base:        #DDDDD8;
-  --color-fg-muted:       #C8C8C2;
-  --color-fg-subtle:      #9A9A90;
-  --color-fg-faint:       #70706B;
-  --color-fg-inverse:     #1A1A18;
-  --color-fg-emphasis:    #FFFFFF;
-  --color-fg-placeholder: #70706B;
+  --color-fg-default:     oklch(96% 0.006 90);
+  --color-fg-strong:      oklch(98% 0.004 90);
+  --color-fg-base:        oklch(85% 0.012 90);
+  --color-fg-muted:       oklch(78% 0.015 90);
+  --color-fg-subtle:      oklch(60% 0.020 90);
+  --color-fg-faint:       oklch(45% 0.018 90);
+  --color-fg-inverse:     oklch(20% 0.008 90);
+  --color-fg-emphasis:    oklch(100% 0 0);
+  --color-fg-placeholder: oklch(45% 0.018 90);
 
-  --color-stroke-default:  #454540;
-  --color-stroke-emphasis: #70706B;
-  --color-stroke-strong:   #5C5C56;
+  --color-stroke-default:  oklch(40% 0.018 90);
+  --color-stroke-emphasis: oklch(45% 0.018 90);
+  --color-stroke-strong:   oklch(42% 0.015 90);
 
-  --color-brand-accent:   #D4A520;
-  --color-brand-primary:  var(--color-forest);
-  --color-brand-muted:    var(--color-olive);
+  --color-brand-accent:   oklch(78% 0.16 85);
+  --color-brand-primary:  oklch(45% 0.14 155);
+  --color-brand-muted:    oklch(55% 0.15 148);
 
-  --color-overlay-light:  rgba(255, 255, 255, 0.1);
-  --color-overlay-medium: rgba(255, 255, 255, 0.15);
-  --color-overlay-heavy:  rgba(255, 255, 255, 0.2);
-  --color-overlay-black:  rgba(255, 255, 255, 0.25);
+  --color-overlay-light:  rgba(0, 0, 0, 0.28);
+  --color-overlay-medium: rgba(0, 0, 0, 0.38);
+  --color-overlay-heavy:  rgba(0, 0, 0, 0.48);
+  --color-overlay-black:  rgba(0, 0, 0, 0.58);
 
   --shadow-sm:     0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-base:   0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
@@ -340,14 +333,21 @@
 
 
 /* ========================================================================
- * 2. TAILWIND BRIDGE (@theme inline)
+ * 2. TAILWIND BRIDGE (@theme)
  * Registers tokens as Tailwind utilities. Uses var() so values stay
  * runtime-responsive (not baked at build time).
  * ======================================================================== */
-@theme inline {
+@theme {
   /* ─── Brand Colors ───────────────────────────────────────── */
-  --color-primary-1: var(--color-brand-accent);
-  --color-primary-2: var(--color-brand-primary);
+  --color-brand:      oklch(35% 0.14 155);
+  --color-brand-hover: oklch(42% 0.14 150);
+  --color-brand-muted: oklch(52% 0.15 148);
+  --color-accent:     oklch(72% 0.18 85);
+  --color-accent-hover: oklch(78% 0.16 85);
+
+  /* ─── Legacy Aliases (for compatibility) ──────────────────── */
+  --color-primary-1: var(--color-accent);
+  --color-primary-2: var(--color-brand);
   --color-primary-3: var(--color-brand-muted);
 
   --color-secondary-1: var(--color-brand-dark);
@@ -358,35 +358,36 @@
 
   /* ─── Base ───────────────────────────────────────────────── */
   --color-bg:   var(--color-surface-base);
-  --color-text: var(--color-text-default);
+  --color-text: var(--color-fg-default);
 
-  /* ─── Surfaces ───────────────────────────────────────────── */
-  --color-surface-base:     #FAFAF8;
-  --color-surface-subtle:   #F5F5F0;
-  --color-surface-muted:    #EDEDEA;
-  --color-surface-emphasis: #DDDDD8;
-  --color-surface-strong:   #C8C8C2;
-  --color-surface-inverse:  #1A1A18;
+  /* ─── Surfaces (OKLCH) ───────────────────────────────────── */
+  --color-surface-base:     oklch(98% 0.004 90);
+  --color-surface-subtle:   oklch(96% 0.006 90);
+  --color-surface-muted:    oklch(93% 0.008 90);
+  --color-surface-emphasis: oklch(85% 0.012 90);
+  --color-surface-strong:   oklch(78% 0.015 90);
+  --color-surface-inverse:  oklch(20% 0.008 90);
 
-  /* ─── Foreground ─────────────────────────────────────────── */
-  --color-fg-default:  #1C1C1A;
-  --color-fg-strong:   #2E2E2B;
-  --color-fg-base:     #454540;
-  --color-fg-muted:    #5C5C56;
-  --color-fg-subtle:   #70706B;
-  --color-fg-faint:    #9A9A90;
-  --color-fg-soft:     #FAFAF8;
-  --color-fg-softer:   #F5F5F0;
-  --color-fg-softest:  #EDEDEA;
-  --color-fg-inverse:  #FAFAF8;
-  --color-fg-emphasis: #FFFFFF;
+  /* ─── Foreground (OKLCH) ─────────────────────────────────── */
+  --color-fg-default:     oklch(20% 0.008 90);
+  --color-fg-strong:      oklch(25% 0.010 90);
+  --color-fg-base:        oklch(35% 0.012 90);
+  --color-fg-muted:       oklch(42% 0.015 90);
+  --color-fg-subtle:      oklch(50% 0.018 90);
+  --color-fg-faint:       oklch(60% 0.020 90);
+  --color-fg-soft:        oklch(98% 0.004 90);
+  --color-fg-softer:      oklch(96% 0.006 90);
+  --color-fg-softest:     oklch(93% 0.008 90);
+  --color-fg-inverse:     oklch(98% 0.004 90);
+  --color-fg-emphasis:    oklch(100% 0 0);
+  --color-fg-placeholder: oklch(60% 0.020 90);
 
-  /* ─── Strokes ────────────────────────────────────────────── */
-  --color-stroke-default:  #E2E2DC;
-  --color-stroke-emphasis: #8E8E86;
-  --color-stroke-strong:   #B8B8B0;
+  /* ─── Strokes (OKLCH) ────────────────────────────────────── */
+  --color-stroke-default:  oklch(88% 0.010 90);
+  --color-stroke-emphasis: oklch(60% 0.025 90);
+  --color-stroke-strong:   oklch(75% 0.018 90);
 
-  /* ─── Status — Error ─────────────────────────────────────── */
+  /* Status: Error */
   --color-status-error-fg:        #C0152A;
   --color-status-error-fg-strong: #8B0E1C;
   --color-status-error-bg:        #FFF0F0;
@@ -394,21 +395,21 @@
   --color-status-error-bg-solid:  #C0152A;
   --color-status-error-border:    #D07070;
 
-  /* ─── Status — Success ───────────────────────────────────── */
+  /* Status: Success */
   --color-status-success-fg:        #1A6B38;
   --color-status-success-fg-strong: #14522B;
   --color-status-success-bg:        #E6F0C3;
   --color-status-success-bg-solid:  #1A6B38;
   --color-status-success-border:    #709050;
 
-  /* ─── Status — Warning ───────────────────────────────────── */
+  /* Status: Warning */
   --color-status-warning-fg:        #92660A;
   --color-status-warning-fg-strong: #6B4A07;
   --color-status-warning-bg:        #FFFBEB;
   --color-status-warning-bg-muted:  #FEF3C7;
   --color-status-warning-border:    #A89040;
 
-  /* ─── Status — Info ──────────────────────────────────────── */
+  /* Status: Info */
   --color-status-info-fg:     #1E4E8C;
   --color-status-info-bg:     #EFF6FF;
   --color-status-info-border: #7088A0;
@@ -424,4 +425,108 @@
   --breakpoint-lg:       1024px;
   --breakpoint-desktop:  1280px;
   --breakpoint-2xl:      1536px;
+}
+
+/*
+ * Keep runtime theme overrides after @theme inline.
+ * Tailwind v4 registers utility variables in @theme; placing these later
+ * ensures utilities like bg-surface-base and text-brand actually follow
+ * manual and system dark mode.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-brand:        oklch(58% 0.13 150);
+    --color-brand-hover:  oklch(66% 0.13 150);
+    --color-brand-muted:  oklch(55% 0.15 148);
+    --color-accent:       oklch(78% 0.16 85);
+    --color-accent-hover: oklch(84% 0.14 85);
+
+    --color-primary-1: var(--color-accent);
+    --color-primary-2: var(--color-brand);
+    --color-primary-3: var(--color-brand-muted);
+    --color-secondary-1: oklch(66% 0.13 150);
+    --color-secondary-2: oklch(58% 0.11 125);
+    --color-support-1: var(--color-surface-cream);
+    --color-support-2: var(--color-surface-sage);
+
+    --color-bg:   var(--color-surface-base);
+    --color-text: var(--color-fg-default);
+
+    --color-surface-base:     oklch(20% 0.008 90);
+    --color-surface-subtle:   oklch(25% 0.010 90);
+    --color-surface-muted:    oklch(30% 0.012 90);
+    --color-surface-emphasis: oklch(35% 0.015 90);
+    --color-surface-strong:   oklch(40% 0.018 90);
+    --color-surface-inverse:  oklch(96% 0.006 90);
+
+    --color-fg-default:     oklch(96% 0.006 90);
+    --color-fg-strong:      oklch(98% 0.004 90);
+    --color-fg-base:        oklch(85% 0.012 90);
+    --color-fg-muted:       oklch(78% 0.015 90);
+    --color-fg-subtle:      oklch(60% 0.020 90);
+    --color-fg-faint:       oklch(45% 0.018 90);
+    --color-fg-soft:        oklch(98% 0.004 90);
+    --color-fg-softer:      oklch(96% 0.006 90);
+    --color-fg-softest:     oklch(93% 0.008 90);
+    --color-fg-inverse:     oklch(20% 0.008 90);
+    --color-fg-emphasis:    oklch(100% 0 0);
+    --color-fg-placeholder: oklch(45% 0.018 90);
+
+    --color-stroke-default:  oklch(40% 0.018 90);
+    --color-stroke-emphasis: oklch(45% 0.018 90);
+    --color-stroke-strong:   oklch(42% 0.015 90);
+
+    --color-overlay-light:  rgba(0, 0, 0, 0.28);
+    --color-overlay-medium: rgba(0, 0, 0, 0.38);
+    --color-overlay-heavy:  rgba(0, 0, 0, 0.48);
+    --color-overlay-black:  rgba(0, 0, 0, 0.58);
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-brand:        oklch(58% 0.13 150);
+  --color-brand-hover:  oklch(66% 0.13 150);
+  --color-brand-muted:  oklch(55% 0.15 148);
+  --color-accent:       oklch(78% 0.16 85);
+  --color-accent-hover: oklch(84% 0.14 85);
+
+  --color-primary-1: var(--color-accent);
+  --color-primary-2: var(--color-brand);
+  --color-primary-3: var(--color-brand-muted);
+  --color-secondary-1: oklch(66% 0.13 150);
+  --color-secondary-2: oklch(58% 0.11 125);
+  --color-support-1: var(--color-surface-cream);
+  --color-support-2: var(--color-surface-sage);
+
+  --color-bg:   var(--color-surface-base);
+  --color-text: var(--color-fg-default);
+
+  --color-surface-base:     oklch(20% 0.008 90);
+  --color-surface-subtle:   oklch(25% 0.010 90);
+  --color-surface-muted:    oklch(30% 0.012 90);
+  --color-surface-emphasis: oklch(35% 0.015 90);
+  --color-surface-strong:   oklch(40% 0.018 90);
+  --color-surface-inverse:  oklch(96% 0.006 90);
+
+  --color-fg-default:     oklch(96% 0.006 90);
+  --color-fg-strong:      oklch(98% 0.004 90);
+  --color-fg-base:        oklch(85% 0.012 90);
+  --color-fg-muted:       oklch(78% 0.015 90);
+  --color-fg-subtle:      oklch(60% 0.020 90);
+  --color-fg-faint:       oklch(45% 0.018 90);
+  --color-fg-soft:        oklch(98% 0.004 90);
+  --color-fg-softer:      oklch(96% 0.006 90);
+  --color-fg-softest:     oklch(93% 0.008 90);
+  --color-fg-inverse:     oklch(20% 0.008 90);
+  --color-fg-emphasis:    oklch(100% 0 0);
+  --color-fg-placeholder: oklch(45% 0.018 90);
+
+  --color-stroke-default:  oklch(40% 0.018 90);
+  --color-stroke-emphasis: oklch(45% 0.018 90);
+  --color-stroke-strong:   oklch(42% 0.015 90);
+
+  --color-overlay-light:  rgba(0, 0, 0, 0.28);
+  --color-overlay-medium: rgba(0, 0, 0, 0.38);
+  --color-overlay-heavy:  rgba(0, 0, 0, 0.48);
+  --color-overlay-black:  rgba(0, 0, 0, 0.58);
 }

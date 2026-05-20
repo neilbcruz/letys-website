@@ -58,45 +58,47 @@ const Button = ({
 }: ButtonProps) => {
   const variants = {
     primary: [
-      'bg-primary-2',
+      'bg-brand',
       'text-fg-inverse',
-      'hover:bg-primary-3',
+      'hover:bg-brand-muted',
       'hover:text-fg-inverse',
       'active:scale-95',
-      'focus:ring-primary-1',
+      'focus:ring-brand',
     ].join(' '),
 
     secondary: [
-      'bg-primary-1',
-      'text-fg-default',
-      'hover:bg-primary-3',
-      'hover:text-fg-inverse',
+      'border-2',
+      'border-brand',
+      'bg-surface-base',
+      'text-brand',
+      'hover:bg-support-2',
+      'hover:text-brand',
       'active:scale-95',
-      'focus:ring-primary-3',
+      'focus:ring-brand',
     ].join(' '),
 
     outline: [
       'bg-transparent',
       'border-2',
-      'border-primary-2',
-      'text-primary-2',
-      'hover:bg-primary-2',
+      'border-brand',
+      'text-brand',
+      'hover:bg-brand',
       'hover:text-fg-inverse',
       'active:scale-95',
-      'focus:ring-primary-1',
+      'focus:ring-brand',
     ].join(' '),
 
     ghost: [
       'bg-transparent',
-      'text-primary-2',
+      'text-brand',
       'hover:bg-support-2',
       'active:scale-95',
-      'focus:ring-primary-1',
+      'focus:ring-brand',
     ].join(' '),
 
     link: [
       'bg-transparent',
-      'text-primary-2',
+      'text-brand',
       'hover:underline',
       'active:scale-95',
       'underline-offset-4',
@@ -125,7 +127,7 @@ const Button = ({
   return (
     <button
       className={cn(
-        'inline-flex items-center justify-center rounded-md font-medium transition-colors',
+        'group inline-flex items-center justify-center rounded-md font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] motion-reduce:transform-none',
         'focus:outline-hidden focus:ring-4 focus:ring-offset-2',
         variants[variant],
         sizes[size],
@@ -166,13 +168,13 @@ const Button = ({
         </>
       )}
       {!isLoading && leftIcon && (
-        <span className='mr-2' aria-hidden="true">
+        <span className='mr-2 transition-transform duration-200 ease-out group-hover:-translate-x-0.5 motion-reduce:transition-none' aria-hidden="true">
           {leftIcon}
         </span>
       )}
       {children}
       {!isLoading && rightIcon && (
-        <span className='ml-2' aria-hidden="true">
+        <span className='ml-2 transition-transform duration-200 ease-out group-hover:translate-x-0.5 motion-reduce:transition-none' aria-hidden="true">
           {rightIcon}
         </span>
       )}

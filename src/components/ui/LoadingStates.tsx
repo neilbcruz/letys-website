@@ -137,6 +137,7 @@ export function LoadingGrid({
       )}
       role="status"
       aria-live="polite"
+      aria-busy="true"
     >
       {Array.from({ length: count }).map((_, i) => (
         <LoadingCard key={i} />
@@ -183,7 +184,7 @@ interface LoadingTextProps {
  */
 export function LoadingText({ lines = 3, className }: LoadingTextProps) {
   return (
-    <div className={cn('space-y-3', className)} role="status" aria-live="polite">
+    <div className={cn('space-y-3', className)} role="status" aria-live="polite" aria-busy="true">
       {Array.from({ length: lines }).map((_, i) => (
         <BaseSkeleton
           key={i}
@@ -239,6 +240,7 @@ export function LoadingTable({ rows = 5, columns = 4 }: LoadingTableProps) {
       className="overflow-hidden bg-surface-base rounded-lg shadow"
       role="status"
       aria-live="polite"
+      aria-busy="true"
     >
       {/* Header */}
       <div className="px-6 py-4 bg-surface-muted">
@@ -328,10 +330,12 @@ export function LoadingSpinner({
     <div
       className="flex flex-col justify-center items-center py-20"
       role="status"
+      aria-live="polite"
+      aria-busy="true"
     >
       <div
         className={cn(
-          'inline-block rounded-full border-4 border-stroke-emphasis animate-spin border-t-primary-2',
+          'inline-block rounded-full border-4 border-stroke-emphasis animate-spin border-t-brand',
           sizes[size],
           className
         )}

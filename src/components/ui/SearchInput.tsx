@@ -135,7 +135,7 @@ const SearchInput = ({
           id={inputId}
           type='text'
           className={cn(
-            'w-full rounded-lg border border-stroke-emphasis focus:border-primary-1 focus:ring-2 focus:ring-primary-1/20',
+            'w-full rounded-lg border border-stroke-emphasis focus:border-brand focus:ring-2 focus:ring-brand/20',
             'bg-surface-base text-fg-default placeholder:text-fg-placeholder',
             'transition-all duration-200 ease-in-out',
             sizes[size],

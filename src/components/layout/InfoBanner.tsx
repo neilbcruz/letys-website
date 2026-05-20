@@ -33,7 +33,7 @@ export default function InfoBanner({
     info: 'bg-status-info-bg border-status-info-border text-status-info-fg',
     warning: 'bg-status-warning-bg border-status-warning-border text-status-warning-fg',
     success: 'bg-status-success-bg border-status-success-border text-status-success-fg-strong',
-    primary: 'bg-primary-3/10 border-primary-3/30 text-primary-2',
+    primary: 'bg-brand-muted/10 border-brand-muted/30 text-brand',
     gray: 'bg-surface-subtle border-stroke-default text-fg-base',
   };
 
@@ -97,7 +97,7 @@ export function StoreInfoBanner({
             href={mapLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium underline rounded text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
+            className="font-medium underline rounded text-brand hover:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand"
           >
             Get Directions →
           </a>
@@ -149,7 +149,7 @@ export function InventorySummary({
         <div className="mt-3 text-center">
           <button
             onClick={onViewFullInventory}
-            className="text-sm underline text-primary-2 hover:text-primary-1 focus:outline-none focus:ring-2 focus:ring-primary-1"
+            className="text-sm underline text-brand hover:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand"
           >
             View Full Inventory →
           </button>
@@ -194,7 +194,7 @@ export function CompactBanner({
     info: 'bg-status-info-bg border-status-info-border text-status-info-fg',
     warning: 'bg-status-warning-bg border-status-warning-border text-status-warning-fg',
     success: 'bg-status-success-bg border-status-success-border text-status-success-fg-strong',
-    primary: 'bg-primary-3/10 border-primary-3/30 text-primary-2',
+    primary: 'bg-brand-muted/10 border-brand-muted/30 text-brand',
     gray: 'bg-surface-subtle border-stroke-default text-fg-base',
   };
 

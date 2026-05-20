@@ -8,7 +8,7 @@ import App from './App'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 2, // 2 min — inventory doesn't change every second
+      staleTime: 1000 * 60 * 2, // 2 min; inventory doesn't change every second
       retry: 1,
       refetchOnWindowFocus: true,
     },

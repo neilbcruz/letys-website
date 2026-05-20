@@ -34,7 +34,7 @@ export function getInventoryImageFromName(itemName: string) {
   const product = findProductByName(itemName);
   if (!product || !product.image) {
     console.warn(`No image found for product: ${itemName}`);
-    return getResponsiveImage('fallback');
+    return undefined;
   }
   return getResponsiveImage(product.image);
 }

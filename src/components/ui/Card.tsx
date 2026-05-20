@@ -39,11 +39,9 @@ const Card = ({
     <div
       className={cn(
         'bg-surface-base rounded-lg border border-stroke-default shadow-xs overflow-hidden',
-        hoverable && 'transition-all duration-300 hover:shadow-lg',
+        hoverable && 'transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-muted hover:shadow-lg',
         className
       )}
-      role='article'
-      aria-label='Service card'
       {...props}
     >
       {children}
@@ -63,8 +61,6 @@ const CardHeader = ({ children, className, ...props }: CardHeaderProps) => {
         'p-[var(--space-4)] md:p-[var(--space-6)] border-b border-stroke-default',
         className
       )}
-      role='heading'
-      aria-level={2}
       {...props}
     >
       {children}
@@ -81,8 +77,6 @@ const CardContent = ({ children, className, ...props }: CardContentProps) => {
   return (
     <div
       className={cn('p-[var(--space-4)] md:p-[var(--space-6)]', className)}
-      role='region'
-      aria-label='Service details'
       {...props}
     >
       {children}
@@ -117,7 +111,7 @@ const CardImage = ({ className, ...props }: CardImageProps) => {
   return (
     <div className='relative w-full h-48 overflow-hidden'>
       <img
-        className={cn('w-full h-full object-cover', className)}
+        className={cn('w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.03]', className)}
         {...props}
         alt={props.alt || 'Card image'}
       />

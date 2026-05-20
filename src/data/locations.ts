@@ -45,7 +45,7 @@ export const LOCATIONS: Location[] = [
     
     image: "location-main",
     icon: "Store",
-    color: "primary-2",
+    color: "brand",
     
     hours: {
       mon: ["06:00","18:00"],
@@ -75,7 +75,7 @@ export const LOCATIONS: Location[] = [
     
     image: "location-shell",
     icon: "Fuel",
-    color: "primary-3",
+    color: "brand-muted",
     
     hours: {
       mon: ["07:00","16:00"],

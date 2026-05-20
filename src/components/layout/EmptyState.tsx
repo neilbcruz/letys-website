@@ -9,6 +9,10 @@ interface EmptyStateProps {
     onClick: () => void;
     variant?: 'primary' | 'secondary';
   };
+  secondaryAction?: {
+    label: string;
+    onClick: () => void;
+  };
   className?: string;
 }
 
@@ -22,22 +26,38 @@ export default function EmptyState({
   title,
   description,
   action,
+  secondaryAction,
   className = '',
 }: EmptyStateProps) {
   return (
-    <div className={`py-20 text-center ${className}`.trim()}>
+    <div
+      className={`py-20 text-center ${className}`.trim()}
+      role="status"
+      aria-live="polite"
+    >
       <Icon className="mx-auto mb-4 w-16 h-16 text-fg-faint" aria-hidden="true" />
       <h2 className="mb-2 text-2xl font-bold text-fg-base">{title}</h2>
       <p className="mb-6 max-w-md mx-auto text-fg-muted">{description}</p>
-      {action && (
-        <button
-          onClick={action.onClick}
-          className={`btn-${action.variant || 'primary'}`}
-          aria-label={action.label}
-        >
-          {action.label}
-        </button>
-      )}
+      <div className="flex flex-col gap-3 items-center justify-center">
+        {action && (
+          <button
+            onClick={action.onClick}
+            className={`btn-${action.variant || 'primary'}`}
+            aria-label={action.label}
+          >
+            {action.label}
+          </button>
+        )}
+        {secondaryAction && (
+          <button
+            onClick={secondaryAction.onClick}
+            className="text-brand font-semibold hover:text-accent transition-colors underline"
+            aria-label={secondaryAction.label}
+          >
+            {secondaryAction.label}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -108,7 +128,11 @@ export function EmptyStateCard({
   className = '',
 }: EmptyStateCardProps) {
   return (
-    <div className={`p-8 text-center bg-surface-subtle rounded-lg border border-stroke-default ${className}`.trim()}>
+    <div
+      className={`p-8 text-center bg-surface-subtle rounded-lg border border-stroke-default ${className}`.trim()}
+      role="status"
+      aria-live="polite"
+    >
       <Icon className="mx-auto mb-3 w-12 h-12 text-fg-faint" aria-hidden="true" />
       <h3 className="mb-2 text-lg font-bold text-fg-base">{title}</h3>
       <p className="text-sm text-fg-muted">{description}</p>
