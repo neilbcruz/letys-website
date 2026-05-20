@@ -243,16 +243,24 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) .logo-plate {
-      background-color: oklch(96% 0.006 90 / 0.92);
-      border-color: oklch(86% 0.012 90 / 0.8);
-      box-shadow: 0 8px 20px rgb(0 0 0 / 0.24);
+      background-color: oklch(35% 0.015 92) !important;
+      border-color: oklch(76% 0.04 92) !important;
+      box-shadow: 0 10px 24px rgb(0 0 0 / 0.28);
+    }
+
+    :root:not([data-theme='light']) .header-logo-image {
+      filter: brightness(1.18) saturate(0.92);
     }
   }
 
   :root[data-theme='dark'] .logo-plate {
-    background-color: oklch(96% 0.006 90 / 0.92);
-    border-color: oklch(86% 0.012 90 / 0.8);
-    box-shadow: 0 8px 20px rgb(0 0 0 / 0.24);
+    background-color: oklch(80% 0.03 92) !important;
+    border-color: oklch(76% 0.04 92) !important;
+    box-shadow: 0 10px 24px rgb(0 0 0 / 0.28);
+  }
+
+  :root[data-theme='dark'] .header-logo-image {
+    filter: brightness(1.18) saturate(0.92);
   }
 
   .ui-chip {

@@ -245,14 +245,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     /* ─── Dark Surfaces (OKLCH - warm dark) ─────────────────── */
-    --color-surface-base:    oklch(20% 0.008 90);
-    --color-surface-white:   oklch(25% 0.010 90);
-    --color-surface-cream:   oklch(30% 0.012 90);
-    --color-surface-sage:    oklch(35% 0.015 100);
-    --color-surface-subtle:  oklch(25% 0.010 90);
-    --color-surface-muted:   oklch(30% 0.012 90);
-    --color-surface-emphasis: oklch(35% 0.015 90);
-    --color-surface-strong:  oklch(40% 0.018 90);
+    --color-surface-base:    oklch(14% 0.007 90);
+    --color-surface-white:   oklch(18% 0.009 90);
+    --color-surface-cream:   oklch(22% 0.010 90);
+    --color-surface-sage:    oklch(28% 0.012 100);
+    --color-surface-subtle:  oklch(18% 0.009 90);
+    --color-surface-muted:   oklch(22% 0.010 90);
+    --color-surface-emphasis: oklch(26% 0.012 90);
+    --color-surface-strong:  oklch(32% 0.015 90);
     --color-surface-inverse: oklch(96% 0.006 90);
 
     /* ─── Dark Foreground (OKLCH) ─────────────────────────── */

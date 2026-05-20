@@ -71,7 +71,7 @@ export default function PageHeader() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
         <Link to="/" className="shrink-0 rounded-md" aria-label="Lety's Buko Pie - Home">
           <span className="sr-only">Lety's Buko Pie</span>
-          <span className="logo-plate block rounded-lg bg-surface-base/85 px-2 py-1 shadow-sm ring-1 ring-stroke-default/70 backdrop-blur-sm transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md">
+          <span className="logo-plate block rounded-lg bg-surface-emphasis/80 px-2 py-1 shadow-sm ring-1 ring-stroke-default/70 backdrop-blur-sm transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md">
             <img
               src={IMAGES.LETYS_LOGO2.default}
               srcSet={IMAGES.LETYS_LOGO2.srcSet}
@@ -79,7 +79,7 @@ export default function PageHeader() {
               width={192}
               height={64}
               alt=""
-              className="h-auto w-32 object-contain sm:w-40 lg:w-44"
+              className="header-logo-image h-auto w-32 object-contain sm:w-40 lg:w-44"
             />
           </span>
         </Link>
