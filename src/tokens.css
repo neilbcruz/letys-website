@@ -361,12 +361,12 @@
   --color-text: var(--color-text-default);
 
   /* ─── Surfaces ───────────────────────────────────────────── */
-  --color-surface-base:     var(--color-surface-base);
-  --color-surface-subtle:   var(--color-surface-subtle);
-  --color-surface-muted:    var(--color-surface-muted);
-  --color-surface-emphasis: var(--color-surface-emphasis);
-  --color-surface-strong:   var(--color-surface-strong);
-  --color-surface-inverse:  var(--color-surface-inverse);
+  --color-surface-base:     #FAFAF8;
+  --color-surface-subtle:   #F5F5F0;
+  --color-surface-muted:    #EDEDEA;
+  --color-surface-emphasis: #DDDDD8;
+  --color-surface-strong:   #C8C8C2;
+  --color-surface-inverse:  #1A1A18;
 
   /* ─── Foreground ─────────────────────────────────────────── */
   --color-fg-default:  #1C1C1A;
@@ -382,36 +382,36 @@
   --color-fg-emphasis: #FFFFFF;
 
   /* ─── Strokes ────────────────────────────────────────────── */
-  --color-stroke-default:  var(--color-stroke-default);
-  --color-stroke-emphasis: var(--color-stroke-emphasis);
-  --color-stroke-strong:   var(--color-stroke-strong);
+  --color-stroke-default:  #E2E2DC;
+  --color-stroke-emphasis: #8E8E86;
+  --color-stroke-strong:   #B8B8B0;
 
   /* ─── Status — Error ─────────────────────────────────────── */
-  --color-status-error-fg:        var(--color-status-error-fg);
-  --color-status-error-fg-strong: var(--color-status-error-fg-strong);
-  --color-status-error-bg:        var(--color-status-error-bg);
-  --color-status-error-bg-muted:  var(--color-status-error-bg-muted);
-  --color-status-error-bg-solid:  var(--color-status-error-bg-solid);
-  --color-status-error-border:    var(--color-status-error-border);
+  --color-status-error-fg:        #C0152A;
+  --color-status-error-fg-strong: #8B0E1C;
+  --color-status-error-bg:        #FFF0F0;
+  --color-status-error-bg-muted:  #FFE0E0;
+  --color-status-error-bg-solid:  #C0152A;
+  --color-status-error-border:    #D07070;
 
   /* ─── Status — Success ───────────────────────────────────── */
-  --color-status-success-fg:        var(--color-status-success-fg);
-  --color-status-success-fg-strong: var(--color-status-success-fg-strong);
-  --color-status-success-bg:        var(--color-status-success-bg);
-  --color-status-success-bg-solid:  var(--color-status-success-bg-solid);
-  --color-status-success-border:    var(--color-status-success-border);
+  --color-status-success-fg:        #1A6B38;
+  --color-status-success-fg-strong: #14522B;
+  --color-status-success-bg:        #E6F0C3;
+  --color-status-success-bg-solid:  #1A6B38;
+  --color-status-success-border:    #709050;
 
   /* ─── Status — Warning ───────────────────────────────────── */
-  --color-status-warning-fg:        var(--color-status-warning-fg);
-  --color-status-warning-fg-strong: var(--color-status-warning-fg-strong);
-  --color-status-warning-bg:        var(--color-status-warning-bg);
-  --color-status-warning-bg-muted:  var(--color-status-warning-bg-muted);
-  --color-status-warning-border:    var(--color-status-warning-border);
+  --color-status-warning-fg:        #92660A;
+  --color-status-warning-fg-strong: #6B4A07;
+  --color-status-warning-bg:        #FFFBEB;
+  --color-status-warning-bg-muted:  #FEF3C7;
+  --color-status-warning-border:    #A89040;
 
   /* ─── Status — Info ──────────────────────────────────────── */
-  --color-status-info-fg:     var(--color-status-info-fg);
-  --color-status-info-bg:     var(--color-status-info-bg);
-  --color-status-info-border: var(--color-status-info-border);
+  --color-status-info-fg:     #1E4E8C;
+  --color-status-info-bg:     #EFF6FF;
+  --color-status-info-border: #7088A0;
 
   /* ─── Typography ─────────────────────────────────────────── */
   --font-heading: var(--font-heading);

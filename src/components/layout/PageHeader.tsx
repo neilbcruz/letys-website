@@ -68,7 +68,7 @@ export default function PageHeader() {
           <button
             type="button"
             onClick={toggleTheme}
-            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md border border-stroke-default bg-surface-white p-3 text-primary-2 shadow-sm transition-colors duration-200 hover:bg-support-2 focus:outline-none focus:ring-2 focus:ring-primary-1 focus:ring-offset-2"
+            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md border border-stroke-default bg-surface-base p-3 text-primary-2 shadow-sm transition-colors duration-200 hover:bg-support-2 focus:outline-none focus:ring-2 focus:ring-primary-1 focus:ring-offset-2"
             aria-label={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
