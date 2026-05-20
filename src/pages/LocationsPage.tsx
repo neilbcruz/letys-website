@@ -171,7 +171,6 @@ export default function LocationsPage() {
       <HeroBanner
         variant="narrow"
         title="Our Locations"
-        subtitle="Visit us at any of our convenient branches"
         icon={<MapPin size={32} aria-hidden="true" />}
       />
 

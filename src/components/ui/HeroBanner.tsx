@@ -14,7 +14,6 @@ interface HeroBannerProps {
 export default function HeroBanner({
   variant = 'full',
   title,
-  subtitle,
   icon,
 }: HeroBannerProps) {
   // Full-width variant (from PageHero.tsx)
@@ -69,8 +68,7 @@ export default function HeroBanner({
 
   // Narrow variant (from PageHeroNarrow.tsx)
   if (variant === 'narrow') {
-    if (!title || !subtitle || !icon) {
-      console.warn('HeroBanner narrow variant requires title, subtitle, and icon props');
+    if (!title || !icon) {
       return null;
     }
 
@@ -110,16 +108,6 @@ export default function HeroBanner({
             <h1 className="text-3xl font-bold text-fg-inverse sm:text-4xl lg:text-5xl">
               {title}
             </h1>
-          </div>
-
-          {/* Subtitle with background for contrast */}
-          <div
-            className="inline-block backdrop-blur-sm rounded-lg px-4 py-2 max-w-3xl"
-            style={{ backgroundColor: 'var(--color-overlay-light)' }}
-          >
-            <p className="text-lg font-medium text-fg-inverse sm:text-xl lg:text-2xl">
-              {subtitle}
-            </p>
           </div>
         </div>
       </div>

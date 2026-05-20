@@ -67,7 +67,6 @@ export default function ProductsPage() {
       <HeroBanner
         variant="narrow"
         title="Store Inventory"
-        subtitle="Browse our current stock across all locations"
         icon={<Package size={32} aria-hidden="true" />}
       />
 

@@ -93,7 +93,6 @@ export default function ProductsAvailabilityPage() {
       <HeroBanner
         variant="narrow"
         title="Store Availability"
-        subtitle="Compare inventory across all locations"
         icon={<TrendingUp size={32} aria-hidden="true" />}
       />
 

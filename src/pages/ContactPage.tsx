@@ -12,7 +12,6 @@ export default function ContactPage() {
       <HeroBanner
         variant="narrow"
         title="Contact Us"
-        subtitle="We'd love to hear from you!"
         icon={<Mail size={32} aria-hidden="true" />}
       />
 

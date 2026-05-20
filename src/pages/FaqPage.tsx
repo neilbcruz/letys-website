@@ -16,7 +16,6 @@ export default function FaqPage() {
       <HeroBanner
         variant="narrow"
         title="Frequently Asked Questions"
-        subtitle="Find answers to common questions about Lety's Buko Pie"
         icon={<HelpCircle size={32} aria-hidden="true" />}
       />
 
