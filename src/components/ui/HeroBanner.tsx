@@ -46,10 +46,10 @@ export default function HeroBanner({
             className="inline-block backdrop-blur-sm rounded-xl p-6 sm:p-8"
             style={{ backgroundColor: 'var(--color-overlay-medium)' }}
           >
-            <h1 className="font-bold text-4xl sm:text-5xl lg:text-6xl mb-4 text-fg-emphasis">
+            <h1 className="font-bold text-4xl sm:text-5xl lg:text-6xl mb-4" style={{ color: '#FFFFFF' }}>
               Welcome to Lety's Buko Pie
             </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl mb-8 font-medium text-fg-emphasis">
+            <p className="text-lg sm:text-xl lg:text-2xl mb-8 font-medium" style={{ color: '#FFFFFF' }}>
               Authentic Filipino buko pie made with love since 1976
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -105,7 +105,7 @@ export default function HeroBanner({
             className="inline-block backdrop-blur-sm rounded-lg p-4 mb-4"
             style={{ backgroundColor: 'var(--color-overlay-medium)' }}
           >
-            <h1 className="text-3xl font-bold text-fg-emphasis sm:text-4xl lg:text-5xl">
+            <h1 className="text-3xl font-bold sm:text-4xl lg:text-5xl" style={{ color: '#FFFFFF' }}>
               {title}
             </h1>
           </div>
