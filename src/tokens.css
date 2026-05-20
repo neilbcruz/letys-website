@@ -52,7 +52,12 @@
   --color-fg-muted:       #5C5C56;
   --color-fg-subtle:      #70706B;
   --color-fg-faint:       #9A9A90;
-  --color-fg-inverse:     #FFFFFF;
+  --color-fg-inverse:     var(--color-fg-soft);
+  /* ─── Soft Whites (for reduced eye strain) ────────────────── */
+  --color-fg-soft:        #FAFAF8;  /* Soft white - general use */
+  --color-fg-softer:      #F5F5F0;  /* Softer white - large areas */
+  --color-fg-softest:     #EDEDEA;  /* Softest white - subtle text */
+  --color-fg-emphasis:    #FFFFFF;  /* Pure white - for emphasis only */
   --color-fg-placeholder: #9A9A90;
 
   /* ─── Strokes ────────────────────────────────────────────── */
@@ -259,12 +264,13 @@
 
     /* ─── Dark Foreground ─────────────────────────────────── */
     --color-fg-default:     #F5F5F0;
-    --color-fg-strong:      #FFFFFF;
+    --color-fg-strong:      #FAFAF8;
     --color-fg-base:        #DDDDD8;
     --color-fg-muted:       #C8C8C2;
     --color-fg-subtle:      #9A9A90;
     --color-fg-faint:       #70706B;
     --color-fg-inverse:     #1A1A18;
+    --color-fg-emphasis:    #FFFFFF;
     --color-fg-placeholder: #70706B;
 
     /* ─── Dark Strokes ────────────────────────────────────── */
@@ -304,12 +310,13 @@
   --color-surface-inverse: #F5F5F0;
 
   --color-fg-default:     #F5F5F0;
-  --color-fg-strong:      #FFFFFF;
+  --color-fg-strong:      #FAFAF8;
   --color-fg-base:        #DDDDD8;
   --color-fg-muted:       #C8C8C2;
   --color-fg-subtle:      #9A9A90;
   --color-fg-faint:       #70706B;
   --color-fg-inverse:     #1A1A18;
+  --color-fg-emphasis:    #FFFFFF;
   --color-fg-placeholder: #70706B;
 
   --color-stroke-default:  #454540;
@@ -368,7 +375,11 @@
   --color-fg-muted:    var(--color-fg-muted);
   --color-fg-subtle:   var(--color-fg-subtle);
   --color-fg-faint:    var(--color-fg-faint);
-  --color-fg-inverse:  #FFFFFF;
+  --color-fg-soft:     var(--color-fg-soft);
+  --color-fg-softer:   var(--color-fg-softer);
+  --color-fg-softest:  var(--color-fg-softest);
+  --color-fg-inverse:  var(--color-fg-inverse);
+  --color-fg-emphasis: var(--color-fg-emphasis);
 
   /* ─── Strokes ────────────────────────────────────────────── */
   --color-stroke-default:  var(--color-stroke-default);
