@@ -5,10 +5,15 @@ export const UNAVAILABLE_BY_STORE: Record<string, string[]> = {
   'letysbukopie-pansol': ['Frozen Buko Pie'],
 };
 
+// Products hidden across all stores (temporary). Remove names to show again.
+export const HIDDEN_PRODUCTS: string[] = ['Oatmeal Cookies', 'Revel Bars'];
+
 export function isAvailableInStore(
   storeId: string,
   productName: string
 ): boolean {
+  if (HIDDEN_PRODUCTS.includes(productName)) return false;
+
   const normalizedStore = storeId.toLowerCase();
 
   return !UNAVAILABLE_BY_STORE[normalizedStore]?.includes(productName);
