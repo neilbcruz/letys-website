@@ -51,7 +51,7 @@ export default function EmptyState({
         {secondaryAction && (
           <button
             onClick={secondaryAction.onClick}
-            className="text-brand font-semibold hover:text-accent transition-colors underline"
+            className="text-brand font-semibold hover:text-accent-fg transition-colors underline"
             aria-label={secondaryAction.label}
           >
             {secondaryAction.label}

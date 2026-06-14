@@ -13,16 +13,16 @@ export default function PageBody() {
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
             <div className="order-1 text-left">
-              <h2 id="featured-heading" className="mb-4 text-3xl font-bold text-brand lg:text-4xl">Our Signature <span className="text-accent">Buko Pie</span></h2>
+              <h2 id="featured-heading" className="mb-4 text-3xl font-bold text-brand lg:text-4xl">Our Signature <span className="text-accent-fg">Buko Pie</span></h2>
               <p className="text-lg leading-relaxed text-fg-base lg:text-xl mb-6">
                 Experience Lety's famous specialty pie, crafted with fresh young coconuts and a legacy of baking excellence since 1976. Each pie is made with love using our time-honored family recipe.
               </p>
               <div className="flex flex-wrap gap-3">
-                <NavLink to="/products" className="flex items-center gap-2 text-brand font-semibold hover:text-accent transition-colors">
+                <NavLink to="/products" className="flex items-center gap-2 text-brand font-semibold hover:text-accent-fg transition-colors">
                   <ShoppingBag size={18} />
                   Shop All Products
                 </NavLink>
-                <HashLink to="/products#specialty" className="flex items-center gap-2 text-brand font-semibold hover:text-accent transition-colors">
+                <HashLink to="/products#specialty" className="flex items-center gap-2 text-brand font-semibold hover:text-accent-fg transition-colors">
                   View Specialty Pies
                 </HashLink>
               </div>
@@ -44,7 +44,7 @@ export default function PageBody() {
       <section aria-labelledby="why-choose-heading" className="py-16 bg-surface-base lg:py-20">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <h2 id="why-choose-heading" className="mb-4 text-3xl font-bold text-center text-brand lg:text-4xl">
-            Why Choose <span className="text-accent">Lety's</span>?
+            Why Choose <span className="text-accent-fg">Lety's</span>?
           </h2>
           <p className="mx-auto mb-12 max-w-2xl text-lg text-center text-fg-muted">
             Three things that matter: fresh ingredients, family tradition, and authentic taste
@@ -61,7 +61,7 @@ export default function PageBody() {
                 </div>
                 <h3 className="mb-3 text-xl font-bold text-brand">{item.title}</h3>
                 <p className="mb-4 leading-relaxed text-fg-muted">{item.desc}</p>
-                <NavLink to={item.link} className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-brand transition-colors">
+                <NavLink to={item.link} className="inline-flex items-center gap-2 text-sm font-semibold text-accent-fg hover:text-brand transition-colors">
                   Learn more →
                 </NavLink>
               </div>
@@ -74,7 +74,7 @@ export default function PageBody() {
       <section aria-labelledby="about-lety-heading" className="py-16 bg-surface-subtle lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <div className="mb-12 text-center max-w-3xl mx-auto">
-            <h2 id="about-lety-heading" className="mb-6 text-3xl font-bold text-brand lg:text-4xl">About <span className="text-accent">Lety</span></h2>
+            <h2 id="about-lety-heading" className="mb-6 text-3xl font-bold text-brand lg:text-4xl">About <span className="text-accent-fg">Lety</span></h2>
             <p className="text-lg text-fg-base">From a single oven in 1976 to Laguna's favorite buko pie, here's our story</p>
           </div>
 
@@ -82,17 +82,17 @@ export default function PageBody() {
           <div className="mb-16 max-w-4xl mx-auto">
             <div className="relative border-l-2 border-brand-muted/30 pl-8 space-y-12">
               <div className="relative">
-                <div className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand text-fg-inverse flex items-center justify-center text-sm font-bold">1</div>
+                <div className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand-fill text-fg-on-brand flex items-center justify-center text-sm font-bold">1</div>
                 <h3 className="mb-2 text-2xl font-bold text-brand">1976: Humble Beginnings</h3>
                 <p className="text-lg text-fg-base">Leticia "Lety" Ocampo Belarmino started with a single oven and a simple goal: earn extra for her kids' schooling while doing what she loved, baking. Her buko pie quickly became a neighborhood favorite.</p>
               </div>
               <div className="relative">
-                <div className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand text-fg-inverse flex items-center justify-center text-sm font-bold">2</div>
+                <div className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand-fill text-fg-on-brand flex items-center justify-center text-sm font-bold">2</div>
                 <h3 className="mb-2 text-2xl font-bold text-brand">The Recipe That Worked</h3>
                 <p className="text-lg text-fg-base">Using young buko (immature coconut) with jelly-like meat and fresh coconut water, Lety perfected a recipe that was different: lighter, sweeter, and distinctly Filipino. Customers kept coming back for that same homemade taste.</p>
               </div>
               <div className="relative">
-                <div className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand text-fg-inverse flex items-center justify-center text-sm font-bold">3</div>
+                <div className="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-brand-fill text-fg-on-brand flex items-center justify-center text-sm font-bold">3</div>
                 <h3 className="mb-2 text-2xl font-bold text-brand">Growing Together</h3>
                 <p className="text-lg text-fg-base">Today, Lety manages multiple locations across Laguna with her family. The same recipe. The same love. The taste that reminds you of home.</p>
               </div>
@@ -117,10 +117,10 @@ export default function PageBody() {
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
             <div>
-              <h2 id="our-products-heading" className="mb-4 text-3xl font-bold text-brand lg:text-4xl">Our <span className="text-accent">Products</span></h2>
+              <h2 id="our-products-heading" className="mb-4 text-3xl font-bold text-brand lg:text-4xl">Our <span className="text-accent-fg">Products</span></h2>
               <p className="text-lg text-fg-muted">Specialty pies, baked goods, and pasalubong favorites</p>
             </div>
-            <NavLink to="/products" className="flex items-center gap-2 text-brand font-semibold hover:text-accent transition-colors whitespace-nowrap">
+            <NavLink to="/products" className="flex items-center gap-2 text-brand font-semibold hover:text-accent-fg transition-colors whitespace-nowrap">
               View All Products <ShoppingBag size={18} />
             </NavLink>
           </div>
@@ -158,7 +158,7 @@ export default function PageBody() {
       <section aria-labelledby="visit-branch-heading" className="py-16 bg-surface-subtle lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-8">
           <div className="mb-12 text-center">
-            <h2 id="visit-branch-heading" className="mb-4 text-3xl font-bold text-brand lg:text-4xl">Visit Our <span className="text-accent">Main Branch</span></h2>
+            <h2 id="visit-branch-heading" className="mb-4 text-3xl font-bold text-brand lg:text-4xl">Visit Our <span className="text-accent-fg">Main Branch</span></h2>
             <p className="text-lg text-fg-muted">The original Lety's location since 1976</p>
           </div>
           <div className="grid grid-cols-1 gap-12 items-center lg:grid-cols-2">
@@ -173,7 +173,7 @@ export default function PageBody() {
                   Barangay Anos, Los Baños, Laguna
                 </p>
                 <p className="text-sm text-fg-muted mb-4">(in front of Heaven's Memorial Garden)</p>
-                <NavLink to="/locations" className="inline-flex items-center gap-2 text-accent font-semibold hover:text-brand transition-colors">
+                <NavLink to="/locations" className="inline-flex items-center gap-2 text-accent-fg font-semibold hover:text-brand transition-colors">
                   View All 5 Locations <MapPin size={16} />
                 </NavLink>
               </div>

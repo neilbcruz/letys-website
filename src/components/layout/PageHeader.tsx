@@ -95,7 +95,7 @@ export default function PageHeader() {
           aria-label="Main navigation"
         >
           <span
-            className="pointer-events-none absolute top-1 bottom-1 rounded-full bg-brand shadow-sm transition-[left,width,background-color,opacity] duration-[360ms] ease-[var(--ease-spring)] motion-reduce:transition-none"
+            className="pointer-events-none absolute top-1 bottom-1 rounded-full bg-brand-fill shadow-sm transition-[left,width,background-color,opacity] duration-[360ms] ease-[var(--ease-spring)] motion-reduce:transition-none"
             style={{
               left: activePill.left,
               width: activePill.width,
@@ -113,7 +113,7 @@ export default function PageHeader() {
               className={({ isActive }) =>
                 `relative z-10 rounded-full px-4 py-2 text-sm font-bold no-underline transition-[color,background-color,transform] duration-200 ease-[var(--ease-smooth)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base ${
                   isActive
-                    ? 'text-fg-inverse'
+                    ? 'text-fg-on-brand'
                     : isTransparent
                       ? 'text-fg-emphasis hover:bg-fg-emphasis/10 hover:text-fg-emphasis hover:-translate-y-0.5'
                       : 'text-fg-base hover:bg-surface-muted hover:text-brand hover:-translate-y-0.5'
@@ -139,13 +139,13 @@ export default function PageHeader() {
             aria-pressed={resolvedTheme === 'dark'}
           >
             <span
-              className={`absolute top-1 h-9 w-9 rounded-full bg-brand shadow-sm transition-transform duration-[360ms] ease-[var(--ease-spring)] motion-reduce:transition-none ${
+              className={`absolute top-1 h-9 w-9 rounded-full bg-brand-fill shadow-sm transition-transform duration-[360ms] ease-[var(--ease-spring)] motion-reduce:transition-none ${
                 resolvedTheme === 'dark' ? 'translate-x-[43px]' : 'translate-x-0'
               }`}
               aria-hidden="true"
             />
             <span
-              className={`absolute left-1 top-1 z-10 grid h-9 w-9 place-items-center text-fg-inverse transition-transform duration-[360ms] ease-[var(--ease-spring)] motion-reduce:transition-none ${
+              className={`absolute left-1 top-1 z-10 grid h-9 w-9 place-items-center text-fg-on-brand transition-transform duration-[360ms] ease-[var(--ease-spring)] motion-reduce:transition-none ${
                 resolvedTheme === 'dark' ? 'translate-x-[43px]' : 'translate-x-0'
               }`}
             >

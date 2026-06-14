@@ -9,6 +9,26 @@
 - Use `primary-*` and brand tokens for brand actions, active navigation, links, selected controls, and limited accents.
 - Avoid raw color literals in components and pages. Raw color values belong in `src/tokens.css`.
 
+## Color Roles — fill vs text (on-color rules)
+
+Brand green is split into two roles because one value can't be both a readable fill and readable text in dark mode (a fill must be dark for white text; text on a surface must be light to read — they never overlap at AA):
+
+| Context | Background | Text |
+| --- | --- | --- |
+| Brand button / tile | `bg-brand-fill` | `text-fg-on-brand` (always white) |
+| Gold button / chip | `bg-accent` | `text-on-accent` (always dark) |
+| Brand text / link / icon on a surface | surface | `text-brand` (flips per theme) |
+| Gold text on a surface | surface | `text-accent-fg` (readable gold) |
+| Gold accent on a dark hero / overlay | dark | `text-accent` (bright gold) |
+
+- Colored **fill** → `on-*` text: `on-brand` (white) for green/status fills, `on-accent` (dark) for gold.
+- Brand/gold as **text on a surface** → `brand` / `accent-fg`, never the raw fill color.
+- Never put `text-fg-inverse` on a permanently-colored surface — it flips to dark in dark mode (black-on-green). `text-fg-inverse` is only for `surface-inverse` / `fg-inverse` pairings, which flip together.
+
+## Display Type
+
+- Hero display figures use `font-black` (Figtree 900) with `tabular-nums`; body text stays at `700` or lighter.
+
 ## Motion
 
 - Prefer color, border, and shadow changes for hover feedback.

@@ -66,13 +66,13 @@ export default function ModalMenu({ isOpen, closeModal, resolvedTheme, toggleThe
                     aria-pressed={resolvedTheme === 'dark'}
                   >
                     <span
-                      className={`absolute top-1 h-9 w-9 rounded-full bg-brand shadow-sm transition-transform duration-300 ease-out motion-reduce:transition-none ${
+                      className={`absolute top-1 h-9 w-9 rounded-full bg-brand-fill shadow-sm transition-transform duration-300 ease-out motion-reduce:transition-none ${
                         resolvedTheme === 'dark' ? 'translate-x-[43px]' : 'translate-x-0'
                       }`}
                       aria-hidden="true"
                     />
                     <span
-                      className={`absolute left-1 top-1 z-10 grid h-9 w-9 place-items-center text-fg-inverse transition-transform duration-300 ease-out motion-reduce:transition-none ${
+                      className={`absolute left-1 top-1 z-10 grid h-9 w-9 place-items-center text-fg-on-brand transition-transform duration-300 ease-out motion-reduce:transition-none ${
                         resolvedTheme === 'dark' ? 'translate-x-[43px]' : 'translate-x-0'
                       }`}
                     >
@@ -110,7 +110,7 @@ export default function ModalMenu({ isOpen, closeModal, resolvedTheme, toggleThe
                     className={({ isActive }) =>
                       `rounded-lg px-4 py-3 text-left text-base font-bold transition-[background-color,color,transform] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base ${
                         isActive
-                          ? 'bg-brand text-fg-inverse shadow-sm'
+                          ? 'bg-brand-fill text-fg-on-brand shadow-sm'
                           : 'text-fg-base hover:translate-x-1 hover:bg-surface-muted hover:text-brand'
                       }`
                     }

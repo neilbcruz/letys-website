@@ -206,8 +206,8 @@ export default function LocationsPage() {
                           loading="lazy"
                         />
                       ) : (
-                        <div className="flex justify-center items-center w-full h-full bg-linear-to-br from-brand to-brand-muted">
-                          <LocationIcon size={56} className="text-fg-inverse" aria-hidden="true" />
+                        <div className="flex justify-center items-center w-full h-full bg-linear-to-br from-brand-fill to-brand-muted">
+                          <LocationIcon size={56} className="text-fg-on-brand" aria-hidden="true" />
                         </div>
                       )}
                       <div className="absolute top-4 right-4">

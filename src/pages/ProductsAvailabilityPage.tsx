@@ -170,7 +170,7 @@ export default function ProductsAvailabilityPage() {
                 {/* Desktop Table */}
                 <div className="hidden overflow-x-auto lg:block">
                   <table className="w-full">
-                    <thead className="text-fg-inverse bg-brand">
+                    <thead className="text-fg-on-brand bg-brand-fill">
                       <tr>
                         <th scope="col" className="px-5 py-3 w-1/4 text-base font-bold text-left">
                           Product

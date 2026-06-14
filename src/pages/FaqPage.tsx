@@ -89,7 +89,7 @@ export default function FaqPage() {
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 <NavLink to="/products" className="p-6 text-center card-elevated hover:border-brand-muted group">
                   <Coffee className="w-12 h-12 mx-auto mb-4 text-brand" />
-                  <h3 className="mb-2 text-xl font-bold transition text-brand group-hover:text-accent">
+                  <h3 className="mb-2 text-xl font-bold transition text-brand group-hover:text-accent-fg">
                     Our Products
                   </h3>
                   <p className="text-fg-muted">
@@ -99,7 +99,7 @@ export default function FaqPage() {
 
                 <NavLink to="/locations" className="p-6 text-center card-elevated hover:border-brand-muted group">
                   <MapPin className="w-12 h-12 mx-auto mb-4 text-brand" />
-                  <h3 className="mb-2 text-xl font-bold transition text-brand group-hover:text-accent">
+                  <h3 className="mb-2 text-xl font-bold transition text-brand group-hover:text-accent-fg">
                     Store Locations
                   </h3>
                   <p className="text-fg-muted">
@@ -109,7 +109,7 @@ export default function FaqPage() {
 
                 <a href="mailto:hello@letysbukopie.com" className="p-6 text-center card-elevated hover:border-brand-muted group">
                   <MessageCircle className="w-12 h-12 mx-auto mb-4 text-brand" />
-                  <h3 className="mb-2 text-xl font-bold transition text-brand group-hover:text-accent">
+                  <h3 className="mb-2 text-xl font-bold transition text-brand group-hover:text-accent-fg">
                     Get in Touch
                   </h3>
                   <p className="text-fg-muted">

@@ -58,10 +58,10 @@ const Button = ({
 }: ButtonProps) => {
   const variants = {
     primary: [
-      'bg-brand',
-      'text-fg-inverse',
+      'bg-brand-fill',
+      'text-fg-on-brand',
       'hover:bg-brand-muted',
-      'hover:text-fg-inverse',
+      'hover:text-fg-on-brand',
       'active:scale-95',
       'focus:ring-brand',
     ].join(' '),
@@ -82,8 +82,8 @@ const Button = ({
       'border-2',
       'border-brand',
       'text-brand',
-      'hover:bg-brand',
-      'hover:text-fg-inverse',
+      'hover:bg-brand-fill',
+      'hover:text-fg-on-brand',
       'active:scale-95',
       'focus:ring-brand',
     ].join(' '),

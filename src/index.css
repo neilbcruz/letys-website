@@ -226,7 +226,7 @@
   }
 
   .site-footer {
-    @apply bg-brand text-fg-inverse;
+    @apply bg-brand-fill text-fg-on-brand;
   }
 
   .footer-icon {
@@ -268,7 +268,7 @@
   }
 
   .ui-chip-selected {
-    @apply rounded-full border border-brand bg-brand text-fg-inverse shadow-sm transition-[background-color,border-color,color,box-shadow,transform] duration-200;
+    @apply rounded-full border border-brand bg-brand-fill text-fg-on-brand shadow-sm transition-[background-color,border-color,color,box-shadow,transform] duration-200;
   }
 
   .status-chip {
@@ -293,11 +293,11 @@
   }
 
   .product-badge-accent {
-    @apply border-accent bg-accent text-fg-inverse;
+    @apply border-accent bg-accent text-on-accent;
   }
 
   .product-badge-error {
-    @apply border-status-error-bg-solid bg-status-error-bg-solid text-fg-inverse;
+    @apply border-status-error-bg-solid bg-status-error-bg-solid text-fg-on-brand;
   }
 
   .stock-badge {
@@ -394,8 +394,8 @@
 
   /* Updated button styles with better contrast */
   .btn-primary {
-    @apply px-6 py-3 bg-brand text-fg-inverse font-bold rounded-lg
-           hover:bg-brand-muted hover:text-fg-inverse
+    @apply px-6 py-3 bg-brand-fill text-fg-on-brand font-bold rounded-lg
+           hover:bg-brand-muted hover:text-fg-on-brand
            focus:ring-4 focus:ring-brand focus:outline-none
            disabled:opacity-60 disabled:cursor-not-allowed;
     transition:
