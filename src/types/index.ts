@@ -21,9 +21,8 @@ export type { NavItem } from '@/data/navItems';
 export type {
   StockDetails,
   StoreItem,
-  GetStoreItemsResponse,
   QueryParams,
-} from '@/services/graphql';
+} from '@/services/inventory';
 
 // ==================== Image Types ====================
 

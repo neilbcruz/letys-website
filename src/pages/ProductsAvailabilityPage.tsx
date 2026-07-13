@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import StockBadge from '@/components/ui/StockBadge';
-import { formatPrice, type StoreItem } from '@/services/graphql';
+import { formatPrice, type StoreItem } from '@/services/inventory';
 import { getInventoryLocations } from '@/data/locations';
 import { TrendingUp, Package } from 'lucide-react';
 import HeroBanner from '@/components/ui/HeroBanner';

@@ -1,5 +1,5 @@
 // src/components/ui/StockBadge.tsx
-import { getStockStatus, type StockDetails } from '@/services/graphql';
+import { getStockStatus, type StockDetails } from '@/services/inventory';
 import { cn } from '@/lib/utils';
 
 /**

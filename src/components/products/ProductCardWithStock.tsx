@@ -1,6 +1,6 @@
 // src/components/products/ProductCardWithStock.tsx
 import { useEffect } from 'react';
-import { formatPrice, getDiscountPercentage, type StoreItem } from '@/services/graphql';
+import { formatPrice, getDiscountPercentage, type StoreItem } from '@/services/inventory';
 import StockBadge from '@/components/ui/StockBadge';
 import { getInventoryImageFromName } from '@/data/products';
 import { useGoogleAnalytics } from '@/components/seo';

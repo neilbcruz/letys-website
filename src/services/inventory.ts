@@ -1,5 +1,26 @@
-// src/services/graphql.ts
-const GRAPHQL_ENDPOINT = 'https://graphql.kahero.co/';
+// src/services/inventory.ts
+// Fetches live inventory from the letys-ops public availability feed.
+
+/** Low-stock threshold. letys-ops does not track one, so we apply a fixed minimum. */
+const DEFAULT_MIN_STOCK = 5;
+
+/** Base URL of the letys-ops inventory API, e.g. https://letys-ops.YOUR-SUBNET.workers.dev */
+const INVENTORY_API_URL = import.meta.env.VITE_LETYS_OPS_API_URL as string | undefined;
+
+/** Shape of the letys-ops public availability response (one fetch returns all stores). */
+interface PublicAvailabilityResponse {
+  stores: Array<{
+    id: string;
+    kaheroStoreId: string;
+    name: string;
+    products: Array<{
+      name: string;
+      category: string;
+      qty: number;
+      unitPrice: number;
+    }>;
+  }>;
+}
 
 export interface StockDetails {
   qty: number;
@@ -29,14 +50,6 @@ export interface StoreItem {
   description: string | null;
 }
 
-export interface GetStoreItemsResponse {
-  data: {
-    getStoreItems: {
-      items: StoreItem[];
-    };
-  };
-}
-
 export interface QueryParams {
   storeName: string;
   pageNumber: number;
@@ -46,16 +59,18 @@ export interface QueryParams {
 }
 
 /**
- * Queries the GraphQL API for store items with optional filtering
+ * Fetches store items from the letys-ops public availability feed.
+ *
+ * A single GET request returns every store and its products; the requested
+ * store is matched client-side via its Kahero slug. letys-ops carries no
+ * discount data, so `originalPrice` mirrors `price` and `discount` is 0.
  *
  * @param params - Query parameters for fetching store items
- * @param params.storeName - Store identifier (e.g., 'letysbukopie-main')
- * @param params.pageNumber - Page number for pagination (starts at 1)
- * @param params.pageSize - Number of items per page (max 100 recommended)
- * @param params.category - Optional category filter
- * @param params.itemName - Optional search term for product name
- * @returns Promise resolving to array of store items
- * @throws Error if the API request fails
+ * @param params.storeName - Kahero store slug (e.g., 'letysbukopie-main')
+ * @param params.category - Optional category filter (matched by inclusion)
+ * @param params.itemName - Optional case-insensitive name search
+ * @returns Promise resolving to array of store items (empty if the store is unknown)
+ * @throws Error if `VITE_LETYS_OPS_API_URL` is unset or the request fails
  *
  * @example
  * ```typescript
@@ -68,41 +83,60 @@ export interface QueryParams {
  * ```
  */
 export async function getStoreItems(params: QueryParams): Promise<StoreItem[]> {
-  const { storeName, pageNumber, pageSize, category = '', itemName = '' } = params;
+  const { storeName, category = '', itemName = '' } = params;
 
-  const query = `{
-  getStoreItems(
-    storeName: "${storeName}"
-    pageNumber: ${pageNumber}
-    pageSize: ${pageSize}
-    category: "${category}"
-    itemName: "${itemName}"
-  )
-}`;
-
-  try {
-    const response = await fetch(GRAPHQL_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/graphql-response+json, application/json',
-      },
-      body: JSON.stringify({
-        query,
-        variables: {},
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const result: GetStoreItemsResponse = await response.json();
-    return result.data.getStoreItems.items;
-  } catch (error) {
-    console.error('Error fetching store items:', error);
-    throw error;
+  if (!INVENTORY_API_URL) {
+    throw new Error(
+      'VITE_LETYS_OPS_API_URL is not set. Configure the letys-ops inventory API base URL.'
+    );
   }
+
+  const base = INVENTORY_API_URL.replace(/\/+$/, '');
+  const response = await fetch(`${base}/api/inventory/availability`);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const result: PublicAvailabilityResponse = await response.json();
+
+  const store = result.stores.find(s => s.kaheroStoreId === storeName);
+  if (!store) {
+    return [];
+  }
+
+  const categoryLower = category.toLowerCase();
+  const itemNameLower = itemName.toLowerCase();
+  const matched = store.products.filter(product => {
+    const matchesCategory =
+      !category || product.category.toLowerCase().includes(categoryLower);
+    const matchesName =
+      !itemName || product.name.toLowerCase().includes(itemNameLower);
+    return matchesCategory && matchesName;
+  });
+
+  return matched.map(product => ({
+    name: product.name,
+    category: product.category,
+    price: product.unitPrice,
+    originalPrice: product.unitPrice,
+    discount: 0,
+    stockDetails: { qty: product.qty, min: DEFAULT_MIN_STOCK },
+    categoryId: '',
+    minPrice: 0,
+    maxPrice: 0,
+    isParentItem: false,
+    itemId: '',
+    discountUnit: '',
+    discountName: '',
+    imagePath: '',
+    color: null,
+    options: [],
+    modifiers: [],
+    symbol: '',
+    allowNegativeStock: false,
+    description: null,
+  }));
 }
 
 /**

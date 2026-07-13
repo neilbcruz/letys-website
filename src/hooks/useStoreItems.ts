@@ -1,6 +1,6 @@
 // src/hooks/useStoreItems.ts
 import { useQuery } from '@tanstack/react-query';
-import { getStoreItems, type StoreItem, type QueryParams } from '@/services/graphql';
+import { getStoreItems, type StoreItem, type QueryParams } from '@/services/inventory';
 import { isAvailableInStore } from '@/data/products';
 import { queryKeys } from './query-keys';
 

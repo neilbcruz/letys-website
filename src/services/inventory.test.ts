@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getStockStatus, getDiscountPercentage } from './graphql';
+import { getStockStatus, getDiscountPercentage } from './inventory';
 
 describe('getStockStatus', () => {
   it('returns out-of-stock when qty is 0', () => {
