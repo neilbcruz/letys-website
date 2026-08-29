@@ -1,7 +1,7 @@
 // src/hooks/useStoreItems.ts
 import { useQuery } from '@tanstack/react-query';
 import { getStoreItems, type StoreItem, type QueryParams } from '@/services/inventory';
-import { isAvailableInStore } from '@/data/products';
+import { isCustomerVisibleItem } from '@/data/products';
 import { queryKeys } from './query-keys';
 
 export interface UseStoreItemsResult {
@@ -21,7 +21,7 @@ export function useStoreItems(params: QueryParams): UseStoreItemsResult {
     }),
     queryFn: async () => {
       const items = await getStoreItems(params);
-      return items.filter(item => isAvailableInStore(params.storeName, item.name));
+      return items.filter(item => isCustomerVisibleItem(params.storeName, item));
     },
   });
 

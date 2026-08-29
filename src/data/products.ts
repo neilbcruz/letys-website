@@ -19,6 +19,22 @@ export function isAvailableInStore(
   return !UNAVAILABLE_BY_STORE[normalizedStore]?.includes(productName);
 }
 
+// Categories that are store supplies, not customer products.
+export const HIDDEN_CATEGORIES: string[] = ['Miscellaneous'];
+
+/**
+ * Whether an inventory-feed item should be shown to customers — excludes
+ * hidden categories, globally hidden products, and per-store exclusions.
+ */
+export function isCustomerVisibleItem(
+  storeId: string,
+  item: { name: string; category: string }
+): boolean {
+  const category = item.category.toLowerCase();
+  if (HIDDEN_CATEGORIES.some(c => c.toLowerCase() === category)) return false;
+  return isAvailableInStore(storeId, item.name);
+}
+
 
 /**
  * Find the ProductItem in products.ts matching the given GraphQL item name
