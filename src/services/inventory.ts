@@ -5,7 +5,8 @@
 const DEFAULT_MIN_STOCK = 5;
 
 /** Base URL of the letys-ops inventory API, e.g. https://letys-ops.YOUR-SUBNET.workers.dev */
-const INVENTORY_API_URL = import.meta.env.VITE_LETYS_OPS_API_URL as string | undefined;
+const INVENTORY_API_URL = (import.meta.env.VITE_LETYS_OPS_API_URL as string | undefined)
+  || 'https://letys-ops.letys.workers.dev';
 
 /** Shape of the letys-ops public availability response (one fetch returns all stores). */
 interface PublicAvailabilityResponse {
@@ -66,7 +67,7 @@ export interface QueryParams {
  * discount data, so `originalPrice` mirrors `price` and `discount` is 0.
  *
  * @param params - Query parameters for fetching store items
- * @param params.storeName - Kahero store slug (e.g., 'letysbukopie-main')
+ * @param params.storeName - letys-ops store id (e.g., 'main')
  * @param params.category - Optional category filter (matched by inclusion)
  * @param params.itemName - Optional case-insensitive name search
  * @returns Promise resolving to array of store items (empty if the store is unknown)
@@ -75,7 +76,7 @@ export interface QueryParams {
  * @example
  * ```typescript
  * const items = await getStoreItems({
- *   storeName: 'letysbukopie-main',
+ *   storeName: 'main',
  *   pageNumber: 1,
  *   pageSize: 50,
  *   category: 'Specialties'
@@ -100,7 +101,7 @@ export async function getStoreItems(params: QueryParams): Promise<StoreItem[]> {
 
   const result: PublicAvailabilityResponse = await response.json();
 
-  const store = result.stores.find(s => s.kaheroStoreId === storeName);
+  const store = result.stores.find(s => s.id === storeName);
   if (!store) {
     return [];
   }
@@ -144,7 +145,7 @@ export async function getStoreItems(params: QueryParams): Promise<StoreItem[]> {
  *
  * Convenience function that wraps getStoreItems with category filtering
  *
- * @param storeName - Store identifier (e.g., 'letysbukopie-main')
+ * @param storeName - Store identifier (e.g., 'main')
  * @param category - Category name to filter by (e.g., 'Specialties')
  * @param pageSize - Number of items to fetch (default: 50)
  * @returns Promise resolving to array of filtered store items
@@ -152,7 +153,7 @@ export async function getStoreItems(params: QueryParams): Promise<StoreItem[]> {
  * @example
  * ```typescript
  * const specialtyItems = await getItemsByCategory(
- *   'letysbukopie-main',
+ *   'main',
  *   'Specialties',
  *   50
  * );
@@ -176,7 +177,7 @@ export async function getItemsByCategory(
  *
  * Performs a text search across store inventory
  *
- * @param storeName - Store identifier (e.g., 'letysbukopie-main')
+ * @param storeName - Store identifier (e.g., 'main')
  * @param itemName - Product name or partial name to search for
  * @param pageSize - Number of results to return (default: 50)
  * @returns Promise resolving to array of matching store items
@@ -184,7 +185,7 @@ export async function getItemsByCategory(
  * @example
  * ```typescript
  * const results = await searchItems(
- *   'letysbukopie-main',
+ *   'main',
  *   'Buko Pie',
  *   20
  * );

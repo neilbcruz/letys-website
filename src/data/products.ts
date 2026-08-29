@@ -2,7 +2,7 @@ import { getResponsiveImage } from '@/lib/images';
 
 // Central rules for per-store product availability
 export const UNAVAILABLE_BY_STORE: Record<string, string[]> = {
-  'letysbukopie-pansol': ['Frozen Buko Pie'],
+  pansol: ['Frozen Buko Pie'],
 };
 
 // Products hidden across all stores (temporary). Remove names to show again.

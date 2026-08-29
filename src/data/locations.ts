@@ -15,7 +15,7 @@ export interface Location {
   mapLink: string;
   
   // Store details
-  storeId: string; // GraphQL store identifier
+  storeId: string; // letys-ops store id ('main' | 'shell' | 'pansol')
   image: string;
   icon: LocationIconName;
   color: string; // Theme color for UI
@@ -33,7 +33,7 @@ export const LOCATIONS: Location[] = [
     id: 'main',
     name: 'Main Store',
     displayName: 'MAIN STORE',
-    storeId: 'letysbukopie-main',
+    storeId: 'main',
     
     address: [
       "Lety's Buko Pie, National Road,", 
@@ -63,7 +63,7 @@ export const LOCATIONS: Location[] = [
     id: 'shell',
     name: 'Shell Branch',
     displayName: 'ANOS SHELL BRANCH',
-    storeId: 'letysbukopie-shell',
+    storeId: 'shell',
     
     address: [
       "56JH+HPC, National Hwy,", 
@@ -93,7 +93,7 @@ export const LOCATIONS: Location[] = [
     id: 'agapita',
     name: 'Agapita Branch',
     displayName: 'AGAPITA BRANCH',
-    storeId: 'letysbukopie-agapita', // Add this if/when API is available
+    storeId: 'agapita', // no letys-ops store yet — hasInventoryAPI stays false
     
     address: [
       "Lety's Buko Pie, Agapita Plaza,", 
@@ -123,7 +123,7 @@ export const LOCATIONS: Location[] = [
     id: 'pansol',
     name: 'Pansol Branch',
     displayName: 'PANSOL BRANCH',
-    storeId: 'letysbukopie-pansol',
+    storeId: 'pansol',
     
     address: [
       "Lety's Buko Pie, Pansol,", 
@@ -176,7 +176,7 @@ export function getLocationById(id: string): Location | undefined {
 }
 
 /**
- * Get location by store ID (GraphQL identifier)
+ * Get location by store ID (letys-ops store identifier)
  */
 export function getLocationByStoreId(storeId: string): Location | undefined {
   return LOCATIONS.find(loc => loc.storeId === storeId);
