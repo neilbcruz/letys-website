@@ -3,14 +3,13 @@
  *
  * All color pairs verified against WCAG 2.1 AA (4.5:1 minimum).
  * Contrast ratios against #FFFFFF unless noted:
- *   --color-gold       on white:  2.52:1  (decorative only; dark text used on gold bg)
+ *   --color-accent     on white:  2.52:1  (decorative only; dark text used on gold bg)
  *   --color-accent-fg  on surface-base: 5.29:1  (AA, accessible gold text on light surfaces)
- *   --color-forest     on white: 10.62:1  (AAA)
- *   --color-olive      on white:  5.15:1  (AA)
- *   --color-fern       on white:  7.94:1  (AAA)
- *   --color-moss       on white:  7.23:1  (AAA)
- *   fg-default on gold:           7.18:1  (AAA, text on gold backgrounds)
- *   fg-inverse on forest:        10.03:1  (AAA, white on hero tiles)
+ *   --color-brand      on white: 10.62:1  (AAA)
+ *   --color-brand-muted on white:  5.15:1  (AA)
+ *   --color-brand-hover on white:  7.94:1  (AAA)
+ *   fg-default on accent:        7.18:1  (AAA, text on gold backgrounds)
+ *   fg-inverse on brand:        10.03:1  (AAA, white on hero tiles)
  *   fg-default on surface-base: 17.09:1  (AAA)
  *   fg-muted on surface-base:    7.98:1  (AAA, secondary text)
  *
@@ -23,43 +22,17 @@
  * All token values defined here. @theme below bridges to Tailwind.
  * ======================================================================== */
 :root {
-  /* ─── Brand Palette (OKLCH) ────────────────────────────────── */
-  --color-gold: oklch(72% 0.18 85); /* Warm gold accent */
-  --color-forest: oklch(35% 0.14 155); /* Deep green brand */
-  --color-olive: oklch(52% 0.15 148); /* Olive green */
-  --color-fern: oklch(42% 0.14 150); /* Light green hover */
-  --color-moss: oklch(45% 0.1 125); /* Dark olive */
-
-  /* ─── Brand Semantic Aliases ─────────────────────────────── */
-  --color-brand-primary: var(--color-forest);
-  --color-brand-accent: var(--color-gold);
-  --color-brand-muted: var(--color-olive);
-  --color-brand-dark: var(--color-fern);
-  --color-brand-darkest: var(--color-moss);
-
-  /* ─── Brand/Accent (shorter semantic names) ────────────────── */
-  --color-brand: var(
-    --color-forest
-  ); /* Brand green for TEXT/border/icon on surfaces */
-  --color-brand-hover: var(--color-fern); /* Lighter green */
-  --color-brand-muted: var(--color-olive); /* Olive green */
-  --color-brand-fill: var(
-    --color-forest
-  ); /* Brand green as a FILL (button/tile bg) — pair with on-brand */
+  /* ─── Brand/Accent (OKLCH) ────────────────────────────────── */
+  --color-brand: oklch(35% 0.14 155); /* Brand green for TEXT/border/icon on surfaces */
+  --color-brand-hover: oklch(42% 0.14 150); /* Lighter green */
+  --color-brand-muted: oklch(52% 0.15 148); /* Olive green */
+  --color-brand-fill: oklch(35% 0.14 155); /* Brand green as a FILL (button/tile bg) — pair with on-brand */
   --color-brand-fill-hover: oklch(42% 0.14 150); /* Fill hover */
-  --color-brand-surface: oklch(
-    94% 0.04 145
-  ); /* Sage green tint (closing-specific) */
-  --color-accent: var(
-    --color-gold
-  ); /* Gold — use as FILL only; pair with on-accent (dark text) */
+  --color-brand-surface: oklch(94% 0.04 145); /* Sage green tint (closing-specific) */
+  --color-accent: oklch(72% 0.18 85); /* Gold — use as FILL only; pair with on-accent (dark text) */
   --color-accent-hover: oklch(78% 0.16 85);
-  --color-accent-fg: oklch(
-    52% 0.15 85
-  ); /* Accessible gold TEXT on surfaces (5.29:1 on surface-base) */
-  --color-on-accent: oklch(
-    20% 0.008 90
-  ); /* Dark text on gold fills — white on gold fails (2.36:1) */
+  --color-accent-fg: oklch(52% 0.15 85); /* Accessible gold TEXT on surfaces (5.29:1 on surface-base) */
+  --color-on-accent: oklch(20% 0.008 90); /* Dark text on gold fills — white on gold fails (2.36:1) */
 
   /* ─── Surfaces (OKLCH - warmer neutrals) ─────────────────── */
   --color-surface-base: oklch(98% 0.004 90); /* Warm cream-white */
@@ -131,7 +104,7 @@
   --color-overlay-black: rgba(0, 0, 0, 0.7);
 
   /* ─── Typography ─────────────────────────────────────────── */
-  --font-heading: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Fraunces", "Figtree", Georgia, serif;
   --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Roboto Mono", monospace;
 
@@ -150,8 +123,6 @@
   --font-medium: 500;
   --font-semibold: 600;
   --font-bold: 700;
-  --font-extrabold: 800;
-  --font-black: 900; /* Display weight — hero numbers / big metrics */
 
   --leading-none: 1;
   --leading-tight: 1.2;
@@ -261,17 +232,17 @@
   --touch-target: 44px;
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
-  --focus-ring-color: var(--color-brand-accent);
+  --focus-ring-color: var(--color-accent);
 
   /* ─── Gradients ──────────────────────────────────────────── */
   --gradient-brand: linear-gradient(
     135deg,
-    var(--color-brand-primary) 0%,
-    var(--color-brand-dark) 100%
+    var(--color-brand) 0%,
+    var(--color-brand-hover) 100%
   );
   --gradient-gold: linear-gradient(
     135deg,
-    var(--color-brand-accent) 0%,
+    var(--color-accent) 0%,
     oklch(78% 0.16 85) 100%
   );
   --gradient-overlay: linear-gradient(
@@ -306,17 +277,6 @@
   /* ─── Hero Gradient (overridden in dark mode) ────────────── */
   --color-hero-from: oklch(35% 0.14 155);
   --color-hero-to: oklch(52% 0.15 148);
-
-  /* ─── Legacy Aliases (for compatibility) ──────────────────── */
-  --color-primary-1: var(--color-accent);
-  --color-primary-2: var(--color-brand);
-  --color-primary-3: var(--color-brand-muted);
-
-  --color-secondary-1: oklch(42% 0.14 150);
-  --color-secondary-2: oklch(45% 0.1 125);
-
-  --color-support-1: oklch(98% 0.03 85);
-  --color-support-2: oklch(94% 0.04 145);
 
   /* ─── Base ───────────────────────────────────────────────── */
   --color-bg: var(--color-surface-base);
@@ -384,7 +344,7 @@
   --color-status-info-border: #7088a0;
 
   /* ─── Typography (literal — no var() self-reference) ────── */
-  --font-heading: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Fraunces", "Figtree", Georgia, serif;
   --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
 
   /* ─── Breakpoints (literal values required by Tailwind v4) ── */
@@ -490,15 +450,6 @@
     --color-hero-from: oklch(45% 0.14 155);
     --color-hero-to: oklch(35% 0.14 155);
 
-    /* ─── Semantic aliases ──────────────────────────────── */
-    --color-primary-1: var(--color-accent);
-    --color-primary-2: var(--color-brand);
-    --color-primary-3: var(--color-brand-muted);
-    --color-secondary-1: oklch(66% 0.13 150);
-    --color-secondary-2: oklch(58% 0.11 125);
-    --color-support-1: var(--color-surface-cream);
-    --color-support-2: var(--color-surface-sage);
-
     --color-bg: var(--color-surface-base);
     --color-text: var(--color-fg-default);
 
@@ -594,15 +545,6 @@
   --color-accent-fg: oklch(80% 0.15 85);
   --color-hero-from: oklch(45% 0.14 155);
   --color-hero-to: oklch(35% 0.14 155);
-
-  /* ─── Semantic aliases ──────────────────────────────── */
-  --color-primary-1: var(--color-accent);
-  --color-primary-2: var(--color-brand);
-  --color-primary-3: var(--color-brand-muted);
-  --color-secondary-1: oklch(66% 0.13 150);
-  --color-secondary-2: oklch(58% 0.11 125);
-  --color-support-1: var(--color-surface-cream);
-  --color-support-2: var(--color-surface-sage);
 
   --color-bg: var(--color-surface-base);
   --color-text: var(--color-fg-default);

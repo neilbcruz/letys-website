@@ -204,6 +204,7 @@ export default function LocationsPage() {
                           alt={`${loc.name} storefront`}
                           className="object-cover w-full h-full"
                           loading="lazy"
+                          decoding="async"
                         />
                       ) : (
                         <div className="flex justify-center items-center w-full h-full bg-linear-to-br from-brand-fill to-brand-muted">

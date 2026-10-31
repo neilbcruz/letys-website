@@ -259,9 +259,9 @@ const SelectPicker = ({
                     key={option.value}
                     className={cn(
                       'px-3 py-2 cursor-pointer text-sm transition-colors',
-                      'text-fg-base hover:bg-support-2 hover:text-brand',
+                      'text-fg-base hover:bg-brand-surface hover:text-brand',
                       selectedOption?.value === option.value &&
-                        'bg-support-2 text-brand font-semibold'
+                        'bg-brand-surface text-brand font-semibold'
                     )}
                     onClick={() => handleSelect(option)}
                     role='option'

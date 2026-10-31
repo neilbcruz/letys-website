@@ -111,6 +111,8 @@ const CardImage = ({ className, ...props }: CardImageProps) => {
   return (
     <div className='relative w-full h-48 overflow-hidden'>
       <img
+        loading="lazy"
+        decoding="async"
         className={cn('w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.03]', className)}
         {...props}
         alt={props.alt || 'Card image'}

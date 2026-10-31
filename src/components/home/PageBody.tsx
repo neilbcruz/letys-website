@@ -33,6 +33,8 @@ export default function PageBody() {
                 srcSet={IMAGES.BUKO_PIE.srcSet}
                 sizes="(max-width: 640px) 16rem, (max-width: 1024px) 20rem, 24rem"
                 alt="Lety's signature Buko Pie"
+                loading="lazy"
+                decoding="async"
                 className="dark-content-image object-cover w-64 h-64 mx-auto rounded-2xl shadow-xl lg:w-80 lg:h-80"
               />
             </div>
@@ -52,7 +54,7 @@ export default function PageBody() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12">
             {[
               { icon: Coffee, title: 'Fresh Daily', desc: 'Made fresh every morning with young coconuts and premium ingredients', link: '/products' },
-              { icon: Users, title: 'Since 1976', desc: 'Three generations of baking the same authentic recipe our customers love', link: '/about' },
+              { icon: Users, title: 'Since 1976', desc: 'Three generations of baking the same authentic recipe our customers love', link: '/#about-lety-heading' },
               { icon: Store, title: '5 Locations', desc: 'Find our stores across Laguna, always near you', link: '/locations' },
             ].map((item, idx) => (
               <div key={idx} className="group p-6 text-center rounded-2xl border border-stroke-default hover:border-brand transition-all duration-300">
@@ -61,9 +63,9 @@ export default function PageBody() {
                 </div>
                 <h3 className="mb-3 text-xl font-bold text-brand">{item.title}</h3>
                 <p className="mb-4 leading-relaxed text-fg-muted">{item.desc}</p>
-                <NavLink to={item.link} className="inline-flex items-center gap-2 text-sm font-semibold text-accent-fg hover:text-brand transition-colors">
+                <HashLink to={item.link} className="inline-flex items-center gap-2 text-sm font-semibold text-accent-fg hover:text-brand transition-colors">
                   Learn more →
-                </NavLink>
+                </HashLink>
               </div>
             ))}
           </div>
@@ -106,6 +108,8 @@ export default function PageBody() {
               srcSet={IMAGES.LETY.srcSet}
               sizes="(max-width: 1024px) 100vw, 50vw"
               alt="Leticia Belarmino - founder of Lety's Buko Pie"
+              loading="lazy"
+              decoding="async"
               className="object-cover w-full max-w-md h-auto rounded-2xl shadow-xl"
             />
           </div>
@@ -138,6 +142,8 @@ export default function PageBody() {
                     srcSet={item.img.srcSet}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     alt={item.name}
+                    loading="lazy"
+                    decoding="async"
                     className="object-cover w-full h-56 group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -194,6 +200,8 @@ export default function PageBody() {
                 srcSet={IMAGES.MAIN_STORE.srcSet}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 alt="Main store view"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto rounded-2xl shadow-2xl"
               />
             </div>

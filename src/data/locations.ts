@@ -105,7 +105,7 @@ export const LOCATIONS: Location[] = [
     
     image: "location-agapita",
     icon: "GraduationCap",
-    color: "secondary-1",
+    color: "brand-hover",
     
     hours: {
       mon: ["06:00","18:00"],
@@ -135,7 +135,7 @@ export const LOCATIONS: Location[] = [
     
     image: "location-pansol",
     icon: "MapPin",
-    color: "secondary-2",
+    color: "brand-muted",
     
     hours: {
       mon: ["07:30","16:30"],
@@ -212,38 +212,73 @@ export function formatHours(hours: Location['hours'], day?: keyof Location['hour
 }
 
 /**
+ * Format a single 24h "HH:MM" time as a 12-hour clock (e.g., "06:00" -> "6:00 AM")
+ */
+export function formatTime(time: string): string {
+  const [h, m] = time.split(':').map(Number);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const hour12 = h % 12 || 12;
+  return `${hour12}:${m.toString().padStart(2, '0')} ${ampm}`;
+}
+
+/**
  * Format time range (e.g., "06:00" - "18:00" -> "6:00 AM - 6:00 PM")
  */
 function formatTimeRange(start: string, end: string): string {
-  const formatTime = (time: string): string => {
-    const [h, m] = time.split(':').map(Number);
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const hour12 = h % 12 || 12;
-    return `${hour12}:${m.toString().padStart(2, '0')} ${ampm}`;
-  };
-  
   return `${formatTime(start)} - ${formatTime(end)}`;
 }
+
+/**
+ * Parse a 24h "HH:MM" time to minutes since midnight
+ */
+function parseTimeToMinutes(time: string): number {
+  const [h, m] = time.split(':').map(Number);
+  return h * 60 + m;
+}
+
+/** Day keys indexed by Date.getDay() (Sunday-first) */
+const DAY_KEYS: (keyof Location['hours'])[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
 /**
  * Check if store is currently open
  */
 export function isStoreOpen(location: Location): boolean {
-  const now = new Date();
-  const dayKeys: (keyof Location['hours'])[] = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-  const todayKey = dayKeys[now.getDay()];
-  
-  const [openStr, closeStr] = location.hours[todayKey];
-  const nowMinutes = now.getHours() * 60 + now.getMinutes();
-  
-  const [openH, openM] = openStr.split(':').map(Number);
-  const [closeH, closeM] = closeStr.split(':').map(Number);
-  
-  const openMinutes = openH * 60 + openM;
-  const closeMinutes = closeH * 60 + closeM;
-  
-  return nowMinutes >= openMinutes && nowMinutes <= closeMinutes;
+  return getStoreStatus(location).isOpen;
 }
+
+/**
+ * Current open/closed status of a store with a label for the next transition
+ * (e.g., "Open Now · Closes 6:00 PM" or "Closed · Opens 7:00 AM tomorrow")
+ */
+export interface StoreStatus {
+  isOpen: boolean;
+  label: string;
+}
+
+/**
+ * Get a store's current status with a label showing when it next opens or closes
+ */
+export function getStoreStatus(location: Location): StoreStatus {
+  const now = new Date();
+  const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+  const [openStr, closeStr] = location.hours[DAY_KEYS[now.getDay()]];
+  const openMinutes = parseTimeToMinutes(openStr);
+  const closeMinutes = parseTimeToMinutes(closeStr);
+
+  if (nowMinutes >= openMinutes && nowMinutes <= closeMinutes) {
+    return { isOpen: true, label: `Open Now · Closes ${formatTime(closeStr)}` };
+  }
+
+  if (nowMinutes < openMinutes) {
+    return { isOpen: false, label: `Closed · Opens ${formatTime(openStr)}` };
+  }
+
+  // Past closing time — the next opening is tomorrow's
+  const [nextOpenStr] = location.hours[DAY_KEYS[(now.getDay() + 1) % 7]];
+  return { isOpen: false, label: `Closed · Opens ${formatTime(nextOpenStr)} tomorrow` };
+}
+
 
 /**
  * Get distance between two coordinates (in km)

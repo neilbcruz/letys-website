@@ -34,7 +34,7 @@ Project-specific quality rules. Read before implementing any task.
 ## UI / Design
 
 - WCAG AA minimum. All color pairs verified 4.5:1+ contrast.
-- `focus-visible` ring with brand accent gold (`--color-brand-accent`).
+- `focus-visible` ring with brand accent gold (`--color-accent` via `--focus-ring-color`).
 - Skip-to-main link. VisuallyHidden for screen-reader-only content.
 - Semantic HTML: `<nav>`, `<main>`, `<header>`, `<footer>`, `<section>`.
 - Print stylesheet hides nav/footer, shows link URLs.

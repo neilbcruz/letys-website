@@ -38,6 +38,8 @@ export default function PageFooter({
                 srcSet={IMAGES.LETYS_LOGO.srcSet}
                 sizes="3.5rem"
                 alt="Lety's Buko Pie Logo"
+                loading="lazy"
+                decoding="async"
                 className="w-12 sm:w-14 h-auto"
               />
             </NavLink>

@@ -41,6 +41,7 @@ export default function ProductCardWithStock({ item }: ProductCardWithStockProps
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
             alt={item.name}
             loading="lazy"
+            decoding="async"
             className="object-cover w-full h-full"
           />
         ) : (
