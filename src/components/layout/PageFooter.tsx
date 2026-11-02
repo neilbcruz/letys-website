@@ -19,7 +19,7 @@ export default function PageFooter({
   messengerUrl = 'https://m.me/letysbukopie/',
   id,
 }: PageFooterProps) {
-  const iconClasses = 'footer-icon inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-accent sm:h-12 sm:w-12';
+  const iconClasses = 'footer-icon inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors sm:h-12 sm:w-12';
   const iconProps = {
     className: 'h-6 w-6 sm:h-7 sm:w-7',
     strokeWidth: 2,

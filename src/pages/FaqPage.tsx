@@ -47,7 +47,7 @@ export default function FaqPage() {
                   {({ open }) => (
                     <div className="overflow-hidden card-elevated">
                       <DisclosureButton
-                        className="flex justify-between items-center p-6 w-full text-left transition-all duration-200 hover:bg-brand-muted/5 focus:outline-none focus:ring-4 focus:ring-brand/50 group"
+                        className="flex justify-between items-center p-6 w-full text-left transition-all duration-200 hover:bg-brand-muted/5 group"
                         aria-expanded={open}
                         aria-controls={`faq-answer-${index}`}
                       >

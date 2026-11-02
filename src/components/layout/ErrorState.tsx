@@ -69,38 +69,6 @@ export default function ErrorState({
 }
 
 /**
- * Pre-configured error states for common use cases
- */
-export function LoadError({
-  message = 'Failed to load data. Please check your connection and try again.',
-  onRetry,
-}: {
-  message?: string;
-  onRetry: () => void;
-}) {
-  return (
-    <ErrorState
-      title="Failed to Load"
-      message={message}
-      onRetry={onRetry}
-      variant="error"
-    />
-  );
-}
-
-export function NetworkError({ onRetry }: { onRetry: () => void }) {
-  return (
-    <ErrorState
-      icon={AlertTriangle}
-      title="Connection Error"
-      message="Unable to reach the server. Please check your internet connection and try again."
-      onRetry={onRetry}
-      variant="error"
-    />
-  );
-}
-
-/**
  * InlineErrorState - A smaller inline error banner
  */
 interface InlineErrorStateProps {

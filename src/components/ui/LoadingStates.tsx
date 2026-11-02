@@ -335,7 +335,7 @@ export function LoadingSpinner({
     >
       <div
         className={cn(
-          'inline-block rounded-full border-4 border-stroke-emphasis animate-spin border-t-brand',
+          'inline-block rounded-full border-4 border-stroke-emphasis animate-spin border-t-brand motion-reduce:animate-none motion-reduce:opacity-60',
           sizes[size],
           className
         )}

@@ -60,7 +60,7 @@ export default function ModalMenu({ isOpen, closeModal, resolvedTheme, toggleThe
                   <button
                     type="button"
                     onClick={toggleTheme}
-                    className="group relative inline-flex h-11 w-[88px] items-center rounded-full border border-stroke-default bg-surface-subtle p-1 text-brand shadow-sm transition-[background-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 hover:bg-surface-muted hover:text-brand-hover hover:shadow-md active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface-base"
+                    className="group relative inline-flex h-11 w-[88px] items-center rounded-full border border-stroke-default bg-surface-subtle p-1 text-brand shadow-sm transition-[background-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 hover:bg-surface-muted hover:text-brand-hover hover:shadow-md active:translate-y-0"
                     aria-label={themeLabel}
                     title={themeLabel}
                     aria-pressed={resolvedTheme === 'dark'}
@@ -92,7 +92,7 @@ export default function ModalMenu({ isOpen, closeModal, resolvedTheme, toggleThe
                   <button
                     type="button"
                     onClick={closeModal}
-                    className="group inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-stroke-default bg-surface-subtle text-brand shadow-sm transition-[background-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 hover:bg-surface-muted hover:text-brand-hover hover:shadow-md active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-brand"
+                    className="group inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-stroke-default bg-surface-subtle text-brand shadow-sm transition-[background-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 hover:bg-surface-muted hover:text-brand-hover hover:shadow-md active:translate-y-0"
                     aria-label="Close menu"
                   >
                     <X className="h-5 w-5 transition-transform duration-200 ease-out group-hover:rotate-90" aria-hidden="true" />
@@ -108,7 +108,7 @@ export default function ModalMenu({ isOpen, closeModal, resolvedTheme, toggleThe
                     to={item.path}
                     onClick={closeModal}
                     className={({ isActive }) =>
-                      `rounded-lg px-4 py-3 text-left text-base font-bold transition-[background-color,color,transform] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base ${
+                      `rounded-lg px-4 py-3 text-left text-base font-bold transition-[background-color,color,transform] duration-200 ease-out ${
                         isActive
                           ? 'bg-brand-fill text-fg-on-brand shadow-sm'
                           : 'text-fg-base hover:translate-x-1 hover:bg-surface-muted hover:text-brand'

@@ -42,7 +42,6 @@ export default function SegmentedControl({
             onClick={() => onChange(option.value)}
             className={cn(
               'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-colors',
-              'focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2',
               isSelected
                 ? 'ui-chip-selected'
                 : 'ui-chip hover:text-brand'

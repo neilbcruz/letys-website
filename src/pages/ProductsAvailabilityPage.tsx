@@ -3,13 +3,55 @@ import { useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import StockBadge from '@/components/ui/StockBadge';
 import { formatPrice, type StoreItem } from '@/services/inventory';
-import { getInventoryLocations } from '@/data/locations';
+import { getInventoryLocations, getStoreStatus, type Location } from '@/data/locations';
 import { TrendingUp, Package } from 'lucide-react';
 import HeroBanner from '@/components/ui/HeroBanner';
 import { LoadingSpinner } from '@/components/ui/';
 import { SEOHead, useGoogleAnalytics } from '@/components/seo';
 import { InlineErrorState, EmptyState } from '@/components/layout';
 import { getLocationIcon } from '@/lib/locationIcons';
+import { cn } from '@/lib/utils';
+
+/**
+ * Open/closed status chip for a store, including the next opening or closing
+ * time so visitors know when the listed stock becomes available.
+ *
+ * The schedule suffix always comes from the static schedule (getStoreStatus);
+ * the open/closed truth (chip color and leading word) prefers the feed's live
+ * `isOpen` when the backend provides one. When live truth disagrees with the
+ * schedule (closed early, opened early), the schedule's transition time is by
+ * definition wrong, so the chip renders the state word alone.
+ */
+function StoreStatusChip({
+  location,
+  liveOpen,
+}: {
+  location: Location;
+  /** Live open/closed state from the availability feed; null when unknown. */
+  liveOpen: boolean | null;
+}) {
+  const scheduled = getStoreStatus(location);
+  const isOpen = liveOpen ?? scheduled.isOpen;
+  const label =
+    liveOpen === null || liveOpen === scheduled.isOpen
+      ? scheduled.label
+      : isOpen
+        ? 'Open Now'
+        : 'Closed';
+
+  return (
+    <span
+      className={cn(
+        'status-chip whitespace-nowrap',
+        isOpen
+          ? 'border-status-success-border bg-status-success-bg text-status-success-fg'
+          : 'border-status-error-border bg-status-error-bg-muted text-status-error-fg'
+      )}
+    >
+      {label}
+    </span>
+  );
+}
 
 export default function ProductsAvailabilityPage() {
   const STORES = getInventoryLocations();
@@ -45,6 +87,7 @@ export default function ProductsAvailabilityPage() {
       id: location.storeId,
       name: location.name,
       icon: location.icon,
+      location,
       data: dataMap[index] || store1Data,
     };
   });
@@ -112,7 +155,7 @@ export default function ProductsAvailabilityPage() {
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
             <button
               onClick={() => setSelectedCategory('')}
-              className={`px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand ${
+              className={`px-4 py-2 text-sm font-medium whitespace-nowrap ${
                 selectedCategory === ''
                   ? 'ui-chip-selected'
                   : 'ui-chip'
@@ -125,7 +168,7 @@ export default function ProductsAvailabilityPage() {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand ${
+                className={`px-4 py-2 text-sm font-medium whitespace-nowrap ${
                   selectedCategory === category
                     ? 'ui-chip-selected'
                     : 'ui-chip'
@@ -183,6 +226,7 @@ export default function ProductsAvailabilityPage() {
                               <div className="flex flex-col gap-2 items-center">
                                 <StoreIcon size={24} aria-hidden="true" />
                                 <span>{store.name}</span>
+                                <StoreStatusChip location={store.location} liveOpen={store.data.storeOpen} />
                               </div>
                             </th>
                           );
@@ -276,9 +320,12 @@ export default function ProductsAvailabilityPage() {
 
                             return (
                               <div key={store.id} className="flex justify-between items-center">
-                                <div className="flex gap-2 items-center">
-                                  <StoreIcon size={20} aria-hidden="true" />
-                                  <span className="font-medium text-fg-base">{store.name}</span>
+                                <div className="flex flex-col gap-1.5 items-start">
+                                  <div className="flex gap-2 items-center">
+                                    <StoreIcon size={20} aria-hidden="true" />
+                                    <span className="font-medium text-fg-base">{store.name}</span>
+                                  </div>
+                                  <StoreStatusChip location={store.location} liveOpen={store.data.storeOpen} />
                                 </div>
                                 {item ? (
                                   <StockBadge stockDetails={item.stockDetails} />

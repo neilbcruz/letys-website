@@ -6,6 +6,8 @@ import { queryKeys } from './query-keys';
 
 export interface UseStoreItemsResult {
   items: StoreItem[];
+  /** Live open/closed state from the availability feed; null when unknown. */
+  storeOpen: boolean | null;
   loading: boolean;
   error: Error | null;
   refetch: () => void;
@@ -20,13 +22,17 @@ export function useStoreItems(params: QueryParams): UseStoreItemsResult {
       pageSize: params.pageSize,
     }),
     queryFn: async () => {
-      const items = await getStoreItems(params);
-      return items.filter(item => isCustomerVisibleItem(params.storeName, item));
+      const { items, storeOpen } = await getStoreItems(params);
+      return {
+        items: items.filter(item => isCustomerVisibleItem(params.storeName, item)),
+        storeOpen,
+      };
     },
   });
 
   return {
-    items: data ?? [],
+    items: data?.items ?? [],
+    storeOpen: data?.storeOpen ?? null,
     loading: isLoading,
     error: error,
     refetch: () => refetch(),

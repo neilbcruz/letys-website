@@ -6,7 +6,6 @@
  * - SEO Head components (page-level meta tags)
  * - Google Analytics components (GA4 integration)
  * - Structured Data components (JSON-LD schemas)
- * - Event Tracking hooks and components
  * - SEO Constants and configuration
  */
 
@@ -20,32 +19,13 @@ export {
 } from './StructuredData';
 
 // SEO Head Components
-export { default as SEOHead, ProductSEOHead, LocationSEOHead } from './SEOHead';
+export { default as SEOHead } from './SEOHead';
 
 // Google Analytics Components
 export {
   default as GoogleAnalytics,
-  GoogleAnalyticsProvider,
-  PageViewTracker,
-  EventTracker,
-  useGoogleAnalytics,
-  withProductViewTracking,
-  useContactFormTracking
+  useGoogleAnalytics
 } from './GoogleAnalytics';
-
-// Event Tracking Hooks
-export {
-  useTrackClick,
-  withClickTracking,
-  useTrackNavigation,
-  useTrackSearch,
-  useTrackFilter,
-  useTrackSocial,
-  useTrackVideo,
-  useTrackDownload,
-  useTrackError,
-  useTrackScrollDepth
-} from './EventTracker';
 
 // SEO Constants and Configuration
 export * from './SEOConstants';

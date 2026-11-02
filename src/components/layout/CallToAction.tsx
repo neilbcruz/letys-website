@@ -139,16 +139,3 @@ export function InventoryCTA({ className = '' }: { className?: string }) {
   );
 }
 
-export function ProductsCTA({ className = '' }: { className?: string }) {
-  return (
-    <CallToAction
-      title="Explore Our Products"
-      description="Discover our delicious selection of buko pies and other treats"
-      buttons={[
-        { label: 'View All Products', href: '/products', variant: 'primary' },
-        { label: 'Check Availability', href: '/availability', variant: 'secondary' },
-      ]}
-      className={className}
-    />
-  );
-}

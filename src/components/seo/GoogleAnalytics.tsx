@@ -54,7 +54,7 @@ const GA_SCRIPT = `
  * Google Analytics Provider Component
  * Injects the GA scripts and wraps the application
  */
-export function GoogleAnalyticsProvider() {
+function GoogleAnalyticsProvider() {
   // Only load GA in production or when explicitly enabled
   const shouldLoadGA = import.meta.env.PROD || import.meta.env['VITE_ENABLE_GA'] === 'true';
 
@@ -233,7 +233,7 @@ export function useGoogleAnalytics(): UseGoogleAnalyticsReturn {
  * Automatically tracks page views on route changes
  * Enhanced with scroll depth tracking
  */
-export function PageViewTracker() {
+function PageViewTracker() {
   const location = useLocation();
   const shouldTrack = import.meta.env.PROD || import.meta.env['VITE_ENABLE_GA'] === 'true';
 
@@ -281,68 +281,6 @@ export function PageViewTracker() {
   }, [location.pathname, shouldTrack]);
 
   return null;
-}
-
-/**
- * Event Tracker Component
- * Wraps components to automatically track specific events
- */
-interface EventTrackerProps {
-  eventName: string;
-  eventParameters?: Record<string, unknown>;
-  children: React.ReactElement;
-  onClick?: () => void;
-}
-
-export function EventTracker({ eventName, eventParameters, children, onClick }: EventTrackerProps) {
-  const { trackEvent } = useGoogleAnalytics();
-
-  const handleClick = () => {
-    trackEvent(eventName, eventParameters);
-    if (onClick) onClick();
-  };
-
-  return <children.type {...(children.props ?? {})} onClick={handleClick} />;
-}
-
-/**
- * Product View Tracker HOC
- * Wraps a product component to track when it's viewed
- */
-export function withProductViewTracking<P extends { productName: string; category?: string; price?: number }>(
-  WrappedComponent: React.ComponentType<P>
-) {
-  return function TrackedComponent(props: P) {
-    const { trackProductView } = useGoogleAnalytics();
-
-    useEffect(() => {
-      trackProductView(props.productName, props.category, props.price);
-    }, [props.productName, props.category, props.price, trackProductView]);
-
-    return <WrappedComponent {...props} />;
-  };
-}
-
-/**
- * Contact Form Tracker Hook
- * Returns a wrapped submit handler that tracks form submissions
- */
-export function useContactFormTracking(
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void | Promise<void>
-) {
-  const { trackContactFormSubmit } = useGoogleAnalytics();
-
-  return async (e: React.FormEvent<HTMLFormElement>) => {
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const subject = formData.get('subject') as string;
-
-    trackContactFormSubmit({ name, email, subject });
-    await handleSubmit(e);
-  };
 }
 
 /**

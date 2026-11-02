@@ -181,7 +181,7 @@ const SelectPicker = ({
         type='button'
         className={cn(
           'w-full flex items-center justify-between rounded-lg border border-stroke-emphasis bg-surface-base text-left',
-          'focus:outline-hidden focus:ring-2 focus:ring-brand/20 focus:border-brand',
+          'focus:border-brand',
           'transition-all duration-200 ease-in-out',
           sizes[size],
           'px-3',
@@ -240,7 +240,7 @@ const SelectPicker = ({
                 <input
                   ref={searchInputRef}
                   type='text'
-                  className='w-full pl-9 pr-3 py-2 text-sm border border-stroke-emphasis rounded-md bg-surface-base text-fg-default placeholder:text-fg-placeholder focus:outline-hidden focus:ring-2 focus:ring-brand/20 focus:border-brand'
+                  className='w-full pl-9 pr-3 py-2 text-sm border border-stroke-emphasis rounded-md bg-surface-base text-fg-default placeholder:text-fg-placeholder focus:border-brand'
                   placeholder='Search options...'
                   value={searchTerm}
                   onChange={handleSearchChange}

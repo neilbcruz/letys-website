@@ -14,6 +14,8 @@ interface PublicAvailabilityResponse {
     id: string;
     kaheroStoreId: string;
     name: string;
+    /** Live open/closed truth; absent until the letys-ops backend deploys it. */
+    isOpen?: boolean;
     products: Array<{
       name: string;
       category: string;
@@ -60,6 +62,16 @@ export interface QueryParams {
 }
 
 /**
+ * Result of fetching a store's items: the matched items plus the store's live
+ * open/closed state from the feed (`storeOpen` is null when the feed did not
+ * report `isOpen` or the store is unknown).
+ */
+export interface GetStoreItemsResult {
+  items: StoreItem[];
+  storeOpen: boolean | null;
+}
+
+/**
  * Fetches store items from the letys-ops public availability feed.
  *
  * A single GET request returns every store and its products; the requested
@@ -70,12 +82,14 @@ export interface QueryParams {
  * @param params.storeName - letys-ops store id (e.g., 'main')
  * @param params.category - Optional category filter (matched by inclusion)
  * @param params.itemName - Optional case-insensitive name search
- * @returns Promise resolving to array of store items (empty if the store is unknown)
+ * @returns Promise resolving to the store's items (empty if the store is
+ *   unknown) plus `storeOpen`, the live open/closed state from the feed
+ *   (null when the feed omitted `isOpen` or the store is unknown)
  * @throws Error if `VITE_LETYS_OPS_API_URL` is unset or the request fails
  *
  * @example
  * ```typescript
- * const items = await getStoreItems({
+ * const { items, storeOpen } = await getStoreItems({
  *   storeName: 'main',
  *   pageNumber: 1,
  *   pageSize: 50,
@@ -83,7 +97,7 @@ export interface QueryParams {
  * });
  * ```
  */
-export async function getStoreItems(params: QueryParams): Promise<StoreItem[]> {
+export async function getStoreItems(params: QueryParams): Promise<GetStoreItemsResult> {
   const { storeName, category = '', itemName = '' } = params;
 
   if (!INVENTORY_API_URL) {
@@ -103,7 +117,7 @@ export async function getStoreItems(params: QueryParams): Promise<StoreItem[]> {
 
   const store = result.stores.find(s => s.id === storeName);
   if (!store) {
-    return [];
+    return { items: [], storeOpen: null };
   }
 
   const categoryLower = category.toLowerCase();
@@ -116,28 +130,31 @@ export async function getStoreItems(params: QueryParams): Promise<StoreItem[]> {
     return matchesCategory && matchesName;
   });
 
-  return matched.map(product => ({
-    name: product.name,
-    category: product.category,
-    price: product.unitPrice,
-    originalPrice: product.unitPrice,
-    discount: 0,
-    stockDetails: { qty: product.qty, min: DEFAULT_MIN_STOCK },
-    categoryId: '',
-    minPrice: 0,
-    maxPrice: 0,
-    isParentItem: false,
-    itemId: '',
-    discountUnit: '',
-    discountName: '',
-    imagePath: '',
-    color: null,
-    options: [],
-    modifiers: [],
-    symbol: '',
-    allowNegativeStock: false,
-    description: null,
-  }));
+  return {
+    items: matched.map(product => ({
+      name: product.name,
+      category: product.category,
+      price: product.unitPrice,
+      originalPrice: product.unitPrice,
+      discount: 0,
+      stockDetails: { qty: product.qty, min: DEFAULT_MIN_STOCK },
+      categoryId: '',
+      minPrice: 0,
+      maxPrice: 0,
+      isParentItem: false,
+      itemId: '',
+      discountUnit: '',
+      discountName: '',
+      imagePath: '',
+      color: null,
+      options: [],
+      modifiers: [],
+      symbol: '',
+      allowNegativeStock: false,
+      description: null,
+    })),
+    storeOpen: store.isOpen ?? null,
+  };
 }
 
 /**
@@ -164,12 +181,12 @@ export async function getItemsByCategory(
   category: string,
   pageSize: number = 50
 ): Promise<StoreItem[]> {
-  return getStoreItems({
+  return (await getStoreItems({
     storeName,
     pageNumber: 1,
     pageSize,
     category,
-  });
+  })).items;
 }
 
 /**
@@ -196,12 +213,12 @@ export async function searchItems(
   itemName: string,
   pageSize: number = 50
 ): Promise<StoreItem[]> {
-  return getStoreItems({
+  return (await getStoreItems({
     storeName,
     pageNumber: 1,
     pageSize,
     itemName,
-  });
+  })).items;
 }
 
 /**

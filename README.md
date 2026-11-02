@@ -6,13 +6,13 @@
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start dev server
-npm run dev
+pnpm dev
 
 # Build for production
-npm run build
+pnpm build
 ```
 
 ## Tech Stack
@@ -40,10 +40,10 @@ VITE_EMAILJS_PUBLIC_KEY=your_public_key
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start dev server (localhost:5173) |
-| `npm run build` | Build for production |
-| `npm run lint` | Run ESLint |
-| `npm run test` | Run E2E tests |
+| `pnpm dev` | Start dev server (localhost:5173) |
+| `pnpm build` | Build for production |
+| `pnpm lint` | Run ESLint |
+| `pnpm test` | Run E2E tests |
 
 ## Project Structure
 
@@ -86,7 +86,7 @@ src/
 
 ```bash
 # Build and deploy to Netlify
-npm run build
+pnpm build
 # Deploy dist/ folder
 ```
 
@@ -94,11 +94,11 @@ npm run build
 
 ```bash
 # Port already in use
-npx kill-port 5173
+pnpm dlx kill-port 5173
 
 # Reset dependencies
-rm -rf node_modules package-lock.json
-npm install
+rm -rf node_modules
+pnpm install
 ```
 
 ## License

@@ -91,7 +91,7 @@ describe('getStoreItems', () => {
     });
     vi.stubGlobal('fetch', fetchMock);
 
-    const items = await getStoreItems({ storeName: 'main', pageNumber: 1, pageSize: 50 });
+    const { items } = await getStoreItems({ storeName: 'main', pageNumber: 1, pageSize: 50 });
 
     const [url] = fetchMock.mock.calls[0] as [string];
     expect(url).toContain('/api/inventory/availability');
@@ -114,8 +114,8 @@ describe('getStoreItems', () => {
     const pies = await getStoreItems({ storeName: 'main', pageNumber: 1, pageSize: 50, category: 'pies' });
     const search = await getStoreItems({ storeName: 'main', pageNumber: 1, pageSize: 50, itemName: 'BROWNIE' });
 
-    expect(pies.map(i => i.name)).toEqual(['Buko Pie']);
-    expect(search.map(i => i.name)).toEqual(['Brownies']);
+    expect(pies.items.map(i => i.name)).toEqual(['Buko Pie']);
+    expect(search.items.map(i => i.name)).toEqual(['Brownies']);
   });
 
   it('returns [] for an unknown store id (legacy slug no longer matches)', async () => {
@@ -124,8 +124,9 @@ describe('getStoreItems', () => {
       json: () => Promise.resolve(FEED),
     }));
 
-    const items = await getStoreItems({ storeName: 'letysbukopie-main', pageNumber: 1, pageSize: 50 });
+    const { items, storeOpen } = await getStoreItems({ storeName: 'letysbukopie-main', pageNumber: 1, pageSize: 50 });
     expect(items).toEqual([]);
+    expect(storeOpen).toBeNull();
   });
 
   it('throws on HTTP error status', async () => {
@@ -134,5 +135,56 @@ describe('getStoreItems', () => {
     await expect(
       getStoreItems({ storeName: 'main', pageNumber: 1, pageSize: 50 })
     ).rejects.toThrow('500');
+  });
+});
+
+describe('getStoreItems storeOpen (live isOpen field)', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('reports storeOpen true when the feed says isOpen: true', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ stores: [{ ...FEED.stores[0], isOpen: true }, FEED.stores[1]] }),
+    }));
+
+    const { storeOpen } = await getStoreItems({ storeName: 'main', pageNumber: 1, pageSize: 50 });
+
+    expect(storeOpen).toBe(true);
+  });
+
+  it('reports storeOpen false when the feed says isOpen: false', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ stores: [{ ...FEED.stores[0], isOpen: false }, FEED.stores[1]] }),
+    }));
+
+    const { storeOpen } = await getStoreItems({ storeName: 'main', pageNumber: 1, pageSize: 50 });
+
+    expect(storeOpen).toBe(false);
+  });
+
+  it('reports storeOpen null when the feed omits isOpen (backend not yet deployed)', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(FEED),
+    }));
+
+    const { storeOpen } = await getStoreItems({ storeName: 'main', pageNumber: 1, pageSize: 50 });
+
+    expect(storeOpen).toBeNull();
+  });
+
+  it('reports empty items and storeOpen null for an unknown store', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ stores: [{ ...FEED.stores[0], isOpen: true }] }),
+    }));
+
+    const { items, storeOpen } = await getStoreItems({ storeName: 'does-not-exist', pageNumber: 1, pageSize: 50 });
+
+    expect(items).toEqual([]);
+    expect(storeOpen).toBeNull();
   });
 });

@@ -1,4 +1,4 @@
-import { Package, Search, XCircle, type LucideIcon } from 'lucide-react';
+import { Package, type LucideIcon } from 'lucide-react';
 
 interface EmptyStateProps {
   icon?: LucideIcon;
@@ -62,80 +62,3 @@ export default function EmptyState({
   );
 }
 
-/**
- * Pre-configured empty states for common use cases
- */
-export function NoProductsFound({
-  onClearFilters,
-  hasFilters = false,
-}: {
-  onClearFilters?: () => void;
-  hasFilters?: boolean;
-}) {
-  return (
-    <EmptyState
-      icon={Package}
-      title="No Products Found"
-      description={
-        hasFilters
-          ? 'Try adjusting your filters or search terms.'
-          : 'No products available at the moment.'
-      }
-      action={
-        hasFilters && onClearFilters
-          ? { label: 'Clear All Filters', onClick: onClearFilters, variant: 'secondary' }
-          : undefined
-      }
-    />
-  );
-}
-
-export function NoSearchResults({ onClear }: { onClear: () => void }) {
-  return (
-    <EmptyState
-      icon={Search}
-      title="No Results Found"
-      description="Try adjusting your search terms or filters."
-      action={{ label: 'Clear Search', onClick: onClear, variant: 'secondary' }}
-    />
-  );
-}
-
-export function NoDataAvailable({ message }: { message?: string }) {
-  return (
-    <EmptyState
-      icon={XCircle}
-      title="No Data Available"
-      description={message || 'No data is currently available for this section.'}
-    />
-  );
-}
-
-/**
- * EmptyStateCard - A card-style empty state for smaller areas
- */
-interface EmptyStateCardProps {
-  icon?: LucideIcon;
-  title: string;
-  description: string;
-  className?: string;
-}
-
-export function EmptyStateCard({
-  icon: Icon = Package,
-  title,
-  description,
-  className = '',
-}: EmptyStateCardProps) {
-  return (
-    <div
-      className={`p-8 text-center bg-surface-subtle rounded-lg border border-stroke-default ${className}`.trim()}
-      role="status"
-      aria-live="polite"
-    >
-      <Icon className="mx-auto mb-3 w-12 h-12 text-fg-faint" aria-hidden="true" />
-      <h3 className="mb-2 text-lg font-bold text-fg-base">{title}</h3>
-      <p className="text-sm text-fg-muted">{description}</p>
-    </div>
-  );
-}

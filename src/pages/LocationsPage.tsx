@@ -259,7 +259,7 @@ export default function LocationsPage() {
                               </p>
                               <button
                                 type="button"
-                                className="inline-flex justify-center items-center w-7 h-7 rounded-full text-brand transition-colors hover:bg-brand-muted/15 hover:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand"
+                                className="inline-flex justify-center items-center w-7 h-7 rounded-full text-brand transition-colors hover:bg-brand-muted/15 hover:text-brand-muted"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setExpanded(prev => ({...prev, [loc.id]: !prev[loc.id]}));

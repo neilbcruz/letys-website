@@ -39,7 +39,7 @@ const Card = ({
     <div
       className={cn(
         'bg-surface-base rounded-lg border border-stroke-default shadow-xs overflow-hidden',
-        hoverable && 'transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-muted hover:shadow-lg',
+        hoverable && 'transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-muted hover:shadow-md',
         className
       )}
       {...props}
