@@ -1,5 +1,5 @@
 // src/pages/ProductsPage.tsx - Store Inventory Page
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useStoreItems } from '@/hooks/useStoreItems';
 import ProductCardWithStock from '@/components/products/ProductCardWithStock';
 import { SearchInput, SegmentedControl } from '@/components/ui';
@@ -19,16 +19,46 @@ export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
-  const { items, loading, error, refetch } = useStoreItems({
+  // Fetch the full store inventory once; category and search filter
+  // client-side. This keeps the category list complete (hash deep-links
+  // can resolve to any category) and avoids a refetch per filter click.
+  const { items: allItems, loading, error, refetch } = useStoreItems({
     storeName: selectedStore,
     pageNumber: 1,
     pageSize: 50,
-    category: selectedCategory,
-    itemName: searchTerm,
   });
 
-  // Get unique categories from items
-  const categories = Array.from(new Set(items.map(item => item.category))).sort();
+  // Get unique categories from the unfiltered inventory
+  const categories = Array.from(new Set(allItems.map(item => item.category))).sort();
+
+  const items = useMemo(() => {
+    const term = searchTerm.trim().toLowerCase();
+    return allItems.filter(
+      (item) =>
+        (!selectedCategory || item.category === selectedCategory) &&
+        (!term || item.name.toLowerCase().includes(term))
+    );
+  }, [allItems, selectedCategory, searchTerm]);
+
+  // Home links deep-link a category via hash (e.g. /products#specialty).
+  // The page is filter-based, so resolve the hash to its category filter
+  // whenever the feed delivers the category list (and on later hash changes).
+  // Dep is the joined key, not the array: a fresh array identity per render
+  // would re-apply the hash and clobber manual filter selections.
+  const categoryKey = categories.join('|');
+  useEffect(() => {
+    const applyHash = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (!hash) return;
+      const match = categoryKey
+        .split('|')
+        .find((c) => c && c.toLowerCase().replace(/[\s-]+/g, '') === hash);
+      if (match) setSelectedCategory(match);
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, [categoryKey]);
 
   // Get current store info
   const currentStore = getLocationByStoreId(selectedStore);
@@ -121,7 +151,7 @@ export default function ProductsPage() {
                     href={currentStore.mapLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-medium underline rounded text-brand hover:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand"
+                    className="font-medium underline rounded text-brand hover:text-brand-muted"
                   >
                     Get Directions →
                   </a>
@@ -143,7 +173,7 @@ export default function ProductsPage() {
               <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
                 <button
                   onClick={() => setSelectedCategory('')}
-                  className={`px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand ${
+                  className={`px-4 py-2 text-sm font-medium whitespace-nowrap ${
                     selectedCategory === ''
                       ? 'ui-chip-selected'
                       : 'ui-chip'
@@ -156,7 +186,7 @@ export default function ProductsPage() {
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-brand ${
+                    className={`px-4 py-2 text-sm font-medium whitespace-nowrap ${
                       selectedCategory === category
                         ? 'ui-chip-selected'
                         : 'ui-chip'
@@ -188,7 +218,7 @@ export default function ProductsPage() {
                   className="flex gap-2 justify-center items-center px-6 py-3 text-base btn-primary disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
                   aria-label="Refresh inventory"
                 >
-                  <RefreshCw size={20} aria-hidden="true" className={loading ? 'animate-spin' : ''} />
+                  <RefreshCw size={20} aria-hidden="true" className={loading ? 'animate-spin motion-reduce:animate-none' : ''} />
                   Refresh
                 </button>
               </div>
@@ -235,7 +265,7 @@ export default function ProductsPage() {
                   {(selectedCategory || searchTerm) && (
                     <button
                       onClick={clearFilters}
-                      className="px-2 py-1 underline rounded transition text-brand hover:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand"
+                      className="px-2 py-1 underline rounded transition text-brand hover:text-brand-muted"
                     >
                       Clear All Filters
                     </button>

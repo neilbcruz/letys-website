@@ -41,6 +41,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: ReactNode;
   /** Custom aria-label for accessibility (overrides default) */
   ariaLabel?: string;
+  /** When set, renders an anchor navigating to this href (same styling).
+   *  Use instead of wrapping Button in a link — interactive-inside-interactive
+   *  is invalid HTML and creates double tab stops. */
+  href?: string;
 }
 
 const Button = ({
@@ -54,6 +58,7 @@ const Button = ({
   rightIcon,
   disabled,
   ariaLabel,
+  href,
   ...props
 }: ButtonProps) => {
   const variants = {
@@ -63,7 +68,6 @@ const Button = ({
       'hover:bg-brand-fill-hover',
       'hover:text-fg-on-brand',
       'active:scale-95',
-      'focus:ring-brand',
     ].join(' '),
 
     secondary: [
@@ -74,7 +78,6 @@ const Button = ({
       'hover:bg-brand-surface',
       'hover:text-brand',
       'active:scale-95',
-      'focus:ring-brand',
     ].join(' '),
 
     outline: [
@@ -84,7 +87,6 @@ const Button = ({
       'text-brand',
       'hover:bg-brand-surface',
       'active:scale-95',
-      'focus:ring-brand',
     ].join(' '),
 
     ghost: [
@@ -92,7 +94,6 @@ const Button = ({
       'text-brand',
       'hover:bg-brand-surface',
       'active:scale-95',
-      'focus:ring-brand',
     ].join(' '),
 
     link: [
@@ -105,7 +106,6 @@ const Button = ({
       'p-0',
       'h-auto',
       'min-h-0',
-      'focus:ring-2',
     ].join(' '),
   };
 
@@ -123,27 +123,12 @@ const Button = ({
     isLoading ? `Loading: ${children}` : undefined
   );
 
-  return (
-    <button
-      className={cn(
-        'group inline-flex items-center justify-center rounded-md font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] motion-reduce:transform-none',
-        'focus:outline-hidden focus:ring-4 focus:ring-offset-2',
-        variants[variant],
-        sizes[size],
-        fullWidth ? 'w-full' : '',
-        isDisabled ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer',
-        variant !== 'link' && 'shadow-sm',
-        className
-      )}
-      disabled={isDisabled}
-      aria-label={computedAriaLabel}
-      aria-busy={isLoading}
-      {...props}
-    >
+  const content = (
+    <>
       {isLoading && (
         <>
           <svg
-            className='mr-2 -ml-1 w-4 h-4 text-current animate-spin'
+            className='mr-2 -ml-1 w-4 h-4 text-current animate-spin motion-reduce:animate-none'
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
             viewBox='0 0 24 24'
@@ -177,6 +162,45 @@ const Button = ({
           {rightIcon}
         </span>
       )}
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={cn(
+          'group inline-flex items-center justify-center rounded-md font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] motion-reduce:transform-none',
+          variants[variant],
+          sizes[size],
+          fullWidth ? 'w-full' : '',
+          'cursor-pointer',
+          ['primary', 'secondary', 'outline'].includes(variant) && 'shadow-sm',
+          className
+        )}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <button
+      className={cn(
+        'group inline-flex items-center justify-center rounded-md font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] motion-reduce:transform-none',
+        variants[variant],
+        sizes[size],
+        fullWidth ? 'w-full' : '',
+        isDisabled ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer',
+        ['primary', 'secondary', 'outline'].includes(variant) && 'shadow-sm',
+        className
+      )}
+      disabled={isDisabled}
+      aria-label={computedAriaLabel}
+      aria-busy={isLoading}
+      {...props}
+    >
+      {content}
     </button>
   );
 };

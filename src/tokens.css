@@ -232,7 +232,7 @@
   --touch-target: 44px;
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
-  --focus-ring-color: var(--color-accent);
+  --focus-ring-color: oklch(62% 0.13 85); /* deep amber: gold family at ≥3:1 on cream (WCAG 2.4.11) */
 
   /* ─── Gradients ──────────────────────────────────────────── */
   --gradient-brand: linear-gradient(
@@ -445,6 +445,8 @@
     --color-brand-surface: oklch(32% 0.05 150);
     --color-accent: oklch(78% 0.16 85);
     --color-accent-hover: oklch(84% 0.14 85);
+    /* Dark surfaces need the brighter theme accent for ≥3:1 focus rings */
+    --focus-ring-color: var(--color-accent);
     --color-accent-surface: oklch(30% 0.05 88);
     --color-accent-fg: oklch(80% 0.15 85);
     --color-hero-from: oklch(45% 0.14 155);
@@ -541,6 +543,8 @@
   --color-brand-surface: oklch(32% 0.05 150);
   --color-accent: oklch(78% 0.16 85);
   --color-accent-hover: oklch(84% 0.14 85);
+  /* Dark surfaces need the brighter theme accent for ≥3:1 focus rings */
+  --focus-ring-color: var(--color-accent);
   --color-accent-surface: oklch(30% 0.05 88);
   --color-accent-fg: oklch(80% 0.15 85);
   --color-hero-from: oklch(45% 0.14 155);

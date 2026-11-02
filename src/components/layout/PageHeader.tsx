@@ -64,14 +64,16 @@ export default function PageHeader() {
     <header
       className={`fixed top-0 left-0 right-0 z-[1200] border-b px-[var(--space-4)] py-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-[var(--ease-smooth)] sm:px-[var(--space-8)] lg:px-[var(--space-12)] ${
         isTransparent
-          ? 'border-transparent bg-surface-inverse/10 text-fg-emphasis backdrop-blur-[2px]'
+          ? resolvedTheme === 'dark'
+            ? 'border-transparent bg-black/30 text-fg-emphasis backdrop-blur-[2px]'
+            : 'border-transparent bg-surface-inverse/10 text-fg-emphasis backdrop-blur-[2px]'
           : 'border-stroke-default bg-surface-base/95 text-fg-default shadow-md backdrop-blur-md'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
         <Link to="/" className="shrink-0 rounded-md" aria-label="Lety's Buko Pie - Home">
           <span className="sr-only">Lety's Buko Pie</span>
-          <span className="logo-plate block rounded-lg bg-surface-emphasis/80 px-2 py-1 shadow-sm ring-1 ring-stroke-default/70 backdrop-blur-sm transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md">
+          <span className="logo-plate block rounded-lg bg-surface-base/80 px-2 py-1 shadow-sm ring-1 ring-stroke-default/70 backdrop-blur-sm transition-[background-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md">
             <img
               src={IMAGES.LETYS_LOGO2.default}
               srcSet={IMAGES.LETYS_LOGO2.srcSet}
@@ -89,7 +91,9 @@ export default function PageHeader() {
           id="navigation"
           className={`relative hidden items-center gap-1 overflow-hidden rounded-full border px-2 py-1 shadow-sm backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-500 ease-[var(--ease-smooth)] tablet:flex ${
             isTransparent
-              ? 'border-fg-emphasis/20 bg-surface-inverse/25'
+              ? resolvedTheme === 'dark'
+                ? 'border-fg-emphasis/10 bg-black/40'
+                : 'border-fg-emphasis/20 bg-surface-inverse/25'
               : 'border-stroke-default bg-surface-base/85'
           }`}
           aria-label="Main navigation"
@@ -111,7 +115,7 @@ export default function PageHeader() {
                 navItemRefs.current[item.path] = node;
               }}
               className={({ isActive }) =>
-                `relative z-10 rounded-full px-4 py-2 text-sm font-bold no-underline transition-[color,background-color,transform] duration-200 ease-[var(--ease-smooth)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base ${
+                `relative z-10 rounded-full px-4 py-2 text-sm font-bold no-underline transition-[color,background-color,transform] duration-200 ease-[var(--ease-smooth)] ${
                   isActive
                     ? 'text-fg-on-brand'
                     : isTransparent
@@ -129,7 +133,7 @@ export default function PageHeader() {
           <button
             type="button"
             onClick={toggleTheme}
-            className={`group relative inline-flex h-11 w-[88px] items-center rounded-full border p-1 shadow-sm transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-[var(--ease-smooth)] hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface-base ${
+            className={`group relative inline-flex h-11 w-[88px] items-center rounded-full border p-1 shadow-sm transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-[var(--ease-smooth)] hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:scale-[0.98] ${
               isTransparent
                 ? 'border-fg-emphasis/20 bg-surface-inverse/25 text-fg-emphasis hover:bg-fg-emphasis/10'
                 : 'border-stroke-default bg-surface-base/85 text-brand hover:bg-surface-muted hover:text-brand-hover'
@@ -168,7 +172,7 @@ export default function PageHeader() {
             ref={menuButtonRef}
             type="button"
             onClick={() => setOpen(current => !current)}
-            className={`group inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border shadow-sm transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-brand tablet:hidden ${
+            className={`group inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border shadow-sm transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 tablet:hidden ${
               isTransparent
                 ? 'border-fg-emphasis/20 bg-surface-inverse/25 text-fg-emphasis hover:bg-fg-emphasis/10'
                 : 'border-stroke-default bg-surface-base/85 text-brand hover:bg-surface-muted hover:text-brand-hover'

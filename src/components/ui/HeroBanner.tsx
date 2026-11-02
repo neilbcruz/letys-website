@@ -1,6 +1,7 @@
 import { IMAGES } from '@/lib/images';
+import { getLocationById, getStoreStatus } from '@/data/locations';
 import { NavLink } from 'react-router-dom';
-import { ShoppingBag, MapPin } from 'lucide-react';
+import { ArrowRight, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui';
 
 type HeroVariant = 'full' | 'narrow';
@@ -17,10 +18,11 @@ export default function HeroBanner({
   title,
   icon,
 }: HeroBannerProps) {
+  const mainStatus = variant === 'full' ? getStoreStatus(getLocationById('main')!) : null;
   // Full-width variant (from PageHero.tsx)
   if (variant === 'full') {
     return (
-      <div className="w-full h-[var(--height-hero-mobile)] sm:h-[var(--height-hero-tablet)] lg:h-[var(--height-hero-desktop)] relative overflow-hidden flex items-center">
+      <div className="w-full min-h-[var(--height-hero-mobile)] sm:min-h-[var(--height-hero-tablet)] lg:min-h-[var(--height-hero-desktop)] relative overflow-hidden flex items-center pt-[var(--header-h)]">
         <picture className="absolute inset-0 w-full h-full">
           {IMAGES.HERO.srcSet && (
             <source srcSet={IMAGES.HERO.srcSet} sizes="100vw" type="image/webp" />
@@ -34,12 +36,26 @@ export default function HeroBanner({
           />
         </picture>
 
-        {/* Overlay */}
+        {/* Overlay: vertical base + left scrim behind text column + top band
+            behind transparent header (WCAG AA over the photo, both themes) */}
         <div
           className="absolute inset-0"
           style={{
+            background: [
+              'linear-gradient(to bottom, var(--color-overlay-light), color-mix(in srgb, var(--color-overlay-medium) 45%, transparent), var(--color-overlay-heavy))',
+              'linear-gradient(to right, var(--color-overlay-black) 0%, color-mix(in srgb, var(--color-overlay-heavy) 80%, transparent) 38%, color-mix(in srgb, var(--color-overlay-medium) 40%, transparent) 58%, transparent 75%)',
+              'linear-gradient(to bottom, color-mix(in srgb, var(--color-overlay-black) 80%, transparent) 0%, transparent 16%)',
+            ].join(', ')
+          }}
+        ></div>
+
+        {/* Mobile veil: text block spans full width and sits in the vertical
+            gradient's weakest band; restore AA until the desktop scrim takes over */}
+        <div
+          className="absolute inset-0 lg:hidden"
+          style={{
             background:
-              'linear-gradient(to bottom, var(--color-overlay-light), color-mix(in srgb, var(--color-overlay-medium) 45%, transparent), var(--color-overlay-heavy))'
+              'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.62) 50%, rgba(0,0,0,0.30) 100%)'
           }}
         ></div>
 
@@ -48,34 +64,68 @@ export default function HeroBanner({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full items-center">
             {/* Left column - Text content */}
             <div className="lg:col-span-1 text-left">
-              <h1 className="font-bold text-3xl sm:text-4xl lg:text-5xl mb-8 text-fg-emphasis leading-[1.1] text-balance">
+              <h1 className="font-bold text-3xl sm:text-4xl lg:text-5xl mb-8 text-fg-emphasis leading-[1.1] text-balance"
+                  style={{ textShadow: '0 2px 12px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.4)' }}>
                 The <span
                   className="text-accent font-semibold text-4xl sm:text-5xl lg:text-6xl whitespace-nowrap"
                   style={{ textShadow: '0 2px 12px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.4)' }}
                 >Buko Pie</span> That Brings You Home
               </h1>
-              <p className="text-xl sm:text-2xl lg:text-3xl mb-12 font-medium text-fg-emphasis leading-snug text-pretty">
+              <p className="text-xl sm:text-2xl lg:text-3xl mb-12 font-medium text-fg-emphasis leading-snug text-pretty"
+                 style={{ textShadow: '0 2px 12px rgba(0,0,0,0.65), 0 1px 3px rgba(0,0,0,0.4)' }}>
                 The Same Homemade Taste,{' '}
                 <span className="whitespace-nowrap">Baked Fresh Daily Since 1976</span>
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-start items-center">
-                <NavLink to="/products" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="border-fg-inverse bg-surface-base/90 text-brand hover:bg-surface-base hover:text-brand w-full group">
-                    <ShoppingBag className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
-                    Shop Our Products
-                  </Button>
-                </NavLink>
-                <NavLink to="/locations" className="w-full sm:w-auto">
-                  <Button size="lg" variant="primary" className="w-full group">
-                    <MapPin className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    Find a Location
-                  </Button>
-                </NavLink>
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-start items-center">
+                <Button href="/locations" size="lg" variant="primary" className="w-full sm:w-auto whitespace-nowrap group">
+                  <MapPin className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  Find a Location
+                </Button>
+                <Button href="/products" size="lg" variant="outline" className="border-fg-inverse bg-surface-base/90 text-brand hover:bg-surface-base hover:text-brand w-full sm:w-auto whitespace-nowrap group">
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  See Our Pies
+                </Button>
               </div>
+
+              {mainStatus && (
+                <div className="mt-6 flex flex-col items-start gap-3">
+                  <NavLink
+                    to="/availability"
+                    className={`status-chip inline-flex items-center ${
+                      mainStatus.isOpen
+                        ? 'border-status-success-border bg-status-success-bg text-status-success-fg'
+                        : 'border-status-error-border bg-status-error-bg-muted text-status-error-fg'
+                    }`}
+                  >
+                    {mainStatus.label}
+                    <span className="sr-only"> — see today's availability</span>
+                  </NavLink>
+                  <NavLink
+                    to="/locations"
+                    className="text-sm font-semibold text-fg-emphasis underline decoration-fg-emphasis/50 underline-offset-4 hover:decoration-fg-emphasis transition-colors"
+                    style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}
+                  >
+                    4 branches across Laguna — hours &amp; directions
+                  </NavLink>
+                </div>
+              )}
             </div>
 
-            {/* Right columns - Empty space to showcase pie */}
-            <div className="hidden lg:block lg:col-span-2"></div>
+            {/* Right columns - signature pie over the storefront backdrop */}
+            <div className="hidden lg:block lg:col-span-2">
+              <picture>
+                {IMAGES.BUKO_PIE.srcSet && (
+                  <source srcSet={IMAGES.BUKO_PIE.srcSet} sizes="(min-width: 1024px) 50vw" type="image/webp" />
+                )}
+                <img
+                  src={IMAGES.BUKO_PIE.default}
+                  alt="Lety's signature Buko Pie — whole pie with golden crust"
+                  className="mx-auto aspect-square h-[min(70vh,560px)] w-auto object-cover rounded-2xl shadow-2xl ring-1 ring-fg-emphasis/15"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </div>
           </div>
         </div>
       </div>

@@ -13,6 +13,14 @@
     color: var(--color-fg-default);
     background-color: var(--color-surface-base);
     font-size: 1rem;
+    /* Fixed header height (measured: 76px mobile · 92px ≥lg). Single source for
+       the hero's top reservation and anchor scroll-padding. */
+    --header-h: 76px;
+    scroll-padding-top: calc(var(--header-h) + 12px);
+  }
+
+  @media (min-width: 1024px) {
+    html { --header-h: 92px; }
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -83,8 +91,6 @@
   *:focus-visible {
     outline: 3px solid var(--focus-ring-color);
     outline-offset: var(--focus-ring-offset);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus-ring-color) 20%, transparent);
-    border-radius: var(--radius-sm);
   }
 
   /* High contrast mode support */
@@ -92,7 +98,6 @@
     *:focus-visible {
       outline: 4px solid;
       outline-offset: 3px;
-      box-shadow: 0 0 0 5px color-mix(in srgb, var(--focus-ring-color) 30%, transparent);
     }
 
     /* Enhance text contrast in high contrast mode */
@@ -110,12 +115,6 @@
   textarea:focus-visible {
     outline: 3px solid var(--focus-ring-color);
     outline-offset: var(--focus-ring-offset);
-  }
-
-  /* WCAG 2.2.13 - Focus Not Obscured (minimum 2x2px visible) */
-  *:focus {
-    position: relative;
-    z-index: 1;
   }
 
   /* Skip link - WCAG 2.4.1 */
@@ -396,10 +395,10 @@
 
   /* Updated button styles with better contrast */
   .btn-primary {
-    @apply px-6 py-3 bg-brand-fill text-fg-on-brand font-bold rounded-lg
-           hover:bg-brand-muted hover:text-fg-on-brand
-           focus:ring-4 focus:ring-brand focus:outline-none
+    @apply px-6 py-3 bg-brand-fill text-fg-on-brand font-bold rounded-md
+           hover:bg-brand-fill-hover hover:text-fg-on-brand
            disabled:opacity-60 disabled:cursor-not-allowed;
+    box-shadow: var(--shadow-sm);
     transition:
       transform var(--duration-normal) var(--ease-smooth),
       box-shadow var(--duration-normal) var(--ease-default),
@@ -409,9 +408,9 @@
   }
 
   .btn-secondary {
-    @apply px-6 py-3 border-2 border-brand bg-surface-base text-brand font-bold rounded-lg
-           hover:bg-brand-surface hover:text-brand
-           focus:ring-4 focus:ring-brand focus:outline-none;
+    @apply px-6 py-3 border-2 border-brand bg-surface-base text-brand font-bold rounded-md
+           hover:bg-brand-surface hover:text-brand;
+    box-shadow: var(--shadow-sm);
     transition:
       transform var(--duration-normal) var(--ease-smooth),
       box-shadow var(--duration-normal) var(--ease-default),
@@ -424,8 +423,7 @@
   @media (hover: hover) {
     .btn-primary:hover,
     .btn-secondary:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
+      transform: translateY(-0.125rem);
     }
   }
 
@@ -535,7 +533,7 @@
 @layer components {
   /* Error states with sufficient contrast */
   .input-error {
-    @apply border-status-error-fg focus:ring-status-error-fg;
+    @apply border-status-error-fg;
   }
 
   .error-message {
@@ -544,7 +542,7 @@
 
   /* Success states */
   .input-success {
-    @apply border-status-success-fg focus:ring-status-success-fg;
+    @apply border-status-success-fg;
   }
 
   .success-message {
